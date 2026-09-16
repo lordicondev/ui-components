@@ -15,10 +15,16 @@ import { prefersReducedMotion } from './reduced-motion.ts';
 const REVEAL_MS = 500;
 
 /**
- * Share of the run one word spends fading. It is the only knob that matters: raise it and
- * more words are in flight at once, which softens the wave without making it any longer.
+ * Share of the run one word spends fading. It is the only knob that matters, and it trades
+ * two qualities against each other: raise it and the trailing edge is a longer, softer
+ * dissolve; lower it and the stagger stretches, so the tail keeps moving for longer but
+ * the words start arriving one at a time instead of melting in.
+ *
+ * The width is a proportion, not a count, so the same share is denser on a long paragraph
+ * than a short one — about seven words in flight across twenty, four across ten. Far below
+ * this and the short ones stop being a wave and become a queue.
  */
-const FADE_SHARE = 0.375;
+const FADE_SHARE = 0.3;
 
 const CONCEAL_MS = 300;
 
