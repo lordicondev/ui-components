@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Alerts</title>
+        <link rel="stylesheet" href="./alert.css" />
+        <script type="module" src="./main.ts"></script>
+    </head>
+    <body>
+        <main class="demo">
+            <ul class="alerts" id="alerts" role="status" aria-live="polite"></ul>
+
+            <div class="demo__controls">
+                <button type="button" data-add="info">Info</button>
+                <button type="button" data-add="success">Success</button>
+                <button type="button" data-add="warning">Warning</button>
+                <button type="button" data-add="error">Error</button>
+            </div>
+        </main>
+
+        <!-- #region markup -->
+        <!-- The template each alert is cloned from. `after-enter` holds the icon back
+             until the card's own entrance animation has finished, so the two read as
+             one movement instead of two competing ones. -->
+        <template id="alert-template">
+            <li class="alert">
+                <lord-icon
+                    class="alert__icon current-color"
+                    trigger="after-enter"
+                    target=".alert"
+                    aria-hidden="true"
+                ></lord-icon>
+
+                <div class="alert__body">
+                    <p class="alert__title"></p>
+                    <p class="alert__message"></p>
+                </div>
+
+                <button class="alert__close" type="button" aria-label="Dismiss">
+                    <lord-icon
+                        class="alert__close-icon current-color"
+                        src="icons/cross.json"
+                        trigger="hover"
+                        target=".alert__close"
+                        aria-hidden="true"
+                    ></lord-icon>
+                </button>
+            </li>
+        </template>
+        <!-- #endregion -->
+    </body>
+</html>

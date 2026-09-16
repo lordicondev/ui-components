@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Accordion</title>
+        <link rel="stylesheet" href="./accordion.css" />
+        <script type="module" src="./main.ts"></script>
+    </head>
+    <body>
+        <main class="demo">
+            <div class="accordion">
+                <!-- #region markup -->
+                <div class="item">
+                    <h3 class="item__heading">
+                        <button
+                            class="item__trigger"
+                            type="button"
+                            aria-expanded="false"
+                            aria-controls="panel-1"
+                        >
+                            How do I reset my password?
+
+                            <lord-icon
+                                class="item__chevron current-color"
+                                src="icons/chevron-down.json"
+                                trigger="expanded-morph"
+                                target=".item__trigger"
+                                aria-hidden="true"
+                            ></lord-icon>
+                        </button>
+                    </h3>
+
+                    <div class="item__panel" id="panel-1" hidden>
+                        <p>
+                            Go to Settings → Security and click "Reset password". You'll get an
+                            email with a secure link valid for 24 hours.
+                        </p>
+                    </div>
+                </div>
+                <!-- #endregion -->
+
+                <div class="item">
+                    <h3 class="item__heading">
+                        <button
+                            class="item__trigger"
+                            type="button"
+                            aria-expanded="false"
+                            aria-controls="panel-2"
+                        >
+                            Can I change my plan anytime?
+
+                            <lord-icon
+                                class="item__chevron current-color"
+                                src="icons/chevron-down.json"
+                                trigger="expanded-morph"
+                                target=".item__trigger"
+                                aria-hidden="true"
+                            ></lord-icon>
+                        </button>
+                    </h3>
+
+                    <div class="item__panel" id="panel-2" hidden>
+                        <p>
+                            Yes. Upgrades apply immediately and downgrades take effect at the end of
+                            the current billing period.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="item">
+                    <h3 class="item__heading">
+                        <button
+                            class="item__trigger"
+                            type="button"
+                            aria-expanded="false"
+                            aria-controls="panel-3"
+                        >
+                            Where can I find my invoices?
+
+                            <lord-icon
+                                class="item__chevron current-color"
+                                src="icons/chevron-down.json"
+                                trigger="expanded-morph"
+                                target=".item__trigger"
+                                aria-hidden="true"
+                            ></lord-icon>
+                        </button>
+                    </h3>
+
+                    <div class="item__panel" id="panel-3" hidden>
+                        <p>Billing → Invoices lists every invoice, with a PDF for each one.</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </body>
+</html>

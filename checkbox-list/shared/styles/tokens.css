@@ -1,0 +1,59 @@
+/*
+ * Roles, not values. Hand-written on purpose: which grey is a border and which is
+ * muted text is a design decision, and this is where a dark mode would be added later.
+ *
+ * Raw values come from palette.css (generated).
+ */
+:root {
+    /* Text. `--ink*` is always a colour; `--text-*` is always a size. */
+    --ink: var(--gray-950);
+    --ink-muted: var(--gray-500);
+    --ink-subtle: var(--gray-400);
+    --ink-inverse: var(--gray-0);
+
+    /* Backgrounds */
+    --surface: var(--gray-0);
+    --surface-muted: var(--gray-50);
+
+    /* Outlines */
+    --border: var(--gray-200);
+    --border-strong: var(--gray-300);
+    --border-accent: var(--brand-400);
+
+    /* Brand accent */
+    --accent: var(--brand-500);
+    --accent-strong: var(--brand-600);
+    --accent-surface: var(--brand-100);
+    --accent-border: var(--brand-300);
+
+    /* Status. Warning rides the brand ramp — that is what the designs use. */
+    --success: var(--green-700);
+    --success-surface: var(--green-100);
+    --success-border: var(--green-300);
+
+    --warning: var(--brand-600);
+    --warning-surface: var(--brand-100);
+    --warning-border: var(--brand-200);
+
+    --danger: var(--red-700);
+    --danger-surface: var(--red-100);
+    --danger-border: var(--red-300);
+
+    /* Icons. Fed straight into --lord-icon-* by the demos. */
+    --icon-color: var(--gray-950);
+    --icon-accent: var(--brand-500);
+
+    /* Type stacks. The families themselves are in palette.css. */
+    --font-ui:
+        var(--font-ui-name), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-mono: var(--font-mono-name), ui-monospace, SFMono-Regular, Menlo, monospace;
+
+    /* Side breathing room around a page's content, so the edges line up as you scroll
+       out of a demo and into the text under it. Defined here and nowhere else: a demo
+       gets it from the shared import it already starts with, and the portal from its
+       copy of this file. */
+    --gutter: clamp(var(--space-16), 5vw, var(--space-48));
+
+    /* Not in Figma — the cards need some lift and one value is enough. */
+    --shadow-sm: 0 1px 2px rgb(10 11 14 / 6%);
+}
