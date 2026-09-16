@@ -46,6 +46,9 @@ export function booleanMorph(defaultAttribute: string): TriggerConstructor {
         /** What the icon currently shows. Null until the player is ready. */
         private shown: boolean | null = null;
 
+        /** Which look the loaded segment arrives at when it runs forwards. */
+        private forwardShows: boolean | null = null;
+
         private get attribute(): string {
             return this.element.getAttribute('data-attribute') ?? defaultAttribute;
         }
@@ -88,6 +91,7 @@ export function booleanMorph(defaultAttribute: string): TriggerConstructor {
 
             if (this.segments) {
                 this.player.switchSegment(on ? this.segments[0] : this.segments[1]);
+                this.forwardShows = on;
                 this.player.seekToEnd();
             } else if (on) {
                 this.player.seekToEnd();
@@ -99,15 +103,20 @@ export function booleanMorph(defaultAttribute: string): TriggerConstructor {
         }
 
         private animateTo(on: boolean): void {
-            // Mid-animation, rewinding what is running beats jumping to another segment:
-            // both segments meet at the boundary, so playing back lands on the right look.
-            if (this.player.playing) {
-                this.player.direction = -1;
-            } else if (this.segments) {
+            if (!this.segments) {
+                // The whole animation is the transition: forwards arrives, back undoes it.
+                this.player.direction = on ? 1 : -1;
+            } else if (this.player.playing) {
+                // Mid-flight, steering the segment already loaded beats switching to the
+                // other one, which would restart at its first frame and jump the icon.
+                // The two meet at the boundary, so either can reach either look — which
+                // way round depends on the segment, not on what the icon was last asked
+                // for. Always reversing is what lets a third quick click strand it.
+                this.player.direction = this.forwardShows === on ? 1 : -1;
+            } else {
                 this.player.direction = 1;
                 this.player.switchSegment(on ? this.segments[0] : this.segments[1]);
-            } else {
-                this.player.direction = on ? 1 : -1;
+                this.forwardShows = on;
             }
 
             this.player.play();

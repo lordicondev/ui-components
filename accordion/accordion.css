@@ -54,38 +54,32 @@
     background: var(--surface-muted);
 }
 
-/* #region rotation */
-/* chevron-down has no morph state — it points one way. So the direction is CSS, and the
-   trigger's job is the small acknowledgement that something happened. */
+/* #region clip */
+/* The icon turns itself now — nothing here to rotate. Colour is a state, not a
+   movement, so it changes at once. */
 .item__chevron {
     flex: none;
     width: var(--icon-size-24);
     height: var(--icon-size-24);
-    color: var(--ink-muted);
-    transition:
-        transform 200ms cubic-bezier(0.2, 0.8, 0.3, 1),
-        color 150ms ease;
+    color: var(--ink);
 }
 
 [aria-expanded='true'] .item__chevron {
-    transform: rotate(180deg);
     color: var(--accent);
 }
 
-/* #endregion */
-
+/* This box does the concealing: the paragraph slides down inside it as the height
+   shrinks. Its padding moved to the paragraph below — here it would still occupy
+   16px at `height: 0` and leave the closed panel holding a gap. */
 .item__panel {
-    padding: 0 var(--space-24) var(--space-16);
-    color: var(--ink-muted);
+    overflow: hidden;
+    padding: 0;
 }
+/* #endregion */
 
 .item__panel p {
     margin: 0;
+    padding: 0 var(--space-24) var(--space-16);
+    color: var(--ink-muted);
     line-height: var(--leading-base);
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .item__chevron {
-        transition: none;
-    }
 }
