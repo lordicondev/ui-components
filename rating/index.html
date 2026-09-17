@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Rating</title>
+        <link rel="stylesheet" href="./rating.css" />
+        <script type="module" src="./main.ts"></script>
+    </head>
+    <body>
+        <main class="demo">
+            <fieldset class="rating">
+                <legend class="rating__legend">Rate this</legend>
+
+                <!-- #region markup -->
+                <!-- One star. `data-chosen` is the rating as it stands, `data-lit` is what
+                     the pointer is promising; the icon morphs on the first and nudges on
+                     the second, and the stylesheet colours on the second alone. The radio
+                     is the real control and keeps every native behaviour — it is only
+                     invisible. -->
+                <label class="star" data-chosen="true" data-lit="true">
+                    <input class="star__input" type="radio" name="rating" value="1" />
+
+                    <lord-icon
+                        class="star__mark current-color"
+                        src="icons/star.json"
+                        trigger="preview-morph"
+                        target=".star"
+                        state="morph-select"
+                        aria-hidden="true"
+                    ></lord-icon>
+
+                    <span class="star__name">1 star</span>
+                </label>
+                <!-- #endregion -->
+
+                <label class="star" data-chosen="true" data-lit="true">
+                    <input class="star__input" type="radio" name="rating" value="2" checked />
+
+                    <lord-icon
+                        class="star__mark current-color"
+                        src="icons/star.json"
+                        trigger="preview-morph"
+                        target=".star"
+                        state="morph-select"
+                        aria-hidden="true"
+                    ></lord-icon>
+
+                    <span class="star__name">2 stars</span>
+                </label>
+
+                <label class="star" data-chosen="false" data-lit="false">
+                    <input class="star__input" type="radio" name="rating" value="3" />
+
+                    <lord-icon
+                        class="star__mark current-color"
+                        src="icons/star.json"
+                        trigger="preview-morph"
+                        target=".star"
+                        state="morph-select"
+                        aria-hidden="true"
+                    ></lord-icon>
+
+                    <span class="star__name">3 stars</span>
+                </label>
+
+                <label class="star" data-chosen="false" data-lit="false">
+                    <input class="star__input" type="radio" name="rating" value="4" />
+
+                    <lord-icon
+                        class="star__mark current-color"
+                        src="icons/star.json"
+                        trigger="preview-morph"
+                        target=".star"
+                        state="morph-select"
+                        aria-hidden="true"
+                    ></lord-icon>
+
+                    <span class="star__name">4 stars</span>
+                </label>
+
+                <label class="star" data-chosen="false" data-lit="false">
+                    <input class="star__input" type="radio" name="rating" value="5" />
+
+                    <lord-icon
+                        class="star__mark current-color"
+                        src="icons/star.json"
+                        trigger="preview-morph"
+                        target=".star"
+                        state="morph-select"
+                        aria-hidden="true"
+                    ></lord-icon>
+
+                    <span class="star__name">5 stars</span>
+                </label>
+            </fieldset>
+        </main>
+    </body>
+</html>

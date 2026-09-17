@@ -58,6 +58,13 @@ select {
     color: inherit;
 }
 
+/* Anything you click more than once in a row drags a text selection across its own label
+   on the second click. Nobody has ever wanted to select the words on a button. */
+button {
+    -webkit-user-select: none;
+    user-select: none;
+}
+
 :focus-visible {
     outline: 2px solid var(--accent);
     outline-offset: 2px;

@@ -1,0 +1,67 @@
+@import '@shared/styles/index.css';
+
+.demo {
+    display: grid;
+    place-items: center;
+    min-height: 100dvh;
+    padding: var(--space-64) var(--gutter);
+}
+
+.star {
+    display: flex;
+    align-items: center;
+    gap: var(--space-12);
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: pointer;
+}
+
+/* #region colour */
+/* Three steps, the same three the checkbox list has: resting, under the pointer, and
+   starred. Hovering shows the colour the star would take, so the answer arrives before
+   the click does — and the shape still says which is which, hollow against filled.
+
+   One name, set four times, and nothing else in the stylesheet knows there is a hover
+   state. No transition on it: a colour here is a state, not a movement, and the only
+   thing with a duration is the star filling in. The count keeps its own colour
+   throughout — in the design it is the star that answers, never the number. */
+.star {
+    --star-mark: var(--ink-subtle);
+}
+
+.star:hover {
+    --star-mark: var(--accent);
+}
+
+.star[aria-pressed='true'] {
+    --star-mark: var(--accent);
+}
+
+.star[aria-pressed='true']:hover {
+    --star-mark: var(--accent-strong);
+}
+/* #endregion */
+
+.star__mark {
+    width: var(--icon-size-24);
+    height: var(--icon-size-24);
+    color: var(--star-mark);
+}
+
+/* Tabular figures so 24 → 25 does not nudge the button's width under the pointer. */
+.star__count {
+    color: var(--ink-soft);
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+}
+
+/* Read aloud, never drawn: the number on its own would be a button called "24". */
+.star__unit {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+}

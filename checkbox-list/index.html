@@ -11,7 +11,9 @@
 
 <body>
     <main class="demo">
-        <fieldset class="options">
+        <fieldset class="options" id="style-box" data-page data-shape="box">
+            <legend class="options__legend">Notifications</legend>
+
             <!-- #region markup -->
             <!-- A real checkbox, hidden but still the thing you click and submit.
                      data-checked exists only so the icon can see the state — the input
@@ -19,8 +21,8 @@
             <label class="option" data-checked="false">
                 <input class="option__input" type="checkbox" name="email" />
 
-                <lord-icon class="option__tick current-color" src="icons/check-circle.json" trigger="checked-morph"
-                    target=".option" state="morph-tick" data-attribute="data-checked" aria-hidden="true"></lord-icon>
+                <lord-icon class="option__tick current-color" src="icons/check-box-empty.json" trigger="checked-morph"
+                    target=".option" state="morph-select" data-attribute="data-checked" aria-hidden="true"></lord-icon>
 
                 <span class="option__text">
                     <span class="option__title">Email marketing</span>
@@ -34,8 +36,8 @@
             <label class="option" data-checked="true">
                 <input class="option__input" type="checkbox" name="sms" checked />
 
-                <lord-icon class="option__tick current-color" src="icons/check-circle.json" trigger="checked-morph"
-                    target=".option" state="morph-tick" data-attribute="data-checked" aria-hidden="true"></lord-icon>
+                <lord-icon class="option__tick current-color" src="icons/check-box-empty.json" trigger="checked-morph"
+                    target=".option" state="morph-select" data-attribute="data-checked" aria-hidden="true"></lord-icon>
 
                 <span class="option__text">
                     <span class="option__title">SMS notifications</span>
@@ -48,8 +50,8 @@
             <label class="option" data-checked="true">
                 <input class="option__input" type="checkbox" name="ads" checked />
 
-                <lord-icon class="option__tick current-color" src="icons/check-circle.json" trigger="checked-morph"
-                    target=".option" state="morph-tick" data-attribute="data-checked" aria-hidden="true"></lord-icon>
+                <lord-icon class="option__tick current-color" src="icons/check-box-empty.json" trigger="checked-morph"
+                    target=".option" state="morph-select" data-attribute="data-checked" aria-hidden="true"></lord-icon>
 
                 <span class="option__text">
                     <span class="option__title">Personalized ads</span>
@@ -59,6 +61,109 @@
                 </span>
             </label>
         </fieldset>
+
+        <fieldset class="options" id="style-circle" data-page data-shape="circle" hidden>
+            <legend class="options__legend">Notifications</legend>
+
+            <label class="option" data-checked="false">
+                <input class="option__input" type="checkbox" name="email" />
+
+                <lord-icon class="option__tick current-color" src="icons/check-circle-empty.json" trigger="checked-morph"
+                    target=".option" state="morph-select" data-attribute="data-checked" aria-hidden="true"></lord-icon>
+
+                <span class="option__text">
+                    <span class="option__title">Email marketing</span>
+                    <span class="option__hint">
+                        Receive product updates, tips, and special offers by email
+                    </span>
+                </span>
+            </label>
+
+            <label class="option" data-checked="true">
+                <input class="option__input" type="checkbox" name="sms" checked />
+
+                <lord-icon class="option__tick current-color" src="icons/check-circle-empty.json" trigger="checked-morph"
+                    target=".option" state="morph-select" data-attribute="data-checked" aria-hidden="true"></lord-icon>
+
+                <span class="option__text">
+                    <span class="option__title">SMS notifications</span>
+                    <span class="option__hint">
+                        Get order and delivery updates via text message
+                    </span>
+                </span>
+            </label>
+
+            <label class="option" data-checked="true">
+                <input class="option__input" type="checkbox" name="ads" checked />
+
+                <lord-icon class="option__tick current-color" src="icons/check-circle-empty.json" trigger="checked-morph"
+                    target=".option" state="morph-select" data-attribute="data-checked" aria-hidden="true"></lord-icon>
+
+                <span class="option__text">
+                    <span class="option__title">Personalized ads</span>
+                    <span class="option__hint">
+                        Let us use your activity to show more relevant ads
+                    </span>
+                </span>
+            </label>
+        </fieldset>
+
+        <fieldset class="options" id="style-single" data-page data-shape="circle" hidden>
+            <legend class="options__legend">Preferred channel</legend>
+
+            <label class="option" data-checked="false">
+                <input class="option__input" type="radio" name="channel" value="on" />
+
+                <lord-icon class="option__tick current-color" src="icons/check-circle-empty.json" trigger="checked-morph"
+                    target=".option" state="morph-select" data-attribute="data-checked" aria-hidden="true"></lord-icon>
+
+                <span class="option__text">
+                    <span class="option__title">Email marketing</span>
+                    <span class="option__hint">
+                        Receive product updates, tips, and special offers by email
+                    </span>
+                </span>
+            </label>
+
+            <label class="option" data-checked="true">
+                <input class="option__input" type="radio" name="channel" value="on" checked />
+
+                <lord-icon class="option__tick current-color" src="icons/check-circle-empty.json" trigger="checked-morph"
+                    target=".option" state="morph-select" data-attribute="data-checked" aria-hidden="true"></lord-icon>
+
+                <span class="option__text">
+                    <span class="option__title">SMS notifications</span>
+                    <span class="option__hint">
+                        Get order and delivery updates via text message
+                    </span>
+                </span>
+            </label>
+
+            <label class="option" data-checked="false">
+                <input class="option__input" type="radio" name="channel" value="on" />
+
+                <lord-icon class="option__tick current-color" src="icons/check-circle-empty.json" trigger="checked-morph"
+                    target=".option" state="morph-select" data-attribute="data-checked" aria-hidden="true"></lord-icon>
+
+                <span class="option__text">
+                    <span class="option__title">Personalized ads</span>
+                    <span class="option__hint">
+                        Let us use your activity to show more relevant ads
+                    </span>
+                </span>
+            </label>
+        </fieldset>
+
+        <!-- #region pager -->
+        <div class="pager">
+            <button class="pager__dot" type="button" aria-pressed="true" aria-controls="style-box"
+                aria-label="Square checkboxes"></button>
+            <button class="pager__dot" type="button" aria-pressed="false" aria-controls="style-circle"
+                aria-label="Round checkboxes"></button>
+            <button class="pager__dot" type="button" aria-pressed="false" aria-controls="style-single"
+                aria-label="Single choice"></button>
+        </div>
+        <!-- #endregion -->
     </main>
 </body>
 

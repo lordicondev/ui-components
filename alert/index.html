@@ -9,45 +9,60 @@
     </head>
     <body>
         <main class="demo">
-            <ul class="alerts" id="alerts" role="status" aria-live="polite"></ul>
+            <section class="page" data-page aria-label="Every kind of alert">
+                <ul class="alerts" data-list="gallery"></ul>
+            </section>
 
-            <div class="demo__controls">
-                <button type="button" data-add="info">Info</button>
-                <button type="button" data-add="success">Success</button>
-                <button type="button" data-add="warning">Warning</button>
-                <button type="button" data-add="error">Error</button>
+            <section class="page page--deck" data-page aria-label="Alerts as they arrive" hidden>
+                <ul class="alerts stack" data-list="queue" role="status" aria-live="polite"></ul>
+                <button class="add" type="button" data-add>Show an alert</button>
+            </section>
+
+            <div class="pager">
+                <button
+                    class="pager__dot"
+                    type="button"
+                    aria-pressed="true"
+                    aria-label="Every kind of alert"
+                ></button>
+                <button
+                    class="pager__dot"
+                    type="button"
+                    aria-pressed="false"
+                    aria-label="Alerts as they arrive"
+                ></button>
             </div>
-        </main>
 
-        <!-- #region markup -->
-        <!-- The template each alert is cloned from. `after-enter` holds the icon back
-             until the card's own entrance animation has finished, so the two read as
-             one movement instead of two competing ones. -->
-        <template id="alert-template">
-            <li class="alert">
-                <lord-icon
-                    class="alert__icon current-color"
-                    trigger="after-enter"
-                    target=".alert"
-                    aria-hidden="true"
-                ></lord-icon>
-
-                <div class="alert__body">
-                    <p class="alert__title"></p>
-                    <p class="alert__message"></p>
-                </div>
-
-                <button class="alert__close" type="button" aria-label="Dismiss">
+            <!-- #region markup -->
+            <!-- Every alert on both pages is cloned from this. `arrival-hover` plays the
+                 icon as the card arrives — after the card's own entrance, so the two read
+                 as one movement — and again whenever the pointer comes to rest on it. -->
+            <template id="alert-template">
+                <li class="alert">
                     <lord-icon
-                        class="alert__close-icon current-color"
-                        src="icons/cross.json"
-                        trigger="hover"
-                        target=".alert__close"
+                        class="alert__icon current-color"
+                        trigger="arrival-hover"
+                        target=".alert"
                         aria-hidden="true"
                     ></lord-icon>
-                </button>
-            </li>
-        </template>
-        <!-- #endregion -->
+
+                    <div class="alert__body">
+                        <p class="alert__title"></p>
+                        <p class="alert__message"></p>
+                    </div>
+
+                    <button class="alert__close" type="button" aria-label="Dismiss">
+                        <lord-icon
+                            class="alert__close-icon current-color"
+                            src="icons/cross.json"
+                            trigger="hover"
+                            target=".alert__close"
+                            aria-hidden="true"
+                        ></lord-icon>
+                    </button>
+                </li>
+            </template>
+            <!-- #endregion -->
+        </main>
     </body>
 </html>

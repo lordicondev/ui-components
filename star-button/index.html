@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Star button</title>
+        <link rel="stylesheet" href="./star-button.css" />
+        <script type="module" src="./main.ts"></script>
+    </head>
+    <body>
+        <main class="demo">
+            <!-- #region markup -->
+            <!-- `aria-pressed` is the whole state: the icon reads it through target, the
+                 stylesheet colours by it, and the count is derived from it. The hidden
+                 word after the number is what makes the button read as "24 stars" rather
+                 than "24" — the star itself is decoration to a screen reader. -->
+            <button class="star" type="button" aria-pressed="false">
+                <lord-icon
+                    class="star__mark current-color"
+                    src="icons/star.json"
+                    trigger="pressed-morph"
+                    target=".star"
+                    state="morph-select"
+                    aria-hidden="true"
+                ></lord-icon>
+
+                <span class="star__count">24</span>
+                <span class="star__unit">stars</span>
+            </button>
+            <!-- #endregion -->
+        </main>
+    </body>
+</html>

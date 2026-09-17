@@ -14,14 +14,14 @@
                 <!-- `target` names the element whose state the icon follows, and it has
                      to be an ancestor — the trigger resolves it with closest(). Here that
                      is .field, which carries aria-invalid for the whole control. -->
-                <div class="field" aria-invalid="false">
+                <div class="field" aria-invalid="false" data-focused="false">
                     <label class="field__label" for="password">Password</label>
 
                     <div class="field__control">
                         <lord-icon
                             class="field__icon field__lock current-color"
                             src="icons/lock.json"
-                            trigger="invalid-attention"
+                            trigger="focus-attention"
                             target=".field"
                             aria-hidden="true"
                         ></lord-icon>
@@ -60,18 +60,21 @@
                     </div>
                     <!-- #skip -->
 
-                    <p class="field__error" id="password-error" hidden>
-                        <!-- #region built-in -->
-                        <!-- A built-in trigger is enough here: the icon plays once, as the
-                             message appears. No custom trigger, no JavaScript. -->
+                    <p class="field__error" id="password-error" data-raised="0" hidden>
+                        <!-- #region hint -->
+                        <!-- data-raised counts how many times this message has been put
+                             up: the icon draws itself in on the first, and only nudges on
+                             a repeat. `hidden` keeps it out of the page in between. -->
                         <lord-icon
                             class="field__error-icon current-color"
                             src="icons/warning-circle.json"
-                            trigger="in"
+                            trigger="raised-attention"
+                            target=".field__error"
+                            state="in-reveal"
                             aria-hidden="true"
                         ></lord-icon>
                         <!-- #endregion -->
-                        Must be at least 8 characters
+                        <span class="field__error-text">Must be at least 8 characters</span>
                     </p>
                     <!-- #endskip -->
                 </div>

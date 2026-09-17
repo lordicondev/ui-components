@@ -1,45 +1,64 @@
 @import '@shared/styles/index.css';
+@import '@shared/ui/pager.css';
 
-/* Room to breathe around the control. */
+/* The example keeps the top of the stage and the dots keep the floor, so the pager sits
+   at the bottom edge however little the page above it needs. */
 .demo {
     display: grid;
-    gap: var(--space-24);
-    align-content: start;
+    grid-template-rows: 1fr auto;
     justify-items: center;
-    min-height: 320px;
-    padding: var(--space-64) var(--gutter);
+    align-items: stretch;
+    gap: var(--space-48);
+    min-height: 100dvh;
+    padding: var(--space-64) var(--gutter) var(--space-32);
 }
 
-.demo__controls {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-8);
-    justify-content: center;
+.page {
+    display: grid;
+    align-content: start;
+    gap: var(--space-24);
+    justify-items: center;
+    width: 100%;
 }
 
-.demo__controls button {
+/* The deck sits in the middle of whatever room the stage has, but behaves as though it
+   were pinned to the bottom of a screen: cards arrive from below and the ones they cover
+   settle downwards behind them. */
+.page--deck {
+    align-content: center;
+}
+
+.add {
+    justify-self: center;
     padding: var(--space-8) var(--space-16);
     border: 1px solid var(--border);
     border-radius: var(--radius-md);
     background: var(--surface);
     font-size: var(--text-sm);
+    font-weight: 500;
     cursor: pointer;
 }
 
-.demo__controls button:hover {
+.add:hover:not(:disabled) {
     border-color: var(--border-strong);
+}
+
+.add:disabled {
+    color: var(--ink-subtle);
+    cursor: not-allowed;
 }
 
 .alerts {
     display: grid;
-    gap: var(--space-12);
+    gap: var(--space-16);
     width: 100%;
-    max-width: 620px;
+    max-width: 600px;
     margin: 0;
     padding: 0;
     list-style: none;
 }
 
+/* The card itself. Grey is the resting kind, and the three below recolour it. */
 .alert {
     display: flex;
     align-items: flex-start;
@@ -48,15 +67,20 @@
     border: 1px solid var(--border);
     border-radius: var(--radius-lg);
     background: var(--surface-muted);
-    animation: alert-enter 320ms cubic-bezier(0.2, 0.8, 0.3, 1);
 }
 
-/* The icon's trigger waits for this to finish before it plays. */
-@keyframes alert-enter {
-    from {
-        opacity: 0;
-        transform: translateY(-6px);
-    }
+.alert__icon {
+    flex: none;
+    width: var(--icon-size-24);
+    height: var(--icon-size-24);
+}
+
+/* #region variants */
+/* A kind is two colours on the card and one on the icon — and the icon's is an ordinary
+   `color`, because `current-color` makes it inherit like any other element. Warning and
+   error are the same three lines against their own tokens. */
+.alert__icon {
+    color: var(--ink-soft);
 }
 
 .alert[data-kind='success'] {
@@ -64,30 +88,24 @@
     background: var(--success-surface);
 }
 
+.alert[data-kind='success'] .alert__icon {
+    color: var(--success);
+}
+
+/* #endregion */
+
 .alert[data-kind='warning'] {
     border-color: var(--warning-border);
     background: var(--warning-surface);
 }
 
+.alert[data-kind='warning'] .alert__icon {
+    color: var(--warning);
+}
+
 .alert[data-kind='error'] {
     border-color: var(--danger-border);
     background: var(--danger-surface);
-}
-
-.alert__icon {
-    flex: none;
-    width: var(--icon-size-20);
-    height: var(--icon-size-20);
-    margin-top: 2px;
-    color: var(--ink-muted);
-}
-
-.alert[data-kind='success'] .alert__icon {
-    color: var(--success);
-}
-
-.alert[data-kind='warning'] .alert__icon {
-    color: var(--warning);
 }
 
 .alert[data-kind='error'] .alert__icon {
@@ -102,13 +120,13 @@
 .alert__title {
     margin: 0;
     font-size: var(--text-sm);
-    font-weight: 600;
+    font-weight: 500;
     line-height: var(--leading-base);
 }
 
 .alert__message {
     margin: 0;
-    color: var(--ink-muted);
+    color: var(--ink-soft);
     font-size: var(--text-sm);
     line-height: var(--leading-base);
 }
@@ -117,26 +135,121 @@
     flex: none;
     display: grid;
     padding: var(--space-4);
-    border: 0;
-    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
     background: none;
+    color: var(--ink-soft);
     cursor: pointer;
     place-items: center;
+}
+
+.alert__close:hover {
+    border-color: var(--border-strong);
+    color: var(--ink);
 }
 
 .alert__close-icon {
     width: var(--icon-size-16);
     height: var(--icon-size-16);
-    color: var(--ink-muted);
 }
 
-.alert__close:hover .alert__close-icon {
-    color: var(--ink);
+/* Experimental. The queue is a deck rather than a list: the newest alert is in front and
+   the ones before it recede behind, so a stack of four costs the height of one. --depth
+   is set per card by the wiring; everything below follows from it. */
+.stack {
+    position: relative;
+
+    /* Room for the tallest card plus the slivers that sit under it, so a deep deck never
+       reaches the button below. */
+    min-height: 132px;
 }
 
-/* The entrance is decoration; without it the icons play as soon as they are ready. */
+/* Anchored to the foot of the deck, not its head: cards are not all the same height, and
+   this is what gives each one behind the same sliver of itself whatever it says. */
+.stack .alert {
+    position: absolute;
+    inset-inline: 0;
+    bottom: 20px;
+    transform-origin: bottom center;
+}
+
+/* #region stack */
+/* The rise and the pop are not one movement: `translate` and `scale` are properties in
+   their own right, not halves of a `transform`, so an arriving card climbs for 220ms
+   while reaching full size in 60ms. Two cards show and the third recedes and fades as it
+   goes, which is how a deck of any depth stays a deck. All three are functions of --depth
+   alone, so they move on one frame — read the fade off the DOM and it arrives late. */
+.stack .alert {
+    --layer: min(var(--depth, 0), 2);
+    translate: 0 calc(var(--layer) * 10px);
+    scale: calc(1 - var(--layer) * 0.2);
+    opacity: calc(1 - max(var(--depth, 0) - 1, 0));
+    transition:
+        translate 220ms cubic-bezier(0.2, 0.8, 0.3, 1),
+        scale 60ms cubic-bezier(0, 0, 0.2, 1),
+        opacity 60ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+/* The cards it covers take the same move at their own pace, longer than the arrival, so
+   the deck is still settling a moment after the new card has landed. Scale is the whole
+   of that movement for them, so it cannot stay on the 60ms track the pop uses. */
+.stack .alert:not(:last-child) {
+    transition:
+        translate 340ms cubic-bezier(0.3, 0, 0.2, 1),
+        scale 340ms cubic-bezier(0.3, 0, 0.2, 1),
+        opacity 340ms cubic-bezier(0.3, 0, 0.2, 1);
+}
+/* #endregion */
+
+/* Where a card is before it exists, and where a dismissed one goes back to. */
+@starting-style {
+    .stack .alert {
+        opacity: 0;
+        scale: 0.9;
+        translate: 0 24px;
+    }
+}
+
+/* #region leaving */
+/* Two effects again, and they are not each other's reverse. The card drops away on an
+   accelerating curve, and its fade is slow enough that you watch it go rather than find
+   it already gone — at the arrival's 60ms it would be invisible before it had moved.
+   Meanwhile the deck closes up behind it on its own 340ms, which is why the dismissal
+   starts that before this has finished. */
+.stack .alert[data-leaving] {
+    z-index: 10;
+    opacity: 0;
+    scale: 0.96;
+    translate: 0 16px;
+    transition:
+        translate 240ms cubic-bezier(0.4, 0, 1, 1),
+        scale 240ms cubic-bezier(0.4, 0, 1, 1),
+        opacity 200ms linear;
+}
+/* #endregion */
+
+/* The glass: a background you can see through, over cards that are already blurred by
+   being behind. Only the deck does this — the gallery is a flat picture of the colours. */
+.stack .alert {
+    background: color-mix(in srgb, var(--surface-muted) 70%, transparent);
+    -webkit-backdrop-filter: blur(5px) saturate(140%);
+    backdrop-filter: blur(5px) saturate(140%);
+}
+
+.stack .alert[data-kind='success'] {
+    background: color-mix(in srgb, var(--success-surface) 70%, transparent);
+}
+
+.stack .alert[data-kind='warning'] {
+    background: color-mix(in srgb, var(--warning-surface) 70%, transparent);
+}
+
+.stack .alert[data-kind='error'] {
+    background: color-mix(in srgb, var(--danger-surface) 70%, transparent);
+}
+
 @media (prefers-reduced-motion: reduce) {
-    .alert {
-        animation: none;
+    .stack .alert {
+        transition: none;
     }
 }

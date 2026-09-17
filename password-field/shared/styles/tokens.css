@@ -7,6 +7,8 @@
 :root {
     /* Text. `--ink*` is always a colour; `--text-*` is always a size. */
     --ink: var(--gray-950);
+    /* Body copy that is not the heading above it: a step down from --ink, still read. */
+    --ink-soft: var(--gray-600);
     --ink-muted: var(--gray-500);
     --ink-subtle: var(--gray-400);
     --ink-inverse: var(--gray-0);
@@ -14,6 +16,8 @@
     /* Backgrounds */
     --surface: var(--gray-0);
     --surface-muted: var(--gray-50);
+    /* A well inside a surface: the filled shape a single icon sits in. */
+    --surface-sunken: var(--gray-100);
 
     /* Outlines */
     --border: var(--gray-200);
@@ -24,16 +28,20 @@
     --accent: var(--brand-500);
     --accent-strong: var(--brand-600);
     --accent-surface: var(--brand-100);
+    /* One step up from that surface: the outline of a tinted box, or the fill of a small
+       shape sitting on one. */
     --accent-border: var(--brand-300);
+    /* Dark enough to stay a mark against either of them. */
+    --accent-ink: var(--brand-700);
 
     /* Status. Warning rides the brand ramp — that is what the designs use. */
     --success: var(--green-700);
     --success-surface: var(--green-100);
     --success-border: var(--green-300);
 
-    --warning: var(--brand-600);
+    --warning: var(--brand-500);
     --warning-surface: var(--brand-100);
-    --warning-border: var(--brand-200);
+    --warning-border: var(--brand-300);
 
     --danger: var(--red-700);
     --danger-surface: var(--red-100);

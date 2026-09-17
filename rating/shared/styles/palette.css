@@ -1,0 +1,87 @@
+/*
+ * Generated from the Figma token export.
+ * Raw values only — roles live in tokens.css. Edit the Figma variables, not this file.
+ */
+:root {
+    /* color/ink */
+    --gray-0: #FFFFFF;
+    --gray-50: #F7F8FA;
+    --gray-100: #EEF0F3;
+    --gray-200: #DEE1E6;
+    --gray-300: #C3C7D0;
+    --gray-400: #9BA1AD;
+    --gray-500: #767C89;
+    --gray-600: #565C68;
+    --gray-700: #3D414B;
+    --gray-800: #282B33;
+    --gray-900: #16181D;
+    --gray-950: #0A0B0E;
+
+    /* color/signal */
+    --brand-100: #FFEEE9;
+    --brand-200: #FFD7CA;
+    --brand-300: #FFB199;
+    --brand-400: #FF7D5C;
+    --brand-500: #FF5A36;
+    --brand-600: #E8431F;
+    --brand-700: #C2340F;
+
+    /* color/success */
+    --green-100: #EDF9F1;
+    --green-300: #A7D9BC;
+    --green-700: #15803D;
+
+    /* color/error */
+    --red-100: #FDECEC;
+    --red-300: #F5B5B5;
+    --red-700: #DC2626;
+
+    /* typography/font */
+    --font-ui-name: 'Figtree';
+    --font-mono-name: 'JetBrains Mono';
+
+    /* typography/size */
+    --text-xs: 12px;
+    --text-sm: 14px;
+    --text-base: 16px;
+    --text-lg: 20px;
+    --text-xl: 24px;
+    --text-2xl: 32px;
+    --text-3xl: 40px;
+
+    /* typography/lineHeight */
+    --leading-xs: 16px;
+    --leading-sm: 20px;
+    --leading-base: 24px;
+    --leading-lg: 28px;
+    --leading-xl: 32px;
+    --leading-2xl: 40px;
+    --leading-3xl: 48px;
+
+    /* spacing (named after the value, the Figma scale is non-linear) */
+    --space-4: 4px;
+    --space-8: 8px;
+    --space-12: 12px;
+    --space-16: 16px;
+    --space-24: 24px;
+    --space-32: 32px;
+    --space-48: 48px;
+    --space-64: 64px;
+    --space-96: 96px;
+
+    /* size/icon */
+    --icon-size-16: 16px;
+    --icon-size-20: 20px;
+    --icon-size-24: 24px;
+    --icon-size-32: 32px;
+    --icon-size-40: 40px;
+    --icon-size-48: 48px;
+    --icon-size-64: 64px;
+    --icon-size-96: 96px;
+
+    /* radius */
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --radius-pill: 9999px;
+}

@@ -1,0 +1,71 @@
+@import '@shared/styles/index.css';
+
+.demo {
+    display: grid;
+    place-items: center;
+    min-height: 100dvh;
+    padding: var(--space-64) var(--gutter);
+}
+
+/* The box from the design: one row of five, its own outline, and nothing else in it. */
+.rating {
+    display: flex;
+    align-items: center;
+    gap: var(--space-8);
+    margin: 0;
+    padding: var(--space-8) var(--space-12);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+}
+
+/* The radio stays in the page and keeps every native behaviour — arrow keys move the
+   rating, the group still submits, and each star still has a name to be called by. All
+   three are only invisible. */
+.star__input,
+.star__name,
+.rating__legend {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+
+/* Five stars in a row is something people sweep back and forth across, so a stray
+   double-click must not start dragging a selection over the group. */
+.star {
+    display: flex;
+    cursor: pointer;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+/* #region colour */
+/* Binary, and immediate. A star is coloured when it is lit, and `data-lit` is the count
+   the row is currently promising: the rating, until a pointer arrives and offers another.
+
+   Nothing here mentions the rating itself, and nothing here transitions. The delay that
+   makes the row light up as a run lives in the state changes, not in this file — which is
+   why the same delay carries the icon's nudge without either knowing about the other. */
+.star {
+    --star-mark: var(--ink-subtle);
+}
+
+.star[data-lit='true'] {
+    --star-mark: var(--accent);
+}
+/* #endregion */
+
+.star__mark {
+    width: var(--icon-size-24);
+    height: var(--icon-size-24);
+    color: var(--star-mark);
+}
+
+/* The radio is invisible, so its focus ring has to land on the star instead. */
+.star__input:focus-visible ~ .star__mark {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+    border-radius: var(--radius-sm);
+}
