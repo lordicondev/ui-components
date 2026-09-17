@@ -1,85 +1,65 @@
 <!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>Checkbox list</title>
-        <link rel="stylesheet" href="./checkbox-list.css" />
-        <script type="module" src="./main.ts"></script>
-    </head>
-    <body>
-        <main class="demo">
-            <fieldset class="options">
-                <legend class="options__legend">Notifications</legend>
 
-                <!-- #region markup -->
-                <!-- A real checkbox, hidden but still the thing you click and submit.
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Checkbox list</title>
+    <link rel="stylesheet" href="./checkbox-list.css" />
+    <script type="module" src="./main.ts"></script>
+</head>
+
+<body>
+    <main class="demo">
+        <fieldset class="options">
+            <!-- #region markup -->
+            <!-- A real checkbox, hidden but still the thing you click and submit.
                      data-checked exists only so the icon can see the state — the input
                      already reports it to assistive tech. -->
-                <label class="option" data-checked="false">
-                    <input class="option__input" type="checkbox" name="email" />
+            <label class="option" data-checked="false">
+                <input class="option__input" type="checkbox" name="email" />
 
-                    <lord-icon
-                        class="option__tick current-color"
-                        src="icons/check-circle.json"
-                        trigger="checked-morph"
-                        target=".option"
-                        state="morph-tick"
-                        data-attribute="data-checked"
-                        aria-hidden="true"
-                    ></lord-icon>
+                <lord-icon class="option__tick current-color" src="icons/check-circle.json" trigger="checked-morph"
+                    target=".option" state="morph-tick" data-attribute="data-checked" aria-hidden="true"></lord-icon>
 
-                    <span class="option__text">
-                        <span class="option__title">Email marketing</span>
-                        <span class="option__hint">
-                            Receive product updates, tips, and special offers by email
-                        </span>
+                <span class="option__text">
+                    <span class="option__title">Email marketing</span>
+                    <span class="option__hint">
+                        Receive product updates, tips, and special offers by email
                     </span>
-                </label>
-                <!-- #endregion -->
+                </span>
+            </label>
+            <!-- #endregion -->
 
-                <label class="option" data-checked="true">
-                    <input class="option__input" type="checkbox" name="sms" checked />
+            <label class="option" data-checked="true">
+                <input class="option__input" type="checkbox" name="sms" checked />
 
-                    <lord-icon
-                        class="option__tick current-color"
-                        src="icons/check-circle.json"
-                        trigger="checked-morph"
-                        target=".option"
-                        state="morph-tick"
-                        data-attribute="data-checked"
-                        aria-hidden="true"
-                    ></lord-icon>
+                <lord-icon class="option__tick current-color" src="icons/check-circle.json" trigger="checked-morph"
+                    target=".option" state="morph-tick" data-attribute="data-checked" aria-hidden="true"></lord-icon>
 
-                    <span class="option__text">
-                        <span class="option__title">SMS notifications</span>
-                        <span class="option__hint">
-                            Get order and delivery updates via text message
-                        </span>
+                <span class="option__text">
+                    <span class="option__title">SMS notifications</span>
+                    <span class="option__hint">
+                        Get order and delivery updates via text message
                     </span>
-                </label>
+                </span>
+            </label>
 
-                <label class="option" data-checked="true">
-                    <input class="option__input" type="checkbox" name="ads" checked />
+            <label class="option" data-checked="true">
+                <input class="option__input" type="checkbox" name="ads" checked />
 
-                    <lord-icon
-                        class="option__tick current-color"
-                        src="icons/check-circle.json"
-                        trigger="checked-morph"
-                        target=".option"
-                        state="morph-tick"
-                        data-attribute="data-checked"
-                        aria-hidden="true"
-                    ></lord-icon>
+                <lord-icon class="option__tick current-color" src="icons/check-circle.json" trigger="checked-morph"
+                    target=".option" state="morph-tick" data-attribute="data-checked" aria-hidden="true"></lord-icon>
 
-                    <span class="option__text">
-                        <span class="option__title">Personalized ads</span>
-                        <span class="option__hint">
-                            Let us use your activity to show more relevant ads
-                        </span>
+                <span class="option__text">
+                    <span class="option__title">Personalized ads</span>
+                    <span class="option__hint">
+                        Let us use your activity to show more relevant ads
                     </span>
-                </label>
-            </fieldset>
-        </main>
-    </body>
+                </span>
+            </label>
+        </fieldset>
+    </main>
+</body>
+
 </html>
