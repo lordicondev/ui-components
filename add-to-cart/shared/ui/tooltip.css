@@ -1,0 +1,63 @@
+/*
+ * The look of a tooltip. What opens and closes it is in tooltip.ts, which sets `data-tip`
+ * on the control while its name should be on screen and takes it off again afterwards.
+ *
+ * A demo that uses this owns the control underneath — how big the button is and what it
+ * is made of are questions about that demo, not about the label floating over it.
+ */
+
+/*
+ * The control the name belongs to becomes the box it is measured against. Worth doing
+ * here rather than asking every demo for it: the markup already says which element that
+ * is by putting the tooltip inside it, and saying it twice is one more thing to forget.
+ */
+:has(> .tooltip) {
+    position: relative;
+}
+
+/*
+ * It rises into place and sinks back out, starting the gap's worth below where it settles
+ * — which is the top edge of the control, so it reads as coming out from behind the thing
+ * it names. Both directions are the same movement in reverse, because nothing is being
+ * announced here: the name was always there, and it is only being shown.
+ *
+ * Hidden with `opacity`, and that is the whole trick: an invisible element is still an
+ * element, so the words go on naming the control for a screen reader while nobody can see
+ * them. `display: none` would take the name away along with the picture.
+ */
+
+/* #region look */
+.tooltip {
+    position: absolute;
+    bottom: calc(100% + var(--space-8));
+    left: 50%;
+    z-index: 1;
+    padding: var(--space-4) var(--space-8);
+    border-radius: var(--radius-md);
+    background: var(--ink);
+    color: var(--ink-inverse);
+    font-size: var(--text-xs);
+    line-height: var(--leading-xs);
+    font-weight: 500;
+    white-space: nowrap;
+    pointer-events: none;
+    opacity: 0;
+    translate: -50% var(--space-8);
+    transition:
+        opacity 120ms ease,
+        translate 160ms cubic-bezier(0.3, 0, 0.2, 1);
+}
+
+[data-tip] > .tooltip {
+    opacity: 1;
+    translate: -50% 0;
+}
+/* #endregion */
+
+/* No travel, and no fade either: the name is either being shown or it is not. */
+@media (prefers-reduced-motion: reduce) {
+    .tooltip {
+        translate: -50% 0;
+        transition: none;
+    }
+}

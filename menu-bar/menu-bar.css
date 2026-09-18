@@ -1,0 +1,123 @@
+@import '@shared/styles/index.css';
+@import '@shared/ui/tooltip.css';
+
+.demo {
+    display: grid;
+    place-items: center;
+    min-height: 100dvh;
+    padding: var(--space-64) var(--gutter);
+}
+
+.menu-bar {
+    display: flex;
+    align-items: center;
+    gap: var(--space-16);
+    padding: var(--space-12);
+    border-radius: var(--radius-lg);
+    background: var(--surface);
+    box-shadow: var(--shadow-sm);
+}
+
+/* A fieldset because the four tools are one choice and the group needs a name. The
+   browser's own frame around it is not wanted; the card already draws the edge. */
+.menu-bar__tools,
+.menu-bar__actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-8);
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+/* Read aloud, never drawn — and the same for the radios themselves, which stay in the
+   page with every native behaviour intact and are only invisible. Not display:none,
+   which would take them out of the tab order and out of the form. */
+.menu-bar__legend,
+.tool__input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+
+/* Stretched rather than sized: the rule is as tall as the buttons beside it, whatever
+   they turn out to be. */
+.menu-bar__rule {
+    align-self: stretch;
+    width: 1px;
+    background: var(--border);
+}
+
+/* #region selected */
+/* Three names, set twice. Everything below reads from them, so this block is the whole
+   difference between the tool you are using and the three you are not — the icon
+   included, because `current-color` lets a Lordicon icon take `color` like any element.
+
+   No transition on any of it. Which tool is selected is a state, not a movement, and the
+   only thing here with a duration is the pair of icons morphing past each other. */
+.tool {
+    --tool-line: var(--border);
+    --tool-fill: var(--surface);
+    --tool-mark: var(--ink);
+}
+
+.tool:hover {
+    --tool-line: var(--border-strong);
+}
+
+/* Tinted rather than outlined: in the design the selected tool has no edge of its own,
+   it is simply sitting on colour. */
+.tool[data-selected='true'] {
+    --tool-line: var(--accent-surface);
+    --tool-fill: var(--accent-surface);
+    --tool-mark: var(--accent);
+}
+/* #endregion */
+
+.tool,
+.action {
+    display: grid;
+    place-items: center;
+    padding: var(--space-12);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    background: var(--surface);
+    cursor: pointer;
+}
+
+/* A button gets this from base.css; a label has to ask. Without it, picking the same
+   tool twice drags a selection across the name floating above it. */
+.tool {
+    border-color: var(--tool-line);
+    background: var(--tool-fill);
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+.action:hover {
+    border-color: var(--border-strong);
+}
+
+.tool__mark,
+.action__mark {
+    width: var(--icon-size-24);
+    height: var(--icon-size-24);
+}
+
+.tool__mark {
+    color: var(--tool-mark);
+}
+
+.action__mark {
+    color: var(--ink);
+}
+
+/* The radio is invisible, so its focus ring has to land on the box that stands for it.
+   The actions are real buttons and take theirs from base.css. */
+.tool:has(.tool__input:focus-visible) {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+}

@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Menu bar</title>
+        <link rel="stylesheet" href="./menu-bar.css" />
+        <script type="module" src="./main.ts"></script>
+    </head>
+    <body>
+        <main class="demo">
+            <div class="menu-bar">
+                <fieldset class="menu-bar__tools">
+                    <legend class="menu-bar__legend">Tool</legend>
+
+                    <!-- #region markup -->
+                    <!-- One tool. The radio is the real control and keeps every native
+                         behaviour — it is only invisible. `data-selected` says the same
+                         thing in an attribute the icon and the stylesheet can both read,
+                         because a radio's checked state is a property and nothing can
+                         watch it. The name floating over the button is the same span that
+                         gives the radio its name; tooltip.css draws it. -->
+                    <label class="tool" data-selected="true">
+                        <input class="tool__input" type="radio" name="tool" value="brush" checked />
+
+                        <lord-icon
+                            class="tool__mark current-color"
+                            src="icons/brush-alt.json"
+                            trigger="selected-morph"
+                            target=".tool"
+                            state="morph-change"
+                            aria-hidden="true"
+                        ></lord-icon>
+
+                        <span class="tooltip">Brush</span>
+                    </label>
+                    <!-- #endregion -->
+
+                    <label class="tool" data-selected="false">
+                        <input class="tool__input" type="radio" name="tool" value="fill" />
+
+                        <lord-icon
+                            class="tool__mark current-color"
+                            src="icons/paint-bucket.json"
+                            trigger="selected-morph"
+                            target=".tool"
+                            state="morph-select"
+                            aria-hidden="true"
+                        ></lord-icon>
+
+                        <span class="tooltip">Fill</span>
+                    </label>
+
+                    <label class="tool" data-selected="false">
+                        <input class="tool__input" type="radio" name="tool" value="pencil" />
+
+                        <lord-icon
+                            class="tool__mark current-color"
+                            src="icons/pencil.json"
+                            trigger="selected-morph"
+                            target=".tool"
+                            state="morph-select"
+                            aria-hidden="true"
+                        ></lord-icon>
+
+                        <span class="tooltip">Pencil</span>
+                    </label>
+
+                    <label class="tool" data-selected="false">
+                        <input class="tool__input" type="radio" name="tool" value="pen" />
+
+                        <lord-icon
+                            class="tool__mark current-color"
+                            src="icons/pen-nib.json"
+                            trigger="selected-morph"
+                            target=".tool"
+                            state="morph-select"
+                            aria-hidden="true"
+                        ></lord-icon>
+
+                        <span class="tooltip">Pen</span>
+                    </label>
+                </fieldset>
+
+                <span class="menu-bar__rule"></span>
+
+                <div class="menu-bar__actions">
+                    <!-- #region action -->
+                    <!-- An action, not a state. Nothing about the button is different
+                         afterwards, so the icon plays once and the markup holds no
+                         attribute for it to follow. -->
+                    <button class="action" type="button">
+                        <lord-icon
+                            class="action__mark current-color"
+                            src="icons/bullet-list.json"
+                            trigger="press-attention"
+                            target=".action"
+                            aria-hidden="true"
+                        ></lord-icon>
+
+                        <span class="tooltip">Bullet list</span>
+                    </button>
+                    <!-- #endregion -->
+
+                    <button class="action" type="button">
+                        <lord-icon
+                            class="action__mark current-color"
+                            src="icons/check-list.json"
+                            trigger="press-attention"
+                            target=".action"
+                            aria-hidden="true"
+                        ></lord-icon>
+
+                        <span class="tooltip">Checklist</span>
+                    </button>
+                </div>
+
+                <span class="menu-bar__rule"></span>
+
+                <button class="action" type="button">
+                    <lord-icon
+                        class="action__mark current-color"
+                        src="icons/three-dots-vertical.json"
+                        trigger="press-attention"
+                        target=".action"
+                        aria-hidden="true"
+                    ></lord-icon>
+
+                    <span class="tooltip">More options</span>
+                </button>
+            </div>
+        </main>
+    </body>
+</html>

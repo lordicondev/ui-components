@@ -26,6 +26,9 @@ const REVEAL_MS = 500;
  */
 const FADE_SHARE = 0.3;
 
+/** And the curve it fades on. A word arriving is not a movement, so it only lets go. */
+const FADE_EASE = 'ease-out';
+
 const CONCEAL_MS = 300;
 
 /** Far enough that the words are clearly leaving, short enough to stay under the clip. */
@@ -37,6 +40,12 @@ export type RevealOptions = {
     duration?: number;
     fadeShare?: number;
     easing?: string;
+    /**
+     * Held back this long before the first word. For text arriving into a box that is
+     * still opening: words that start before there is anywhere to put them are read as
+     * the box being late rather than the words being early.
+     */
+    delay?: number;
 };
 
 export type ConcealOptions = {
@@ -108,7 +117,7 @@ export function settleText(element: HTMLElement): void {
  * run always takes `duration`: more words tighten the stagger rather than lengthen the run.
  */
 export function revealText(element: HTMLElement, options: RevealOptions = {}): Animation[] {
-    const { duration = REVEAL_MS, fadeShare = FADE_SHARE, easing = 'ease-out' } = options;
+    const { duration = REVEAL_MS, fadeShare = FADE_SHARE, easing = FADE_EASE, delay = 0 } = options;
 
     const words = splitWords(element);
     settleText(element);
@@ -124,7 +133,7 @@ export function revealText(element: HTMLElement, options: RevealOptions = {}): A
         // a finished wave leaves nothing to undo.
         word.animate(
             { opacity: [0, 1] },
-            { duration: fade, delay: index * step, easing, fill: 'backwards' },
+            { duration: fade, delay: delay + index * step, easing, fill: 'backwards' },
         ),
     );
 }

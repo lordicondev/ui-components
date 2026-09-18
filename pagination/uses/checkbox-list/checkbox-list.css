@@ -1,0 +1,103 @@
+@import '@shared/styles/index.css';
+@import '@shared/ui/pager.css';
+
+/* Room to breathe around the control, and a floor under it so the pager sits at the
+   bottom of the demo rather than wherever the current variant happens to end. */
+.demo {
+    display: grid;
+    grid-template-rows: 1fr auto;
+    justify-items: center;
+    align-items: start;
+    gap: var(--space-48);
+    min-height: 100dvh;
+    padding: var(--space-64) var(--gutter) var(--space-32);
+}
+
+.options {
+    display: grid;
+    gap: var(--space-24);
+    max-width: 560px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+/* The label is the click target, title and hint included, so double-clicking to toggle
+   would otherwise highlight the sentence it sits on. Buttons get this from base.css; a
+   label has to ask. */
+.option {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-12);
+    cursor: pointer;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+/* The input stays in the page and keeps every native behaviour; it is only invisible.
+   Not display:none, which would take it out of the tab order and out of the form. The
+   legend is hidden the same way: the group needs a name, the picture does not. */
+.option__input,
+.options__legend {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+
+/* #region colour */
+/* Three steps, not two: resting, under the pointer, and chosen. Hovering shows the accent
+   the row would take, so the answer arrives before the click does — the shape still says
+   which is which, an empty outline against a filled one.
+
+   No transition anywhere here: colour is a state, not a movement, so it changes at once. */
+.option__tick {
+    flex: none;
+    width: var(--icon-size-24);
+    height: var(--icon-size-24);
+    margin-top: 1px;
+    color: var(--ink-subtle);
+}
+
+.option:hover .option__tick {
+    color: var(--accent);
+}
+
+.option[data-checked='true'] .option__tick {
+    color: var(--accent);
+}
+
+.option[data-checked='true']:hover .option__tick {
+    color: var(--accent-strong);
+}
+/* #endregion */
+
+/* The input is invisible, so its focus ring has to land on the icon instead — and follow
+   the shape the icon actually draws, which is what data-shape on the group is for. */
+.option__input:focus-visible ~ .option__tick {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+    border-radius: var(--radius-sm);
+}
+
+[data-shape='circle'] .option__input:focus-visible ~ .option__tick {
+    border-radius: var(--radius-pill);
+}
+
+.option__text {
+    display: grid;
+}
+
+.option__title {
+    font-weight: 500;
+    line-height: var(--leading-base);
+}
+
+.option__hint {
+    color: var(--ink-muted);
+    font-size: var(--text-sm);
+    line-height: var(--leading-base);
+    font-weight: 500;
+}

@@ -21,6 +21,9 @@
 
     /* Outlines */
     --border: var(--gray-200);
+    /* Fainter than a border has any business being, for a box that already has a fill of
+       its own: it is the edge of a filled input, not a line drawn round nothing. */
+    --border-soft: var(--gray-100);
     --border-strong: var(--gray-300);
     --border-accent: var(--brand-400);
 
@@ -62,6 +65,12 @@
        copy of this file. */
     --gutter: clamp(var(--space-16), 5vw, var(--space-48));
 
-    /* Not in Figma — the cards need some lift and one value is enough. */
-    --shadow-sm: 0 1px 2px rgb(10 11 14 / 6%);
+    /* The halo a card sits in: no offset in either direction, so it reads as lift rather
+       than as a light source. An effect in Figma rather than a variable, which is why it
+       is written out here — the colour is --gray-400, and only the alpha is new. */
+    --shadow-sm: 0 0 7.5px color-mix(in srgb, var(--gray-400) 20%, transparent);
+    /* The same halo under something that is already a colour. Warmer and heavier than the
+       grey one, because a brand button has to lift off a white page rather than off a
+       tinted one. */
+    --shadow-accent: 0 0 7.5px color-mix(in srgb, var(--accent-strong) 40%, transparent);
 }

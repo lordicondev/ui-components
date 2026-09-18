@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Add to cart</title>
+        <link rel="stylesheet" href="./add-to-cart.css" />
+        <script type="module" src="./main.ts"></script>
+    </head>
+    <body>
+        <main class="demo">
+            <div class="shelf">
+                <!-- #region markup -->
+                <!-- `aria-pressed` is the whole state: the basket morphs on it, the button
+                     opens on it, and the words are what it looks like. Those words are
+                     hidden from a screen reader on purpose — they say what the button has
+                     already done, which `aria-pressed` has said too. The name, floating
+                     above, is the other half: what pressing it would do next. -->
+                <button class="cart" type="button" aria-pressed="false">
+                    <lord-icon
+                        class="cart__mark current-color"
+                        src="icons/shopping-basket.json"
+                        trigger="pressed-morph"
+                        target=".cart"
+                        state="morph-add"
+                        aria-hidden="true"
+                    ></lord-icon>
+
+                    <span class="cart__said" aria-hidden="true">
+                        <span class="cart__label">Added to cart</span>
+                    </span>
+
+                    <span class="tooltip">Add to cart</span>
+                </button>
+                <!-- #endregion -->
+
+                <!-- #region favorite -->
+                <!-- The same trigger and the same attribute, on an icon that keeps what it
+                     is given. `morph-select` fills the heart in; the stylesheet colours it
+                     from the same `aria-pressed`, so shape and colour never disagree. -->
+                <button class="favorite" type="button" aria-pressed="false">
+                    <lord-icon
+                        class="favorite__mark current-color"
+                        src="icons/heart.json"
+                        trigger="pressed-morph"
+                        target=".favorite"
+                        state="morph-select"
+                        aria-hidden="true"
+                    ></lord-icon>
+
+                    <span class="tooltip">Add to favorites</span>
+                </button>
+                <!-- #endregion -->
+            </div>
+        </main>
+    </body>
+</html>

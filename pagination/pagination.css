@@ -1,0 +1,170 @@
+@import '@shared/styles/index.css';
+@import '@shared/ui/pager.css';
+
+/* Room above for the row, and a floor under it so the dots stay put as the variants
+   change width. */
+.demo {
+    display: grid;
+    grid-template-rows: 1fr auto;
+    justify-items: center;
+    align-items: center;
+    gap: var(--space-48);
+    min-height: 100dvh;
+    padding: var(--space-64) var(--gutter) var(--space-32);
+}
+
+/* The steps at the ends, the numbers between them, and the design's 96 pixels of air. */
+.pages {
+    display: flex;
+    align-items: center;
+    gap: var(--space-96);
+}
+
+/* The bare chevrons have no box to see, so the gap the design measures is to the chevron
+   itself — and the padding that makes them big enough to hit sits inside it. */
+.pages--bare {
+    gap: calc(var(--space-96) - var(--space-8));
+}
+
+.numbers {
+    position: relative;
+    display: flex;
+    gap: var(--space-4);
+}
+
+/*
+ * The frame is one element for the whole row rather than a border on the page you are on,
+ * because a border cannot travel from one button to another.
+ *
+ * Both its edges are written on every turn and both are on the same journey, but they do
+ * not leave together. The leading edge goes first and alone, so the frame stretches until
+ * it touches the page it is moving to; only then does the trailing edge follow, and it
+ * arrives slowly. Which edge leads is the direction, and that is the only thing script
+ * has to say about any of this.
+ *
+ * Both times and both curves are measured off the reference recording: 130ms for the
+ * stretch on a curve that only accelerates, and 300ms for the catching up on one that only
+ * slows down. A frame that moved both edges at once would just be a box sliding, and the
+ * row would lose the one thing this says — which way you went.
+ */
+.numbers {
+    --frame-lead: 130ms cubic-bezier(0.4, 0, 1, 1);
+    --frame-trail: 300ms cubic-bezier(0.215, 0.61, 0.355, 1) 130ms;
+}
+
+/* #region frame */
+.numbers__frame {
+    position: absolute;
+    inset-block: 0;
+    left: var(--frame-left);
+    right: var(--frame-right);
+    border: 1px solid var(--accent);
+    border-radius: var(--radius-md);
+    pointer-events: none;
+    transition:
+        right var(--frame-lead),
+        left var(--frame-trail);
+}
+
+.numbers[data-going='back'] .numbers__frame {
+    transition:
+        left var(--frame-lead),
+        right var(--frame-trail);
+}
+/* #endregion */
+
+/* Nowhere to be until the row has been measured, and `data-going` is the word for that
+   having happened. */
+.numbers:not([data-going]) .numbers__frame {
+    opacity: 0;
+}
+
+/* As wide as it is tall, and said that way round: a line of text and the padding above and
+   below it, which is exactly what the height already comes to. Written as a minimum rather
+   than a width, so a two-digit page widens the button instead of crowding it. */
+.page {
+    display: grid;
+    place-items: center;
+    min-width: calc(var(--leading-base) + 2 * var(--space-8));
+    padding: var(--space-8);
+    border: 0;
+    border-radius: var(--radius-md);
+    background: none;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.page:hover {
+    background: var(--surface-muted);
+}
+
+.step {
+    display: flex;
+    align-items: center;
+    gap: var(--space-8);
+    padding: var(--space-8);
+    border: 0;
+    border-radius: var(--radius-md);
+    background: none;
+    color: var(--ink);
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.step:disabled {
+    color: var(--ink-subtle);
+    cursor: default;
+}
+
+/* #region mirror */
+/* One arrow in the set and two on screen. Turning the next button round turns its
+   animation round with it — the arrow that flies out to the left on one flies out to the
+   right on the other, and neither the icon nor the trigger knows it happened. */
+.step__mark {
+    flex: none;
+    width: var(--icon-size-24);
+    height: var(--icon-size-24);
+}
+
+.step--next .step__mark {
+    scale: -1 1;
+}
+/* #endregion */
+
+/* What actually differs between the three rows: a box, a box with a word in it, and no box
+   at all. Everything else on screen — the numbers, the frame, the times it moves in — is
+   the same markup and the same stylesheet, three times over. */
+
+/* #region variants */
+.step--boxed {
+    border: 1px solid var(--border);
+    background: var(--surface);
+}
+
+.step--boxed:hover:not(:disabled),
+.step--labelled:hover:not(:disabled) {
+    background: var(--surface-muted);
+}
+
+.step--boxed:active:not(:disabled),
+.step--labelled:active:not(:disabled) {
+    background: var(--surface-sunken);
+}
+
+/* No box to tint, so the chevron answers instead. */
+.step--bare:hover:not(:disabled) {
+    color: var(--accent);
+}
+
+.step--labelled .step__mark,
+.step--bare .step__mark {
+    width: var(--icon-size-20);
+    height: var(--icon-size-20);
+}
+/* #endregion */
+
+@media (prefers-reduced-motion: reduce) {
+    .numbers__frame {
+        transition: none;
+    }
+}
