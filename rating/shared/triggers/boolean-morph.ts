@@ -3,14 +3,14 @@ import type { Player } from '@lordicon/web';
 import { BaseTrigger } from './base.ts';
 import { observeAttribute } from './observe.ts';
 
-type Segment = [number, number];
+export type Segment = [number, number];
 
 /**
  * A Lordicon morph state carries a ratio, e.g. `morph-close:0.5`. Frames up to the ratio
  * are the transition into the second look; the rest are the transition back. Splitting
  * the state there gives us one segment per direction.
  */
-function splitAtRatio(player: Player): [Segment, Segment] | null {
+export function splitAtRatio(player: Player): [Segment, Segment] | null {
     const state = player.availableStates.find((candidate) => candidate.name === player.state);
     const ratio = state?.params.length ? parseFloat(state.params[0]) : NaN;
 

@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Button progress</title>
+        <link rel="stylesheet" href="./button-progress.css" />
+        <script type="module" src="./main.ts"></script>
+    </head>
+    <body>
+        <main class="demo">
+            <div class="task" id="kind-download" data-page>
+                <!-- #region markup -->
+                <!-- `data-stage` is the whole control: the icon loops on it, the fill and
+                     the words move on it, and the toast comes and goes on it. `data-progress`
+                     is the other half of the API — set it to anything from 0 to 100 and the
+                     bar follows, whether that is this demo pretending or a real transfer. -->
+                <button
+                    class="task__button"
+                    type="button"
+                    data-stage="idle"
+                    data-progress="0"
+                    aria-label="Download file"
+                >
+                    <span class="task__fill" aria-hidden="true"></span>
+
+                    <lord-icon
+                        class="task__mark current-color"
+                        src="icons/download.json"
+                        trigger="stage-cycle"
+                        target=".task__button"
+                        state="morph-check"
+                        data-loop="loop-cycle"
+                        aria-hidden="true"
+                    ></lord-icon>
+                    <!-- #skip -->
+
+                    <!-- #region says -->
+                    <!-- Three labels, stacked, and the strip they sit on slides up by one
+                         line each time the stage changes. They are the only place the words
+                         live — `aria-label` on the button is read off whichever is showing,
+                         so the second page of this demo is these three lines and an icon. -->
+                    <span class="task__says" aria-hidden="true">
+                        <span class="task__lines">
+                            <span class="task__line">Download file</span>
+                            <span class="task__line"
+                                >Downloading<i class="task__dots"><i></i><i></i><i></i></i
+                            ></span>
+                            <span class="task__line">Downloaded</span>
+                        </span>
+                    </span>
+                    <!-- #endregion -->
+                    <!-- #endskip -->
+                </button>
+                <!-- #endregion -->
+
+                <!-- #region toast -->
+                <!-- Absolutely placed, so it is drawn over the page rather than in it —
+                     nothing below moves to make room. It opens from the button's middle and
+                     runs out to the button's left edge, and the words are simply uncovered
+                     as it goes. -->
+                <p class="toast" role="status" data-shown="false">
+                    <lord-icon
+                        class="toast__mark current-color"
+                        src="icons/check-circle.json"
+                        trigger="shown-attention"
+                        target=".toast"
+                        state="in-reveal"
+                        aria-hidden="true"
+                    ></lord-icon>
+
+                    <span class="toast__text">File downloaded – lordicon-icons.zip</span>
+                </p>
+                <!-- #endregion -->
+            </div>
+
+            <div class="task" id="kind-upload" data-page>
+                <button
+                    class="task__button"
+                    type="button"
+                    data-stage="idle"
+                    data-progress="0"
+                    aria-label="Upload file"
+                >
+                    <span class="task__fill" aria-hidden="true"></span>
+
+                    <!-- #region upload -->
+                    <!-- The whole of the second page. Nothing in the stylesheet or the code
+                         knows which of the two it is looking at: `main.ts` wires whatever
+                         `.task` elements it finds, and finds two. -->
+                    <lord-icon
+                        class="task__mark current-color"
+                        src="icons/upload.json"
+                        trigger="stage-cycle"
+                        target=".task__button"
+                        state="morph-select"
+                        data-loop="loop-cycle"
+                        aria-hidden="true"
+                    ></lord-icon>
+
+                    <span class="task__says" aria-hidden="true">
+                        <span class="task__lines">
+                            <span class="task__line">Upload file</span>
+                            <span class="task__line"
+                                >Uploading<i class="task__dots"><i></i><i></i><i></i></i
+                            ></span>
+                            <span class="task__line">Uploaded</span>
+                        </span>
+                    </span>
+                    <!-- #endregion -->
+                </button>
+
+                <p class="toast" role="status" data-shown="false">
+                    <lord-icon
+                        class="toast__mark current-color"
+                        src="icons/check-circle.json"
+                        trigger="shown-attention"
+                        target=".toast"
+                        state="in-reveal"
+                        aria-hidden="true"
+                    ></lord-icon>
+
+                    <span class="toast__text">File uploaded – icon-heart.json</span>
+                </p>
+            </div>
+
+            <div class="pager">
+                <button
+                    class="pager__dot"
+                    type="button"
+                    aria-pressed="true"
+                    aria-controls="kind-download"
+                    aria-label="Download"
+                ></button>
+                <button
+                    class="pager__dot"
+                    type="button"
+                    aria-pressed="false"
+                    aria-controls="kind-upload"
+                    aria-label="Upload"
+                ></button>
+            </div>
+        </main>
+    </body>
+</html>

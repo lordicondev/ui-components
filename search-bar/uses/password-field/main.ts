@@ -1,7 +1,7 @@
 // #region setup
 import { defineElement, Element } from '@lordicon/element';
 import { booleanAttention } from '@shared/triggers/boolean-attention.ts';
-import { RaisedAttention } from '@shared/triggers/raised-attention.ts';
+import { raisedAttention } from '@shared/triggers/raised-attention.ts';
 import { booleanMorph } from '@shared/triggers/boolean-morph.ts';
 
 // Register before defineElement(): it calls customElements.define() last, and the moment
@@ -9,7 +9,7 @@ import { booleanMorph } from '@shared/triggers/boolean-morph.ts';
 // an unregistered name throws.
 Element.defineTrigger('pressed-morph', booleanMorph('aria-pressed'));
 Element.defineTrigger('focus-attention', booleanAttention('data-focused'));
-Element.defineTrigger('raised-attention', RaisedAttention);
+Element.defineTrigger('raised-attention', raisedAttention('data-raised'));
 
 defineElement();
 // #endregion

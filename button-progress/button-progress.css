@@ -1,0 +1,271 @@
+@import '@shared/styles/index.css';
+@import '@shared/ui/pager.css';
+
+/* Room for the button and the receipt that hangs under it, and a floor for the dots so
+   they stay put whichever of the two pages is showing. */
+.demo {
+    display: grid;
+    grid-template-rows: 1fr auto;
+    justify-items: center;
+    align-items: center;
+    gap: var(--space-96);
+    min-height: 100dvh;
+    padding: var(--space-64) var(--gutter) var(--space-32);
+}
+
+/* The button's own box, and the thing the toast is measured against — it opens from this
+   box's middle and runs out to its left edge. */
+.task {
+    position: relative;
+    display: grid;
+    justify-items: start;
+}
+
+.task__button {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    overflow: hidden;
+    padding: var(--space-8) var(--space-16);
+    border: 0;
+    border-radius: var(--radius-md);
+    background: var(--accent);
+    box-shadow: var(--shadow-accent);
+    color: var(--ink-inverse);
+    font-weight: 500;
+    cursor: pointer;
+}
+
+/* Immediate, both of them: which colour the button is says what it would do if pressed,
+   and an answer to that should not arrive late. The icon holds still through both — the
+   pointer passing over a button is not an event the icon has anything to add to. */
+.task__button:hover:not(:disabled) {
+    background: var(--accent-strong);
+}
+
+.task__button:active:not(:disabled) {
+    background: var(--accent-ink);
+}
+
+.task__button:disabled {
+    cursor: default;
+}
+
+/*
+ * The bar is always the full width of the button and scaled down to `--progress`, rather
+ * than a box being made wider: a solid colour has nothing to distort, scaling is off the
+ * layout entirely, and there is no step where the browser works out a new width. It sits
+ * under the icon and the words, which never move.
+ *
+ * Finished, it fades rather than running back — the bar has nothing left to say, and
+ * emptying it would be a second animation saying it. The scale is reset afterwards, which
+ * nobody sees, because only the busy button transitions it at all.
+ */
+
+/* #region fill */
+.task__fill {
+    position: absolute;
+    inset: 0;
+    transform-origin: left;
+    scale: var(--progress, 0) 1;
+    background: var(--accent-strong);
+    opacity: 0;
+}
+
+.task__button[data-stage='busy'] .task__fill {
+    opacity: 1;
+    transition: scale 220ms linear;
+}
+
+.task__button[data-stage='done'] .task__fill {
+    opacity: 0;
+    transition: opacity 300ms ease;
+}
+/* #endregion */
+
+.task__mark {
+    flex: none;
+    width: var(--icon-size-24);
+    height: var(--icon-size-24);
+}
+
+/*
+ * One line's worth of window, and a strip of labels behind it. Every change slides the
+ * strip up by exactly one line, so the old words leave over the top and the new ones come
+ * up from underneath — the same movement whichever label is arriving.
+ *
+ * The window is as wide as the widest label rather than the current one, so the button
+ * keeps its width while the words change — which is also what stops the ellipsis in
+ * "Downloading…" from pushing the button about.
+ */
+
+/* #region says */
+.task__says {
+    display: block;
+    overflow: hidden;
+    height: var(--leading-base);
+}
+
+.task__lines {
+    display: grid;
+    justify-items: start;
+    translate: 0 calc(var(--line, 0) * var(--leading-base) * -1);
+    transition: translate 250ms ease-out;
+}
+
+.task__line {
+    line-height: var(--leading-base);
+    white-space: nowrap;
+}
+/* #endregion */
+
+/* #region dots */
+/*
+ * The three dots after "Downloading" arrive one at a time and leave together, over and
+ * over. They are always in the line and only ever change opacity, so the word they follow
+ * cannot move and neither can the button around it — the room for them was taken when the
+ * strip was measured, whether or not any of them is lit.
+ *
+ * Measured off the reference recording: a 667ms round in which each of the first three
+ * steps holds for 150ms and the last, with all three showing, holds for the rest.
+ */
+.task__dots {
+    font-style: normal;
+}
+
+.task__dots > i::before {
+    content: '.';
+    font-style: normal;
+}
+
+/* Longhands, not the `animation` shorthand. A shorthand with no name in it is
+   `animation-name: none` plus some timings, and a CSS minifier is entitled to throw the
+   timings away and write `animation: none` — which is exactly what the built stylesheet
+   did, leaving the dots named but with nothing to run and no way to notice in dev. */
+.task__dots > i {
+    opacity: 0;
+    animation-duration: 667ms;
+    animation-timing-function: step-end;
+    animation-iteration-count: infinite;
+}
+
+.task__dots > i:nth-child(1) {
+    animation-name: dot-one;
+}
+
+.task__dots > i:nth-child(2) {
+    animation-name: dot-two;
+}
+
+.task__dots > i:nth-child(3) {
+    animation-name: dot-three;
+}
+
+@keyframes dot-one {
+    22.5% {
+        opacity: 1;
+    }
+}
+
+@keyframes dot-two {
+    45% {
+        opacity: 1;
+    }
+}
+
+@keyframes dot-three {
+    67.5% {
+        opacity: 1;
+    }
+}
+/* #endregion */
+
+/* The wrap back to the first label, taken in one frame with nothing allowed to animate. */
+.task__lines[data-settling] {
+    transition: none;
+}
+
+/*
+ * Drawn over the page rather than in it: absolute, so nothing below shifts to make room for
+ * a receipt that is leaving in two seconds anyway.
+ *
+ * It opens from the middle of the button and finishes flush with the button's left edge —
+ * `left` going from 50% to 0 while the width goes from nothing to what the words measure.
+ * `--toast-width` is that measurement, taken once, because CSS has no transition from zero
+ * to `auto`. The words are not animated at all: the box uncovers them as it goes.
+ *
+ * Leaving is not the reverse of arriving. It drops a little and dims, and the box it grew
+ * from is not unmade.
+ */
+
+/* The chrome: where it hangs and what it is made of. Nothing here moves. */
+.toast {
+    position: absolute;
+    top: calc(100% + var(--space-16) + var(--space-4));
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: var(--space-8);
+    margin: 0;
+    overflow: hidden;
+    padding: var(--space-8);
+    border: 1px solid var(--border-soft);
+    border-radius: var(--radius-lg);
+    background: var(--surface);
+}
+
+/* #region toast */
+/* Leaving is a fade and a small drop, and nothing else — the box does not close the way it
+   opened. `0s 150ms` is what keeps it that way: the width and the offset snap back only
+   once the fade has finished, at a moment when there is nothing on screen to see it. */
+.toast {
+    left: 50%;
+    width: 0;
+    opacity: 0;
+    translate: 0 0;
+    transition:
+        opacity 150ms ease,
+        translate 150ms ease,
+        width 0s 150ms,
+        left 0s 150ms;
+}
+
+.toast[data-shown='true'] {
+    width: var(--toast-width, max-content);
+    left: 0;
+    opacity: 1;
+    transition:
+        width 500ms cubic-bezier(0.215, 0.61, 0.355, 1),
+        left 500ms cubic-bezier(0.215, 0.61, 0.355, 1),
+        opacity 150ms ease;
+}
+
+/* #endregion */
+
+.toast[data-shown='false'] {
+    translate: 0 var(--space-8);
+}
+
+.toast__mark {
+    flex: none;
+    width: var(--icon-size-20);
+    height: var(--icon-size-20);
+    color: var(--accent);
+}
+
+.toast__text {
+    color: var(--ink);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    line-height: var(--leading-base);
+    white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .task__lines,
+    .task__fill,
+    .toast {
+        transition: none;
+    }
+}

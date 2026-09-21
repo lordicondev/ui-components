@@ -1,0 +1,256 @@
+@import '@shared/styles/index.css';
+
+.demo {
+    display: grid;
+    place-items: center;
+    min-height: 100dvh;
+    padding: var(--space-24) var(--gutter);
+}
+
+/* #region fit */
+/*
+ * A sidebar has no natural height: it is as tall as the window beside it, and the design
+ * draws it at 814px because that is how tall that window was. So all three sizes are named
+ * and the browser picks — `min-height` wins over `max-height` in CSS, and that ordering is
+ * the rule. Never shorter than what it holds, never taller than the screen, 814px between.
+ *
+ * The cap is spelled out rather than `100%` of the box around it: a percentage height needs
+ * a definite one to measure against, that box is sized by this one, and the column would
+ * hang off the bottom of the screen.
+ */
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: var(--space-24);
+    width: 300px;
+    height: 814px;
+    min-height: min-content;
+    max-height: calc(100dvh - var(--space-48)); /* the demo's padding, top and bottom */
+    padding: var(--space-12);
+    border: 1px solid var(--border-soft);
+    border-radius: var(--radius-lg);
+    background: var(--surface);
+    box-shadow: var(--shadow-sm);
+}
+/* #endregion */
+
+.sidebar__top {
+    display: flex;
+    flex: none;
+    flex-direction: column;
+    gap: var(--space-12);
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: var(--space-8);
+    margin: 0;
+    padding: var(--space-8) 0;
+    font-weight: 700;
+}
+
+.brand__mark {
+    display: block;
+    flex: none;
+    width: var(--icon-size-40);
+    height: var(--icon-size-40);
+}
+
+.brand__mark svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+/* The search bar demo's field, near enough as it stands. The one change is the resting
+   edge: on a white card the design draws no line at all, so the border is there and
+   invisible, which keeps the words from shifting a pixel when focus lights it up. */
+.field {
+    display: flex;
+    align-items: center;
+    gap: var(--space-8);
+    padding: var(--space-8);
+    border: 1px solid transparent;
+    border-radius: var(--radius-md);
+    background: var(--surface-muted);
+}
+
+.field[data-focused='true'] {
+    border-color: var(--accent-border);
+    box-shadow: var(--shadow-accent);
+}
+
+/* Read aloud, never drawn. The placeholder says the same word but a placeholder is not a
+   name — it leaves the moment you type. */
+.field__label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+
+.field__input {
+    flex: 1;
+    min-width: 0;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--ink);
+    font-weight: 500;
+}
+
+.field__input::placeholder {
+    color: var(--ink-muted);
+}
+
+/* The ring moved to the box: base.css draws one on anything focused, and here that would
+   be a second outline inside the one the field is already drawing. */
+.field__input:focus-visible {
+    outline: none;
+}
+
+.field__input::-webkit-search-cancel-button {
+    appearance: none;
+}
+
+/* Invisible but still taking up room, so the field does not jump a button's width wider
+   the moment you stop typing. */
+.field__clear {
+    display: grid;
+    visibility: hidden;
+    place-items: center;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--ink-muted);
+    cursor: pointer;
+}
+
+.field[data-clearable='true'] .field__clear {
+    visibility: visible;
+}
+
+.field__clear:hover {
+    color: var(--ink);
+}
+
+.field__mark {
+    flex: none;
+    width: var(--icon-size-24);
+    height: var(--icon-size-24);
+    color: var(--ink-muted);
+}
+
+.nav__group {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+/* A real rule rather than a border on the group above it, because it separates two lists
+   and belongs to neither. Its own margin is the design's 12px on both sides. */
+.nav__rule {
+    height: 0;
+    margin: var(--space-12) 0;
+    border: 0;
+    border-top: 1px solid var(--border);
+}
+
+/* #region state */
+/*
+ * Two names, set twice, and between them the whole of what hovering a row does. Everything
+ * below reads from them — the fill, and the mark, which is a Lordicon icon taking `color`
+ * through `current-color` like any other element. Nothing here knows there is an icon.
+ *
+ * The label is deliberately not in the set: it is the destination's name, legible at rest,
+ * and darkening it would be the row repeating a word you had just read.
+ *
+ * Hover and the current page look the same, which is what the design draws and is not a
+ * collision — the pointer is only ever on one row, so with it away exactly one row is
+ * tinted and that one is where you are.
+ *
+ * No transition on either. Which row you are on is a state, not a movement, and the
+ * recording turns the fill on and off inside a single frame.
+ */
+.nav__item {
+    --nav-fill: transparent;
+    --nav-mark: var(--ink-muted);
+}
+
+.nav__item:hover,
+.nav__item[aria-current='page'] {
+    --nav-fill: var(--surface-muted);
+    --nav-mark: var(--ink);
+}
+/* #endregion */
+
+.nav__item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-8);
+    padding: var(--space-8);
+    border-radius: var(--radius-md);
+    background: var(--nav-fill);
+    color: var(--ink);
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.nav__mark {
+    flex: none;
+    width: var(--icon-size-24);
+    height: var(--icon-size-24);
+    color: var(--nav-mark);
+}
+
+/* The row is the link, so the ring is drawn on the row rather than around the words. */
+.nav__item:focus-visible {
+    outline-offset: -2px;
+}
+
+.account {
+    display: flex;
+    flex: none;
+    align-items: center;
+    gap: var(--space-8);
+    padding: var(--space-8);
+    border: 1px solid var(--border-soft);
+    border-radius: var(--radius-md);
+    background: none;
+    font-weight: 500;
+    text-align: start;
+    cursor: pointer;
+}
+
+/* Two shapes and a letter, which is what the design's avatar is. An <img> would be a
+   photograph this demo does not have, and a second SVG for one glyph is a file too many. */
+.account__avatar {
+    display: grid;
+    flex: none;
+    place-items: center;
+    width: var(--icon-size-40);
+    height: var(--icon-size-40);
+    border-radius: var(--radius-pill);
+    background: var(--surface-muted);
+    color: var(--ink-subtle);
+    font-weight: 500;
+}
+
+/* Pushes the dots to the far edge, and is the only thing in the row allowed to shrink. */
+.account__name {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.account__mark {
+    flex: none;
+    width: var(--icon-size-24);
+    height: var(--icon-size-24);
+    color: var(--ink);
+}

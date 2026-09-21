@@ -1,0 +1,62 @@
+/*
+ * What a popover is made of, and how it leaves. Where it sits and how it arrives are in
+ * popover.ts; what it holds belongs to the demo that opens it.
+ */
+
+/*
+ * The UA stylesheet pins a popover to all four edges and centres it with auto margins.
+ * Undone here, because `place()` sets two of them and a panel held to the other two would
+ * be stretched between the answers.
+ */
+.popover {
+    position: fixed;
+    inset: auto;
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+/* The one line without which none of the rest is ever reached. The browser hides a closed
+   popover from its own stylesheet, and an author's `display` beats it whatever the
+   selector: give the panel `display: flex` and it is never hidden again. */
+.popover:not(:popover-open) {
+    display: none;
+}
+
+/* #region leave */
+/*
+ * Arriving is script, because a height that unrolls has to be measured first. Leaving
+ * cannot be: a closing popover leaves the top layer, and asking to keep an element the
+ * browser has taken away is a fight nobody wins.
+ *
+ * `allow-discrete` is the platform's answer: told to allow the discrete step, the browser
+ * holds `display` and `overlay` at their old values until the transition is over, so the
+ * panel stays visible for exactly as long as it takes to fade. It sinks as it goes — the
+ * one place the two directions are not mirrored — and the open state transitions nothing.
+ */
+.popover {
+    opacity: 0;
+    translate: 0 var(--space-12);
+    transition:
+        opacity 160ms ease-in,
+        translate 160ms ease-in,
+        overlay 160ms allow-discrete,
+        display 160ms allow-discrete;
+}
+
+.popover:popover-open {
+    opacity: 1;
+    translate: 0 0;
+    transition: none;
+}
+/* #endregion */
+
+/* Nothing moves, and the rows are simply there. `popovers()` makes the same decision on
+   its own side, so a panel opened with motion turned off is drawn at full height with
+   everything in it. */
+@media (prefers-reduced-motion: reduce) {
+    .popover {
+        translate: 0 0;
+        transition: none;
+    }
+}
