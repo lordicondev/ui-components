@@ -10,12 +10,9 @@
     <body>
         <main class="demo">
             <div class="shelf">
-                <!-- #region markup -->
-                <!-- `aria-pressed` is the whole state: the basket morphs on it, the button
-                     opens on it, and the words are what it looks like. Those words are
-                     hidden from a screen reader on purpose — they say what the button has
-                     already done, which `aria-pressed` has said too. The name, floating
-                     above, is the other half: what pressing it would do next. -->
+                <!-- aria-pressed is the state: the basket morphs on it and the button opens
+                     on it. The words are aria-hidden; aria-pressed already says the same.
+                     The tooltip span is the button's name. -->
                 <button class="cart" type="button" aria-pressed="false">
                     <lord-icon
                         class="cart__mark current-color"
@@ -32,12 +29,9 @@
 
                     <span class="tooltip">Add to cart</span>
                 </button>
-                <!-- #endregion -->
 
-                <!-- #region favorite -->
-                <!-- The same trigger and the same attribute, on an icon that keeps what it
-                     is given. `morph-select` fills the heart in; the stylesheet colours it
-                     from the same `aria-pressed`, so shape and colour never disagree. -->
+                <!-- The same trigger and attribute. morph-select fills the heart; the
+                     stylesheet colours it from the same aria-pressed. -->
                 <button class="favorite" type="button" aria-pressed="false">
                     <lord-icon
                         class="favorite__mark current-color"
@@ -50,7 +44,6 @@
 
                     <span class="tooltip">Add to favorites</span>
                 </button>
-                <!-- #endregion -->
             </div>
         </main>
     </body>

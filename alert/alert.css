@@ -1,8 +1,6 @@
 @import '@shared/styles/index.css';
 @import '@shared/ui/pager.css';
 
-/* The example keeps the top of the stage and the dots keep the floor, so the pager sits
-   at the bottom edge however little the page above it needs. */
 .demo {
     display: grid;
     grid-template-rows: 1fr auto;
@@ -21,9 +19,8 @@
     width: 100%;
 }
 
-/* The deck sits in the middle of whatever room the stage has, but behaves as though it
-   were pinned to the bottom of a screen: cards arrive from below and the ones they cover
-   settle downwards behind them. */
+/* The deck sits mid-stage but behaves as if pinned to the bottom of a screen: cards
+   arrive from below and recede downwards. */
 .page--deck {
     align-content: center;
 }
@@ -58,7 +55,7 @@
     list-style: none;
 }
 
-/* The card itself. Grey is the resting kind, and the three below recolour it. */
+/* The card. Grey by default; a kind recolours it below. */
 .alert {
     display: flex;
     align-items: flex-start;
@@ -75,10 +72,7 @@
     height: var(--icon-size-24);
 }
 
-/* #region variants */
-/* A kind is two colours on the card and one on the icon — and the icon's is an ordinary
-   `color`, because `current-color` makes it inherit like any other element. Warning and
-   error are the same three lines against their own tokens. */
+/* A kind is two colours on the card and one on the icon, which inherits `color`. */
 .alert__icon {
     color: var(--ink-soft);
 }
@@ -91,8 +85,6 @@
 .alert[data-kind='success'] .alert__icon {
     color: var(--success);
 }
-
-/* #endregion */
 
 .alert[data-kind='warning'] {
     border-color: var(--warning-border);
@@ -153,19 +145,15 @@
     height: var(--icon-size-16);
 }
 
-/* Experimental. The queue is a deck rather than a list: the newest alert is in front and
-   the ones before it recede behind, so a stack of four costs the height of one. --depth
-   is set per card by the wiring; everything below follows from it. */
+/* The queue is a deck: the newest card is in front, the rest recede behind it. main.ts
+   writes --depth on each card; everything below follows from it. */
 .stack {
     position: relative;
-
-    /* Room for the tallest card plus the slivers that sit under it, so a deep deck never
-       reaches the button below. */
+    /* Room for the tallest card plus the slivers under it. */
     min-height: 132px;
 }
 
-/* Anchored to the foot of the deck, not its head: cards are not all the same height, and
-   this is what gives each one behind the same sliver of itself whatever it says. */
+/* Anchored at the bottom, so cards of different heights show the same sliver behind. */
 .stack .alert {
     position: absolute;
     inset-inline: 0;
@@ -173,12 +161,9 @@
     transform-origin: bottom center;
 }
 
-/* #region stack */
-/* The rise and the pop are not one movement: `translate` and `scale` are properties in
-   their own right, not halves of a `transform`, so an arriving card climbs for 220ms
-   while reaching full size in 60ms. Two cards show and the third recedes and fades as it
-   goes, which is how a deck of any depth stays a deck. All three are functions of --depth
-   alone, so they move on one frame — read the fade off the DOM and it arrives late. */
+/* Position, size and fade are all functions of --depth. `translate` and `scale` are
+   separate properties, so an arriving card climbs for 220ms while popping to full size
+   in 60ms. Two cards show behind the front one; the third fades out. */
 .stack .alert {
     --layer: min(var(--depth, 0), 2);
     translate: 0 calc(var(--layer) * 10px);
@@ -190,18 +175,15 @@
         opacity 60ms cubic-bezier(0, 0, 0.2, 1);
 }
 
-/* The cards it covers take the same move at their own pace, longer than the arrival, so
-   the deck is still settling a moment after the new card has landed. Scale is the whole
-   of that movement for them, so it cannot stay on the 60ms track the pop uses. */
+/* The cards behind settle more slowly than the new one arrives. */
 .stack .alert:not(:last-child) {
     transition:
         translate 340ms cubic-bezier(0.3, 0, 0.2, 1),
         scale 340ms cubic-bezier(0.3, 0, 0.2, 1),
         opacity 340ms cubic-bezier(0.3, 0, 0.2, 1);
 }
-/* #endregion */
 
-/* Where a card is before it exists, and where a dismissed one goes back to. */
+/* Where a new card starts from. */
 @starting-style {
     .stack .alert {
         opacity: 0;
@@ -210,12 +192,8 @@
     }
 }
 
-/* #region leaving */
-/* Two effects again, and they are not each other's reverse. The card drops away on an
-   accelerating curve, and its fade is slow enough that you watch it go rather than find
-   it already gone — at the arrival's 60ms it would be invisible before it had moved.
-   Meanwhile the deck closes up behind it on its own 340ms, which is why the dismissal
-   starts that before this has finished. */
+/* A dismissed card drops on an accelerating curve and fades slowly enough to be seen
+   going. The deck closes up behind it at the same time. */
 .stack .alert[data-leaving] {
     z-index: 10;
     opacity: 0;
@@ -226,10 +204,8 @@
         scale 240ms cubic-bezier(0.4, 0, 1, 1),
         opacity 200ms linear;
 }
-/* #endregion */
 
-/* The glass: a background you can see through, over cards that are already blurred by
-   being behind. Only the deck does this — the gallery is a flat picture of the colours. */
+/* Translucent cards in the deck, so the ones behind show through. */
 .stack .alert {
     background: color-mix(in srgb, var(--surface-muted) 70%, transparent);
     -webkit-backdrop-filter: blur(5px) saturate(140%);

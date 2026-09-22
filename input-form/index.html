@@ -9,10 +9,8 @@
     </head>
     <body>
         <main class="demo">
-            <!-- #region composer -->
-            <!-- The control, and the whole of what opens the menu: `popovertarget`. Which
-                 way it opens is not said here — the composer sits at the foot of the page,
-                 and `popovers()` finds that out for itself. -->
+            <!-- popovertarget on the plus is what opens the menu. Which way it opens is
+                 decided by popovers() from the room around the button. -->
             <form class="composer">
                 <label class="visually-hidden" for="prompt">Message</label>
                 <!-- prettier-ignore -->
@@ -34,7 +32,6 @@
                             aria-hidden="true"
                         ></lord-icon>
                     </button>
-                    <!-- #skip -->
                     <div class="composer__say">
                         <button class="mic" type="button" aria-label="Dictate">
                             <lord-icon
@@ -56,15 +53,11 @@
                             ></lord-icon>
                         </button>
                     </div>
-                    <!-- #endskip -->
                 </div>
             </form>
-            <!-- #endregion -->
 
-            <!-- The submenu lives inside this one, which is what makes them a pair as far
-                 as the browser is concerned: an auto popover nested in another does not
-                 dismiss it, and closing the outer takes the inner with it. It is in the top
-                 layer either way, so being a child here costs it nothing in the layout. -->
+            <!-- The submenu is nested inside this panel, so the browser treats the two as
+                 a pair: opening the inner does not dismiss the outer. -->
             <div class="menu popover" id="more" popover>
                 <ul class="menu__list">
                     <li class="menu__row" data-rise>
@@ -80,13 +73,9 @@
                         </button>
                     </li>
 
-                    <!-- #region row -->
-                    <!-- The row that opens the other panel, and the only one with no
-                         `data-choose` on it: choosing puts the menus away, and this row is a
-                         route rather than an answer. `popovertargetaction="show"` rather than
-                         the default toggle, too — the pointer resting here is what opens the
-                         panel, and a click that closed one you were still inside would be a
-                         fight between the two. -->
+                    <!-- The row that opens the submenu. No data-choose, because choosing
+                         closes the menus. popovertargetaction="show", not toggle: the pointer
+                         already opens it, and a click must not close it again. -->
                     <li class="menu__row" data-rise>
                         <button
                             class="row"
@@ -102,8 +91,7 @@
                                 aria-hidden="true"
                             ></lord-icon>
                             <span class="row__label" data-reveal>Add to project</span>
-                            <!-- The second icon, answering the same hover: `target=".row"`
-                                 points both at the button rather than at themselves. -->
+                            <!-- Both icons target the row, so both play on the same hover. -->
                             <lord-icon
                                 class="row__more current-color"
                                 src="icons/chevron-right.json"
@@ -113,7 +101,6 @@
                             ></lord-icon>
                         </button>
                     </li>
-                    <!-- #endregion -->
 
                     <li class="menu__row" data-rise>
                         <button class="row" type="button" data-choose>
@@ -143,7 +130,7 @@
                 </ul>
 
                 <div class="menu submenu popover" id="projects" popover data-side="inline">
-                    <div class="field" data-focused="false" data-rise>
+                    <div class="field" data-focused="false" data-clearable="false" data-rise>
                         <label class="visually-hidden" for="project">Search projects</label>
 
                         <lord-icon
@@ -175,7 +162,7 @@
 
                     <ul class="projects">
                         <li class="projects__row" data-rise>
-                            <button class="row" type="button" data-choose data-project="Gardening">
+                            <button class="row" type="button" data-choose>
                                 <lord-icon
                                     class="row__icon current-color"
                                     src="icons/folder.json"
@@ -188,12 +175,7 @@
                         </li>
 
                         <li class="projects__row" data-rise>
-                            <button
-                                class="row"
-                                type="button"
-                                data-choose
-                                data-project="Finance App"
-                            >
+                            <button class="row" type="button" data-choose>
                                 <lord-icon
                                     class="row__icon current-color"
                                     src="icons/folder.json"
@@ -206,7 +188,7 @@
                         </li>
 
                         <li class="projects__row" data-rise>
-                            <button class="row" type="button" data-choose data-project="My wedding">
+                            <button class="row" type="button" data-choose>
                                 <lord-icon
                                     class="row__icon current-color"
                                     src="icons/folder.json"

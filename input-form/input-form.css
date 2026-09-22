@@ -2,9 +2,7 @@
 @import '@shared/ui/popover.css';
 @import '@shared/ui/menu.css';
 
-/* The composer at the foot of the page, the way a composer sits in the thing it belongs to.
-   That is not decoration: it is why there is no room under the plus, and so why the menu
-   opens upward without this demo ever saying that it should. */
+/* The composer sits at the bottom, which is why the menu opens upward. */
 .demo {
     display: grid;
     align-content: end;
@@ -13,18 +11,9 @@
     padding: var(--space-64) var(--gutter) var(--space-48);
 }
 
-/* #region focus */
-/*
- * Two names, set once at rest and once focused, and every rule below reads from them.
- *
- * `:focus-within` rather than an attribute, and the difference is worth saying: the search
- * field next door keeps `data-focused` because an *icon* is watching it, and an attribute is
- * the only form of that a trigger can read. Nothing watches the composer, so inventing one
- * would be bookkeeping for the stylesheet's own benefit.
- *
- * The send button's halo is in here too. It is the same `--shadow-accent` the composer takes,
- * and both of them lit at rest would be two glows arguing on an empty page.
- */
+/* The border and the halo, at rest and focused. The send button shares the halo, so the
+   page has one glow at a time. :focus-within rather than an attribute: no icon watches
+   the composer. */
 .composer {
     --composer-line: var(--border);
     --composer-halo: none;
@@ -34,7 +23,6 @@
     --composer-line: var(--accent-border);
     --composer-halo: var(--shadow-accent);
 }
-/* #endregion */
 
 .composer {
     display: grid;
@@ -58,7 +46,7 @@
     color: var(--ink-subtle);
 }
 
-/* The box already draws the focused state; a second ring inside it would be one too many. */
+/* The box draws the focused state; no second ring inside it. */
 .composer__input:focus-visible {
     outline: none;
 }
@@ -79,9 +67,7 @@
     gap: var(--space-16);
 }
 
-/* The well the plus sits in. Filled a step darker while the menu is open, because a control
-   that opened something is still doing it — `aria-expanded` is what `popovers()` writes and
-   what the screen reader is being told, so there is no second name for the same state. */
+/* Darker while the menu is open. aria-expanded is written by popovers(). */
 .plus {
     display: grid;
     place-items: center;
@@ -136,20 +122,8 @@
     height: var(--icon-size-24);
 }
 
-/* #region menu */
-/*
- * The two panels are menu.css's, tighter than the notification menu's by one step of the
- * spacing ramp — a panel hanging off a `+` is not one you read, it is one you pick from.
- *
- * The submenu carries the `menu` class too rather than being a second panel in the sheet: it
- * is the same box, and a menu inside a menu is still a menu. Its own class is left for the one
- * thing that is not — the strips below, which reach back to the row that opened it.
- *
- * `flex: none` on the lists is the line that only matters going up. A flex column whose height
- * is animated from nothing squashes its contents rather than letting them overflow, so the
- * lists refuse to shrink and popover.css bottom-aligns them. Between them the rows nearest the
- * button are the ones you see first, which is what the recording does.
- */
+/* Both panels use menu.css, one spacing step tighter than the notification menu.
+   `flex: none` on the lists: a column animating from height 0 would squash them. */
 .menu {
     --menu-width: 280px;
     --menu-gap: var(--space-8);
@@ -164,19 +138,9 @@
     list-style: none;
 }
 
-/*
- * The submenu reaches back across the gap to the menu it came from.
- *
- * The two are drawn a gap apart, and a pointer travelling between them is over neither for as
- * long as it takes to cross — which, moved slowly, is long enough for the submenu to decide it
- * has been left. Widening the target rather than waiting longer makes the pair one continuous
- * thing, so there is no moment to be patient about.
- *
- * Strips down each side rather than a box over the whole panel, because a box would sit on top
- * of the rows and swallow the clicks meant for them. `right: 100%` and `left: 100%` put each
- * one just outside an edge, and there is one on both sides because the panel flips to the left
- * of the menu when there is no room to the right of it.
- */
+/* Invisible strips down both sides of the submenu bridge the gap to the menu, so the
+   pointer crossing it is never over nothing. Both sides, because the panel can open on
+   either side of the menu. */
 .submenu::before,
 .submenu::after {
     content: '';
@@ -193,10 +157,8 @@
 .submenu::after {
     left: 100%;
 }
-/* #endregion */
 
-/* The row is menu.css's, unchanged — this demo is where most of its defaults came from. All
-   that is left is the chevron, which only a row opening onto something else has. */
+/* The chevron on the row that opens the submenu. */
 .row__more {
     flex: none;
     width: var(--icon-size-20);
@@ -204,16 +166,12 @@
     color: var(--ink-subtle);
 }
 
-/*
- * When the search matches nothing the list is not empty, it is gone. An empty `<ul>` still
- * takes the column's gap, which would leave the field with twice as much room under it as
- * over it — and a panel that is only a search box should look like one.
- */
+/* An empty list would still take the column's gap, so it is removed instead. */
 .projects:not(:has(.projects__row:not([hidden]))) {
     display: none;
 }
 
-/* The search bar's field, whole. */
+/* The search bar's field. */
 .field {
     display: flex;
     align-items: center;
@@ -259,10 +217,8 @@
     appearance: none;
 }
 
-/*
- * Invisible but still taking up room, so the field does not jump a button's width wider the
- * moment you stop typing, and the words never run under a cross about to appear over them.
- */
+/* Invisible but still taking up room, so the field does not change width when the
+   button appears. */
 .field__clear {
     display: grid;
     visibility: hidden;

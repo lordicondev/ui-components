@@ -1,13 +1,10 @@
-/*
- * The dots themselves. A demo that uses them owns its own layout — where the pager sits is
- * a question about that demo's stage, not about the dots.
- */
+/* The dots that page between the parts of a demo. Where they sit is the demo's business. */
 .pager {
     display: flex;
     gap: var(--space-4);
 }
 
-/* A dot small enough to stay out of the way, inside a button big enough to hit. */
+/* A small dot inside a button big enough to hit. */
 .pager__dot {
     display: grid;
     place-items: center;

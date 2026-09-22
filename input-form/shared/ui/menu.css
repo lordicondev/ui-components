@@ -1,29 +1,13 @@
 /*
- * What a menu is made of: a panel, the headings that divide it, and the rows themselves.
+ * The look of a menu: the panel, its group headings and its rows. Placement and the
+ * opening animation are in popover.ts and popover.css; the keyboard cursor is in menu.ts.
  *
- * This is the look, and nothing else. Where the panel sits and how it arrives are in
- * popover.ts and popover.css; which row the keyboard is on is in menu.ts. A demo can take any
- * of the three without the others.
- *
- * Everything a demo is likely to want different is a variable with a default, so adopting this
- * sheet is usually a `--menu-width` and nothing else.
- *
- * Import it *after* popover.css. That sheet undoes the UA's `[popover]` rules — the padding and
- * the border among them — and it does it at the same specificity as `.menu`, so a panel that
- * took the look before the reset would have it taken away again.
+ * Import after popover.css, which resets the UA popover rules at the same specificity.
+ * Most demos only need to set `--menu-width`.
  */
 
-/*
- * The box the rows sit in.
- *
- * `display: flex` is load-bearing rather than decorative. popover.css supplies only the
- * `display: none` for a closed panel; something has to supply the other half, and an author's
- * own `display` is what keeps the browser's hiding rule from ever winning.
- *
- * The width is the one measurement a menu cannot work out for itself — it is set by the
- * longest thing the designer put in it — so it is the one variable without a default.
- */
-/* #region panel */
+/* `display: flex` matters: popover.css hides a closed panel with `display: none`, and an
+   author `display` is what keeps the browser's own hiding rule from applying. */
 .menu {
     display: flex;
     flex-direction: column;
@@ -34,24 +18,16 @@
     border-radius: var(--radius-lg);
     background: var(--surface);
     box-shadow: var(--shadow-sm);
-    /* The UA sheet gives a popover `color: CanvasText`, which is plain black rather than the
-       page's ink. Nothing inherits past it, so the panel has to say what colour it is. */
+    /* The UA sheet gives a popover `color: CanvasText`; nothing inherits past it. */
     color: var(--ink);
 }
-/* #endregion */
 
-/*
- * A panel the arrow keys talk to takes focus when it opens, so that the first press has
- * somewhere to land — but it is not the thing you are looking at, the row under the cursor is.
- * base.css rings anything focused, and a ring round the whole menu would be pointing at the
- * box rather than at the choice. menu.ts draws the cursor instead.
- */
+/* The panel takes focus when it opens so arrow keys have somewhere to land, but the cursor
+   drawn by menu.ts is what the eye should follow, not a ring around the whole box. */
 .menu[data-keys]:focus {
     outline: none;
 }
 
-/* A run of rows under a name. The heading is the quietest text on the panel: it is there to be
-   found when you go looking for it, not read on the way past. */
 .menu__group {
     display: flex;
     flex-direction: column;
@@ -66,25 +42,16 @@
     font-weight: 600;
 }
 
-/* `flex: none` against the trap in popover.css: a column animating from `height: 0` squashes
-   its children unless they refuse, and a squashed list looks like the animation not working. */
+/* `flex: none`: a column animating from `height: 0` squashes its children unless they
+   refuse to shrink. */
 .menu__list {
     display: flex;
     flex-direction: column;
     flex: none;
 }
 
-/*
- * One row, and the two variables that colour it.
- *
- * `--row-fill` is what it looks like at rest and `--row-hover` what it looks like when you are
- * on it. Splitting them is what lets a row that is already tinted — an unread notification,
- * say — darken from its own colour rather than jumping to the common one.
- *
- * Nothing transitions. Which row you are on is a state, not a movement, and a fill that faded
- * would still be catching up as the pointer reached the next row.
- */
-/* #region row */
+/* Two variables colour a row: `--row-fill` at rest and `--row-hover` under the cursor.
+   A row that is already tinted, such as an unread notification, sets both. */
 .row {
     --row-fill: transparent;
     --row-hover: var(--surface-muted);
@@ -102,17 +69,14 @@
     cursor: pointer;
 }
 
-/* The second selector is the whole argument for menu.ts: `data-active` is written by the
-   keyboard cursor and by the pointer alike, so being hovered and being arrowed to are one
-   state with one look. A demo with no keyboard still gets the `:hover` half for free. */
+/* `data-active` is written by the keyboard cursor and by the pointer alike, so hovered and
+   arrowed-to are one state with one look. No transition: this is a state, not a movement. */
 .row:hover,
 .row[data-active='true'] {
     background: var(--row-hover);
 }
-/* #endregion */
 
-/* Inside the row rather than around it: the rows touch, so a ring drawn outside one would be
-   drawn over its neighbours. */
+/* The rows touch, so the focus ring goes inside the row rather than over its neighbours. */
 .row:focus-visible {
     outline-offset: -2px;
 }
@@ -124,8 +88,6 @@
     height: var(--icon-size-24);
 }
 
-/* The weight is here rather than on the row, because a row can hold quieter things than its
-   own name — a timestamp, a second line — and they are not all labels. */
 .row__label {
     flex: 1;
     font-weight: 500;

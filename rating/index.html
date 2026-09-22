@@ -12,12 +12,9 @@
             <fieldset class="rating">
                 <legend class="visually-hidden">Rate this</legend>
 
-                <!-- #region markup -->
-                <!-- One star. `data-chosen` is the rating as it stands, `data-lit` is what
-                     the pointer is promising; the icon morphs on the first and nudges on
-                     the second, and the stylesheet colours on the second alone. The radio
-                     is the real control and keeps every native behaviour — it is only
-                     invisible. -->
+                <!-- One star. data-chosen is the rating, data-lit the preview. The icon
+                     morphs on the first and nudges on the second; the stylesheet colours
+                     on the second. The radio is the real control, only invisible. -->
                 <label class="star" data-chosen="true" data-lit="true">
                     <input
                         class="star__input visually-hidden"
@@ -37,7 +34,6 @@
 
                     <span class="visually-hidden">1 star</span>
                 </label>
-                <!-- #endregion -->
 
                 <label class="star" data-chosen="true" data-lit="true">
                     <input

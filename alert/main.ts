@@ -1,11 +1,10 @@
-// #region setup
 import { defineElement, Element } from '@lordicon/element';
 import { ArrivalHover } from '@shared/triggers/arrival-hover.ts';
 
+// Triggers have to be registered before defineElement().
 Element.defineTrigger('arrival-hover', ArrivalHover);
 
 defineElement();
-// #endregion
 
 import '@shared/types/lordicon.d.ts';
 import { pager } from '@shared/ui/pager.ts';
@@ -36,10 +35,10 @@ const CONTENT: Record<Kind, { icon: string; title: string; message: string }> = 
     },
 };
 
-/** Top to bottom, the order the design lays them out in. */
+/** The gallery page, top to bottom. */
 const GALLERY: Kind[] = ['info', 'success', 'warning', 'error'];
 
-/** What the button queues, and in which order. The quiet grey one closes the set. */
+/** What the button queues, in order. */
 const QUEUE: Kind[] = ['error', 'warning', 'success', 'info'];
 
 const template = document.querySelector<HTMLTemplateElement>('#alert-template')!;
@@ -47,8 +46,7 @@ const gallery = document.querySelector<HTMLElement>('[data-list="gallery"]')!;
 const queue = document.querySelector<HTMLElement>('[data-list="queue"]')!;
 const add = document.querySelector<HTMLButtonElement>('[data-add]')!;
 
-// #region build
-/** One alert, filled in. Both pages are made of these. */
+/** One alert from the template. Both pages are made of these. */
 function build(kind: Kind): HTMLElement {
     const { icon, title, message } = CONTENT[kind];
     const alert = template.content.cloneNode(true) as DocumentFragment;
@@ -61,16 +59,15 @@ function build(kind: Kind): HTMLElement {
 
     return card;
 }
-// #endregion
 
-/** The cards that still count. One on its way out has already given up its place. */
+/** The cards in the deck, not counting one on its way out. */
 function standing(): HTMLElement[] {
     return ([...queue.children] as HTMLElement[]).filter(
         (card) => !card.hasAttribute('data-leaving'),
     );
 }
 
-/** How far back each card sits. The newest is in front; the rest recede behind it. */
+/** Writes each card's depth: the newest is 0 and in front, the rest recede behind it. */
 function restack(): void {
     const cards = standing();
 
@@ -80,15 +77,14 @@ function restack(): void {
     });
 }
 
-/** Out the way it came in, and only gone once it has finished going. */
+/** Marks the card as leaving, lets the stylesheet animate it out, then removes it. */
 async function dismiss(card: HTMLElement): Promise<void> {
     card.dataset.leaving = '';
 
-    // Before it has gone, not after: the deck closes up while the card is still flying
-    // out, rather than standing still until it has finished.
+    // Restack now, so the deck closes up while the card is still on its way out.
     settle();
 
-    // The transitions do not exist until a frame has passed with the attribute set.
+    // The leaving transitions only exist once a frame has passed with the attribute set.
     await new Promise(requestAnimationFrame);
     await Promise.allSettled(card.getAnimations().map((leaving) => leaving.finished));
 
@@ -96,8 +92,7 @@ async function dismiss(card: HTMLElement): Promise<void> {
     settle();
 }
 
-// #region queue
-/** The first kind not already up, so dismissing brings that kind back, not a duplicate. */
+/** The first kind not already in the deck, so dismissing one brings that kind back. */
 function next(): Kind | undefined {
     const up = new Set(standing().map((card) => card.dataset.kind));
     return QUEUE.find((kind) => !up.has(kind));
@@ -114,17 +109,16 @@ function enqueue(): void {
     settle();
 }
 
-/** After anything changes: who sits where, and whether there is room for one more. */
+/** After any change: who sits where, and whether there is room for one more. */
 function settle(): void {
     restack();
     add.disabled = !next();
 }
-// #endregion
 
 add.addEventListener('click', enqueue);
 
-// The first page is a picture of every kind at once. Its close buttons answer the pointer
-// and nothing else — dismissing is what the second page is for, where it frees a slot.
+// The gallery shows every kind at once. Its close buttons are not focusable: dismissing
+// belongs to the second page.
 for (const kind of GALLERY) {
     const card = build(kind);
     card.querySelector('.alert__close')!.setAttribute('tabindex', '-1');

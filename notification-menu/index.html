@@ -10,15 +10,9 @@
     <body>
         <main class="demo">
             <div class="stage">
-                <!-- #region bell -->
-                <!-- `popovertarget` is the whole of the opening: the browser toggles the
-                     panel, closes it on a click away or on Escape, and says in the
-                     accessibility tree what this button is for.
-
-                     `data-count` is the notification count, and everything else reads it.
-                     The icon rings when it goes up, the badge is drawn from it, and the
-                     stylesheet draws the button pressed while `aria-expanded` is true —
-                     which `popovers()` puts there off the browser's own toggle event. -->
+                <!-- popovertarget opens the panel; the browser closes it on Escape or a
+                     click away. data-count is the count: the icon rings when it goes up and
+                     the badge is drawn from it. aria-expanded is written by popovers(). -->
                 <button
                     class="bell"
                     type="button"
@@ -36,7 +30,6 @@
 
                     <span class="bell__badge" aria-hidden="true" hidden></span>
                 </button>
-                <!-- #endregion -->
 
                 <div class="menu popover" id="feed" popover>
                     <div class="menu__head" data-rise>
@@ -45,12 +38,9 @@
                     </div>
 
                     <ul class="feed">
-                        <!-- #region item -->
-                        <!-- One notification. `data-unread` is both halves of what new
-                             means: the dot beside it, and the tint behind it that unrolls
-                             on the way in. `data-rise` marks the row as one of the things
-                             the panel brings in, and `data-reveal` marks the words inside
-                             it that arrive one after another. -->
+                        <!-- One notification. data-unread is the dot and the tint. data-rise
+                             marks a row the panel brings in; data-reveal marks the words that
+                             arrive one after another. -->
                         <li class="feed__row" data-unread data-rise>
                             <button class="row" type="button">
                                 <span class="row__mark">
@@ -74,7 +64,6 @@
                                 <span class="visually-hidden">Unread</span>
                             </button>
                         </li>
-                        <!-- #endregion -->
 
                         <li class="feed__row" data-unread data-rise>
                             <button class="row" type="button">
@@ -145,8 +134,7 @@
                 </div>
             </div>
 
-            <!-- Not part of the control. The count is an input to this demo, and these are
-                 the only way to give it one from a page with nothing behind it. -->
+            <!-- The demo's own controls, not part of the component. -->
             <form class="controls">
                 <label class="controls__label" for="count">Notifications</label>
                 <input

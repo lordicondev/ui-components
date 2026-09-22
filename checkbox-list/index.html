@@ -13,10 +13,8 @@
             <fieldset class="options" id="style-box" data-page data-shape="box">
                 <legend class="visually-hidden">Notifications</legend>
 
-                <!-- #region markup -->
-                <!-- A real checkbox, hidden but still the thing you click and submit.
-                     data-checked exists only so the icon can see the state — the input
-                     already reports it to assistive tech. -->
+                <!-- A real checkbox, hidden but still what you click and submit.
+                     data-checked exists so the icon can see the state. -->
                 <label class="option" data-checked="false">
                     <input class="option__input visually-hidden" type="checkbox" name="email" />
 
@@ -37,7 +35,6 @@
                         </span>
                     </span>
                 </label>
-                <!-- #endregion -->
 
                 <label class="option" data-checked="true">
                     <input
@@ -252,7 +249,6 @@
                 </label>
             </fieldset>
 
-            <!-- #region pager -->
             <div class="pager">
                 <button
                     class="pager__dot"
@@ -276,7 +272,6 @@
                     aria-label="Single choice"
                 ></button>
             </div>
-            <!-- #endregion -->
         </main>
     </body>
 </html>

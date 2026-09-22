@@ -12,9 +12,7 @@
             <div class="sidebar">
                 <div class="sidebar__top">
                     <p class="brand">
-                        <!-- The only drawing in the demo that is not a Lordicon icon, so it
-                             is an inline SVG rather than a file: two shapes, no request, and
-                             it recolours with the page if the page ever changes. -->
+                        <!-- The logo is an inline SVG, not a Lordicon icon. -->
                         <span class="brand__mark" aria-hidden="true">
                             <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
                                 <rect width="40" height="40" rx="4" fill="#edf9f1" />
@@ -30,12 +28,7 @@
                         Lordicon
                     </p>
 
-                    <!-- #region search -->
-                    <!-- The search bar demo's field, whole: the same two attributes, the
-                         same two triggers, the same half-second of quiet before the cross
-                         draws itself in. A field is not somewhere you hover — it is
-                         somewhere you are — so it keeps answering focus while everything
-                         under it answers the pointer. -->
+                    <!-- The search bar demo's field: same attributes, same triggers. -->
                     <form class="search" role="search">
                         <div class="field" data-focused="false" data-clearable="false">
                             <label class="visually-hidden" for="q">Search</label>
@@ -62,16 +55,12 @@
                             </button>
                         </div>
                     </form>
-                    <!-- #endregion -->
 
                     <nav class="nav" aria-label="Main">
                         <ul class="nav__group">
-                            <!-- #region markup -->
-                            <!-- One destination. `aria-current` is the whole state: the
-                                 stylesheet tints the row it is on, and the script moves it
-                                 from one link to another. `target=".nav__item"` points the
-                                 icon at the link rather than at itself, so the grid answers
-                                 a pointer anywhere in the row — the word included. -->
+                            <!-- One destination. aria-current is the state; the stylesheet
+                                 tints the row that has it. target=".nav__item" makes the
+                                 whole row the hover area. -->
                             <li>
                                 <a class="nav__item" href="#overview" aria-current="page">
                                     <lord-icon
@@ -85,7 +74,6 @@
                                     <span class="nav__label">Overview</span>
                                 </a>
                             </li>
-                            <!-- #endregion -->
 
                             <li>
                                 <a class="nav__item" href="#orders">
@@ -166,9 +154,7 @@
 
                         <ul class="nav__group">
                             <li>
-                                <!-- `hover-mechanic` rather than the cog's default pinch:
-                                     the one icon in the set that turns, and a cog is the
-                                     one shape a reader expects to. -->
+                                <!-- hover-mechanic turns the cog; its default state pinches. -->
                                 <a class="nav__item" href="#settings">
                                     <lord-icon
                                         class="nav__mark current-color"

@@ -7,7 +7,6 @@
     padding: var(--space-64) var(--gutter);
 }
 
-/* The box from the design: one row of five, its own outline, and nothing else in it. */
 .rating {
     display: flex;
     align-items: center;
@@ -18,8 +17,7 @@
     border-radius: var(--radius-md);
 }
 
-/* Five stars in a row is something people sweep back and forth across, so a stray
-   double-click must not start dragging a selection over the group. */
+/* No text selection: people sweep back and forth across the row. */
 .star {
     display: flex;
     cursor: pointer;
@@ -27,13 +25,7 @@
     user-select: none;
 }
 
-/* #region colour */
-/* Binary, and immediate. A star is coloured when it is lit, and `data-lit` is the count
-   the row is currently promising: the rating, until a pointer arrives and offers another.
-
-   Nothing here mentions the rating itself, and nothing here transitions. The delay that
-   makes the row light up as a run lives in the state changes, not in this file — which is
-   why the same delay carries the icon's nudge without either knowing about the other. */
+/* Coloured when lit. No transition: the stagger comes from the state changes. */
 .star {
     --star-mark: var(--ink-subtle);
 }
@@ -41,7 +33,6 @@
 .star[data-lit='true'] {
     --star-mark: var(--accent);
 }
-/* #endregion */
 
 .star__mark {
     width: var(--icon-size-24);

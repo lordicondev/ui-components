@@ -8,12 +8,8 @@
     padding: var(--space-64) var(--gutter);
 }
 
-/*
- * The pair is anchored on its right, and the box is only as wide as the two buttons are
- * when the cart is shut. The cart opens into the space on the left and overflows this box,
- * which is the point: the heart never moves, so it is still under the pointer that has
- * just pressed the button beside it, and the shut pair sits square in the middle.
- */
+/* Anchored on the right and as wide as the shut pair: the cart opens leftward and the
+   heart never moves. */
 .shelf {
     display: flex;
     justify-content: flex-end;
@@ -22,22 +18,9 @@
     width: 88px;
 }
 
-/*
- * Opening is three properties moving together, and one of them is the box that holds the
- * words. It goes from no width at all to what they measure, taking the gap in front of it
- * and the button's own padding with it — from the 8px that centres a lone icon out to the
- * 16px the design gives the open button.
- *
- * That box is also what does the clipping, and it clips from the right, because the words
- * are laid out from its left and keep their own width whatever it does. Which is the whole
- * of the closing animation: the text is not faded, moved, or told anything at all — the box
- * narrows and the words go under its edge.
- *
- * `--said-width` is what those words measure, written once from main.ts. 400ms and the
- * curve are measured off the reference recording.
- */
-
-/* #region open */
+/* Three transitions: the width of the box holding the words, the gap before it, and the
+   padding. The box clips the words, so closing needs no text animation. --said-width is
+   written by main.ts. 400ms and the curve are from the reference recording. */
 .cart {
     --opening: 400ms cubic-bezier(0.4, 0, 0.2, 1);
     display: flex;
@@ -63,7 +46,6 @@
 .cart[aria-pressed='true'] .cart__said {
     width: var(--said-width, max-content);
 }
-/* #endregion */
 
 .cart {
     border: 0;
@@ -78,24 +60,20 @@
     background: var(--accent-strong);
 }
 
-/* The one place the darkest brand colour is a surface rather than a mark. A press is the
-   only state short enough that nothing has to stay legible against it. */
+/* Pressed. */
 .cart:active {
     background: var(--accent-ink);
 }
 
-/* `max-content` is what keeps the words the same width whatever the box around them is
-   doing — they are laid out once and then travel under its right edge, rather than being
-   re-wrapped smaller and smaller as it closes. It is also what makes them measurable at a
-   moment when the box is shut. */
+/* max-content keeps the words at their own width inside the animating box, and lets
+   main.ts measure them while the box is shut. */
 .cart__label {
     display: block;
     width: max-content;
     font-weight: 500;
 }
 
-/* Square, and as tall as the button beside it, which has no outline to make room for —
-   hence the borrowed pixel. */
+/* Square, and as tall as the cart button, which has no border: hence the 1px. */
 .favorite {
     display: grid;
     place-items: center;
@@ -122,10 +100,7 @@
     height: var(--icon-size-24);
 }
 
-/* #region colour */
-/* Two steps, and no transition on either. Which way the heart is pointing is a state, not
-   a movement, and the only thing here with a duration is the shape filling in. The icon
-   takes `color` like any other element, so outline and fill are one rule apart. */
+/* Outline or filled, from the same attribute the morph reads. No transition. */
 .favorite__mark {
     color: var(--ink);
 }
@@ -133,7 +108,6 @@
 .favorite[aria-pressed='true'] .favorite__mark {
     color: var(--accent);
 }
-/* #endregion */
 
 @media (prefers-reduced-motion: reduce) {
     .cart,

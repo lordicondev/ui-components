@@ -7,14 +7,8 @@
     padding: var(--space-64) var(--gutter);
 }
 
-/* #region colour */
-/* The design is two columns of the same tile, so the stylesheet is too: five names set
-   once at rest and once under the pointer. Everything below reads from them, which makes
-   this block the entire hover state — the icon included, because `current-color` lets a
-   Lordicon icon inherit `color` like any other element.
-
-   No transition on any of them. A colour here says which tile you are pointing at, and an
-   answer to that question should not arrive late. The only thing that moves is the plus. */
+/* Five custom properties, at rest and hovered. Everything below reads from them, the icon
+   included. No transition. */
 .tile {
     --tile-line: var(--border);
     --tile-fill: transparent;
@@ -30,9 +24,8 @@
     --tile-mark: var(--accent-ink);
     --tile-label: var(--ink);
 }
-/* #endregion */
 
-/* Dashed, because the card it stands for is not there yet. */
+/* Dashed: the card is not there yet. */
 .tile {
     display: flex;
     flex-direction: column;

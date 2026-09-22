@@ -2,8 +2,7 @@
 @import '@shared/ui/popover.css';
 @import '@shared/ui/menu.css';
 
-/* The control near the top and the demo's own controls at the foot, because what hangs off
-   the button is 344px tall and has to hang into something. */
+/* The bell near the top, so the panel has room to hang under it. */
 .demo {
     display: grid;
     grid-template-rows: 1fr auto;
@@ -13,21 +12,14 @@
     padding: var(--space-48) var(--gutter) var(--space-32);
 }
 
-/* The button keeps a box of its own so the badge has something to hang off. */
+/* A box for the badge to hang off. */
 .stage {
     display: grid;
     align-self: start;
     justify-items: center;
 }
 
-/* #region bell */
-/*
- * Three looks, and the third is the one worth naming. Resting is a white box with an edge;
- * the pointer fills it the faintest grey; and while the menu is open it stays filled a step
- * darker, because a control that opened something is still doing it. That last state reads
- * `aria-expanded`, which is the same attribute the browser's own popover machinery is
- * describing to a screen reader — it is not a class invented to go with it.
- */
+/* Resting, hovered, and open. aria-expanded is written by popovers(). */
 .bell {
     position: relative;
     display: grid;
@@ -48,22 +40,14 @@
     background: var(--border-soft);
 }
 
-/* #endregion */
-
 .bell__mark {
     display: block;
     width: var(--icon-size-24);
     height: var(--icon-size-24);
 }
 
-/*
- * Hung off the button's top-right corner rather than laid out inside it, so the button is
- * the same size whether there is a count or not. `min-width` with a pill radius is what
- * makes it a circle at one digit and a lozenge at two, without measuring anything.
- *
- * It grows from its own middle, which is why the origin is named: the default is the centre
- * of the box, and the box is wider at two digits than at one.
- */
+/* Hung off the button's corner, so the button keeps its size. A circle at one digit,
+   a pill at two. */
 .bell__badge {
     position: absolute;
     top: calc(var(--space-8) * -1);
@@ -80,20 +64,11 @@
     transform-origin: center;
 }
 
-/* #region menu */
-/*
- * The panel, which is menu.css's now — the box, the edge and the halo are the same ones the
- * dropdown and the palette are drawn with. `popover` puts it in the top layer, so none of this
- * needs a z-index and nothing on the page can clip it.
- *
- * What is left is the width, which no shared sheet can know, and a cap for a narrow window.
- */
+/* The panel is menu.css's. Only the width is this demo's. */
 .menu {
     --menu-width: 350px;
     max-width: calc(100vw - var(--space-24));
 }
-
-/* #endregion */
 
 .menu__head {
     display: flex;
@@ -130,17 +105,8 @@
     list-style: none;
 }
 
-/* #region tint */
-/*
- * What a row is filled with. The fill itself is a background image a few rules down, so
- * that it has a width to unroll; these say only what colour it is.
- *
- * A new row's hover is the same tint again: `--accent-surface` is the brand colour at a
- * tenth of its strength over white, and another tenth over the top is the next step on a
- * ramp the page already uses, rather than a second colour to agree on.
- *
- * Neither transitions — the recording colours a row inside one frame at 24fps.
- */
+/* What a row is filled with, at rest and hovered. The fill itself is the background
+   image below, so main.ts can animate its width. No transition. */
 .feed__row {
     --row-fill: transparent;
     --row-hover: var(--surface-muted);
@@ -155,14 +121,7 @@
     --row-fill: var(--row-hover);
 }
 
-/* #endregion */
-
-/* #region run */
-/*
- * The new rows are one block, not two tinted boxes. The design rounds the run rather than
- * each row in it, so a row in the middle of a run has square edges where it meets the next
- * one — which is a question about neighbours, and `:has()` is how an element asks it.
- */
+/* Adjacent unread rows form one rounded block: the edges where they meet are square. */
 .feed__row {
     border-radius: var(--radius-md);
     background-image: linear-gradient(var(--row-fill), var(--row-fill));
@@ -180,17 +139,8 @@
     border-start-end-radius: 0;
 }
 
-/* #endregion */
-
-/*
- * The row is menu.css's too, and these are the four ways this one differs: it holds two lines
- * rather than one, so it is taller, roomier and aligned to the top of them.
- *
- * The last two are the interesting pair. The rounding is handed back to the `<li>`, which is the
- * only thing that knows whether this row is in the middle of a run of new ones. And the hover
- * fill is turned off rather than taken, because the `<li>` paints this row — a tint with a width
- * to unroll cannot be a background colour — and two fills would be one too many.
- */
+/* The row is menu.css's, with two lines of text. The <li> paints the fill and owns the
+   rounding, so the row's own hover fill is off. */
 .row {
     --row-align: flex-start;
     --row-gap: var(--space-12);
@@ -199,7 +149,7 @@
     border-radius: inherit;
 }
 
-/* The well the icon sits in: a filled disc, one step off whatever is behind it. */
+/* The disc the icon sits in. */
 .row__mark {
     display: grid;
     flex: none;
@@ -228,8 +178,7 @@
     line-height: var(--leading-sm);
 }
 
-/* Already in place when the row arrives. The tint says a row is new over a third of a
-   second; the dot says the same thing and has nothing to add by taking as long. */
+/* Not animated: the tint already says the row is new. */
 .row__dot {
     flex: none;
     width: 6px;

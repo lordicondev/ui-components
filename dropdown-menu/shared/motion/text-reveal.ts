@@ -1,37 +1,26 @@
 /**
  * Text that arrives word by word and leaves in one piece.
  *
- * The two directions are deliberately not mirror images. Arriving, the block stays where it
- * is and its words fade in as a wave — several are always in flight, so the eye reads a
- * gradient rather than a queue. Leaving, nothing fades: the block slides down as one and
- * whatever box is closing over it does the hiding, which keeps every word legible right up
- * to the edge it disappears under.
- *
- * The caller owns that box. This module only moves the text inside it.
+ * `revealText()` fades the words in as a wave: several are in flight at once. `concealText()`
+ * slides the whole block down without fading; the box around it is expected to clip it.
+ * This module only moves the text, the caller owns the box.
  */
 import { prefersReducedMotion } from './reduced-motion.ts';
 
-/** First word starting to last word finished. Fixed, whatever the word count. */
+/** First word starting to last word finished, whatever the word count. */
 const REVEAL_MS = 500;
 
 /**
- * Share of the run one word spends fading. It is the only knob that matters, and it trades
- * two qualities against each other: raise it and the trailing edge is a longer, softer
- * dissolve; lower it and the stagger stretches, so the tail keeps moving for longer but
- * the words start arriving one at a time instead of melting in.
- *
- * The width is a proportion, not a count, so the same share is denser on a long paragraph
- * than a short one — about seven words in flight across twenty, four across ten. Far below
- * this and the short ones stop being a wave and become a queue.
+ * How much of the run one word spends fading. Higher means a softer, more overlapping wave;
+ * lower means words arrive more one at a time.
  */
 const FADE_SHARE = 0.3;
 
-/** And the curve it fades on. A word arriving is not a movement, so it only lets go. */
 const FADE_EASE = 'ease-out';
 
 const CONCEAL_MS = 300;
 
-/** Far enough that the words are clearly leaving, short enough to stay under the clip. */
+/** Pixels the block travels down. Enough to read as leaving, short enough to stay clipped. */
 const CONCEAL_DISTANCE = 32;
 
 const MOVE_EASING = 'cubic-bezier(0.3, 0, 0.2, 1)';
@@ -40,11 +29,7 @@ export type RevealOptions = {
     duration?: number;
     fadeShare?: number;
     easing?: string;
-    /**
-     * Held back this long before the first word. For text arriving into a box that is
-     * still opening: words that start before there is anywhere to put them are read as
-     * the box being late rather than the words being early.
-     */
+    /** Wait before the first word, for text arriving into a box that is still opening. */
     delay?: number;
 };
 
@@ -56,12 +41,9 @@ export type ConcealOptions = {
 };
 
 /**
- * Wraps every word of `element` in its own span, leaving the markup around them alone.
- *
- * Walking text nodes rather than rewriting innerHTML means a link or a <strong> inside the
- * paragraph survives; a word split across such a boundary simply becomes two spans, which
- * nobody can see because only opacity is ever animated. The spans stay inline — inline-block
- * would change line breaking and the baseline, and opacity needs neither.
+ * Wraps every word of `element` in its own span. Walks text nodes rather than rewriting
+ * innerHTML, so inline markup inside the paragraph survives. Runs once; later calls return
+ * the spans already there.
  */
 export function splitWords(element: HTMLElement): HTMLElement[] {
     const already = element.querySelectorAll<HTMLElement>('[data-word]');
@@ -75,8 +57,7 @@ export function splitWords(element: HTMLElement): HTMLElement[] {
         if (!text.data.trim()) continue;
 
         const pieces = document.createDocumentFragment();
-        // The capturing split keeps the whitespace, so line breaks and copied text are
-        // exactly what they were before.
+        // The capturing split keeps the whitespace, so copied text reads as before.
         for (const part of text.data.split(/(\s+)/)) {
             if (!part) continue;
 
@@ -98,10 +79,8 @@ export function splitWords(element: HTMLElement): HTMLElement[] {
 }
 
 /**
- * Stops whatever this block has running and hands it back to the stylesheet.
- *
- * Scoped to the block and its own words on purpose: getAnimations({ subtree: true }) on an
- * ancestor would also cancel the height animation of the panel doing the clipping.
+ * Cancels whatever this block and its words have running. Scoped on purpose: a subtree
+ * search from an ancestor would also cancel the box's own animation.
  */
 export function settleText(element: HTMLElement): void {
     for (const animation of element.getAnimations()) animation.cancel();
@@ -111,10 +90,9 @@ export function settleText(element: HTMLElement): void {
     }
 }
 
-// #region wave
 /**
- * Words fade in one after another, each starting before the one ahead has finished. The
- * run always takes `duration`: more words tighten the stagger rather than lengthen the run.
+ * Fades the words in one after another. The run always takes `duration`; more words mean
+ * a tighter stagger.
  */
 export function revealText(element: HTMLElement, options: RevealOptions = {}): Animation[] {
     const { duration = REVEAL_MS, fadeShare = FADE_SHARE, easing = FADE_EASE, delay = 0 } = options;
@@ -123,25 +101,23 @@ export function revealText(element: HTMLElement, options: RevealOptions = {}): A
     settleText(element);
     if (prefersReducedMotion()) return [];
 
-    // A lone word has nothing to wave against, so it just takes the run.
     const solo = words.length < 2;
     const fade = solo ? duration : duration * fadeShare;
     const step = solo ? 0 : (duration - fade) / (words.length - 1);
 
     return words.map((word, index) =>
-        // `backwards` holds a word invisible through its delay; no forwards fill means
-        // a finished wave leaves nothing to undo.
+        // `backwards` keeps a word invisible through its delay. No forwards fill, so a
+        // finished wave leaves nothing to undo.
         word.animate(
             { opacity: [0, 1] },
             { duration: fade, delay: delay + index * step, easing, fill: 'backwards' },
         ),
     );
 }
-// #endregion
 
 /**
- * Sends the block down as one, without fading it. The words stay at full ink and are cut
- * off by the caller's box, so none of them is ever painted outside it.
+ * Slides the block down as one, without fading. Fills forwards so the text stays down
+ * until the box has closed; the next reveal cancels it.
  */
 export function concealText(element: HTMLElement, options: ConcealOptions = {}): Animation | null {
     const { duration = CONCEAL_MS, distance = CONCEAL_DISTANCE, easing = MOVE_EASING } = options;
@@ -149,8 +125,6 @@ export function concealText(element: HTMLElement, options: ConcealOptions = {}):
     settleText(element);
     if (prefersReducedMotion()) return null;
 
-    // Forwards, because the text has to stay down until the box has finished closing. The
-    // next reveal cancels it on its way in.
     return element.animate(
         { transform: ['translateY(0)', `translateY(${distance}px)`] },
         { duration, easing, fill: 'forwards' },

@@ -2,9 +2,7 @@
 @import '@shared/ui/popover.css';
 @import '@shared/ui/menu.css';
 
-/* A little above the middle, which is where a ⋮ on a row of something usually is — and far
-   enough from the foot of the stage that there is plainly room below it for the panel. The
-   menu is not in this box: a popover draws in the top layer and is clipped by nothing. */
+/* The button a little above the middle, with room below it for the panel. */
 .demo {
     display: grid;
     align-content: center;
@@ -13,8 +11,7 @@
     padding: var(--space-48) var(--gutter) 40vh;
 }
 
-/* The well the ⋮ sits in. `aria-expanded` is written by `popovers()` and read here, so the
-   pressed look and the panel being open are one fact rather than two that have to agree. */
+/* Pressed while the menu is open. aria-expanded is written by popovers(). */
 .dots {
     display: grid;
     place-items: center;
@@ -36,25 +33,15 @@
     height: var(--icon-size-24);
 }
 
-/* The groups sit a step further apart than the rows do, which is what makes them groups. */
+/* Groups sit a step further apart than rows. */
 .menu {
     --menu-width: 334px;
     --menu-gap: var(--space-16);
 }
 
-/* #region danger */
-/*
- * The one row you cannot undo, in one declaration.
- *
- * `--danger` is already the red the design draws, so no colour is written here. And because
- * the icon carries `current-color`, the trash bin turns with the words: the stylesheet never
- * mentions an icon, and nothing about the row is coloured twice.
- *
- * The hover fill goes with it — a tenth of the same red over the panel, rather than the grey
- * every other row uses, so the warning does not go grey at the moment you reach for it.
- */
+/* The destructive row: red text, a red hover fill, and the icon follows the text colour
+   through current-color. */
 .row[data-danger] {
     --row-hover: var(--danger-surface);
     color: var(--danger);
 }
-/* #endregion */

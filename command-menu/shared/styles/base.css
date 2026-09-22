@@ -1,9 +1,6 @@
 /*
- * Sets the stage: fonts, reset, default typography. Nothing control-specific —
- * every demo styles its own control so a demo can be read on its own.
- *
- * Only the UI face ships here. JetBrains Mono is a portal concern (code blocks),
- * so demos do not carry 43 kB they never render.
+ * Fonts, reset and default typography. Nothing control-specific: every demo styles its
+ * own control. Only the UI face is here; the mono face is the portal's.
  */
 @font-face {
     font-family: 'Figtree';
@@ -34,8 +31,8 @@
     box-sizing: border-box;
 }
 
-/* Any `display` in a component beats the UA rule for [hidden], and then `el.hidden = true`
-   silently stops working. Settle it once here. */
+/* An author `display` on a component would beat the UA rule for [hidden], and then
+   `el.hidden = true` would stop working. Settled once here. */
 [hidden] {
     display: none !important;
 }
@@ -58,8 +55,7 @@ select {
     color: inherit;
 }
 
-/* Anything you click more than once in a row drags a text selection across its own label
-   on the second click. Nobody has ever wanted to select the words on a button. */
+/* A second click on a button would otherwise select its label. */
 button {
     -webkit-user-select: none;
     user-select: none;
@@ -71,13 +67,9 @@ button {
 }
 
 /*
- * Said, but not drawn. A field that a magnifier already explains still needs a label, and a
- * radio group still needs a legend — the name has to be in the accessibility tree whether or
- * not there is room for it on screen.
- *
- * Clipped rather than `display: none` or `visibility: hidden`, because both of those take the
- * element out of the tree as well, and one of the things this hides is a live radio input that
- * still has to be reachable by keyboard.
+ * In the accessibility tree but not on screen: labels and legends that the visual design
+ * has no room for. Clipped rather than `display: none`, which would remove it from the
+ * tree too, and it also hides live radio inputs that must stay reachable by keyboard.
  */
 .visually-hidden {
     position: absolute;

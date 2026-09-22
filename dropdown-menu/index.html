@@ -9,9 +9,7 @@
     </head>
     <body>
         <main class="demo">
-            <!-- The whole of what opens the menu is `popovertarget`. Which way it opens is
-                 not said here and could not be: `popovers()` measures the room around the
-                 button, so the same markup near the foot of a window opens upward. -->
+            <!-- popovertarget opens the menu. popovers() decides which way it opens. -->
             <button class="dots" type="button" popovertarget="edit" aria-label="More options">
                 <lord-icon
                     class="dots__mark current-color"
@@ -22,11 +20,9 @@
                 ></lord-icon>
             </button>
 
-            <!-- #region menu -->
-            <!-- `role="menu"` with `tabindex="-1"` on the rows is one tab stop rather than
-                 five, which is what a menu is. `data-keys` says this is the element the arrow
-                 keys talk to, and `data-choose` marks a row as an answer — popover.ts closes
-                 the menu on one, menus.ts walks between them, off the one attribute. -->
+            <!-- role="menu" and tabindex="-1" on the rows: one tab stop. data-keys marks the
+                 element the arrow keys talk to; data-choose marks a row that can be chosen
+                 (popover.ts closes the menu on it) and arrowed to (menu.ts). -->
             <div class="menu popover" id="edit" popover role="menu" tabindex="-1" data-keys>
                 <div class="menu__group" role="group" aria-labelledby="edit-heading">
                     <p class="menu__heading" data-rise id="edit-heading">Edit</p>
@@ -42,7 +38,6 @@
                             ></lord-icon>
                             <span class="row__label" data-reveal>Rename</span>
                         </button>
-                        <!-- #skip -->
                         <!-- prettier-ignore -->
                         <button class="row" type="button" role="menuitem" tabindex="-1" data-choose data-rise>
                             <lord-icon
@@ -54,10 +49,8 @@
                             ></lord-icon>
                             <span class="row__label" data-reveal>Duplicate</span>
                         </button>
-                        <!-- #endskip -->
                     </div>
                 </div>
-                <!-- #skip -->
 
                 <div class="menu__group" role="group" aria-labelledby="share-heading">
                     <p class="menu__heading" data-rise id="share-heading">Share</p>
@@ -87,9 +80,7 @@
                     </div>
                 </div>
 
-                <!-- No heading over the last one, because what it does belongs to no group:
-                     it is the one thing on this menu you cannot undo. `data-danger` is the
-                     whole of saying so — the stylesheet does the rest in one declaration. -->
+                <!-- No heading: this row belongs to no group. data-danger colours it. -->
                 <div class="menu__list">
                     <!-- prettier-ignore -->
                     <button class="row" type="button" role="menuitem" tabindex="-1" data-choose data-rise data-danger>
@@ -103,9 +94,7 @@
                         <span class="row__label" data-reveal>Delete</span>
                     </button>
                 </div>
-                <!-- #endskip -->
             </div>
-            <!-- #endregion -->
         </main>
     </body>
 </html>

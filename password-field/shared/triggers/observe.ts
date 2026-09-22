@@ -1,4 +1,4 @@
-/** Watches one attribute and returns the teardown. */
+/** Calls `onChange` whenever `attribute` changes on `element`. Returns the teardown. */
 export function observeAttribute(
     element: HTMLElement,
     attribute: string,

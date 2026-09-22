@@ -10,11 +10,8 @@
     <body>
         <main class="demo">
             <div class="task" id="kind-download" data-page>
-                <!-- #region markup -->
-                <!-- `data-stage` is the whole control: the icon loops on it, the fill and
-                     the words move on it, and the toast comes and goes on it. `data-progress`
-                     is the other half of the API — set it to anything from 0 to 100 and the
-                     bar follows, whether that is this demo pretending or a real transfer. -->
+                <!-- data-stage is the state: the icon, the fill, the label and the toast read
+                     it. data-progress is 0 to 100 and the bar follows it. -->
                 <button
                     class="task__button"
                     type="button"
@@ -33,13 +30,9 @@
                         data-loop="loop-cycle"
                         aria-hidden="true"
                     ></lord-icon>
-                    <!-- #skip -->
 
-                    <!-- #region says -->
-                    <!-- Three labels, stacked, and the strip they sit on slides up by one
-                         line each time the stage changes. They are the only place the words
-                         live — `aria-label` on the button is read off whichever is showing,
-                         so the second page of this demo is these three lines and an icon. -->
+                    <!-- Three labels on a strip that slides up one line per stage change.
+                         aria-label on the button is copied from whichever is showing. -->
                     <span class="task__says" aria-hidden="true">
                         <span class="task__lines">
                             <span class="task__line">Download file</span>
@@ -49,16 +42,9 @@
                             <span class="task__line">Downloaded</span>
                         </span>
                     </span>
-                    <!-- #endregion -->
-                    <!-- #endskip -->
                 </button>
-                <!-- #endregion -->
 
-                <!-- #region toast -->
-                <!-- Absolutely placed, so it is drawn over the page rather than in it —
-                     nothing below moves to make room. It opens from the button's middle and
-                     runs out to the button's left edge, and the words are simply uncovered
-                     as it goes. -->
+                <!-- Absolutely placed, so nothing below moves to make room. -->
                 <p class="toast" role="status" data-shown="false">
                     <lord-icon
                         class="toast__mark current-color"
@@ -71,7 +57,6 @@
 
                     <span class="toast__text">File downloaded – lordicon-icons.zip</span>
                 </p>
-                <!-- #endregion -->
             </div>
 
             <div class="task" id="kind-upload" data-page>
@@ -84,10 +69,7 @@
                 >
                     <span class="task__fill" aria-hidden="true"></span>
 
-                    <!-- #region upload -->
-                    <!-- The whole of the second page. Nothing in the stylesheet or the code
-                         knows which of the two it is looking at: `main.ts` wires whatever
-                         `.task` elements it finds, and finds two. -->
+                    <!-- The second page: a different icon and three different words. -->
                     <lord-icon
                         class="task__mark current-color"
                         src="icons/upload.json"
@@ -107,7 +89,6 @@
                             <span class="task__line">Uploaded</span>
                         </span>
                     </span>
-                    <!-- #endregion -->
                 </button>
 
                 <p class="toast" role="status" data-shown="false">

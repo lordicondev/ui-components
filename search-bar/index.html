@@ -10,11 +10,8 @@
     <body>
         <main class="demo">
             <form class="search" role="search">
-                <!-- #region markup -->
-                <!-- Two attributes, and between them the whole control. `data-focused` is
-                     whether the cursor is in the field; `data-clearable` is whether there
-                     is anything worth offering to clear. Each icon follows one of them,
-                     and the stylesheet follows both. -->
+                <!-- data-focused: focus is in the field. data-clearable: there is text to
+                     clear. Each icon follows one; the stylesheet follows both. -->
                 <div class="field" data-focused="false" data-clearable="false">
                     <label class="visually-hidden" for="q">Search</label>
 
@@ -27,12 +24,8 @@
                     ></lord-icon>
 
                     <input class="field__input" id="q" type="search" placeholder="Search" />
-                    <!-- #skip -->
-                    <!-- #region clear -->
-                    <!-- `state` is an entrance, which is why the cross draws itself rather
-                         than appearing: `in-reveal` starts from an empty frame. Nothing
-                         hides this button — `data-clearable` does, in the stylesheet, and
-                         the same attribute is what tells the icon to draw. -->
+                    <!-- in-reveal starts from an empty frame, so the cross draws itself in.
+                         The stylesheet shows the button on the same attribute. -->
                     <button class="field__clear" type="button" aria-label="Clear search">
                         <lord-icon
                             class="field__mark current-color"
@@ -43,10 +36,7 @@
                             aria-hidden="true"
                         ></lord-icon>
                     </button>
-                    <!-- #endregion -->
-                    <!-- #endskip -->
                 </div>
-                <!-- #endregion -->
             </form>
         </main>
     </body>

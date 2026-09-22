@@ -33,10 +33,8 @@
                 ></button>
             </div>
 
-            <!-- #region markup -->
-            <!-- Every alert on both pages is cloned from this. `arrival-hover` plays the
-                 icon as the card arrives — after the card's own entrance, so the two read
-                 as one movement — and again whenever the pointer comes to rest on it. -->
+            <!-- Every alert on both pages is cloned from this. arrival-hover plays the
+                 icon once the card's own entrance has finished, and again on hover. -->
             <template id="alert-template">
                 <li class="alert">
                     <lord-icon
@@ -62,7 +60,6 @@
                     </button>
                 </li>
             </template>
-            <!-- #endregion -->
         </main>
     </body>
 </html>

@@ -1,23 +1,20 @@
-// #region setup
 import { defineElement, Element } from '@lordicon/element';
 import { booleanMorph } from '@shared/triggers/boolean-morph.ts';
 
+// Triggers have to be registered before defineElement().
 Element.defineTrigger('expanded-morph', booleanMorph('aria-expanded'));
 
 defineElement();
-// #endregion
 
 import '@shared/types/lordicon.d.ts';
 import { prefersReducedMotion } from '@shared/motion/reduced-motion.ts';
 import { concealText, revealText } from '@shared/motion/text-reveal.ts';
 
-// #region panel
 const panels = new WeakMap<HTMLElement, Animation>();
 
-/** `height` has no transition to `auto`, so the box is measured and moved by hand. */
+/** `height` cannot transition to `auto`, so the panel is measured and animated by hand. */
 async function setPanel(panel: HTMLElement, open: boolean): Promise<void> {
-    // Measured before cancelling and before unhiding, so it is honest either way: a
-    // closed panel is zero, and one caught mid-flight is wherever it had got to.
+    // Measured before cancelling, so a panel caught mid-animation starts from where it is.
     const from = panel.getBoundingClientRect().height;
     panels.get(panel)?.cancel();
 
@@ -32,14 +29,12 @@ async function setPanel(panel: HTMLElement, open: boolean): Promise<void> {
         { duration: 300, easing: 'cubic-bezier(0.3, 0, 0.2, 1)', fill: 'forwards' },
     );
     panels.set(panel, height);
-    // A rejection means a later click cancelled this one, and now owns the panel.
+    // A rejection means a later click cancelled this animation and owns the panel now.
     if (!(await height.finished.catch(() => null))) return;
-    panel.hidden = !open; // hide first: never a frame back at full height
+    panel.hidden = !open; // hide first, so there is never a frame back at full height
     height.cancel(); // then hand the height back to the stylesheet
 }
-// #endregion
 
-// #region wiring
 for (const trigger of document.querySelectorAll<HTMLButtonElement>('.item__trigger')) {
     const panel = document.getElementById(trigger.getAttribute('aria-controls')!)!;
     const text = panel.querySelector('p')!;
@@ -49,14 +44,13 @@ for (const trigger of document.querySelectorAll<HTMLButtonElement>('.item__trigg
 
         trigger.setAttribute('aria-expanded', String(open));
 
-        // Arriving and leaving are not the same movement: the words fade in where they
-        // are, and the whole paragraph slides out under the closing panel.
+        // Opening fades the words in where they are; closing slides the paragraph down
+        // under the shrinking panel.
         if (open) revealText(text);
         else concealText(text);
 
-        // Second, because the paragraph has to be back in place first: scrollHeight
-        // counts a transformed child, so a leftover slide would inflate the target.
+        // After the text: revealText() cancels a leftover slide, and scrollHeight would
+        // count the transformed paragraph otherwise.
         void setPanel(panel, open);
     });
 }
-// #endregion

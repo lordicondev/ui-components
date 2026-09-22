@@ -9,11 +9,8 @@
     </head>
     <body>
         <main class="demo">
-            <!-- #region markup -->
-            <!-- The whole demo. `target` points the icon at the button rather than at
-                 itself, so the plus turns when the pointer reaches any part of the tile —
-                 the label and the empty corners included. `hover` is built in; nothing
-                 here is registered by this demo. -->
+            <!-- target points the icon at the tile, so the plus turns when the pointer
+                 reaches any part of it. hover is a built-in trigger. -->
             <button class="tile" type="button">
                 <span class="tile__puck">
                     <lord-icon
@@ -28,7 +25,6 @@
 
                 <span class="tile__label">Add new card</span>
             </button>
-            <!-- #endregion -->
         </main>
     </body>
 </html>

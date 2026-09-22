@@ -1,36 +1,28 @@
-// #region setup
 import { defineElement, Element } from '@lordicon/element';
 import { booleanAttention } from '@shared/triggers/boolean-attention.ts';
 import { stageCycle } from '@shared/triggers/stage-cycle.ts';
-import { pager } from '@shared/ui/pager.ts';
 
-// The transfer icon reads the stage and does the sequencing itself — loop while the work
-// runs, confirm once it has, and only after the loop it was in has come round. The toast's
-// tick is the plain case beside it: play once, when it arrives.
+// Triggers have to be registered before defineElement().
+// The button's icon loops while busy and confirms when done. The toast's tick plays once.
 Element.defineTrigger('stage-cycle', stageCycle('data-stage'));
 Element.defineTrigger('shown-attention', booleanAttention('data-shown'));
 
 defineElement();
-// #endregion
+
+import { pager } from '@shared/ui/pager.ts';
 
 const STAGES = ['idle', 'busy', 'done'];
 
-/** How long the pretend transfer takes, how much of it lands at a time, and how long its
- *  receipt stays up. Reporting in steps is the point: a real transfer says where it has
- *  got to now and then, and the stylesheet covers the distance in between. */
+/** How long the pretend transfer takes, how much lands per step, and how long the receipt stays. */
 const TRANSFER = 2200;
 const STEP = 10;
 const RECEIPT = 2000;
 
 const wait = (ms: number) => new Promise((done) => setTimeout(done, ms));
 
-// #region wire
 /**
- * Everything one of these buttons does, given nothing but the button.
- *
- * It is called once per `.task` on the page and there are two of them, which is the whole
- * difference between the download and the upload: a different `src`, three different words
- * and one different sentence, all of it in the markup. Nothing below knows which it has.
+ * Wires one `.task`: the button, its label strip and its toast. Called for each task on
+ * the page; the download and the upload differ only in markup.
  */
 function wire(task: HTMLElement): void {
     const button = task.querySelector<HTMLButtonElement>('.task__button')!;
@@ -38,19 +30,13 @@ function wire(task: HTMLElement): void {
     const lines = [...task.querySelectorAll<HTMLElement>('.task__line')];
     const toast = task.querySelector<HTMLElement>('.toast')!;
 
-    // The copy that makes the wrap invisible: the strip counts past the last line to a
-    // repeat of the first, and is moved back to the real one once it has arrived there.
+    // A copy of the first label after the last one, so the strip can wrap forwards.
     strip.append(lines[0].cloneNode(true));
-    // #skip
 
-    // #region api
     /**
-     * Where the bar is, from 0 to 100. Write it and the fill follows.
-     *
-     * This is the whole of the progress API and it is an attribute, so it can be set from
-     * anywhere — the pretend transfer below, a real one's `onprogress`, or the element
-     * inspector. The stylesheet reads `--progress` rather than the attribute, because CSS
-     * cannot yet take a number out of one, so the two are kept in step here.
+     * Progress from 0 to 100. An attribute, so anything can drive it: this demo's pretend
+     * transfer, a real `onprogress`, or the element inspector. The stylesheet reads
+     * `--progress`, because CSS cannot take a number out of an attribute.
      */
     function report(percent: number): void {
         const bounded = Math.min(Math.max(percent, 0), 100);
@@ -59,7 +45,7 @@ function wire(task: HTMLElement): void {
         button.style.setProperty('--progress', String(bounded / 100));
     }
 
-    /** Which of the three things the button is doing. Everything else is downstream. */
+    /** Sets the stage: idle, busy or done. The icon, the bar, the label and the toast read it. */
     function enter(stage: string): void {
         button.dataset.stage = stage;
         button.disabled = stage === 'busy';
@@ -67,16 +53,11 @@ function wire(task: HTMLElement): void {
 
         say(STAGES.indexOf(stage));
     }
-    // #endregion
 
-    // #region says
     /**
-     * Slide the strip up by one line, whichever way round the change is.
-     *
-     * Going back to the start is the interesting one: 2 → 0 would slide the words down, and
-     * the old line is supposed to leave upwards every time. So the strip keeps counting — a
-     * copy of the first line is waiting past the end — and once it has arrived there it is
-     * moved back to the real one with the transition switched off, which nobody can see.
+     * Slides the label strip to line `at`. The strip only ever moves up. Going back to the
+     * first label, it slides on to the copy past the end, then jumps back to the real one
+     * with transitions off.
      */
     function say(at: number): void {
         const from = Number(strip.dataset.at ?? 0);
@@ -84,8 +65,7 @@ function wire(task: HTMLElement): void {
 
         strip.dataset.at = String(at);
         strip.style.setProperty('--line', String(to));
-        // The first text node, not the whole line: the busy one ends in three dots that
-        // come and go, and "Uploading dot dot dot" is not what the button is called.
+        // The first text node only: the busy label ends in animated dots.
         button.setAttribute('aria-label', lines[at].firstChild!.textContent!.trim());
 
         if (to <= from) return;
@@ -97,16 +77,14 @@ function wire(task: HTMLElement): void {
 
                 strip.dataset.settling = '';
                 strip.style.setProperty('--line', '0');
-                void strip.offsetWidth; // take the jump now, while nothing may transition
+                void strip.offsetWidth; // apply the jump now, while transitions are off
                 delete strip.dataset.settling;
             },
             { once: true },
         );
     }
-    // #endregion
 
-    // #region run
-    /** One press, one whole cycle. The stages are set here and nothing else is. */
+    /** One press: busy with progress in steps, done, a receipt, then idle again. */
     async function run(): Promise<void> {
         enter('busy');
 
@@ -116,28 +94,22 @@ function wire(task: HTMLElement): void {
         }
         enter('done');
 
-        toast.dataset.shown = 'true'; // its tick draws itself in on this
+        toast.dataset.shown = 'true'; // the tick plays on this
         await wait(RECEIPT);
 
         toast.dataset.shown = 'false';
-        await wait(200); // let it fall away before the button forgets the whole thing
+        await wait(200); // let the toast leave before the button resets
         enter('idle');
         report(0);
     }
 
     button.addEventListener('click', () => void run());
-    // #endregion
-    // #endskip
 }
-// #endregion
 
 /**
- * How wide each receipt is when it is open. Measured once, after the font, because Figtree
- * is not the width of the fallback it replaces.
- *
- * A hidden page has no width to ask about, so the page is put back for as long as the
- * question takes. Nothing is painted in between — a browser does not stop mid-task to draw
- * — so there is nothing to see, and it beats holding the pager back until the font lands.
+ * Measures each toast's open width once the font has loaded, because CSS cannot
+ * transition width to `auto`. A hidden page has no widths, so it is shown for the
+ * measurement; nothing paints in between.
  */
 async function measure(): Promise<void> {
     await document.fonts.ready;

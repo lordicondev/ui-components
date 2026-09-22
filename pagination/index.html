@@ -10,11 +10,8 @@
     <body>
         <main class="demo">
             <nav class="pages" id="style-arrows" data-page aria-label="Pagination">
-                <!-- #region steps -->
-                <!-- There is one arrow in the icon set and two on screen. The next button
-                     is the previous one turned round by the stylesheet, which turns the
-                     animation round with it: the arrow that flies out to the left here
-                     flies out to the right there. -->
+                <!-- One arrow icon for both buttons. The stylesheet flips the next button's
+                     icon, and its animation with it. -->
                 <button
                     class="step step--boxed"
                     type="button"
@@ -30,13 +27,9 @@
                         aria-hidden="true"
                     ></lord-icon>
                 </button>
-                <!-- #endregion -->
 
-                <!-- #region markup -->
-                <!-- The frame is one element for the row, not a border on the page you are
-                     on — a border cannot travel from one button to another. `aria-current`
-                     is what actually says which page this is, and it says so whether or
-                     not the frame has finished arriving. -->
+                <!-- The frame is one element for the row, so it can travel between pages.
+                     aria-current is what says which page is current. -->
                 <div class="numbers">
                     <span class="numbers__frame" aria-hidden="true"></span>
 
@@ -45,7 +38,6 @@
                     <button class="page" type="button">3</button>
                     <button class="page" type="button">4</button>
                 </div>
-                <!-- #endregion -->
 
                 <button
                     class="step step--boxed step--next"

@@ -3,26 +3,25 @@ import { BaseTrigger } from './base.ts';
 import { observeAttribute } from './observe.ts';
 
 /**
- * Plays the icon once, each time a boolean attribute on the target turns `"true"`.
+ * Plays the icon once each time a boolean attribute on the target turns `"true"`.
  *
- * Where `booleanMorph` holds two looks and travels between them, this one has no second
- * look to hold: it is a reaction, not a state. Focus arriving in a field, a message
- * appearing — something happened, the icon acknowledges it, and nothing is left behind.
- *
- * Registered under one name per attribute, the same way the morphs are:
+ * Unlike `booleanMorph` there is no second look to hold: the icon reacts and comes back to
+ * rest. Register one name per attribute:
  *
  *     Element.defineTrigger('focus-attention', booleanAttention('data-focused'));
  *     Element.defineTrigger('shown-attention', booleanAttention('data-shown'));
  *
- * `data-attribute` on the <lord-icon> overrides the attribute being watched.
+ * `data-attribute` on the `<lord-icon>` overrides the attribute for that one icon.
  *
- * Under reduced motion it jumps to the played-out frame instead. That matters for an
- * entrance state like `in-reveal`, which starts from nothing: staying put would leave the
- * icon invisible rather than still.
+ * A change that lands while the icon is still playing is dropped, so a pointer crossing a
+ * row twice does not restart the animation.
+ *
+ * Under reduced motion the icon jumps to its last frame instead. That matters for an
+ * entrance state such as `in-reveal`, which starts invisible.
  */
 export function booleanAttention(defaultAttribute: string): TriggerConstructor {
     return class BooleanAttention extends BaseTrigger {
-        /** What the icon last reacted to, so a repeated "true" is not news. */
+        /** The value last reacted to, so setting `"true"` again is not a change. */
         private on = false;
 
         private get attribute(): string {
@@ -40,7 +39,7 @@ export function booleanAttention(defaultAttribute: string): TriggerConstructor {
         }
 
         onReady(): void {
-            // Take the state it arrived in without playing: only later changes are news.
+            // Take the starting value without playing; only later changes count.
             this.on = this.isOn;
         }
 
@@ -48,7 +47,7 @@ export function booleanAttention(defaultAttribute: string): TriggerConstructor {
             if (!this.player.ready || this.isOn === this.on) return;
 
             this.on = this.isOn;
-            if (!this.on) return;
+            if (!this.on || this.player.playing) return;
 
             if (this.prefersReducedMotion) this.player.seekToEnd();
             else this.player.playFromStart();

@@ -1,8 +1,7 @@
 @import '@shared/styles/index.css';
 @import '@shared/ui/pager.css';
 
-/* Room above for the row, and a floor under it so the dots stay put as the variants
-   change width. */
+/* A row above, the dots below. */
 .demo {
     display: grid;
     grid-template-rows: 1fr auto;
@@ -13,15 +12,14 @@
     padding: var(--space-64) var(--gutter) var(--space-32);
 }
 
-/* The steps at the ends, the numbers between them, and the design's 96 pixels of air. */
 .pages {
     display: flex;
     align-items: center;
     gap: var(--space-96);
 }
 
-/* The bare chevrons have no box to see, so the gap the design measures is to the chevron
-   itself — and the padding that makes them big enough to hit sits inside it. */
+/* The bare chevrons carry 8px of padding to be big enough to hit; the gap gives it back
+   so the visible distance matches the other rows. */
 .pages--bare {
     gap: calc(var(--space-96) - var(--space-8));
 }
@@ -33,26 +31,15 @@
 }
 
 /*
- * The frame is one element for the whole row rather than a border on the page you are on,
- * because a border cannot travel from one button to another.
- *
- * Both its edges are written on every turn and both are on the same journey, but they do
- * not leave together. The leading edge goes first and alone, so the frame stretches until
- * it touches the page it is moving to; only then does the trailing edge follow, and it
- * arrives slowly. Which edge leads is the direction, and that is the only thing script
- * has to say about any of this.
- *
- * Both times and both curves are measured off the reference recording: 130ms for the
- * stretch on a curve that only accelerates, and 300ms for the catching up on one that only
- * slows down. A frame that moved both edges at once would just be a box sliding, and the
- * row would lose the one thing this says — which way you went.
+ * The frame's two edges do not move together. The leading edge goes first, so the frame
+ * stretches to the new page; the trailing edge follows once it has arrived. Times and
+ * curves are from the reference recording.
  */
 .numbers {
     --frame-lead: 130ms cubic-bezier(0.4, 0, 1, 1);
     --frame-trail: 300ms cubic-bezier(0.215, 0.61, 0.355, 1) 130ms;
 }
 
-/* #region frame */
 .numbers__frame {
     position: absolute;
     inset-block: 0;
@@ -71,17 +58,14 @@
         left var(--frame-lead),
         right var(--frame-trail);
 }
-/* #endregion */
 
-/* Nowhere to be until the row has been measured, and `data-going` is the word for that
-   having happened. */
+/* Hidden until the row has been measured, which is when `data-going` is first set. */
 .numbers:not([data-going]) .numbers__frame {
     opacity: 0;
 }
 
-/* As wide as it is tall, and said that way round: a line of text and the padding above and
-   below it, which is exactly what the height already comes to. Written as a minimum rather
-   than a width, so a two-digit page widens the button instead of crowding it. */
+/* A square: as wide as a line of text plus padding is tall. A minimum, so a two-digit
+   page can widen it. */
 .page {
     display: grid;
     place-items: center;
@@ -116,10 +100,7 @@
     cursor: default;
 }
 
-/* #region mirror */
-/* One arrow in the set and two on screen. Turning the next button round turns its
-   animation round with it — the arrow that flies out to the left on one flies out to the
-   right on the other, and neither the icon nor the trigger knows it happened. */
+/* One arrow icon for both buttons. Flipping the next one flips its animation too. */
 .step__mark {
     flex: none;
     width: var(--icon-size-24);
@@ -129,13 +110,8 @@
 .step--next .step__mark {
     scale: -1 1;
 }
-/* #endregion */
 
-/* What actually differs between the three rows: a box, a box with a word in it, and no box
-   at all. Everything else on screen — the numbers, the frame, the times it moves in — is
-   the same markup and the same stylesheet, three times over. */
-
-/* #region variants */
+/* Everything that differs between the three rows. */
 .step--boxed {
     border: 1px solid var(--border);
     background: var(--surface);
@@ -151,7 +127,7 @@
     background: var(--surface-sunken);
 }
 
-/* No box to tint, so the chevron answers instead. */
+/* No box to tint, so the chevron changes colour instead. */
 .step--bare:hover:not(:disabled) {
     color: var(--accent);
 }
@@ -161,7 +137,6 @@
     width: var(--icon-size-20);
     height: var(--icon-size-20);
 }
-/* #endregion */
 
 @media (prefers-reduced-motion: reduce) {
     .numbers__frame {

@@ -13,13 +13,9 @@
                 <fieldset class="menu-bar__tools">
                     <legend class="visually-hidden">Tool</legend>
 
-                    <!-- #region markup -->
-                    <!-- One tool. The radio is the real control and keeps every native
-                         behaviour — it is only invisible. `data-selected` says the same
-                         thing in an attribute the icon and the stylesheet can both read,
-                         because a radio's checked state is a property and nothing can
-                         watch it. The name floating over the button is the same span that
-                         gives the radio its name; tooltip.css draws it. -->
+                    <!-- One tool. The radio is the real control, only invisible. data-selected
+                         mirrors its checked state for the icon and the stylesheet. The
+                         tooltip span is the radio's name; tooltip.css draws it. -->
                     <label class="tool" data-selected="true">
                         <input
                             class="tool__input visually-hidden"
@@ -40,7 +36,6 @@
 
                         <span class="tooltip">Brush</span>
                     </label>
-                    <!-- #endregion -->
 
                     <label class="tool" data-selected="false">
                         <input
@@ -106,10 +101,7 @@
                 <span class="menu-bar__rule"></span>
 
                 <div class="menu-bar__actions">
-                    <!-- #region action -->
-                    <!-- An action, not a state. Nothing about the button is different
-                         afterwards, so the icon plays once and the markup holds no
-                         attribute for it to follow. -->
+                    <!-- An action, not a state: no attribute to follow, the icon plays once. -->
                     <button class="action" type="button">
                         <lord-icon
                             class="action__mark current-color"
@@ -121,7 +113,6 @@
 
                         <span class="tooltip">Bullet list</span>
                     </button>
-                    <!-- #endregion -->
 
                     <button class="action" type="button">
                         <lord-icon

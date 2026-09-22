@@ -17,15 +17,8 @@
     cursor: pointer;
 }
 
-/* #region colour */
-/* Three steps, the same three the checkbox list has: resting, under the pointer, and
-   starred. Hovering shows the colour the star would take, so the answer arrives before
-   the click does — and the shape still says which is which, hollow against filled.
-
-   One name, set four times, and nothing else in the stylesheet knows there is a hover
-   state. No transition on it: a colour here is a state, not a movement, and the only
-   thing with a duration is the star filling in. The count keeps its own colour
-   throughout — in the design it is the star that answers, never the number. */
+/* Resting, hovered, starred, and starred under the pointer. Hover shows the colour a press
+   would leave; the shape says which state it is. No transition: only the fill animates. */
 .star {
     --star-mark: var(--ink-subtle);
 }
@@ -41,7 +34,6 @@
 .star[aria-pressed='true']:hover {
     --star-mark: var(--accent-strong);
 }
-/* #endregion */
 
 .star__mark {
     width: var(--icon-size-24);
@@ -49,7 +41,7 @@
     color: var(--star-mark);
 }
 
-/* Tabular figures so 24 → 25 does not nudge the button's width under the pointer. */
+/* Tabular figures, so 24 to 25 does not change the button's width. */
 .star__count {
     color: var(--ink-soft);
     font-weight: 500;

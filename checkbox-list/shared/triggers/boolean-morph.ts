@@ -1,64 +1,38 @@
 import type { TriggerConstructor } from '@lordicon/element';
-import type { Player } from '@lordicon/web';
 import { BaseTrigger } from './base.ts';
 import { observeAttribute } from './observe.ts';
-
-export type Segment = [number, number];
-
-/**
- * A Lordicon morph state carries a ratio, e.g. `morph-close:0.5`. Frames up to the ratio
- * are the transition into the second look; the rest are the transition back. Splitting
- * the state there gives us one segment per direction.
- */
-export function splitAtRatio(player: Player): [Segment, Segment] | null {
-    const state = player.availableStates.find((candidate) => candidate.name === player.state);
-    const ratio = state?.params.length ? parseFloat(state.params[0]) : NaN;
-
-    if (!state || !(ratio > 0 && ratio <= 1)) {
-        return null;
-    }
-
-    const boundary = state.time + Math.floor((state.duration + 1) * ratio);
-    return [
-        [state.time, boundary],
-        [boundary, state.time + state.duration + 1],
-    ];
-}
+import { splitAtRatio, type Segment } from './segments.ts';
 
 /**
- * Two looks, and the travel between them, kept in step with one boolean.
+ * Keeps an icon's two looks in step with a boolean attribute on the target.
  *
- * Which attribute holds that boolean is left open, so a trigger built on this one can read
- * it from somewhere else or answer a second attribute alongside it. `booleanMorph` below
- * is the plain case, and the only one most demos need.
+ * With a morph state (`state="morph-close"`), the first half plays when the attribute turns
+ * true and the second half when it turns false. Without one, the whole animation plays
+ * forwards or backwards. A change that lands mid-animation reverses it in place.
+ *
+ * Which attribute to read is left to the subclass; `booleanMorph()` below is the usual one.
  */
 export abstract class MorphTrigger extends BaseTrigger {
+    /** The morph's two halves: into the second look, and back. Null without a morph state. */
     private segments: [Segment, Segment] | null = null;
 
-    /** What the icon currently shows. Null until the player is ready. */
-    private shown: boolean | null = null;
+    /** The look on screen. Null until the player is ready. */
+    private showing: boolean | null = null;
 
-    /** Which look the loaded segment arrives at when it runs forwards. */
-    private forwardShows: boolean | null = null;
+    /** The look the loaded segment ends on when played forwards. */
+    private segmentEndsOn: boolean | null = null;
 
-    /**
-     * True while something other than the morph has the player. A trigger built on this
-     * one sets it when it borrows the player for a state of its own; the morph then knows
-     * that what is playing is not its own travel, and takes the player back rather than
-     * steering something it did not start.
-     */
-    protected borrowed = false;
+    /** True while an animation this trigger started is still playing. */
+    private steering = false;
 
-    /** Where the look is written down. */
+    /** The attribute that holds the boolean. */
     protected abstract get attribute(): string;
 
-    /** What that attribute says right now. */
     protected get on(): boolean {
         return this.targetElement.getAttribute(this.attribute) === 'true';
     }
 
     onConnected(): void {
-        // State can change before the player is ready; onReady reads it again.
         this.disposable(observeAttribute(this.targetElement, this.attribute, () => this.sync()));
     }
 
@@ -69,28 +43,29 @@ export abstract class MorphTrigger extends BaseTrigger {
             this.player.switchSegment();
         });
 
+        // The attribute may have changed before the player was ready; start from its value now.
         this.jumpTo(this.on);
     }
 
-    private sync(): void {
-        if (!this.player.ready) return;
-        if (this.on === this.shown) return;
-
-        if (this.prefersReducedMotion) {
-            this.jumpTo(this.on);
-        } else {
-            this.animateTo(this.on);
-        }
+    onComplete(): void {
+        this.steering = false;
     }
 
-    /** The starting look, and the reduced-motion path: no animation, just the result. */
+    private sync(): void {
+        if (!this.player.ready || this.on === this.showing) return;
+
+        if (this.prefersReducedMotion) this.jumpTo(this.on);
+        else this.animateTo(this.on);
+    }
+
+    /** Shows a look without animating: at start, and for every change under reduced motion. */
     private jumpTo(on: boolean): void {
-        this.borrowed = false;
+        this.steering = false;
         this.player.direction = 1;
 
         if (this.segments) {
             this.player.switchSegment(on ? this.segments[0] : this.segments[1]);
-            this.forwardShows = on;
+            this.segmentEndsOn = on;
             this.player.seekToEnd();
         } else if (on) {
             this.player.seekToEnd();
@@ -98,45 +73,38 @@ export abstract class MorphTrigger extends BaseTrigger {
             this.player.seekToStart();
         }
 
-        this.shown = on;
+        this.showing = on;
     }
 
     private animateTo(on: boolean): void {
         if (!this.segments) {
-            // The whole animation is the transition: forwards arrives, back undoes it.
+            // The whole animation is the transition: forwards to get there, backwards to undo.
             this.player.direction = on ? 1 : -1;
-        } else if (this.player.playing && !this.borrowed) {
-            // Mid-flight, steering the segment already loaded beats switching to the
-            // other one, which would restart at its first frame and jump the icon.
-            // The two meet at the boundary, so either can reach either look — which
-            // way round depends on the segment, not on what the icon was last asked
-            // for. Always reversing is what lets a third quick click strand it.
-            this.player.direction = this.forwardShows === on ? 1 : -1;
+        } else if (this.player.playing && this.steering) {
+            // Interrupted mid-morph. Switching segments would jump to the other half's first
+            // frame, so reverse or resume the half already loaded instead. The two halves
+            // meet at the boundary, so either one reaches either look.
+            this.player.direction = this.segmentEndsOn === on ? 1 : -1;
         } else {
-            this.borrowed = false;
             this.player.direction = 1;
             this.player.switchSegment(on ? this.segments[0] : this.segments[1]);
-            this.forwardShows = on;
+            this.segmentEndsOn = on;
         }
 
+        this.steering = true;
         this.player.play();
-        this.shown = on;
+        this.showing = on;
     }
 }
 
 /**
- * Follows a boolean attribute on the target element: "on" when it reads `"true"`.
- *
- * The same behaviour covers a press toggle, a disclosure and a checkbox, so it is
- * registered under one name per attribute rather than copied three times:
+ * A morph driven by one boolean attribute on the target, "on" when it reads `"true"`.
+ * Register one name per attribute:
  *
  *     Element.defineTrigger('pressed-morph', booleanMorph('aria-pressed'));
  *     Element.defineTrigger('expanded-morph', booleanMorph('aria-expanded'));
  *
- * `data-attribute` on the <lord-icon> overrides the attribute being watched.
- *
- * Icons with a morph state play the matching half. Icons without one play the whole
- * animation forwards or backwards instead, so the trigger is still useful for them.
+ * `data-attribute` on the `<lord-icon>` overrides the attribute for that one icon.
  */
 export function booleanMorph(defaultAttribute: string): TriggerConstructor {
     return class BooleanMorph extends MorphTrigger {

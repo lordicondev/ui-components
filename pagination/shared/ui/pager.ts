@@ -1,13 +1,9 @@
 /**
- * Dots that page between the parts of one demo.
+ * Dots that switch between the parts of one demo. Showcase scaffolding, not a control: it
+ * exists so a demo can show three variants of a component without stacking them.
  *
- * Some controls have more to say than fits in a single picture — three styles of the same
- * checkbox, an alert list and the thing that fills it. Rather than stack them all and let
- * the demo sprawl, each part gets a page and the dots move between them.
- *
- * Convention over configuration: the parts carry `data-page`, the dots carry `.pager__dot`
- * in source order. Hiding a page takes its controls out of the tab order and out of the
- * accessibility tree with it, so only the page on screen can be reached.
+ * Parts carry `data-page`, dots carry `.pager__dot`, both in source order. A hidden page is
+ * out of the tab order and the accessibility tree.
  */
 export function pager(root: ParentNode = document): (shown: number) => void {
     const pages = [...root.querySelectorAll<HTMLElement>('[data-page]')];

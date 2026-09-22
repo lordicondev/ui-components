@@ -1,35 +1,21 @@
-// #region setup
 import { defineElement, Element } from '@lordicon/element';
 import { booleanMorph } from '@shared/triggers/boolean-morph.ts';
 import { PressAttention } from '@shared/triggers/press-attention.ts';
-import { tooltips } from '@shared/ui/tooltip.ts';
 
-// One bar, two kinds of button, so two triggers. A tool is a state and the icon holds it;
-// an action is over the moment it happens and the icon only acknowledges it.
+// Triggers have to be registered before defineElement().
+// A tool is a state, so its icon morphs. An action is over at once, so its icon plays once.
 Element.defineTrigger('selected-morph', booleanMorph('data-selected'));
 Element.defineTrigger('press-attention', PressAttention);
 
 defineElement();
 
-// Every control here is named by the word floating over it. This is what shows it.
-tooltips();
-// #endregion
+import { tooltips } from '@shared/ui/tooltip.ts';
 
-// #region wiring
 const tools = [...document.querySelectorAll<HTMLElement>('.tool')];
 
-/**
- * Write the group's choice onto every tool.
- *
- * A radio group already decides which one is on; what it will not do is say so in a way
- * anything else can watch, because `checked` is a property and mutations do not carry
- * properties. So the answer is copied into an attribute and the bar wakes up: two icons
- * morph past each other — the one being put down and the one being picked up — and the
- * stylesheet tints the new tool, all of it from this one line running four times.
- *
- * `change` covers a click and an arrow key alike, which is the whole keyboard story: a
- * radio group is a single tab stop and the arrows move within it.
- */
+// A radio's `checked` is a property, and a MutationObserver cannot watch a property. So
+// the group's choice is copied onto each label as data-selected, which the icon and the
+// stylesheet read. `change` fires for a click and for an arrow key alike.
 function follow(): void {
     for (const tool of tools) {
         const input = tool.querySelector<HTMLInputElement>('.tool__input')!;
@@ -38,4 +24,6 @@ function follow(): void {
 }
 
 document.querySelector('.menu-bar__tools')!.addEventListener('change', follow);
-// #endregion
+
+// Every button's name is the span inside it; tooltips() shows it on hover and focus.
+tooltips();

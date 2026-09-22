@@ -1,46 +1,30 @@
 /*
- * What a popover is made of, which way round it is, and how it leaves. Where it sits and how
- * it arrives are in popover.ts; what it holds belongs to the demo that opens it.
- *
- * `popovers()` writes `data-direction` on the panel before it is ever painted, and everything
- * below that depends on which way it opened reads that one attribute.
+ * The look of a popover panel, which way it opened, and how it leaves. Placement and the
+ * opening animation are in popover.ts, which writes `data-direction` on the panel before
+ * it is painted.
  */
 
-/*
- * The UA stylesheet pins a popover to all four edges and centres it with auto margins.
- * Undone here, because `place()` sets two of them and a panel held to the other two would
- * be stretched between the answers.
- */
+/* The UA sheet pins a popover to all four edges and centres it with auto margins.
+   popover.ts sets two of the edges, so the rest is undone here. */
 .popover {
     position: fixed;
     inset: auto;
     margin: 0;
     padding: 0;
     border: 0;
-    /* The UA gives a popover `overflow: auto`, which makes it a scroll container and clips
-       anything a panel puts outside its own box — a submenu's reach across the gap to the menu
-       it came from, say. The opening animation still clips, from an inline style, and this is
-       what it goes back to. */
+    /* The UA `overflow: auto` would clip a submenu reaching across the gap. The opening
+       animation clips from an inline style and hands back to this afterwards. */
     overflow: visible;
 }
 
-/* The one line without which none of the rest is ever reached. The browser hides a closed
-   popover from its own stylesheet, and an author's `display` beats it whatever the
-   selector: give the panel `display: flex` and it is never hidden again. */
+/* The browser hides a closed popover from its own stylesheet, and any author `display`
+   overrides that. Without this rule, a panel given `display: flex` is never hidden. */
 .popover:not(:popover-open) {
     display: none;
 }
 
-/* #region leave */
-/*
- * Arriving is script, because a height that unrolls has to be measured first. Leaving cannot
- * be: a closing popover leaves the top layer, and asking to keep an element the browser has
- * taken away is a fight nobody wins. `allow-discrete` is the platform's answer — it holds
- * `display` and `overlay` at their old values until the transition is over, so the panel stays
- * visible for as long as it takes to fade, and it goes back the way it came. How far is named
- * rather than written in: the upward answer comes from a selector that also matches
- * `:popover-open`, where a second `translate` would win on source order alone.
- */
+/* Leaving is a CSS transition. A closing popover leaves the top layer at once; the
+   `allow-discrete` transitions hold `display` and `overlay` until the fade is over. */
 .popover {
     --popover-leave: var(--space-12);
     opacity: 0;
@@ -57,21 +41,10 @@
     translate: 0 0;
     transition: none;
 }
-/* #endregion */
 
-/* #region direction */
-/*
- * Opening upward is three differences, and two of them are one rule.
- *
- * The panel leaves the way it came, so upward it rises rather than sinks. And while it is
- * still short it has to overflow at its *top*, so that the rows nearest the control are the
- * ones on screen — which is what bottom-aligning the contents does.
- *
- * The shrink rule is the one that looks unnecessary and is not. A flex column told to be
- * shorter than its contents squashes its children rather than overflowing them, so without
- * this the rows flatten instead of sliding out of the top, and bottom-aligning them has
- * nothing left to do. The failure looks like the animation simply not working.
- */
+/* Opening upward: the panel leaves upward too, and while it is still short its rows
+   overflow at the top, so the ones nearest the control show first. Children must not
+   shrink, or the flex column squashes them instead of overflowing. */
 .popover[data-direction='up'] {
     --popover-leave: calc(var(--space-12) * -1);
     justify-content: flex-end;
@@ -80,11 +53,8 @@
 .popover[data-direction='up'] > * {
     flex-shrink: 0;
 }
-/* #endregion */
 
-/* Nothing moves, and the rows are simply there. `popovers()` makes the same decision on
-   its own side, so a panel opened with motion turned off is drawn at full height with
-   everything in it. */
+/* popover.ts skips its animations under reduced motion too. */
 @media (prefers-reduced-motion: reduce) {
     .popover {
         translate: 0 0;

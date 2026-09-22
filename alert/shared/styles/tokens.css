@@ -1,13 +1,11 @@
 /*
- * Roles, not values. Hand-written on purpose: which grey is a border and which is
- * muted text is a design decision, and this is where a dark mode would be added later.
- *
- * Raw values come from palette.css (generated).
+ * Design tokens by role. Raw values come from palette.css (generated); which grey is a
+ * border and which is muted text is decided here, and so would a dark mode be.
  */
 :root {
     /* Text. `--ink*` is always a colour; `--text-*` is always a size. */
     --ink: var(--gray-950);
-    /* Body copy that is not the heading above it: a step down from --ink, still read. */
+    /* Body copy: a step down from --ink. */
     --ink-soft: var(--gray-600);
     --ink-muted: var(--gray-500);
     --ink-subtle: var(--gray-400);
@@ -21,8 +19,7 @@
 
     /* Outlines */
     --border: var(--gray-200);
-    /* Fainter than a border has any business being, for a box that already has a fill of
-       its own: it is the edge of a filled input, not a line drawn round nothing. */
+    /* The edge of a box that already has a fill, such as an input. */
     --border-soft: var(--gray-100);
     --border-strong: var(--gray-300);
     --border-accent: var(--brand-400);
@@ -31,10 +28,9 @@
     --accent: var(--brand-500);
     --accent-strong: var(--brand-600);
     --accent-surface: var(--brand-100);
-    /* One step up from that surface: the outline of a tinted box, or the fill of a small
-       shape sitting on one. */
+    /* The outline of a tinted box, or a small shape on one. */
     --accent-border: var(--brand-300);
-    /* Dark enough to stay a mark against either of them. */
+    /* Text or a mark on either of the above. */
     --accent-ink: var(--brand-700);
 
     /* Status. Warning rides the brand ramp — that is what the designs use. */
@@ -59,18 +55,11 @@
         var(--font-ui-name), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     --font-mono: var(--font-mono-name), ui-monospace, SFMono-Regular, Menlo, monospace;
 
-    /* Side breathing room around a page's content, so the edges line up as you scroll
-       out of a demo and into the text under it. Defined here and nowhere else: a demo
-       gets it from the shared import it already starts with, and the portal from its
-       copy of this file. */
+    /* Side padding of a page. The portal uses the same value, so demo and text line up. */
     --gutter: clamp(var(--space-16), 5vw, var(--space-48));
 
-    /* The halo a card sits in: no offset in either direction, so it reads as lift rather
-       than as a light source. An effect in Figma rather than a variable, which is why it
-       is written out here — the colour is --gray-400, and only the alpha is new. */
+    /* A card's halo: no offset, so it reads as lift rather than as a light source. */
     --shadow-sm: 0 0 7.5px color-mix(in srgb, var(--gray-400) 20%, transparent);
-    /* The same halo under something that is already a colour. Warmer and heavier than the
-       grey one, because a brand button has to lift off a white page rather than off a
-       tinted one. */
+    /* The same halo under a brand-coloured element. */
     --shadow-accent: 0 0 7.5px color-mix(in srgb, var(--accent-strong) 40%, transparent);
 }

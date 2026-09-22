@@ -1,20 +1,19 @@
 import { BaseTrigger } from './base.ts';
 
 /**
- * An icon that greets the thing it labels: it plays as that thing arrives, and again
- * whenever the pointer comes to rest on it.
+ * Plays the icon when it comes into view, and again whenever the pointer enters the target.
  *
- * The arrival is the harder half. An icon that animates while its card is still sliding in
- * reads as two movements fighting, so this waits for the card's own animations to settle
- * first. It watches for the card becoming visible rather than only for the element being
- * created, which covers a card inserted into the page, a page unhidden beside it, and one
- * scrolled into view — all of them arrivals as far as a reader is concerned.
+ * "Into view" is an IntersectionObserver on the icon, so it covers an element inserted into
+ * the page, one unhidden, and one scrolled to. Before playing it waits for the target's own
+ * animations to finish, so a card sliding in does not have an icon moving inside it.
  *
- * Entrance states usually start from nothing, so under reduced motion the icon jumps to
- * its finished frame rather than staying invisible.
+ *     Element.defineTrigger('arrival-hover', ArrivalHover);
+ *
+ * Under reduced motion the icon jumps to its last frame. Entrance states start invisible,
+ * so staying on the first frame would hide it.
  */
 export class ArrivalHover extends BaseTrigger {
-    /** An arrival that happened before the player could answer it. */
+    /** An arrival that happened before the player was ready. */
     private owed = false;
 
     onConnected(): void {
@@ -37,7 +36,7 @@ export class ArrivalHover extends BaseTrigger {
     }
 
     private async arrive(): Promise<void> {
-        // getAnimations() is empty until the card's animation has actually started.
+        // getAnimations() is empty until the target's animation has started, one frame later.
         await new Promise(requestAnimationFrame);
         if (!this.connected) return;
 

@@ -1,8 +1,6 @@
 @import '@shared/styles/index.css';
 @import '@shared/ui/pager.css';
 
-/* Room for the button and the receipt that hangs under it, and a floor for the dots so
-   they stay put whichever of the two pages is showing. */
 .demo {
     display: grid;
     grid-template-rows: 1fr auto;
@@ -13,8 +11,7 @@
     padding: var(--space-64) var(--gutter) var(--space-32);
 }
 
-/* The button's own box, and the thing the toast is measured against — it opens from this
-   box's middle and runs out to its left edge. */
+/* The box the toast is positioned against. */
 .task {
     position: relative;
     display: grid;
@@ -37,9 +34,7 @@
     cursor: pointer;
 }
 
-/* Immediate, both of them: which colour the button is says what it would do if pressed,
-   and an answer to that should not arrive late. The icon holds still through both — the
-   pointer passing over a button is not an event the icon has anything to add to. */
+/* No transition on hover or press. The icon holds still through both. */
 .task__button:hover:not(:disabled) {
     background: var(--accent-strong);
 }
@@ -52,18 +47,9 @@
     cursor: default;
 }
 
-/*
- * The bar is always the full width of the button and scaled down to `--progress`, rather
- * than a box being made wider: a solid colour has nothing to distort, scaling is off the
- * layout entirely, and there is no step where the browser works out a new width. It sits
- * under the icon and the words, which never move.
- *
- * Finished, it fades rather than running back — the bar has nothing left to say, and
- * emptying it would be a second animation saying it. The scale is reset afterwards, which
- * nobody sees, because only the busy button transitions it at all.
- */
-
-/* #region fill */
+/* The bar is the full width of the button, scaled by --progress. Scaling a solid colour
+   costs no layout. When done it fades rather than running back; the scale resets while
+   it is invisible. */
 .task__fill {
     position: absolute;
     inset: 0;
@@ -82,7 +68,6 @@
     opacity: 0;
     transition: opacity 300ms ease;
 }
-/* #endregion */
 
 .task__mark {
     flex: none;
@@ -90,17 +75,8 @@
     height: var(--icon-size-24);
 }
 
-/*
- * One line's worth of window, and a strip of labels behind it. Every change slides the
- * strip up by exactly one line, so the old words leave over the top and the new ones come
- * up from underneath — the same movement whichever label is arriving.
- *
- * The window is as wide as the widest label rather than the current one, so the button
- * keeps its width while the words change — which is also what stops the ellipsis in
- * "Downloading…" from pushing the button about.
- */
-
-/* #region says */
+/* A one-line window over a strip of labels. The window is as wide as the widest label,
+   so the button keeps its width while the words change. */
 .task__says {
     display: block;
     overflow: hidden;
@@ -118,18 +94,9 @@
     line-height: var(--leading-base);
     white-space: nowrap;
 }
-/* #endregion */
 
-/* #region dots */
-/*
- * The three dots after "Downloading" arrive one at a time and leave together, over and
- * over. They are always in the line and only ever change opacity, so the word they follow
- * cannot move and neither can the button around it — the room for them was taken when the
- * strip was measured, whether or not any of them is lit.
- *
- * Measured off the reference recording: a 667ms round in which each of the first three
- * steps holds for 150ms and the last, with all three showing, holds for the rest.
- */
+/* The three dots after "Downloading" appear one at a time and vanish together, on a
+   667ms cycle from the reference recording. They only change opacity, so nothing moves. */
 .task__dots {
     font-style: normal;
 }
@@ -139,10 +106,8 @@
     font-style: normal;
 }
 
-/* Longhands, not the `animation` shorthand. A shorthand with no name in it is
-   `animation-name: none` plus some timings, and a CSS minifier is entitled to throw the
-   timings away and write `animation: none` — which is exactly what the built stylesheet
-   did, leaving the dots named but with nothing to run and no way to notice in dev. */
+/* Longhands, not the `animation` shorthand: a shorthand without a name minifies to
+   `animation: none` and drops the timings. */
 .task__dots > i {
     opacity: 0;
     animation-duration: 667ms;
@@ -179,27 +144,13 @@
         opacity: 1;
     }
 }
-/* #endregion */
 
-/* The wrap back to the first label, taken in one frame with nothing allowed to animate. */
+/* The jump back to the first label, taken with transitions off. */
 .task__lines[data-settling] {
     transition: none;
 }
 
-/*
- * Drawn over the page rather than in it: absolute, so nothing below shifts to make room for
- * a receipt that is leaving in two seconds anyway.
- *
- * It opens from the middle of the button and finishes flush with the button's left edge —
- * `left` going from 50% to 0 while the width goes from nothing to what the words measure.
- * `--toast-width` is that measurement, taken once, because CSS has no transition from zero
- * to `auto`. The words are not animated at all: the box uncovers them as it goes.
- *
- * Leaving is not the reverse of arriving. It drops a little and dims, and the box it grew
- * from is not unmade.
- */
-
-/* The chrome: where it hangs and what it is made of. Nothing here moves. */
+/* The receipt under the button. Absolute, so nothing below moves to make room. */
 .toast {
     position: absolute;
     top: calc(100% + var(--space-16) + var(--space-4));
@@ -215,10 +166,10 @@
     background: var(--surface);
 }
 
-/* #region toast */
-/* Leaving is a fade and a small drop, and nothing else — the box does not close the way it
-   opened. `0s 150ms` is what keeps it that way: the width and the offset snap back only
-   once the fade has finished, at a moment when there is nothing on screen to see it. */
+/* Opens from the button's middle (left 50%, width 0) to its left edge at full width.
+   --toast-width is measured by main.ts, because width cannot transition to auto. The
+   words are not animated; the box uncovers them. Leaving is a fade and a small drop;
+   `0s 150ms` snaps width and left back once the fade has finished. */
 .toast {
     left: 50%;
     width: 0;
@@ -240,8 +191,6 @@
         left 500ms cubic-bezier(0.215, 0.61, 0.355, 1),
         opacity 150ms ease;
 }
-
-/* #endregion */
 
 .toast[data-shown='false'] {
     translate: 0 var(--space-8);

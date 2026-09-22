@@ -2,14 +2,14 @@ import type { Trigger } from '@lordicon/element';
 import type { Player } from '@lordicon/web';
 
 /**
- * Shared plumbing for our triggers.
+ * What every trigger in this project starts from.
  *
- * A trigger is rebuilt whenever `trigger` or `target` changes, not only when the element
- * leaves the page, so anything it sets up has to be undone. Registering teardown next to
- * the setup keeps the two from drifting apart.
+ * The element rebuilds a trigger whenever its `trigger` or `target` attribute changes, not
+ * only when the element leaves the page. So everything a trigger sets up is registered
+ * with `disposable()` and undone in `onDisconnected()`.
  *
- * Note the explicit fields: parameter properties would be neater, but they are not
- * erasable syntax, and this project has to survive having its types stripped.
+ * Fields are assigned by hand because parameter properties are not erasable syntax, and
+ * this project's TypeScript has to stay valid after its types are stripped.
  */
 export abstract class BaseTrigger implements Trigger {
     protected player: Player;
@@ -25,11 +25,12 @@ export abstract class BaseTrigger implements Trigger {
         this.targetElement = targetElement;
     }
 
+    /** Registers something to undo when the trigger is torn down. */
     protected disposable(cleanup: () => void): void {
         this.cleanups.push(cleanup);
     }
 
-    /** False once the trigger is torn down — worth checking after an await. */
+    /** False once the trigger is torn down. Check it after an `await`. */
     protected get connected(): boolean {
         return this.live;
     }
@@ -39,7 +40,7 @@ export abstract class BaseTrigger implements Trigger {
         for (const cleanup of this.cleanups.splice(0)) cleanup();
     }
 
-    /** These animations report a state change, so when motion is unwelcome we jump to it. */
+    /** Same check as shared/motion/reduced-motion.ts, kept here so triggers import nothing else. */
     protected get prefersReducedMotion(): boolean {
         return globalThis.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false;
     }

@@ -1,6 +1,5 @@
 @import '@shared/styles/index.css';
 
-/* Room to breathe around the control. */
 .demo {
     display: grid;
     align-content: start;
@@ -54,9 +53,7 @@
     background: var(--surface-muted);
 }
 
-/* #region clip */
-/* The icon turns itself now — nothing here to rotate. Colour is a state, not a
-   movement, so it changes at once. */
+/* The icon turns itself; the stylesheet only colours it. No transition. */
 .item__chevron {
     flex: none;
     width: var(--icon-size-24);
@@ -68,14 +65,12 @@
     color: var(--accent);
 }
 
-/* This box does the concealing: the paragraph slides down inside it as the height
-   shrinks. Its padding moved to the paragraph below — here it would still occupy
-   16px at `height: 0` and leave the closed panel holding a gap. */
+/* The panel clips the paragraph sliding down inside it. Its padding is on the paragraph
+   instead: padding here would still take up room at `height: 0`. */
 .item__panel {
     overflow: hidden;
     padding: 0;
 }
-/* #endregion */
 
 .item__panel p {
     margin: 0;

@@ -1,10 +1,9 @@
 # Alerts
 
-Four kinds of alert, and an icon that greets the card it arrives on.
+Four kinds of alert. The status icon plays as its card arrives and again on hover.
 
-The first page is a picture of every kind at once. The second is the same card doing its
-job: a button queues alerts one at a time, the icon plays as each arrives, and dismissing
-one frees the slot it held.
+The first page shows every kind at once. On the second, a button queues alerts into a
+deck, and dismissing one frees its slot.
 
 ## Run it
 
@@ -15,34 +14,28 @@ npm run dev
 
 ## Triggers
 
-| Trigger            | Watches                                  | On              |
-| ------------------ | ---------------------------------------- | --------------- |
-| `arrival-hover`    | its card arriving, and the pointer on it | the status icon |
-| `hover` (built-in) | the pointer on the dismiss button        | the cross       |
+| Trigger            | Watches                                    | On              |
+| ------------------ | ------------------------------------------ | --------------- |
+| `arrival-hover`    | its card coming into view, and the pointer | the status icon |
+| `hover` (built-in) | the pointer on the dismiss button          | the cross       |
 
 `arrival-hover` waits for the card's own entrance animation to finish before it plays, so
-the two read as one movement rather than two competing ones. It watches for the card
-becoming _visible_ rather than only for the element being created, which is why the icons
-play again when you page back to the gallery — a page unhidden is an arrival too.
+the two do not compete. It watches for the card becoming visible, not only for it being
+created, so paging back to the gallery plays the icons again.
 
-## The two pages
+## Notes
 
-Both are built from one template and one table of content, so a kind is described once.
-The dots at the bottom come from `shared/ui/pager.ts`, the same ones the checkbox list uses.
-
-The button queues four and then rests. Which kind comes next is decided by how many are
-already up, so however you empty the queue, the fourth is always the quiet grey one — the
-set ends on the calmest thing in it rather than the loudest.
-
-## Worth noticing
-
-The gallery's dismiss buttons answer the pointer and nothing else: the page is there to be
-looked at, and a card that could vanish from it would leave a hole with no way back.
-Dismissing lives on the second page, where it means something.
-
-Every kind is the same card. A variant changes two colours on it and one on the icon, and
-the icon's is an ordinary `color` declaration — `current-color` makes a Lordicon icon
-inherit like any other element, so it needs no rule of its own and no colour in a trigger.
+- Both pages are built from one `<template>` and one table of content, so a kind is
+  described once. A kind is `data-kind` on the card: two colours on the card and one on
+  the icon, which inherits `color` through `current-color`.
+- The deck is CSS driven by `--depth`, written by `restack()`. The newest card is in front;
+  the ones behind recede and fade. `translate` and `scale` are separate properties, so the
+  arrival can climb over 220ms while popping to full size in 60ms.
+- Dismissing sets `data-leaving`, restacks at once so the deck closes up under the card,
+  waits for the leaving transitions, then removes it.
+- The button queues four and then rests. Which kind comes next depends on which are
+  already up, so the order stays the same however you dismiss.
+- The dots are `shared/ui/pager.ts`.
 
 ---
 
