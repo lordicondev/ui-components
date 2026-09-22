@@ -1,0 +1,156 @@
+@import '@shared/styles/index.css';
+@import '@shared/ui/popover.css';
+@import '@shared/ui/menu.css';
+
+/* Near the top, because a palette hangs off a button in a toolbar rather than floating in the
+   middle of a page — and because it leaves the room below that `popovers()` measures. */
+.demo {
+    display: grid;
+    align-content: start;
+    justify-items: center;
+    min-height: 100dvh;
+    padding: var(--space-64) var(--gutter) var(--space-48);
+}
+
+/* The same pressed state the dropdown's ⋮ has, off the same attribute. */
+.opener {
+    padding: var(--space-8) var(--space-12);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    background: var(--surface);
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.opener:hover,
+.opener[aria-expanded='true'] {
+    background: var(--surface-sunken);
+}
+
+/* The groups sit a step further apart than the rows do, which is what makes them groups. */
+.menu {
+    --menu-width: 400px;
+    --menu-gap: var(--space-16);
+}
+
+.commands {
+    display: flex;
+    flex: none;
+    flex-direction: column;
+    gap: var(--menu-gap, var(--space-12));
+}
+
+/* #region empty */
+/*
+ * The three rules that make a search of nothing look like one.
+ *
+ * A group whose rows have all gone goes with them, heading and all — a name over an empty
+ * space is worse than no name. When every group has gone the list goes too, because an empty
+ * column still takes the panel's gap.
+ *
+ * Between them the panel's height simply follows what is in it, and nothing animates that: the
+ * height is the browser's again once the opening is over, and a box easing itself shorter
+ * would still be moving when the next letter landed.
+ */
+.menu__group:not(:has(.row:not([hidden]))),
+.commands:not(:has(.row:not([hidden]))) {
+    display: none;
+}
+
+.empty {
+    display: grid;
+    justify-items: center;
+    gap: var(--space-4);
+    margin: 0;
+    padding: var(--space-24) 0;
+    color: var(--ink);
+    font-size: var(--text-sm);
+}
+/* #endregion */
+
+.empty__mark {
+    display: block;
+    width: var(--icon-size-24);
+    height: var(--icon-size-24);
+    color: var(--ink-muted);
+}
+
+/*
+ * The search bar's field, copied — the fourth demo to hold one, and still not shared. A field
+ * has no mechanism in CSS the way a popover or a menu does; it is tokens and a `visibility`,
+ * and sharing it would mean sharing a look rather than a part. `fields()` is the part.
+ *
+ * One line differs, and the design is why: no border at rest. This one sits on a panel that
+ * already has an edge, so a second one inside it would be a box drawn round nothing. The
+ * border is there and transparent, which keeps the words from moving when focus lights it.
+ */
+.field {
+    display: flex;
+    align-items: center;
+    gap: var(--space-8);
+    flex: none;
+    padding: var(--space-8);
+    border: 1px solid transparent;
+    border-radius: var(--radius-md);
+    background: var(--surface-muted);
+}
+
+.field[data-focused='true'] {
+    border-color: var(--border-soft);
+}
+
+.field__input {
+    flex: 1;
+    min-width: 0;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--ink);
+    font-weight: 500;
+}
+
+/* A step smaller than what you type, which is what the design draws: the prompt is the
+   quietest thing in the panel, and the words you put there are the loudest. */
+.field__input::placeholder {
+    color: var(--ink-muted);
+    font-size: var(--text-sm);
+}
+
+/* The ring moved to the box, as in the search bar: base.css draws one on anything focused,
+   and here that would be a second outline inside the one the field already draws. */
+.field__input:focus-visible {
+    outline: none;
+}
+
+.field__input::-webkit-search-cancel-button {
+    appearance: none;
+}
+
+/* `visibility` rather than `hidden`: an invisible element still has a box, so the field does
+   not jump a button's width wider the moment you stop typing. */
+.field__clear {
+    display: grid;
+    place-items: center;
+    visibility: hidden;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--ink-muted);
+    cursor: pointer;
+}
+
+.field[data-clearable='true'] .field__clear {
+    visibility: visible;
+}
+
+.field__clear:hover {
+    color: var(--ink);
+}
+
+.field__mark,
+.field__cross {
+    flex: none;
+    width: var(--icon-size-24);
+    height: var(--icon-size-24);
+    color: var(--ink-muted);
+}

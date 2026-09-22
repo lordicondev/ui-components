@@ -13,6 +13,8 @@ Element.defineTrigger('clearable-attention', booleanAttention('data-clearable'))
 defineElement();
 // #endregion
 
+import { fields } from '@shared/ui/field.ts';
+
 // #region navigate
 const nav = document.querySelector<HTMLElement>('.nav')!;
 const items = [...nav.querySelectorAll<HTMLAnchorElement>('.nav__item')];
@@ -38,59 +40,9 @@ nav.addEventListener('click', (event) => {
 // #endregion
 
 /*
- * Everything below is the search bar demo, unchanged. It is copied rather than imported
- * because a demo is a page you can read start to finish — but it is the same field, the
- * same two attributes and the same two triggers, and the reasoning behind it is written up
- * over there rather than repeated here.
+ * The field is the search bar demo's, and now literally so: `fields()` writes the two
+ * attributes its icons are watching — the settle timer that waits for the keyboard, and the
+ * guard that does not call reaching for the clear button a departure. The reasoning behind
+ * all of it is written up over there rather than repeated here.
  */
-
-const field = document.querySelector<HTMLElement>('.field')!;
-const input = document.querySelector<HTMLInputElement>('.field__input')!;
-const clear = document.querySelector<HTMLButtonElement>('.field__clear')!;
-
-// #region settle
-/** How long the quiet has to last before the field offers to be emptied. */
-const SETTLED = 500;
-let settling: ReturnType<typeof setTimeout> | undefined;
-
-/** Offer to clear, or stop offering. The icon and the stylesheet both read this. */
-function offer(clearable: boolean): void {
-    clearTimeout(settling);
-    field.dataset.clearable = String(clearable);
-}
-
-input.addEventListener('input', () => {
-    clearTimeout(settling);
-
-    // Nothing left to clear, and no reason to wait half a second to say so.
-    if (!input.value) {
-        offer(false);
-        return;
-    }
-
-    // Once it is there it stays: a button that hopped away on the next keystroke would be
-    // gone exactly when you reached for it.
-    if (field.dataset.clearable === 'true') return;
-
-    settling = setTimeout(() => offer(true), SETTLED);
-});
-// #endregion
-
-// The whole field, not the input: there are two things inside it that can hold focus, and
-// a `focusout` whose `relatedTarget` is still inside the field is not a departure.
-field.addEventListener('focusin', () => (field.dataset.focused = 'true'));
-
-field.addEventListener('focusout', (event) => {
-    if (field.contains(event.relatedTarget as Node | null)) return;
-
-    field.dataset.focused = 'false';
-    if (input.value) offer(true);
-});
-
-// Clearing is not leaving. The cursor goes back where it was, and the magnifier does not
-// play again — `data-focused` never changed, and the icon is watching that, not us.
-clear.addEventListener('click', () => {
-    input.value = '';
-    offer(false);
-    input.focus();
-});
+fields();

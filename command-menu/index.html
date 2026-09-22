@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Command menu</title>
+        <link rel="stylesheet" href="./command-menu.css" />
+        <script type="module" src="./main.ts"></script>
+    </head>
+    <body>
+        <main class="demo">
+            <!-- The button and the shortcut open the same panel, and `aria-keyshortcuts` is
+                 how the second of them is announced rather than only drawn. -->
+            <button
+                class="opener"
+                type="button"
+                popovertarget="palette"
+                aria-keyshortcuts="Meta+K Control+K"
+            >
+                Open menu (⌘K)
+            </button>
+
+            <div class="menu popover" id="palette" popover>
+                <!-- #region field -->
+                <!-- The search bar's field, and one attribute more. `data-keys` puts the arrow
+                     keys on the input, so the cursor can move down the list while the caret
+                     stays where you are typing — which is the whole reason a palette needs
+                     `aria-activedescendant` rather than moving focus about. -->
+                <div class="field" data-focused="false" data-clearable="false" data-rise>
+                    <label class="visually-hidden" for="command">Command</label>
+                    <lord-icon
+                        class="field__mark current-color"
+                        src="icons/magnifier.json"
+                        trigger="focus-attention"
+                        target=".field"
+                        aria-hidden="true"
+                    ></lord-icon>
+                    <!-- prettier-ignore -->
+                    <input class="field__input" id="command" type="search" role="combobox"
+                           placeholder="Type a command or search..." autocomplete="off"
+                           aria-controls="commands" aria-expanded="true" data-keys />
+                    <!-- #skip -->
+                    <button class="field__clear" type="button" aria-label="Clear">
+                        <lord-icon
+                            class="field__cross current-color"
+                            src="icons/cross.json"
+                            trigger="clearable-attention"
+                            target=".field"
+                            state="in-reveal"
+                            aria-hidden="true"
+                        ></lord-icon>
+                    </button>
+                    <!-- #endskip -->
+                </div>
+                <!-- #endregion -->
+
+                <!-- #region palette -->
+                <div class="commands" id="commands" role="listbox" aria-label="Commands">
+                    <div class="menu__group" role="group" aria-labelledby="suggest-heading">
+                        <p class="menu__heading" data-rise id="suggest-heading">Suggestions</p>
+                        <div class="menu__list">
+                            <!-- prettier-ignore -->
+                            <div class="row" role="option" aria-selected="false" data-choose data-rise>
+                                <lord-icon
+                                    class="row__icon current-color"
+                                    src="icons/file-text.json"
+                                    trigger="active-attention"
+                                    target=".row"
+                                    aria-hidden="true"
+                                ></lord-icon>
+                                <span class="row__label" data-reveal>Create new document</span>
+                            </div>
+                            <!-- #skip -->
+                            <!-- prettier-ignore -->
+                            <div class="row" role="option" aria-selected="false" data-choose data-rise>
+                                <lord-icon
+                                    class="row__icon current-color"
+                                    src="icons/clock-arrow-rotate-left.json"
+                                    trigger="active-attention"
+                                    target=".row"
+                                    aria-hidden="true"
+                                ></lord-icon>
+                                <span class="row__label" data-reveal>Open recent file</span>
+                            </div>
+                            <!-- #endskip -->
+                        </div>
+                    </div>
+                    <!-- #skip -->
+
+                    <div class="menu__group" role="group" aria-labelledby="actions-heading">
+                        <p class="menu__heading" data-rise id="actions-heading">Actions</p>
+                        <div class="menu__list">
+                            <!-- prettier-ignore -->
+                            <div class="row" role="option" aria-selected="false" data-choose data-rise>
+                                <lord-icon
+                                    class="row__icon current-color"
+                                    src="icons/link.json"
+                                    trigger="active-attention"
+                                    target=".row"
+                                    aria-hidden="true"
+                                ></lord-icon>
+                                <span class="row__label" data-reveal>Copy link</span>
+                            </div>
+                            <!-- prettier-ignore -->
+                            <div class="row" role="option" aria-selected="false" data-choose data-rise>
+                                <lord-icon
+                                    class="row__icon current-color"
+                                    src="icons/copy.json"
+                                    trigger="active-attention"
+                                    target=".row"
+                                    aria-hidden="true"
+                                ></lord-icon>
+                                <span class="row__label" data-reveal>Duplicate</span>
+                            </div>
+                            <!-- prettier-ignore -->
+                            <div class="row" role="option" aria-selected="false" data-choose data-rise>
+                                <lord-icon
+                                    class="row__icon current-color"
+                                    src="icons/trash-bin.json"
+                                    trigger="active-attention"
+                                    target=".row"
+                                    aria-hidden="true"
+                                ></lord-icon>
+                                <span class="row__label" data-reveal>Delete</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="menu__group" role="group" aria-labelledby="navigate-heading">
+                        <p class="menu__heading" data-rise id="navigate-heading">Navigation</p>
+                        <div class="menu__list">
+                            <!-- prettier-ignore -->
+                            <div class="row" role="option" aria-selected="false" data-choose data-rise>
+                                <lord-icon
+                                    class="row__icon current-color"
+                                    src="icons/cog.json"
+                                    trigger="active-attention"
+                                    target=".row"
+                                    aria-hidden="true"
+                                ></lord-icon>
+                                <span class="row__label" data-reveal>Open settings</span>
+                            </div>
+                            <!-- prettier-ignore -->
+                            <div class="row" role="option" aria-selected="false" data-choose data-rise>
+                                <lord-icon
+                                    class="row__icon current-color"
+                                    src="icons/avatar-circle.json"
+                                    trigger="active-attention"
+                                    target=".row"
+                                    aria-hidden="true"
+                                ></lord-icon>
+                                <span class="row__label" data-reveal>View profile</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- #endskip -->
+                </div>
+                <!-- #endregion -->
+
+                <!-- #region empty -->
+                <!-- What is left when nothing matches. `hidden` takes it out of the layout and
+                     out of the accessibility tree at once; `data-shown` is a separate word for
+                     a separate reader, because the cross has to be told it is time to draw
+                     itself in and an element cannot animate its way out of `display: none`. -->
+                <p class="empty" data-shown="false" hidden>
+                    <lord-icon
+                        class="empty__mark current-color"
+                        src="icons/cross-circle.json"
+                        trigger="shown-attention"
+                        target=".empty"
+                        state="in-reveal"
+                        aria-hidden="true"
+                    ></lord-icon>
+                    No results found.
+                </p>
+                <!-- #endregion -->
+            </div>
+        </main>
+    </body>
+</html>

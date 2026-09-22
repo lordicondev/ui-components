@@ -13,9 +13,16 @@ import { BaseTrigger } from './base.ts';
  * clicking a link both moves the pointer onto it and focuses it, and only one of those is
  * news. The browser already decides which focus deserves to be seen; this asks it.
  *
- * Under reduced motion it does nothing at all, for the same reason `pressAttention` does
- * not: a hover state ends on the frame it started on, so there is no finished look to jump
- * to and leaving the icon alone is exactly right.
+ * A second arrival that lands while the icon is still playing is dropped rather than started
+ * again. This is where a hover and a press part company: `pressAttention` restarts, because a
+ * person pressing a button twice is asking twice and deserves an answer both times. Reaching a
+ * control is not asking for anything. A pointer crossing a list, or going back to the row it
+ * just left, would otherwise cut every animation off at its first frame and the list would
+ * flicker rather than answer.
+ *
+ * Under reduced motion it does nothing at all, for the same reason `pressAttention` does not:
+ * a hover state ends on the frame it started on, so there is no finished look to jump to and
+ * leaving the icon alone is exactly right.
  */
 export class HoverFocus extends BaseTrigger {
     onConnected(): void {
@@ -35,6 +42,9 @@ export class HoverFocus extends BaseTrigger {
 
     private play(): void {
         if (!this.player.ready || this.prefersReducedMotion) return;
+
+        // Still answering the last one. Starting over would only interrupt itself.
+        if (this.player.playing) return;
 
         this.player.playFromStart();
     }

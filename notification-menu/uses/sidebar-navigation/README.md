@@ -83,10 +83,11 @@ somewhere, and this one has nowhere to go.
 
 ## The search bar, borrowed whole
 
-The field is the [search bar](../search-bar/) demo, unchanged: the same two attributes, the
-same two triggers, the same half-second of quiet before the cross draws itself in. It is
-copied rather than imported because a demo is a page you can read start to finish — the
-reasoning behind it is written up over there.
+The field is the [search bar](../search-bar/) demo's, and now literally so: `fields()` writes
+the two attributes its icons are watching — the half-second of quiet before the cross draws
+itself in, and the guard that does not call reaching for the clear button a departure. It was
+copied here first and shared once a third demo wanted it; the reasoning behind it is written
+up over there.
 
 It is also the one thing in the sidebar that does not answer the pointer. A field is not
 somewhere you hover, it is somewhere you are, and the magnifier answers the cursor arriving

@@ -69,3 +69,21 @@ button {
     outline: 2px solid var(--accent);
     outline-offset: 2px;
 }
+
+/*
+ * Said, but not drawn. A field that a magnifier already explains still needs a label, and a
+ * radio group still needs a legend — the name has to be in the accessibility tree whether or
+ * not there is room for it on screen.
+ *
+ * Clipped rather than `display: none` or `visibility: hidden`, because both of those take the
+ * element out of the tree as well, and one of the things this hides is a live radio input that
+ * still has to be reachable by keyboard.
+ */
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+}

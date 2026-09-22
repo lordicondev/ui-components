@@ -34,19 +34,6 @@
     user-select: none;
 }
 
-/* The input stays in the page and keeps every native behaviour; it is only invisible.
-   Not display:none, which would take it out of the tab order and out of the form. The
-   legend is hidden the same way: the group needs a name, the picture does not. */
-.option__input,
-.options__legend {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    clip-path: inset(50%);
-    white-space: nowrap;
-}
-
 /* #region colour */
 /* Three steps, not two: resting, under the pointer, and chosen. Hovering shows the accent
    the row would take, so the answer arrives before the click does — the shape still says

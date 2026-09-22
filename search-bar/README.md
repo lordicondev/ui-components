@@ -27,6 +27,20 @@ Neither icon is holding a state. The magnifier ends its wobble exactly where it 
 the cross is simply there or not. That is what separates an attention from a morph: a morph
 has two looks to keep, and these have one each.
 
+## The timing lives in `shared/ui/`
+
+The two attributes the icons watch are written by `fields()`, and this demo's own script is
+two `defineTrigger` calls and one more line. That was not always true: this field was written
+here, copied into the sidebar, and pulled into `shared/ui/field.ts` when a third demo wanted
+it. The blocks below are that module, shown on this page because they are what there is to
+read about a search bar.
+
+What did not move is the markup or the stylesheet. A field has no mechanism in CSS the way a
+tooltip or a popover does — it is tokens and a `visibility` — so sharing it would have meant
+sharing a look, and a demo owns its own look. Four demos hold a copy of it now, and that is
+still the answer; the menu those demos hang it in _is_ shared, in `shared/ui/menu.css`,
+because a panel and a row are mechanisms rather than looks.
+
 ## Worth noticing
 
 The cross draws itself rather than appearing, and the reason is one attribute: `in-reveal`
@@ -59,6 +73,10 @@ know where focus is going.
 
 The cursor then goes back to the input, which is what a search box is for, and the magnifier
 does not play again: `data-focused` never changed, and the icon is watching that, not us.
+
+Clearing also raises an `input` event by hand, which this demo has no use for and the next one
+did. Setting `value` from script raises nothing, so anything the field feeds — a list being
+filtered, say — would never hear that it had been emptied.
 
 Both icons are the muted grey the placeholder is, which is not what the flat mockup looks
 like and is what the recording measures. They are marks in a field rather than the thing in

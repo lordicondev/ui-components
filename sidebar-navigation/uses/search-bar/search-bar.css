@@ -34,18 +34,6 @@
 }
 /* #endregion */
 
-/* Read aloud, never drawn. The placeholder says the same word but a placeholder is not a
-   name — it leaves the moment you type, and a control cannot be nameless halfway through
-   being used. */
-.field__label {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    clip-path: inset(50%);
-    white-space: nowrap;
-}
-
 .field__input {
     flex: 1;
     min-width: 0;

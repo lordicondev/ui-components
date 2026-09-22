@@ -11,7 +11,7 @@
         <main class="demo">
             <div class="menu-bar">
                 <fieldset class="menu-bar__tools">
-                    <legend class="menu-bar__legend">Tool</legend>
+                    <legend class="visually-hidden">Tool</legend>
 
                     <!-- #region markup -->
                     <!-- One tool. The radio is the real control and keeps every native
@@ -21,7 +21,13 @@
                          watch it. The name floating over the button is the same span that
                          gives the radio its name; tooltip.css draws it. -->
                     <label class="tool" data-selected="true">
-                        <input class="tool__input" type="radio" name="tool" value="brush" checked />
+                        <input
+                            class="tool__input visually-hidden"
+                            type="radio"
+                            name="tool"
+                            value="brush"
+                            checked
+                        />
 
                         <lord-icon
                             class="tool__mark current-color"
@@ -37,7 +43,12 @@
                     <!-- #endregion -->
 
                     <label class="tool" data-selected="false">
-                        <input class="tool__input" type="radio" name="tool" value="fill" />
+                        <input
+                            class="tool__input visually-hidden"
+                            type="radio"
+                            name="tool"
+                            value="fill"
+                        />
 
                         <lord-icon
                             class="tool__mark current-color"
@@ -52,7 +63,12 @@
                     </label>
 
                     <label class="tool" data-selected="false">
-                        <input class="tool__input" type="radio" name="tool" value="pencil" />
+                        <input
+                            class="tool__input visually-hidden"
+                            type="radio"
+                            name="tool"
+                            value="pencil"
+                        />
 
                         <lord-icon
                             class="tool__mark current-color"
@@ -67,7 +83,12 @@
                     </label>
 
                     <label class="tool" data-selected="false">
-                        <input class="tool__input" type="radio" name="tool" value="pen" />
+                        <input
+                            class="tool__input visually-hidden"
+                            type="radio"
+                            name="tool"
+                            value="pen"
+                        />
 
                         <lord-icon
                             class="tool__mark current-color"

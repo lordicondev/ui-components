@@ -55,13 +55,3 @@
     font-weight: 500;
     font-variant-numeric: tabular-nums;
 }
-
-/* Read aloud, never drawn: the number on its own would be a button called "24". */
-.star__unit {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    clip-path: inset(50%);
-    white-space: nowrap;
-}

@@ -109,9 +109,18 @@ that every demo built on this gets it without having to know.
 ### Arriving is script, leaving is not
 
 A height that unrolls has to be measured first, so the entrance is `element.animate()`: the
-panel from nothing to what it holds in 220ms on `cubic-bezier(0.3, 0, 0.2, 1)` — the same
+panel from a sliver to what it holds in 220ms on `cubic-bezier(0.3, 0, 0.2, 1)` — the same
 curve the accordion opens with, fitted to this recording at 225ms and landing on the same
 answer.
+
+A sliver rather than nothing, and that word is load-bearing. `box-sizing: border-box` is on
+everything in this project, and a box can never be shorter than its own padding and border —
+so `height: 0` on a panel with twelve pixels of padding still renders twenty-six tall.
+Animating from `0` spends the first quarter of the duration below that floor, where nothing
+moves, and what you see is a panel sitting still and then leaping into the fast part of the
+curve. Both ends of the keyframe are `offsetHeight` for that reason: the height the box
+actually renders at, collapsed and open. `scrollHeight` is the near miss at the far end — it
+leaves the border out, so the panel stops two pixels short and snaps the rest.
 
 Which raises the question of when to start it, and the obvious answer is wrong. `toggle` is
 queued as a task, so the browser has already shown the panel — at the full height its
@@ -129,8 +138,9 @@ holds both at their old value until the rest of the transition is over. The pane
 sinks for 160ms and then goes. Where that is not understood it goes at once, which is what a
 popover did before any of this existed.
 
-The two directions are not mirrored, and that is the one deliberate asymmetry: rows arrive
-from above, and the whole panel leaves downwards, back under the button it came from.
+The panel goes back the way it came — down, here, back under the bell — and so do its rows.
+Which way that is, the module works out for itself; see the input form, which is the same
+panel with nowhere below it to go.
 
 ## One cascade, not three animations that overlap
 
@@ -139,25 +149,34 @@ Anything marked `data-rise` inside the panel is a row. `popovers()` brings each 
 before the movement is, so a row is readable while it is still arriving, which is what the
 recording measures.
 
+A hover that lands while a row's icon is still playing is dropped rather than started again.
+A pointer crossing the list, or going back to the row it just left, would otherwise cut each
+animation off at its first frame — the list would flicker rather than answer. That lives in
+`hover-focus`, so the sidebar and the input form got it at the same time.
+
 Rows start 40ms apart, the first of them 60ms after the panel. Measured against the recording
 the five elements start at 52, 131, 140, 173 and 185ms after the panel does; a fixed stagger
 is within a frame of that at every point except one, and 40ms is as fine a grain as 24fps can
 honestly resolve.
 
 A title's words and a new row's tint have to start in that same cascade rather than in one of
-their own, so the module hands each row back with the delay it was given:
+their own. The words are the module's own business now — four demos wanted them, so `reveal`
+takes a selector and `popovers()` starts them from the instant it moved the row. The tint is
+this demo's alone, and for that the module hands each row back with the delay it gave it:
 
 ```ts
 popovers(document, {
+    reveal: '[data-reveal]',
+
     onRise(row, delay) {
-        revealText(title, { duration: 260, fadeShare: 0.45, delay });
         if (row.hasAttribute('data-unread')) unroll(row, delay + 90);
     },
 });
 ```
 
 The words are the accordion's `revealText`, faster: 260ms with almost half of it spent fading,
-against the accordion's 500ms and a third. A one-line title in a list is not a paragraph, and
+against the accordion's 500ms and a third. Those two numbers are in `popover.ts` now rather
+than here — they were measured on this recording, and the demos that came after took them. A one-line title in a list is not a paragraph, and
 the recording puts each word about 40ms behind the last with a 120ms fade of its own.
 
 ## A fill with a width
@@ -206,9 +225,9 @@ a state rather than a movement — the same argument the sidebar makes about its
 "More options" is. The rows are real buttons, so they can be tabbed to and the keyboard gets
 the icons too, and like the sidebar's links they have nowhere to go.
 
-The panel opens downwards and stays inside the screen, and that is all it does about
-placement. Flipping above the button when there is no room below it is a real need and a real
-amount of code, and no demo has wanted it yet.
+The panel opens downwards because there is room below the bell, which is a decision
+`popovers()` makes rather than one this demo states. What it still does not do is clamp: a
+panel taller than the room on the side it chose runs off the edge of the screen.
 
 ---
 

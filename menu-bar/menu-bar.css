@@ -30,19 +30,6 @@
     border: 0;
 }
 
-/* Read aloud, never drawn — and the same for the radios themselves, which stay in the
-   page with every native behaviour intact and are only invisible. Not display:none,
-   which would take them out of the tab order and out of the form. */
-.menu-bar__legend,
-.tool__input {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    clip-path: inset(50%);
-    white-space: nowrap;
-}
-
 /* Stretched rather than sized: the rule is as tall as the buttons beside it, whatever
    they turn out to be. */
 .menu-bar__rule {
