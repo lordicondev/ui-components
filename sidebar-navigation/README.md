@@ -12,15 +12,15 @@ npm run dev
 
 ## Triggers
 
-| Trigger               | Watches                      | On                                 |
-| --------------------- | ---------------------------- | ---------------------------------- |
-| `hover-focus`         | the pointer and the keyboard | the seven list icons, and the dots |
-| `focus-attention`     | `data-focused` on `.field`   | the magnifier                      |
-| `clearable-attention` | `data-clearable` on `.field` | the cross, state `in-reveal`       |
+| Trigger                  | Watches                        | On                                 |
+| ------------------------ | ------------------------------ | ---------------------------------- |
+| `hover`                  | the pointer and keyboard focus | the seven list icons, and the dots |
+| `follow(data-focused)`   | `data-focused` on `.field`     | the magnifier                      |
+| `follow(data-clearable)` | `data-clearable` on `.field`   | the cross, state `in-reveal`       |
 
-`hover-focus` is the built-in `hover` plus keyboard focus (`:focus-visible`), so tabbing
-down the list plays the icons too. `target=".nav__item"` makes the whole row the hover
-area, not just the icon.
+`hover` answers the pointer and keyboard focus (`:focus-visible`), so tabbing down the list
+plays the icons too. `target=".nav__item"` makes the whole row the hover area, not just the
+icon.
 
 ## Notes
 
@@ -39,5 +39,8 @@ area, not just the icon.
 
 ---
 
-Exported from [lordicondev/system-showcase](https://github.com/lordicondev/system-showcase/tree/main/demos/sidebar-navigation), where it sits
-alongside the other demos and the triggers it uses.
+Exported from [lordicondev/ui-components](https://github.com/lordicondev/ui-components/tree/main/demos/sidebar-navigation), where it sits
+alongside the other demos.
+
+The code is MIT. The icons are under the [Lordicon License Terms](https://lordicon.com/licenses);
+see [LICENSE.md](LICENSE.md).

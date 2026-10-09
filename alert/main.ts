@@ -1,12 +1,8 @@
-import { defineElement, Element } from '@lordicon/element';
-import { ArrivalHover } from '@shared/triggers/arrival-hover.ts';
+import { defineElement } from '@lordicon/element';
 
-// Triggers have to be registered before defineElement().
-Element.defineTrigger('arrival-hover', ArrivalHover);
-
+// Registers <lord-icon> with its built-in triggers. The markup says what each icon follows.
 defineElement();
 
-import '@shared/types/lordicon.d.ts';
 import { pager } from '@shared/ui/pager.ts';
 
 type Kind = 'info' | 'success' | 'warning' | 'error';
@@ -35,18 +31,14 @@ const CONTENT: Record<Kind, { icon: string; title: string; message: string }> = 
     },
 };
 
-/** The gallery page, top to bottom. */
-const GALLERY: Kind[] = ['info', 'success', 'warning', 'error'];
-
 /** What the button queues, in order. */
 const QUEUE: Kind[] = ['error', 'warning', 'success', 'info'];
 
 const template = document.querySelector<HTMLTemplateElement>('#alert-template')!;
-const gallery = document.querySelector<HTMLElement>('[data-list="gallery"]')!;
 const queue = document.querySelector<HTMLElement>('[data-list="queue"]')!;
 const add = document.querySelector<HTMLButtonElement>('[data-add]')!;
 
-/** One alert from the template. Both pages are made of these. */
+/** One alert from the template, for the deck. The gallery's cards are in the markup. */
 function build(kind: Kind): HTMLElement {
     const { icon, title, message } = CONTENT[kind];
     const alert = template.content.cloneNode(true) as DocumentFragment;
@@ -116,14 +108,6 @@ function settle(): void {
 }
 
 add.addEventListener('click', enqueue);
-
-// The gallery shows every kind at once. Its close buttons are not focusable: dismissing
-// belongs to the second page.
-for (const kind of GALLERY) {
-    const card = build(kind);
-    card.querySelector('.alert__close')!.setAttribute('tabindex', '-1');
-    gallery.append(card);
-}
 
 pager();
 settle();

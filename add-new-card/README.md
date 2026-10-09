@@ -12,9 +12,9 @@ npm run dev
 
 ## Triggers
 
-| Trigger            | Watches                  | On       |
-| ------------------ | ------------------------ | -------- |
-| `hover` (built-in) | the pointer, on the tile | the plus |
+| Trigger | Watches                  | On       |
+| ------- | ------------------------ | -------- |
+| `hover` | the pointer, on the tile | the plus |
 
 `target=".tile"` makes the whole tile the hover area. `state="hover-rotation"` turns the
 plus half a circle, which ends where it started.
@@ -27,5 +27,8 @@ plus half a circle, which ends where it started.
 
 ---
 
-Exported from [lordicondev/system-showcase](https://github.com/lordicondev/system-showcase/tree/main/demos/add-new-card), where it sits
-alongside the other demos and the triggers it uses.
+Exported from [lordicondev/ui-components](https://github.com/lordicondev/ui-components/tree/main/demos/add-new-card), where it sits
+alongside the other demos.
+
+The code is MIT. The icons are under the [Lordicon License Terms](https://lordicon.com/licenses);
+see [LICENSE.md](LICENSE.md).

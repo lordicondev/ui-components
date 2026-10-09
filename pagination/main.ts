@@ -1,17 +1,18 @@
-import { defineElement, Element } from '@lordicon/element';
-import { PressAttention } from '@shared/triggers/press-attention.ts';
-import { pager } from '@shared/ui/pager.ts';
+import { defineElement } from '@lordicon/element';
 
-// Triggers have to be registered before defineElement().
-Element.defineTrigger('press-attention', PressAttention);
-
+// Registers <lord-icon> with its built-in triggers. The markup says what each icon follows.
 defineElement();
+
+import { pager } from '@shared/ui/pager.ts';
 
 /**
  * Puts the frame over `page`. Both edges are written every time; the stylesheet reads
- * `data-going` to decide which edge moves first.
+ * `data-going` to decide which edge moves first. Also runs whenever the row changes size:
+ * when it is first shown, and when the web font arrives. A hidden row has no size and keeps
+ * its frame where it was, so the frame does not slide in when the row comes back.
  */
 function place(numbers: HTMLElement, page: HTMLElement, going: 'on' | 'back'): void {
+    if (!numbers.offsetWidth) return;
     const trailing = numbers.offsetWidth - page.offsetLeft - page.offsetWidth;
 
     numbers.dataset.going = going;
@@ -49,11 +50,10 @@ function paginate(row: HTMLElement): void {
         step.addEventListener('click', () => turn(at + Number(step.dataset.step)));
     });
 
-    place(numbers, pages[at], 'on');
+    new ResizeObserver(() => place(numbers, pages[at], 'on')).observe(numbers);
     limit(steps, at, pages.length);
 }
 
-// Every row is placed before pager() hides two of them: a hidden row has no widths.
 for (const row of document.querySelectorAll<HTMLElement>('.pages')) paginate(row);
 
 pager();

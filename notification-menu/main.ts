@@ -1,12 +1,6 @@
-import { defineElement, Element } from '@lordicon/element';
-import { HoverFocus } from '@shared/triggers/hover-focus.ts';
-import { raisedAttention } from '@shared/triggers/raised-attention.ts';
+import { defineElement } from '@lordicon/element';
 
-// Triggers have to be registered before defineElement().
-// The rows play on hover or focus. The bell plays when data-count goes up.
-Element.defineTrigger('hover-focus', HoverFocus);
-Element.defineTrigger('count-attention', raisedAttention('data-count'));
-
+// Registers <lord-icon> with its built-in triggers. The markup says what each icon follows.
 defineElement();
 
 import { prefersReducedMotion } from '@shared/motion/reduced-motion.ts';
@@ -61,7 +55,7 @@ function drop(): void {
 }
 
 // Opening the menu reads the notifications: the count goes to zero. The bell stays quiet,
-// because raisedAttention only plays when the count goes up.
+// because follow only plays when the count goes up.
 menu.addEventListener('toggle', (event) => {
     if ((event as ToggleEvent).newState === 'open') setCount(0);
 });

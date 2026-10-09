@@ -12,15 +12,14 @@ npm run dev
 
 ## Triggers
 
-| Trigger               | Watches                      | On                                         |
-| --------------------- | ---------------------------- | ------------------------------------------ |
-| `hover-focus`         | the pointer and the keyboard | the plus, the tools, every row icon        |
-| `focus-attention`     | `data-focused` on `.field`   | the magnifier in the project search        |
-| `clearable-attention` | `data-clearable` on `.field` | the cross in the search, state `in-reveal` |
+| Trigger                  | Watches                        | On                                         |
+| ------------------------ | ------------------------------ | ------------------------------------------ |
+| `hover`                  | the pointer and keyboard focus | the plus, the tools, every row icon        |
+| `follow(data-focused)`   | `data-focused` on `.field`     | the magnifier in the project search        |
+| `follow(data-clearable)` | `data-clearable` on `.field`   | the cross in the search, state `in-reveal` |
 
-`hover-focus` plays once when the pointer enters or keyboard focus lands; a hover mid-play
-is dropped. The two field triggers are `booleanAttention` on the attributes that
-`shared/ui/field.ts` writes.
+`hover` plays once when the pointer enters or keyboard focus lands; a hover mid-play is
+dropped. The two field icons follow the attributes that `shared/ui/field.ts` writes.
 
 ## Notes
 
@@ -42,5 +41,8 @@ is dropped. The two field triggers are `booleanAttention` on the attributes that
 
 ---
 
-Exported from [lordicondev/system-showcase](https://github.com/lordicondev/system-showcase/tree/main/demos/input-form), where it sits
-alongside the other demos and the triggers it uses.
+Exported from [lordicondev/ui-components](https://github.com/lordicondev/ui-components/tree/main/demos/input-form), where it sits
+alongside the other demos.
+
+The code is MIT. The icons are under the [Lordicon License Terms](https://lordicon.com/licenses);
+see [LICENSE.md](LICENSE.md).

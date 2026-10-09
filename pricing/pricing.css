@@ -1,0 +1,215 @@
+@import '@shared/styles/index.css';
+@import '@shared/ui/pager.css';
+
+/* The cards above, the dots below. */
+.demo {
+    display: grid;
+    grid-template-rows: 1fr auto;
+    justify-items: center;
+    align-items: center;
+    gap: var(--space-48);
+    min-height: 100dvh;
+    padding: var(--space-64) var(--gutter) var(--space-32);
+}
+
+/* Three columns from 920px, the narrowest at which no line wraps; one below that. The
+   middle column is a little wider. Cards in a row stretch to the tallest, so the buttons
+   line up. The row gap leaves room for the badge and the raised icon. */
+.plans {
+    display: grid;
+    grid-template-columns: minmax(0, 360px);
+    justify-content: center;
+    gap: var(--space-48) var(--space-16);
+    width: 100%;
+}
+
+@media (min-width: 920px) {
+    .plans {
+        grid-template-columns: 1fr 1.12fr 1fr;
+        max-width: 1160px;
+    }
+}
+
+.plan {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-32);
+    padding: var(--space-24) var(--space-24) var(--space-16);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    background: var(--surface);
+    box-shadow: 0 1px 1.5px rgb(0 0 0 / 4%);
+}
+
+.plan__head {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-12);
+}
+
+.plan__well {
+    display: flex;
+    padding: var(--space-12);
+    border-radius: var(--radius-pill);
+    background: var(--surface-muted);
+}
+
+.plan__name,
+.plan__price,
+.plan__lead {
+    margin: 0;
+    font-size: var(--text-base);
+    font-weight: 600;
+}
+
+.plan__price {
+    font-size: var(--text-xl);
+}
+
+.plan__features {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-12);
+}
+
+.features {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.feature {
+    display: flex;
+    align-items: center;
+    gap: var(--space-8);
+    color: var(--ink-soft);
+    font-size: var(--text-sm);
+}
+
+.feature__tick {
+    flex: none;
+    width: var(--icon-size-16);
+    height: var(--icon-size-16);
+    filter: var(--icon-filter);
+}
+
+/* Pushed to the bottom of a card that is taller than its content. */
+.plan__action {
+    margin-top: auto;
+    padding: 7px var(--space-12);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    background: var(--surface);
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.plan__action:hover {
+    background: var(--surface-muted);
+}
+
+.plan--featured {
+    border-color: var(--border-accent);
+}
+
+.plan--featured .plan__well {
+    background: var(--accent-surface);
+}
+
+.plan--featured .plan__action {
+    border-color: var(--accent);
+    background: var(--accent);
+    color: var(--ink-inverse);
+    box-shadow: var(--shadow-accent);
+}
+
+.plan--featured .plan__action:hover {
+    border-color: var(--accent-strong);
+    background: var(--accent-strong);
+}
+
+/* 12px above the card's border. */
+.plan__badge {
+    position: absolute;
+    top: -13px;
+    left: 50%;
+    translate: -50% 0;
+    margin: 0;
+    padding: var(--space-8) var(--space-12);
+    border-radius: var(--radius-sm);
+    background: var(--accent);
+    color: var(--ink-inverse);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    line-height: var(--leading-xs);
+}
+
+/* Grey icons, and accent ones on the featured card. A plan's icon takes color; its
+   placeholder and the SVG ticks, which are black, take the same colour as a filter. */
+.plan__icon {
+    color: var(--ink-soft);
+    --icon-filter: var(--filter-ink-soft);
+}
+
+.feature__tick {
+    --icon-filter: var(--filter-ink-subtle);
+}
+
+.plan--featured .plan__icon {
+    color: var(--accent);
+    --icon-filter: var(--filter-accent);
+}
+
+.plan--featured .feature__tick {
+    --icon-filter: var(--filter-accent-strong);
+}
+
+/* The icon sits on the top border, centred, over a centred name and price. */
+.plans--raised .plan {
+    padding-top: var(--space-48);
+    box-shadow: none;
+}
+
+.plans--raised .plan__head {
+    align-items: center;
+}
+
+.plans--raised .plan__name {
+    font-size: var(--text-lg);
+}
+
+.plans--raised .plan__well {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    translate: -50% calc(-50% - 1px);
+    border-radius: var(--radius-md);
+}
+
+/* No icon. Name and price share a row, with a rule under them. */
+.plans--compact .plan__head {
+    flex-direction: row;
+    justify-content: space-between;
+    padding-bottom: var(--space-24);
+    border-bottom: 1px solid var(--border);
+    /* 24px from the rule to the features, not the card's 32. */
+    margin-bottom: calc(var(--space-24) - var(--space-32));
+}
+
+.plans--compact .plan__name {
+    font-size: var(--text-lg);
+}
+
+.plans--compact .features {
+    gap: var(--space-12);
+}
+
+.plans--compact .feature__tick {
+    width: var(--icon-size-20);
+    height: var(--icon-size-20);
+}

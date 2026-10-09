@@ -12,12 +12,12 @@ npm run dev
 
 ## Triggers
 
-| Trigger         | Watches                   | On                             |
-| --------------- | ------------------------- | ------------------------------ |
-| `pressed-morph` | `aria-pressed` on `.star` | the star, state `morph-select` |
+| Trigger                | Watches                   | On                             |
+| ---------------------- | ------------------------- | ------------------------------ |
+| `follow(aria-pressed)` | `aria-pressed` on `.star` | the star, state `morph-select` |
 
-`booleanMorph('aria-pressed')`. The morph state's first half plays on press and the second
-half on un-press. A press that lands mid-animation reverses it in place.
+The morph state's first half plays on press and the second half on un-press. A press that
+lands mid-animation reverses it in place.
 
 ## Notes
 
@@ -33,5 +33,8 @@ half on un-press. A press that lands mid-animation reverses it in place.
 
 ---
 
-Exported from [lordicondev/system-showcase](https://github.com/lordicondev/system-showcase/tree/main/demos/star-button), where it sits
-alongside the other demos and the triggers it uses.
+Exported from [lordicondev/ui-components](https://github.com/lordicondev/ui-components/tree/main/demos/star-button), where it sits
+alongside the other demos.
+
+The code is MIT. The icons are under the [Lordicon License Terms](https://lordicon.com/licenses);
+see [LICENSE.md](LICENSE.md).

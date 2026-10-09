@@ -59,10 +59,12 @@
     width: var(--icon-size-24);
     height: var(--icon-size-24);
     color: var(--ink);
+    --icon-filter: var(--filter-ink);
 }
 
 [aria-expanded='true'] .item__chevron {
     color: var(--accent);
+    --icon-filter: var(--filter-accent);
 }
 
 /* The panel clips the paragraph sliding down inside it. Its padding is on the paragraph

@@ -92,11 +92,13 @@
     background: none;
     color: var(--ink);
     font-weight: 500;
+    --icon-filter: var(--filter-ink);
     cursor: pointer;
 }
 
 .step:disabled {
     color: var(--ink-subtle);
+    --icon-filter: var(--filter-ink-subtle);
     cursor: default;
 }
 

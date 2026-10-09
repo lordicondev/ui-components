@@ -25,32 +25,44 @@
                         aria-label="Add context"
                     >
                         <lord-icon
-                            class="plus__mark current-color"
+                            class="plus__mark"
+                            current-color
                             src="icons/plus.json"
-                            trigger="hover-focus"
+                            loading="interaction"
+                            trigger="hover"
                             target=".plus"
                             aria-hidden="true"
-                        ></lord-icon>
+                        >
+                            <img alt="" src="icons/plus.svg" />
+                        </lord-icon>
                     </button>
                     <div class="composer__say">
                         <button class="mic" type="button" aria-label="Dictate">
                             <lord-icon
-                                class="tool__mark current-color"
+                                class="tool__mark"
+                                current-color
                                 src="icons/microphone.json"
-                                trigger="hover-focus"
+                                loading="interaction"
+                                trigger="hover"
                                 target=".mic"
                                 aria-hidden="true"
-                            ></lord-icon>
+                            >
+                                <img alt="" src="icons/microphone.svg" />
+                            </lord-icon>
                         </button>
 
                         <button class="send" type="submit" aria-label="Send">
                             <lord-icon
-                                class="tool__mark current-color"
+                                class="tool__mark"
+                                current-color
                                 src="icons/arrow-up.json"
-                                trigger="hover-focus"
+                                loading="interaction"
+                                trigger="hover"
                                 target=".send"
                                 aria-hidden="true"
-                            ></lord-icon>
+                            >
+                                <img alt="" src="icons/arrow-up.svg" />
+                            </lord-icon>
                         </button>
                     </div>
                 </div>
@@ -63,9 +75,10 @@
                     <li class="menu__row" data-rise>
                         <button class="row" type="button" data-choose>
                             <lord-icon
-                                class="row__icon current-color"
+                                class="row__icon"
+                                current-color
                                 src="icons/link.json"
-                                trigger="hover-focus"
+                                trigger="hover"
                                 target=".row"
                                 aria-hidden="true"
                             ></lord-icon>
@@ -84,18 +97,20 @@
                             popovertargetaction="show"
                         >
                             <lord-icon
-                                class="row__icon current-color"
+                                class="row__icon"
+                                current-color
                                 src="icons/folder.json"
-                                trigger="hover-focus"
+                                trigger="hover"
                                 target=".row"
                                 aria-hidden="true"
                             ></lord-icon>
                             <span class="row__label" data-reveal>Add to project</span>
                             <!-- Both icons target the row, so both play on the same hover. -->
                             <lord-icon
-                                class="row__more current-color"
+                                class="row__more"
+                                current-color
                                 src="icons/chevron-right.json"
-                                trigger="hover-focus"
+                                trigger="hover"
                                 target=".row"
                                 aria-hidden="true"
                             ></lord-icon>
@@ -105,9 +120,10 @@
                     <li class="menu__row" data-rise>
                         <button class="row" type="button" data-choose>
                             <lord-icon
-                                class="row__icon current-color"
+                                class="row__icon"
+                                current-color
                                 src="icons/bulb.json"
-                                trigger="hover-focus"
+                                trigger="hover"
                                 target=".row"
                                 aria-hidden="true"
                             ></lord-icon>
@@ -118,9 +134,10 @@
                     <li class="menu__row" data-rise>
                         <button class="row" type="button" data-choose>
                             <lord-icon
-                                class="row__icon current-color"
+                                class="row__icon"
+                                current-color
                                 src="icons/plug.json"
-                                trigger="hover-focus"
+                                trigger="hover"
                                 target=".row"
                                 aria-hidden="true"
                             ></lord-icon>
@@ -134,9 +151,10 @@
                         <label class="visually-hidden" for="project">Search projects</label>
 
                         <lord-icon
-                            class="field__mark current-color"
+                            class="field__mark"
+                            current-color
                             src="icons/magnifier.json"
-                            trigger="focus-attention"
+                            trigger="follow(data-focused)"
                             target=".field"
                             aria-hidden="true"
                         ></lord-icon>
@@ -150,9 +168,10 @@
 
                         <button class="field__clear" type="button" aria-label="Clear search">
                             <lord-icon
-                                class="field__mark current-color"
+                                class="field__mark"
+                                current-color
                                 src="icons/cross.json"
-                                trigger="clearable-attention"
+                                trigger="follow(data-clearable)"
                                 target=".field"
                                 state="in-reveal"
                                 aria-hidden="true"
@@ -164,9 +183,10 @@
                         <li class="projects__row" data-rise>
                             <button class="row" type="button" data-choose>
                                 <lord-icon
-                                    class="row__icon current-color"
+                                    class="row__icon"
+                                    current-color
                                     src="icons/folder.json"
-                                    trigger="hover-focus"
+                                    trigger="hover"
                                     target=".row"
                                     aria-hidden="true"
                                 ></lord-icon>
@@ -177,9 +197,10 @@
                         <li class="projects__row" data-rise>
                             <button class="row" type="button" data-choose>
                                 <lord-icon
-                                    class="row__icon current-color"
+                                    class="row__icon"
+                                    current-color
                                     src="icons/folder.json"
-                                    trigger="hover-focus"
+                                    trigger="hover"
                                     target=".row"
                                     aria-hidden="true"
                                 ></lord-icon>
@@ -190,9 +211,10 @@
                         <li class="projects__row" data-rise>
                             <button class="row" type="button" data-choose>
                                 <lord-icon
-                                    class="row__icon current-color"
+                                    class="row__icon"
+                                    current-color
                                     src="icons/folder.json"
-                                    trigger="hover-focus"
+                                    trigger="hover"
                                     target=".row"
                                     aria-hidden="true"
                                 ></lord-icon>

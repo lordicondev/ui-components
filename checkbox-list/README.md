@@ -14,12 +14,11 @@ npm run dev
 
 ## Triggers
 
-| Trigger         | Watches                                           | On       |
-| --------------- | ------------------------------------------------- | -------- |
-| `checked-morph` | `data-checked` on `.option`, via `data-attribute` | the tick |
+| Trigger                | Watches                     | On       |
+| ---------------------- | --------------------------- | -------- |
+| `follow(data-checked)` | `data-checked` on `.option` | the tick |
 
-`booleanMorph('aria-checked')`, pointed at `data-checked` with `data-attribute` on the
-icon.
+The tick's morph plays forwards on check and back on uncheck.
 
 ## Notes
 
@@ -37,5 +36,8 @@ icon.
 
 ---
 
-Exported from [lordicondev/system-showcase](https://github.com/lordicondev/system-showcase/tree/main/demos/checkbox-list), where it sits
-alongside the other demos and the triggers it uses.
+Exported from [lordicondev/ui-components](https://github.com/lordicondev/ui-components/tree/main/demos/checkbox-list), where it sits
+alongside the other demos.
+
+The code is MIT. The icons are under the [Lordicon License Terms](https://lordicon.com/licenses);
+see [LICENSE.md](LICENSE.md).

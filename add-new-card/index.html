@@ -14,13 +14,17 @@
             <button class="tile" type="button">
                 <span class="tile__puck">
                     <lord-icon
-                        class="tile__mark current-color"
+                        class="tile__mark"
+                        current-color
                         src="icons/plus.json"
+                        loading="interaction"
                         trigger="hover"
                         target=".tile"
                         state="hover-rotation"
                         aria-hidden="true"
-                    ></lord-icon>
+                    >
+                        <img alt="" src="icons/plus.svg" />
+                    </lord-icon>
                 </span>
 
                 <span class="tile__label">Add new card</span>

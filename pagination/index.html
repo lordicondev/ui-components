@@ -19,13 +19,17 @@
                     aria-label="Previous page"
                 >
                     <lord-icon
-                        class="step__mark current-color"
+                        class="step__mark"
+                        current-color
                         src="icons/arrow-left.json"
-                        trigger="press-attention"
+                        loading="interaction"
+                        trigger="click"
                         target=".step"
                         state="hover-slide"
                         aria-hidden="true"
-                    ></lord-icon>
+                    >
+                        <img alt="" src="icons/arrow-left.svg" />
+                    </lord-icon>
                 </button>
 
                 <!-- The frame is one element for the row, so it can travel between pages.
@@ -46,22 +50,27 @@
                     aria-label="Next page"
                 >
                     <lord-icon
-                        class="step__mark current-color"
+                        class="step__mark"
+                        current-color
                         src="icons/arrow-left.json"
-                        trigger="press-attention"
+                        loading="interaction"
+                        trigger="click"
                         target=".step"
                         state="hover-slide"
                         aria-hidden="true"
-                    ></lord-icon>
+                    >
+                        <img alt="" src="icons/arrow-left.svg" />
+                    </lord-icon>
                 </button>
             </nav>
 
-            <nav class="pages" id="style-labelled" data-page aria-label="Pagination">
+            <nav class="pages" id="style-labelled" data-page hidden aria-label="Pagination">
                 <button class="step step--labelled" type="button" data-step="-1">
                     <lord-icon
-                        class="step__mark current-color"
+                        class="step__mark"
+                        current-color
                         src="icons/chevron-left.json"
-                        trigger="press-attention"
+                        trigger="click"
                         target=".step"
                         aria-hidden="true"
                     ></lord-icon>
@@ -80,16 +89,17 @@
                 <button class="step step--labelled step--next" type="button" data-step="1">
                     Next
                     <lord-icon
-                        class="step__mark current-color"
+                        class="step__mark"
+                        current-color
                         src="icons/chevron-left.json"
-                        trigger="press-attention"
+                        trigger="click"
                         target=".step"
                         aria-hidden="true"
                     ></lord-icon>
                 </button>
             </nav>
 
-            <nav class="pages pages--bare" id="style-bare" data-page aria-label="Pagination">
+            <nav class="pages pages--bare" id="style-bare" data-page hidden aria-label="Pagination">
                 <button
                     class="step step--bare"
                     type="button"
@@ -97,9 +107,10 @@
                     aria-label="Previous page"
                 >
                     <lord-icon
-                        class="step__mark current-color"
+                        class="step__mark"
+                        current-color
                         src="icons/chevron-left.json"
-                        trigger="press-attention"
+                        trigger="click"
                         target=".step"
                         aria-hidden="true"
                     ></lord-icon>
@@ -121,9 +132,10 @@
                     aria-label="Next page"
                 >
                     <lord-icon
-                        class="step__mark current-color"
+                        class="step__mark"
+                        current-color
                         src="icons/chevron-left.json"
-                        trigger="press-attention"
+                        trigger="click"
                         target=".step"
                         aria-hidden="true"
                     ></lord-icon>

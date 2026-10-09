@@ -13,13 +13,12 @@ npm run dev
 
 ## Triggers
 
-| Trigger           | Watches                    | On                            |
-| ----------------- | -------------------------- | ----------------------------- |
-| `selected-morph`  | `data-selected` on `.tool` | the tool, its `morph-*` state |
-| `press-attention` | a `click` on `.action`     | the button, its default state |
+| Trigger                 | Watches                    | On                            |
+| ----------------------- | -------------------------- | ----------------------------- |
+| `follow(data-selected)` | `data-selected` on `.tool` | the tool, its `morph-*` state |
+| `click`                 | a `click` on `.action`     | the button, its default state |
 
-`selected-morph` is `booleanMorph('data-selected')`. `press-attention` plays the icon on
-every click, Enter and Space included.
+`click` plays the icon on every click, Enter and Space included.
 
 ## Notes
 
@@ -27,7 +26,9 @@ every click, Enter and Space included.
   choice, `change` fires for clicks and keys alike.
 - A radio's `checked` is a property, and a MutationObserver cannot watch a property, so
   `follow()` copies it onto each label as `data-selected`. The icon and the stylesheet read
-  that. Changing tool moves two icons at once, each watching its own label.
+  that. Changing tool moves two icons at once, each watching its own label. That is why
+  the tools load at once, while the actions wait for the first pointer, click or focus
+  (`loading="interaction"`): the tool you leave changes without being touched.
 - The brush uses `state="morph-change"`, the other tools `morph-select`. The names come
   from the icons; the markup is where they are set.
 - Two icon files were hand-edited to add the `:0.5` ratio to their morph marker, which the
@@ -40,5 +41,8 @@ every click, Enter and Space included.
 
 ---
 
-Exported from [lordicondev/system-showcase](https://github.com/lordicondev/system-showcase/tree/main/demos/menu-bar), where it sits
-alongside the other demos and the triggers it uses.
+Exported from [lordicondev/ui-components](https://github.com/lordicondev/ui-components/tree/main/demos/menu-bar), where it sits
+alongside the other demos.
+
+The code is MIT. The icons are under the [Lordicon License Terms](https://lordicon.com/licenses);
+see [LICENSE.md](LICENSE.md).

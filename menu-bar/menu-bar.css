@@ -42,6 +42,7 @@
     --tool-line: var(--border);
     --tool-fill: var(--surface);
     --tool-mark: var(--ink);
+    --icon-filter: var(--filter-ink);
 }
 
 .tool:hover {
@@ -53,6 +54,7 @@
     --tool-line: var(--accent-surface);
     --tool-fill: var(--accent-surface);
     --tool-mark: var(--accent);
+    --icon-filter: var(--filter-accent);
 }
 
 .tool,
@@ -90,6 +92,7 @@
 
 .action__mark {
     color: var(--ink);
+    --icon-filter: var(--filter-ink);
 }
 
 /* The radio is invisible, so its focus ring goes on the label. */

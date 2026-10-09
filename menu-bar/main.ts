@@ -1,12 +1,6 @@
-import { defineElement, Element } from '@lordicon/element';
-import { booleanMorph } from '@shared/triggers/boolean-morph.ts';
-import { PressAttention } from '@shared/triggers/press-attention.ts';
+import { defineElement } from '@lordicon/element';
 
-// Triggers have to be registered before defineElement().
-// A tool is a state, so its icon morphs. An action is over at once, so its icon plays once.
-Element.defineTrigger('selected-morph', booleanMorph('data-selected'));
-Element.defineTrigger('press-attention', PressAttention);
-
+// Registers <lord-icon> with its built-in triggers. The markup says what each icon follows.
 defineElement();
 
 import { tooltips } from '@shared/ui/tooltip.ts';

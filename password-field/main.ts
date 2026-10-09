@@ -1,16 +1,8 @@
-import { defineElement, Element } from '@lordicon/element';
-import { booleanAttention } from '@shared/triggers/boolean-attention.ts';
-import { raisedAttention } from '@shared/triggers/raised-attention.ts';
-import { booleanMorph } from '@shared/triggers/boolean-morph.ts';
+import { defineElement } from '@lordicon/element';
 
-// Triggers have to be registered before defineElement().
-Element.defineTrigger('pressed-morph', booleanMorph('aria-pressed'));
-Element.defineTrigger('focus-attention', booleanAttention('data-focused'));
-Element.defineTrigger('raised-attention', raisedAttention('data-raised'));
-
+// Registers <lord-icon> with its built-in triggers. The markup says what each icon follows.
 defineElement();
 
-import '@shared/types/lordicon.d.ts';
 import { prefersReducedMotion } from '@shared/motion/reduced-motion.ts';
 import { revealText, settleText } from '@shared/motion/text-reveal.ts';
 

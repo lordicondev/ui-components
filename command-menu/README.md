@@ -13,14 +13,15 @@ npm run dev
 
 ## Triggers
 
-| Trigger               | Watches                      | On                            |
-| --------------------- | ---------------------------- | ----------------------------- |
-| `active-attention`    | `data-active` on `.row`      | all seven row icons           |
-| `focus-attention`     | `data-focused` on `.field`   | the magnifier                 |
-| `clearable-attention` | `data-clearable` on `.field` | the cross, state `in-reveal`  |
-| `shown-attention`     | `data-shown` on `.empty`     | the cross-circle, `in-reveal` |
+| Trigger                  | Watches                      | On                            |
+| ------------------------ | ---------------------------- | ----------------------------- |
+| `follow(data-active)`    | `data-active` on `.row`      | all seven row icons           |
+| `follow(data-focused)`   | `data-focused` on `.field`   | the magnifier                 |
+| `follow(data-clearable)` | `data-clearable` on `.field` | the cross, state `in-reveal`  |
+| `follow(data-shown)`     | `data-shown` on `.empty`     | the cross-circle, `in-reveal` |
 
-All four are `booleanAttention`, one name per attribute.
+None of these icons has a morph state, so each plays once every time its attribute turns
+true.
 
 ## Notes
 
@@ -42,5 +43,8 @@ All four are `booleanAttention`, one name per attribute.
 
 ---
 
-Exported from [lordicondev/system-showcase](https://github.com/lordicondev/system-showcase/tree/main/demos/command-menu), where it sits
-alongside the other demos and the triggers it uses.
+Exported from [lordicondev/ui-components](https://github.com/lordicondev/ui-components/tree/main/demos/command-menu), where it sits
+alongside the other demos.
+
+The code is MIT. The icons are under the [Lordicon License Terms](https://lordicon.com/licenses);
+see [LICENSE.md](LICENSE.md).

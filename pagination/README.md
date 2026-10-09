@@ -13,10 +13,10 @@ npm run dev
 
 ## Triggers
 
-| Trigger           | Watches              | On                             |
-| ----------------- | -------------------- | ------------------------------ |
-| `press-attention` | a `click` on `.step` | the arrow, state `hover-slide` |
-| `press-attention` | a `click` on `.step` | the chevron, its default state |
+| Trigger | Watches              | On                             |
+| ------- | -------------------- | ------------------------------ |
+| `click` | a `click` on `.step` | the arrow, state `hover-slide` |
+| `click` | a `click` on `.step` | the chevron, its default state |
 
 Plays the icon once per press. Which animation plays is the `state` attribute on the icon:
 the arrow has a `hover-slide` state, the chevron uses its default.
@@ -39,5 +39,8 @@ the arrow has a `hover-slide` state, the chevron uses its default.
 
 ---
 
-Exported from [lordicondev/system-showcase](https://github.com/lordicondev/system-showcase/tree/main/demos/pagination), where it sits
-alongside the other demos and the triggers it uses.
+Exported from [lordicondev/ui-components](https://github.com/lordicondev/ui-components/tree/main/demos/pagination), where it sits
+alongside the other demos.
+
+The code is MIT. The icons are under the [Lordicon License Terms](https://lordicon.com/licenses);
+see [LICENSE.md](LICENSE.md).

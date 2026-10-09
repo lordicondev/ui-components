@@ -14,13 +14,17 @@
                  makes the button read as "24 stars". -->
             <button class="star" type="button" aria-pressed="false">
                 <lord-icon
-                    class="star__mark current-color"
+                    class="star__mark"
+                    current-color
                     src="icons/star.json"
-                    trigger="pressed-morph"
+                    loading="interaction"
+                    trigger="follow(aria-pressed)"
                     target=".star"
                     state="morph-select"
                     aria-hidden="true"
-                ></lord-icon>
+                >
+                    <img alt="" src="icons/star.svg" />
+                </lord-icon>
 
                 <span class="star__count">24</span>
                 <span class="visually-hidden">stars</span>

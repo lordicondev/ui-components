@@ -75,6 +75,7 @@
 /* A kind is two colours on the card and one on the icon, which inherits `color`. */
 .alert__icon {
     color: var(--ink-soft);
+    --icon-filter: var(--filter-ink-soft);
 }
 
 .alert[data-kind='success'] {
@@ -84,6 +85,7 @@
 
 .alert[data-kind='success'] .alert__icon {
     color: var(--success);
+    --icon-filter: var(--filter-success);
 }
 
 .alert[data-kind='warning'] {
@@ -93,6 +95,7 @@
 
 .alert[data-kind='warning'] .alert__icon {
     color: var(--warning);
+    --icon-filter: var(--filter-warning);
 }
 
 .alert[data-kind='error'] {
@@ -102,6 +105,7 @@
 
 .alert[data-kind='error'] .alert__icon {
     color: var(--danger);
+    --icon-filter: var(--filter-danger);
 }
 
 .alert__body {
@@ -131,6 +135,7 @@
     border-radius: var(--radius-md);
     background: none;
     color: var(--ink-soft);
+    --icon-filter: var(--filter-ink-soft);
     cursor: pointer;
     place-items: center;
 }

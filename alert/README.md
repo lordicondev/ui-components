@@ -14,20 +14,21 @@ npm run dev
 
 ## Triggers
 
-| Trigger            | Watches                                    | On              |
-| ------------------ | ------------------------------------------ | --------------- |
-| `arrival-hover`    | its card coming into view, and the pointer | the status icon |
-| `hover` (built-in) | the pointer on the dismiss button          | the cross       |
+| Trigger                                           | Watches                             | On              |
+| ------------------------------------------------- | ----------------------------------- | --------------- |
+| `intro="hover-pinch, after=.alert"`, then `hover` | its card arriving, then the pointer | the status icon |
+| `hover`                                           | the pointer on the dismiss button   | the cross       |
 
-`arrival-hover` waits for the card's own entrance animation to finish before it plays, so
-the two do not compete. It watches for the card becoming visible, not only for it being
-created, so paging back to the gallery plays the icons again.
+`intro` plays the icon once, when its card comes into view. `after=.alert` holds it until
+the card's own entrance animation has finished, so the two do not compete. After that,
+`hover` plays it again whenever the pointer enters the card.
 
 ## Notes
 
-- Both pages are built from one `<template>` and one table of content, so a kind is
-  described once. A kind is `data-kind` on the card: two colours on the card and one on
-  the icon, which inherits `color` through `current-color`.
+- The first page is plain markup, so it shows before the script runs; each icon holds an
+  SVG of its first frame until it is ready. The deck's cards are cloned from a
+  `<template>`. A kind is `data-kind` on the card: two colours on the card and one on the
+  icon, which inherits `color` through `current-color`.
 - The deck is CSS driven by `--depth`, written by `restack()`. The newest card is in front;
   the ones behind recede and fade. `translate` and `scale` are separate properties, so the
   arrival can climb over 220ms while popping to full size in 60ms.
@@ -39,5 +40,8 @@ created, so paging back to the gallery plays the icons again.
 
 ---
 
-Exported from [lordicondev/system-showcase](https://github.com/lordicondev/system-showcase/tree/main/demos/alert), where it sits
-alongside the other demos and the triggers it uses.
+Exported from [lordicondev/ui-components](https://github.com/lordicondev/ui-components/tree/main/demos/alert), where it sits
+alongside the other demos.
+
+The code is MIT. The icons are under the [Lordicon License Terms](https://lordicon.com/licenses);
+see [LICENSE.md](LICENSE.md).

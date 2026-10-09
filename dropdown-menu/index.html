@@ -12,12 +12,16 @@
             <!-- popovertarget opens the menu. popovers() decides which way it opens. -->
             <button class="dots" type="button" popovertarget="edit" aria-label="More options">
                 <lord-icon
-                    class="dots__mark current-color"
+                    class="dots__mark"
+                    current-color
                     src="icons/three-dots-vertical.json"
-                    trigger="hover-focus"
+                    loading="interaction"
+                    trigger="hover"
                     target=".dots"
                     aria-hidden="true"
-                ></lord-icon>
+                >
+                    <img alt="" src="icons/three-dots-vertical.svg" />
+                </lord-icon>
             </button>
 
             <!-- role="menu" and tabindex="-1" on the rows: one tab stop. data-keys marks the
@@ -30,9 +34,10 @@
                         <!-- prettier-ignore -->
                         <button class="row" type="button" role="menuitem" tabindex="-1" data-choose data-rise>
                             <lord-icon
-                                class="row__icon current-color"
+                                class="row__icon"
+                                current-color
                                 src="icons/pencil-line.json"
-                                trigger="active-attention"
+                                trigger="follow(data-active)"
                                 target=".row"
                                 aria-hidden="true"
                             ></lord-icon>
@@ -41,9 +46,10 @@
                         <!-- prettier-ignore -->
                         <button class="row" type="button" role="menuitem" tabindex="-1" data-choose data-rise>
                             <lord-icon
-                                class="row__icon current-color"
+                                class="row__icon"
+                                current-color
                                 src="icons/copy.json"
-                                trigger="active-attention"
+                                trigger="follow(data-active)"
                                 target=".row"
                                 aria-hidden="true"
                             ></lord-icon>
@@ -58,9 +64,10 @@
                         <!-- prettier-ignore -->
                         <button class="row" type="button" role="menuitem" tabindex="-1" data-choose data-rise>
                             <lord-icon
-                                class="row__icon current-color"
+                                class="row__icon"
+                                current-color
                                 src="icons/link.json"
-                                trigger="active-attention"
+                                trigger="follow(data-active)"
                                 target=".row"
                                 aria-hidden="true"
                             ></lord-icon>
@@ -69,9 +76,10 @@
                         <!-- prettier-ignore -->
                         <button class="row" type="button" role="menuitem" tabindex="-1" data-choose data-rise>
                             <lord-icon
-                                class="row__icon current-color"
+                                class="row__icon"
+                                current-color
                                 src="icons/avatars-group.json"
-                                trigger="active-attention"
+                                trigger="follow(data-active)"
                                 target=".row"
                                 aria-hidden="true"
                             ></lord-icon>
@@ -85,9 +93,10 @@
                     <!-- prettier-ignore -->
                     <button class="row" type="button" role="menuitem" tabindex="-1" data-choose data-rise data-danger>
                         <lord-icon
-                            class="row__icon current-color"
+                            class="row__icon"
+                            current-color
                             src="icons/trash-bin.json"
-                            trigger="active-attention"
+                            trigger="follow(data-active)"
                             target=".row"
                             aria-hidden="true"
                         ></lord-icon>

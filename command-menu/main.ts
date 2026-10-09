@@ -1,14 +1,6 @@
-import { defineElement, Element } from '@lordicon/element';
-import { booleanAttention } from '@shared/triggers/boolean-attention.ts';
+import { defineElement } from '@lordicon/element';
 
-// Triggers have to be registered before defineElement().
-// One trigger under four names, one per attribute. data-active is written by the arrow
-// keys and by the pointer alike, so a row's icon plays for either.
-Element.defineTrigger('active-attention', booleanAttention('data-active'));
-Element.defineTrigger('focus-attention', booleanAttention('data-focused'));
-Element.defineTrigger('clearable-attention', booleanAttention('data-clearable'));
-Element.defineTrigger('shown-attention', booleanAttention('data-shown'));
-
+// Registers <lord-icon> with its built-in triggers. The markup says what each icon follows.
 defineElement();
 
 import { fields } from '@shared/ui/field.ts';

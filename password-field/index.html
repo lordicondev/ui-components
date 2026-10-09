@@ -17,12 +17,16 @@
 
                     <div class="field__control">
                         <lord-icon
-                            class="field__icon field__lock current-color"
+                            class="field__icon field__lock"
+                            current-color
                             src="icons/lock.json"
-                            trigger="focus-attention"
+                            loading="interaction"
+                            trigger="follow(data-focused)"
                             target=".field"
                             aria-hidden="true"
-                        ></lord-icon>
+                        >
+                            <img alt="" src="icons/lock.svg" />
+                        </lord-icon>
 
                         <input
                             class="field__input"
@@ -42,13 +46,17 @@
                         >
                             <!-- state picks the morph: first half to reveal, second to hide. -->
                             <lord-icon
-                                class="field__icon current-color"
+                                class="field__icon"
+                                current-color
                                 src="icons/eye.json"
-                                trigger="pressed-morph"
+                                loading="interaction"
+                                trigger="follow(aria-pressed)"
                                 target=".field__toggle"
                                 state="morph-close"
                                 aria-hidden="true"
-                            ></lord-icon>
+                            >
+                                <img alt="" src="icons/eye.svg" />
+                            </lord-icon>
                         </button>
                     </div>
 
@@ -56,9 +64,10 @@
                         <!-- data-raised counts how many times the message has been shown:
                              the icon draws itself in on the first, and nudges on a repeat. -->
                         <lord-icon
-                            class="field__error-icon current-color"
+                            class="field__error-icon"
+                            current-color
                             src="icons/warning-circle.json"
-                            trigger="raised-attention"
+                            trigger="follow(data-raised)"
                             target=".field__error"
                             state="in-reveal"
                             aria-hidden="true"

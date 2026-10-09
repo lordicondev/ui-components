@@ -1,12 +1,6 @@
-import { defineElement, Element } from '@lordicon/element';
-import { booleanAttention } from '@shared/triggers/boolean-attention.ts';
-import { stageCycle } from '@shared/triggers/stage-cycle.ts';
+import { defineElement } from '@lordicon/element';
 
-// Triggers have to be registered before defineElement().
-// The button's icon loops while busy and confirms when done. The toast's tick plays once.
-Element.defineTrigger('stage-cycle', stageCycle('data-stage'));
-Element.defineTrigger('shown-attention', booleanAttention('data-shown'));
-
+// Registers <lord-icon> with its built-in triggers. The markup says what each icon follows.
 defineElement();
 
 import { pager } from '@shared/ui/pager.ts';

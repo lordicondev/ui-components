@@ -12,13 +12,12 @@ npm run dev
 
 ## Triggers
 
-| Trigger          | Watches                             | On                                   |
-| ---------------- | ----------------------------------- | ------------------------------------ |
-| `expanded-morph` | `aria-expanded` on `.item__trigger` | the chevron, state `morph-direction` |
+| Trigger                 | Watches                             | On                                   |
+| ----------------------- | ----------------------------------- | ------------------------------------ |
+| `follow(aria-expanded)` | `aria-expanded` on `.item__trigger` | the chevron, state `morph-direction` |
 
-`booleanMorph('aria-expanded')`. The icon's `morph-direction` state plays forwards to open
-and backwards to close, so there is no CSS rotation in the demo. The stylesheet only sets
-the chevron's colour.
+The icon's `morph-direction` state plays forwards to open and backwards to close, so there
+is no CSS rotation in the demo. The stylesheet only sets the chevron's colour.
 
 ## Notes
 
@@ -36,5 +35,8 @@ the chevron's colour.
 
 ---
 
-Exported from [lordicondev/system-showcase](https://github.com/lordicondev/system-showcase/tree/main/demos/accordion), where it sits
-alongside the other demos and the triggers it uses.
+Exported from [lordicondev/ui-components](https://github.com/lordicondev/ui-components/tree/main/demos/accordion), where it sits
+alongside the other demos.
+
+The code is MIT. The icons are under the [Lordicon License Terms](https://lordicon.com/licenses);
+see [LICENSE.md](LICENSE.md).

@@ -1,9 +1,6 @@
-import { defineElement, Element } from '@lordicon/element';
-import { booleanMorph } from '@shared/triggers/boolean-morph.ts';
+import { defineElement } from '@lordicon/element';
 
-// Triggers have to be registered before defineElement().
-Element.defineTrigger('pressed-morph', booleanMorph('aria-pressed'));
-
+// Registers <lord-icon> with its built-in triggers. The markup says what each icon follows.
 defineElement();
 
 const button = document.querySelector<HTMLButtonElement>('.star')!;

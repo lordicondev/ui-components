@@ -12,13 +12,13 @@ npm run dev
 
 ## Triggers
 
-| Trigger         | Watches                       | On                              |
-| --------------- | ----------------------------- | ------------------------------- |
-| `pressed-morph` | `aria-pressed` on `.cart`     | the basket, state `morph-add`   |
-| `pressed-morph` | `aria-pressed` on `.favorite` | the heart, state `morph-select` |
+| Trigger                | Watches                       | On                              |
+| ---------------------- | ----------------------------- | ------------------------------- |
+| `follow(aria-pressed)` | `aria-pressed` on `.cart`     | the basket, state `morph-add`   |
+| `follow(aria-pressed)` | `aria-pressed` on `.favorite` | the heart, state `morph-select` |
 
-One registration of `booleanMorph('aria-pressed')` covers both. The `state` attribute in
-the markup picks which morph each icon plays.
+The same trigger on both. The `state` attribute in the markup picks which morph each icon
+plays.
 
 ## Notes
 
@@ -38,5 +38,8 @@ the markup picks which morph each icon plays.
 
 ---
 
-Exported from [lordicondev/system-showcase](https://github.com/lordicondev/system-showcase/tree/main/demos/add-to-cart), where it sits
-alongside the other demos and the triggers it uses.
+Exported from [lordicondev/ui-components](https://github.com/lordicondev/ui-components/tree/main/demos/add-to-cart), where it sits
+alongside the other demos.
+
+The code is MIT. The icons are under the [Lordicon License Terms](https://lordicon.com/licenses);
+see [LICENSE.md](LICENSE.md).

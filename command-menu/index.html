@@ -25,9 +25,10 @@
                 <div class="field" data-focused="false" data-clearable="false" data-rise>
                     <label class="visually-hidden" for="command">Command</label>
                     <lord-icon
-                        class="field__mark current-color"
+                        class="field__mark"
+                        current-color
                         src="icons/magnifier.json"
-                        trigger="focus-attention"
+                        trigger="follow(data-focused)"
                         target=".field"
                         aria-hidden="true"
                     ></lord-icon>
@@ -37,9 +38,10 @@
                            aria-controls="commands" aria-expanded="true" data-keys />
                     <button class="field__clear" type="button" aria-label="Clear">
                         <lord-icon
-                            class="field__mark current-color"
+                            class="field__mark"
+                            current-color
                             src="icons/cross.json"
-                            trigger="clearable-attention"
+                            trigger="follow(data-clearable)"
                             target=".field"
                             state="in-reveal"
                             aria-hidden="true"
@@ -54,9 +56,10 @@
                             <!-- prettier-ignore -->
                             <div class="row" role="option" aria-selected="false" data-choose data-rise>
                                 <lord-icon
-                                    class="row__icon current-color"
+                                    class="row__icon"
+                                    current-color
                                     src="icons/file-text.json"
-                                    trigger="active-attention"
+                                    trigger="follow(data-active)"
                                     target=".row"
                                     aria-hidden="true"
                                 ></lord-icon>
@@ -65,9 +68,10 @@
                             <!-- prettier-ignore -->
                             <div class="row" role="option" aria-selected="false" data-choose data-rise>
                                 <lord-icon
-                                    class="row__icon current-color"
+                                    class="row__icon"
+                                    current-color
                                     src="icons/clock-arrow-rotate-left.json"
-                                    trigger="active-attention"
+                                    trigger="follow(data-active)"
                                     target=".row"
                                     aria-hidden="true"
                                 ></lord-icon>
@@ -82,9 +86,10 @@
                             <!-- prettier-ignore -->
                             <div class="row" role="option" aria-selected="false" data-choose data-rise>
                                 <lord-icon
-                                    class="row__icon current-color"
+                                    class="row__icon"
+                                    current-color
                                     src="icons/link.json"
-                                    trigger="active-attention"
+                                    trigger="follow(data-active)"
                                     target=".row"
                                     aria-hidden="true"
                                 ></lord-icon>
@@ -93,9 +98,10 @@
                             <!-- prettier-ignore -->
                             <div class="row" role="option" aria-selected="false" data-choose data-rise>
                                 <lord-icon
-                                    class="row__icon current-color"
+                                    class="row__icon"
+                                    current-color
                                     src="icons/copy.json"
-                                    trigger="active-attention"
+                                    trigger="follow(data-active)"
                                     target=".row"
                                     aria-hidden="true"
                                 ></lord-icon>
@@ -104,9 +110,10 @@
                             <!-- prettier-ignore -->
                             <div class="row" role="option" aria-selected="false" data-choose data-rise>
                                 <lord-icon
-                                    class="row__icon current-color"
+                                    class="row__icon"
+                                    current-color
                                     src="icons/trash-bin.json"
-                                    trigger="active-attention"
+                                    trigger="follow(data-active)"
                                     target=".row"
                                     aria-hidden="true"
                                 ></lord-icon>
@@ -121,9 +128,10 @@
                             <!-- prettier-ignore -->
                             <div class="row" role="option" aria-selected="false" data-choose data-rise>
                                 <lord-icon
-                                    class="row__icon current-color"
+                                    class="row__icon"
+                                    current-color
                                     src="icons/cog.json"
-                                    trigger="active-attention"
+                                    trigger="follow(data-active)"
                                     target=".row"
                                     aria-hidden="true"
                                 ></lord-icon>
@@ -132,9 +140,10 @@
                             <!-- prettier-ignore -->
                             <div class="row" role="option" aria-selected="false" data-choose data-rise>
                                 <lord-icon
-                                    class="row__icon current-color"
+                                    class="row__icon"
+                                    current-color
                                     src="icons/avatar-circle.json"
-                                    trigger="active-attention"
+                                    trigger="follow(data-active)"
                                     target=".row"
                                     aria-hidden="true"
                                 ></lord-icon>
@@ -148,9 +157,10 @@
                      icon, which cannot animate out of display: none. -->
                 <p class="empty" data-shown="false" hidden>
                     <lord-icon
-                        class="empty__mark current-color"
+                        class="empty__mark"
+                        current-color
                         src="icons/cross-circle.json"
-                        trigger="shown-attention"
+                        trigger="follow(data-shown)"
                         target=".empty"
                         state="in-reveal"
                         aria-hidden="true"

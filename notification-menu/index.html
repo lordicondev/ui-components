@@ -21,12 +21,15 @@
                     aria-label="Notifications"
                 >
                     <lord-icon
-                        class="bell__mark current-color"
+                        class="bell__mark"
+                        current-color
                         src="icons/bell.json"
-                        trigger="count-attention"
+                        trigger="follow(data-count)"
                         target=".bell"
                         aria-hidden="true"
-                    ></lord-icon>
+                    >
+                        <img alt="" src="icons/bell.svg" />
+                    </lord-icon>
 
                     <span class="bell__badge" aria-hidden="true" hidden></span>
                 </button>
@@ -45,9 +48,10 @@
                             <button class="row" type="button">
                                 <span class="row__mark">
                                     <lord-icon
-                                        class="row__icon current-color"
+                                        class="row__icon"
+                                        current-color
                                         src="icons/heart.json"
-                                        trigger="hover-focus"
+                                        trigger="hover"
                                         target=".row"
                                         aria-hidden="true"
                                     ></lord-icon>
@@ -69,9 +73,10 @@
                             <button class="row" type="button">
                                 <span class="row__mark">
                                     <lord-icon
-                                        class="row__icon current-color"
+                                        class="row__icon"
+                                        current-color
                                         src="icons/download.json"
-                                        trigger="hover-focus"
+                                        trigger="hover"
                                         target=".row"
                                         aria-hidden="true"
                                     ></lord-icon>
@@ -93,9 +98,10 @@
                             <button class="row" type="button">
                                 <span class="row__mark">
                                     <lord-icon
-                                        class="row__icon current-color"
+                                        class="row__icon"
+                                        current-color
                                         src="icons/message.json"
-                                        trigger="hover-focus"
+                                        trigger="hover"
                                         target=".row"
                                         aria-hidden="true"
                                     ></lord-icon>
@@ -114,9 +120,10 @@
                             <button class="row" type="button">
                                 <span class="row__mark">
                                     <lord-icon
-                                        class="row__icon current-color"
+                                        class="row__icon"
+                                        current-color
                                         src="icons/star.json"
-                                        trigger="hover-focus"
+                                        trigger="hover"
                                         target=".row"
                                         aria-hidden="true"
                                     ></lord-icon>

@@ -1,45 +1,65 @@
-import type { TriggerConstructor } from '@lordicon/element';
-import { MorphTrigger } from './boolean-morph.ts';
-import { observeAttribute } from './observe.ts';
-import { stateSegment } from './segments.ts';
+import {
+    BaseTrigger,
+    defaultState,
+    Morpher,
+    stateSegment,
+    type TriggerContext,
+} from '@lordicon/element';
 
 /**
- * A morph that also plays a preview.
+ * A morph that also plays a preview. The first value is the boolean the icon morphs on, as
+ * in the built-in `follow`. `preview` names a second one: when it turns true while the icon
+ * is at rest, the icon plays its default state once and nothing else changes. The rating
+ * uses it for the stars under the pointer.
  *
- * `shape` is the boolean the icon morphs on, exactly as in `booleanMorph`. `preview` is a
- * second boolean: when it turns true while the icon is at rest, the icon plays its default
- * state once. Nothing changes afterwards. The rating demo uses it for the stars under the
- * pointer.
+ *     <lord-icon trigger="preview-morph(data-chosen, preview=data-lit)" state="morph-select">
  *
- *     Element.defineTrigger('preview-morph', previewMorph('data-chosen', 'data-lit'));
+ *     defineElement({ triggers: { 'preview-morph': PreviewMorph } });
+ *
+ * Under reduced motion the morph jumps and the preview is left out.
  */
-export function previewMorph(shape: string, preview: string): TriggerConstructor {
-    return class PreviewMorph extends MorphTrigger {
-        protected get attribute(): string {
-            return shape;
-        }
+export class PreviewMorph extends BaseTrigger {
+    static readonly primary = 'attr';
 
-        onConnected(): void {
-            super.onConnected();
-            this.disposable(observeAttribute(this.targetElement, preview, () => this.nudge()));
-        }
+    #morpher: Morpher;
 
-        private nudge(): void {
-            if (!this.player.ready) return;
-            if (this.targetElement.getAttribute(preview) !== 'true') return;
+    constructor(context: TriggerContext) {
+        super(context);
+        this.#morpher = new Morpher(this.player, this.ratio());
 
-            // Nothing to preview when the icon already holds, or is on its way to, the
-            // chosen look; and no second nudge while the first one plays.
-            if (this.on || this.player.playing || this.prefersReducedMotion) return;
+        this.watch(this.target, this.option('attr', 'data-chosen'), () => this.morph());
+        this.watch(this.target, this.option('preview', 'data-lit'), () => this.preview());
+        this.signal.addEventListener('abort', () => this.#morpher.restore(), { once: true });
+    }
 
-            const resting = this.player.availableStates.find((state) => state.default);
-            if (!resting) return;
+    onReady(): void {
+        this.#morpher.start(this.read('attr', 'data-chosen'));
+    }
 
-            this.player.direction = 1;
-            this.player.switchSegment(stateSegment(resting));
-            // play(), not playFromStart(): playFromStart() rewinds to the start of the
-            // `state` attribute's segment, not to the segment just loaded.
-            this.player.play();
-        }
-    };
+    onComplete(): void {
+        this.#morpher.complete();
+    }
+
+    private read(option: string, fallback: string): boolean {
+        return this.target.getAttribute(this.option(option, fallback)) === 'true';
+    }
+
+    private morph(): void {
+        const on = this.read('attr', 'data-chosen');
+        if (!this.player.ready || this.#morpher.showing === on) return;
+
+        if (this.reducedMotion) this.#morpher.jump(on);
+        else this.#morpher.animate(on);
+    }
+
+    private preview(): void {
+        if (!this.player.ready || !this.read('preview', 'data-lit')) return;
+
+        // Nothing to preview when the icon already holds, or is on its way to, the chosen
+        // look; and no second preview while the first one plays.
+        if (this.#morpher.showing || this.player.playing || this.reducedMotion) return;
+
+        const resting = defaultState(this.player.states);
+        if (resting) void this.player.play({ segment: stateSegment(resting) });
+    }
 }

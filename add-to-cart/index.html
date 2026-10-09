@@ -15,13 +15,17 @@
                      The tooltip span is the button's name. -->
                 <button class="cart" type="button" aria-pressed="false">
                     <lord-icon
-                        class="cart__mark current-color"
+                        class="cart__mark"
+                        current-color
                         src="icons/shopping-basket.json"
-                        trigger="pressed-morph"
+                        loading="interaction"
+                        trigger="follow(aria-pressed)"
                         target=".cart"
                         state="morph-add"
                         aria-hidden="true"
-                    ></lord-icon>
+                    >
+                        <img alt="" src="icons/shopping-basket.svg" />
+                    </lord-icon>
 
                     <span class="cart__said" aria-hidden="true">
                         <span class="cart__label">Added to cart</span>
@@ -34,13 +38,17 @@
                      stylesheet colours it from the same aria-pressed. -->
                 <button class="favorite" type="button" aria-pressed="false">
                     <lord-icon
-                        class="favorite__mark current-color"
+                        class="favorite__mark"
+                        current-color
                         src="icons/heart.json"
-                        trigger="pressed-morph"
+                        loading="interaction"
+                        trigger="follow(aria-pressed)"
                         target=".favorite"
                         state="morph-select"
                         aria-hidden="true"
-                    ></lord-icon>
+                    >
+                        <img alt="" src="icons/heart.svg" />
+                    </lord-icon>
 
                     <span class="tooltip">Add to favorites</span>
                 </button>

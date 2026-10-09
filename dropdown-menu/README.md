@@ -12,14 +12,13 @@ npm run dev
 
 ## Triggers
 
-| Trigger            | Watches                 | On                 |
-| ------------------ | ----------------------- | ------------------ |
-| `hover-focus`      | pointer and keyboard    | the ⋮              |
-| `active-attention` | `data-active` on `.row` | all five row icons |
+| Trigger               | Watches                        | On                 |
+| --------------------- | ------------------------------ | ------------------ |
+| `hover`               | the pointer and keyboard focus | the ⋮              |
+| `follow(data-active)` | `data-active` on `.row`        | all five row icons |
 
-`active-attention` is `booleanAttention('data-active')`. `shared/ui/menu.ts` writes that
-attribute on the row under the pointer and on the row the arrow keys moved to, so the icon
-plays for either and never learns which.
+`shared/ui/menu.ts` writes `data-active` on the row under the pointer and on the row the
+arrow keys moved to, so the icon plays for either and never learns which.
 
 ## Notes
 
@@ -36,5 +35,8 @@ plays for either and never learns which.
 
 ---
 
-Exported from [lordicondev/system-showcase](https://github.com/lordicondev/system-showcase/tree/main/demos/dropdown-menu), where it sits
-alongside the other demos and the triggers it uses.
+Exported from [lordicondev/ui-components](https://github.com/lordicondev/ui-components/tree/main/demos/dropdown-menu), where it sits
+alongside the other demos.
+
+The code is MIT. The icons are under the [Lordicon License Terms](https://lordicon.com/licenses);
+see [LICENSE.md](LICENSE.md).

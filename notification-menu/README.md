@@ -13,20 +13,21 @@ npm run dev
 
 ## Triggers
 
-| Trigger           | Watches                      | On                 |
-| ----------------- | ---------------------------- | ------------------ |
-| `count-attention` | `data-count` on `.bell`      | the bell           |
-| `hover-focus`     | the pointer and the keyboard | the four row icons |
+| Trigger              | Watches                        | On                 |
+| -------------------- | ------------------------------ | ------------------ |
+| `follow(data-count)` | `data-count` on `.bell`        | the bell           |
+| `hover`              | the pointer and keyboard focus | the four row icons |
 
-`raisedAttention('data-count')` compares the old and new count. Up from zero plays the
-icon's `state` (here its default); up again plays a nudge; down plays nothing. The count
-the page starts with plays nothing either.
+`data-count` is a number, so `follow` counts. Up from zero plays the icon's `state` (here
+its default); up again plays a nudge; down plays nothing. The count the page starts with
+plays nothing either.
 
 ## Notes
 
 - `setCount(n)` is the whole API. It writes `data-count`, which the icon watches, and
   draws the badge: a pop with overshoot on the way in, a quick shrink on the way out.
-  Opening the menu sets the count to zero.
+  Opening the menu sets the count to zero. The bell loads at once rather than on
+  interaction: the count can change before anyone touches it.
 - The panel is a browser popover: `popovertarget` on the bell, `popover` on the panel.
   `shared/ui/popover.ts` places it under the bell, writes `aria-expanded` on the bell,
   unrolls the height and brings each `data-rise` row in 40ms after the last.
@@ -41,5 +42,8 @@ the page starts with plays nothing either.
 
 ---
 
-Exported from [lordicondev/system-showcase](https://github.com/lordicondev/system-showcase/tree/main/demos/notification-menu), where it sits
-alongside the other demos and the triggers it uses.
+Exported from [lordicondev/ui-components](https://github.com/lordicondev/ui-components/tree/main/demos/notification-menu), where it sits
+alongside the other demos.
+
+The code is MIT. The icons are under the [Lordicon License Terms](https://lordicon.com/licenses);
+see [LICENSE.md](LICENSE.md).

@@ -28,10 +28,12 @@
 /* Coloured when lit. No transition: the stagger comes from the state changes. */
 .star {
     --star-mark: var(--ink-subtle);
+    --icon-filter: var(--filter-ink-subtle);
 }
 
 .star[data-lit='true'] {
     --star-mark: var(--accent);
+    --icon-filter: var(--filter-accent);
 }
 
 .star__mark {

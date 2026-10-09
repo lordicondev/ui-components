@@ -1,13 +1,6 @@
-import { defineElement, Element } from '@lordicon/element';
-import { booleanAttention } from '@shared/triggers/boolean-attention.ts';
-import { HoverFocus } from '@shared/triggers/hover-focus.ts';
+import { defineElement } from '@lordicon/element';
 
-// Triggers have to be registered before defineElement().
-// The list icons play on hover or focus. The search field's icons play on its own attributes.
-Element.defineTrigger('hover-focus', HoverFocus);
-Element.defineTrigger('focus-attention', booleanAttention('data-focused'));
-Element.defineTrigger('clearable-attention', booleanAttention('data-clearable'));
-
+// Registers <lord-icon> with its built-in triggers. The markup says what each icon follows.
 defineElement();
 
 import { fields } from '@shared/ui/field.ts';

@@ -1,12 +1,8 @@
-import { defineElement, Element } from '@lordicon/element';
-import { booleanMorph } from '@shared/triggers/boolean-morph.ts';
+import { defineElement } from '@lordicon/element';
 
-// Triggers have to be registered before defineElement().
-Element.defineTrigger('expanded-morph', booleanMorph('aria-expanded'));
-
+// Registers <lord-icon> with its built-in triggers. The markup says what each icon follows.
 defineElement();
 
-import '@shared/types/lordicon.d.ts';
 import { prefersReducedMotion } from '@shared/motion/reduced-motion.ts';
 import { concealText, revealText } from '@shared/motion/text-reveal.ts';
 

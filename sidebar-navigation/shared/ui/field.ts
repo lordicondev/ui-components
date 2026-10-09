@@ -2,7 +2,7 @@
  * A text field that reports its state in two attributes:
  *
  *     <div class="field" data-focused="false" data-clearable="false">
- *         <lord-icon … trigger="focus-attention" target=".field"></lord-icon>
+ *         <lord-icon … trigger="follow(data-focused)" target=".field"></lord-icon>
  *         <input class="field__input" />
  *         <button class="field__clear">…</button>
  *     </div>

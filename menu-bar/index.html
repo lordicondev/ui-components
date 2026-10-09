@@ -26,13 +26,16 @@
                         />
 
                         <lord-icon
-                            class="tool__mark current-color"
+                            class="tool__mark"
+                            current-color
                             src="icons/brush-alt.json"
-                            trigger="selected-morph"
+                            trigger="follow(data-selected)"
                             target=".tool"
                             state="morph-change"
                             aria-hidden="true"
-                        ></lord-icon>
+                        >
+                            <img alt="" src="icons/brush-alt.morph-change.svg" />
+                        </lord-icon>
 
                         <span class="tooltip">Brush</span>
                     </label>
@@ -46,13 +49,16 @@
                         />
 
                         <lord-icon
-                            class="tool__mark current-color"
+                            class="tool__mark"
+                            current-color
                             src="icons/paint-bucket.json"
-                            trigger="selected-morph"
+                            trigger="follow(data-selected)"
                             target=".tool"
                             state="morph-select"
                             aria-hidden="true"
-                        ></lord-icon>
+                        >
+                            <img alt="" src="icons/paint-bucket.svg" />
+                        </lord-icon>
 
                         <span class="tooltip">Fill</span>
                     </label>
@@ -66,13 +72,16 @@
                         />
 
                         <lord-icon
-                            class="tool__mark current-color"
+                            class="tool__mark"
+                            current-color
                             src="icons/pencil.json"
-                            trigger="selected-morph"
+                            trigger="follow(data-selected)"
                             target=".tool"
                             state="morph-select"
                             aria-hidden="true"
-                        ></lord-icon>
+                        >
+                            <img alt="" src="icons/pencil.svg" />
+                        </lord-icon>
 
                         <span class="tooltip">Pencil</span>
                     </label>
@@ -86,13 +95,16 @@
                         />
 
                         <lord-icon
-                            class="tool__mark current-color"
+                            class="tool__mark"
+                            current-color
                             src="icons/pen-nib.json"
-                            trigger="selected-morph"
+                            trigger="follow(data-selected)"
                             target=".tool"
                             state="morph-select"
                             aria-hidden="true"
-                        ></lord-icon>
+                        >
+                            <img alt="" src="icons/pen-nib.svg" />
+                        </lord-icon>
 
                         <span class="tooltip">Pen</span>
                     </label>
@@ -104,24 +116,32 @@
                     <!-- An action, not a state: no attribute to follow, the icon plays once. -->
                     <button class="action" type="button">
                         <lord-icon
-                            class="action__mark current-color"
+                            class="action__mark"
+                            current-color
                             src="icons/bullet-list.json"
-                            trigger="press-attention"
+                            loading="interaction"
+                            trigger="click"
                             target=".action"
                             aria-hidden="true"
-                        ></lord-icon>
+                        >
+                            <img alt="" src="icons/bullet-list.svg" />
+                        </lord-icon>
 
                         <span class="tooltip">Bullet list</span>
                     </button>
 
                     <button class="action" type="button">
                         <lord-icon
-                            class="action__mark current-color"
+                            class="action__mark"
+                            current-color
                             src="icons/check-list.json"
-                            trigger="press-attention"
+                            loading="interaction"
+                            trigger="click"
                             target=".action"
                             aria-hidden="true"
-                        ></lord-icon>
+                        >
+                            <img alt="" src="icons/check-list.svg" />
+                        </lord-icon>
 
                         <span class="tooltip">Checklist</span>
                     </button>
@@ -131,12 +151,16 @@
 
                 <button class="action" type="button">
                     <lord-icon
-                        class="action__mark current-color"
+                        class="action__mark"
+                        current-color
                         src="icons/three-dots-vertical.json"
-                        trigger="press-attention"
+                        loading="interaction"
+                        trigger="click"
                         target=".action"
                         aria-hidden="true"
-                    ></lord-icon>
+                    >
+                        <img alt="" src="icons/three-dots-vertical.svg" />
+                    </lord-icon>
 
                     <span class="tooltip">More options</span>
                 </button>

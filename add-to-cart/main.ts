@@ -1,10 +1,6 @@
-import { defineElement, Element } from '@lordicon/element';
-import { booleanMorph } from '@shared/triggers/boolean-morph.ts';
+import { defineElement } from '@lordicon/element';
 
-// Triggers have to be registered before defineElement().
-// One trigger for both buttons. Which morph each icon plays is its `state` in the markup.
-Element.defineTrigger('pressed-morph', booleanMorph('aria-pressed'));
-
+// Registers <lord-icon> with its built-in triggers. The markup says what each icon follows.
 defineElement();
 
 import { revealText, settleText } from '@shared/motion/text-reveal.ts';

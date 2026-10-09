@@ -16,14 +16,15 @@ npm run dev
 
 ## Triggers
 
-| Trigger         | Watches                        | On                             |
-| --------------- | ------------------------------ | ------------------------------ |
-| `preview-morph` | `data-chosen` on `.star`       | the star, state `morph-select` |
-| `preview-morph` | `data-lit` on the same `.star` | the star's default state       |
+| Trigger                                        | Watches                        | On                             |
+| ---------------------------------------------- | ------------------------------ | ------------------------------ |
+| `preview-morph(data-chosen, preview=data-lit)` | `data-chosen` on `.star`       | the star, state `morph-select` |
+|                                                | `data-lit` on the same `.star` | the star's default state       |
 
-`previewMorph('data-chosen', 'data-lit')`: a `booleanMorph` on the first attribute, plus
-a nudge with the icon's default state when the second turns true. A star that is already
-filled does not nudge.
+The one trigger in this project that is not built in: `shared/triggers/preview-morph.ts`,
+on the package's `BaseTrigger` and `Morpher`. It morphs on the first attribute like
+`follow`, and plays the icon's default state once when `preview` turns true. A star that is
+already filled does not nudge. `main.ts` registers it with `defineElement({ triggers })`.
 
 ## Notes
 
@@ -37,8 +38,13 @@ filled does not nudge.
 - The control is a real radio group. Arrow keys change the rating, and `change` fires for
   clicks and keys alike. Clicking the star that is the whole rating clears it, one tick
   later, because the label would re-check the radio otherwise.
+- The stars load at once, not with `loading="interaction"`: choosing one star changes the
+  ones before it, which nobody touched.
 
 ---
 
-Exported from [lordicondev/system-showcase](https://github.com/lordicondev/system-showcase/tree/main/demos/rating), where it sits
-alongside the other demos and the triggers it uses.
+Exported from [lordicondev/ui-components](https://github.com/lordicondev/ui-components/tree/main/demos/rating), where it sits
+alongside the other demos.
+
+The code is MIT. The icons are under the [Lordicon License Terms](https://lordicon.com/licenses);
+see [LICENSE.md](LICENSE.md).

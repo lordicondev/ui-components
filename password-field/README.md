@@ -18,13 +18,13 @@ npm run dev
 
 ## Triggers
 
-| Trigger            | Watches                            | On                             |
-| ------------------ | ---------------------------------- | ------------------------------ |
-| `pressed-morph`    | `aria-pressed` on `.field__toggle` | the eye, state `morph-close`   |
-| `focus-attention`  | `data-focused` on `.field`         | the lock                       |
-| `raised-attention` | `data-raised` on `.field__error`   | the warning, state `in-reveal` |
+| Trigger                | Watches                            | On                             |
+| ---------------------- | ---------------------------------- | ------------------------------ |
+| `follow(aria-pressed)` | `aria-pressed` on `.field__toggle` | the eye, state `morph-close`   |
+| `follow(data-focused)` | `data-focused` on `.field`         | the lock                       |
+| `follow(data-raised)`  | `data-raised` on `.field__error`   | the warning, state `in-reveal` |
 
-`raised-attention` counts rather than flips. `data-raised` going from 0 to 1 is the
+`data-raised` is a number, so `follow` counts rather than flips. Going from 0 to 1 is the
 message appearing, and the icon plays its `in-reveal` entrance. Going up again while the
 message is still on screen is the same message repeated: the icon plays its default state
 as a nudge instead.
@@ -45,5 +45,8 @@ as a nudge instead.
 
 ---
 
-Exported from [lordicondev/system-showcase](https://github.com/lordicondev/system-showcase/tree/main/demos/password-field), where it sits
-alongside the other demos and the triggers it uses.
+Exported from [lordicondev/ui-components](https://github.com/lordicondev/ui-components/tree/main/demos/password-field), where it sits
+alongside the other demos.
+
+The code is MIT. The icons are under the [Lordicon License Terms](https://lordicon.com/licenses);
+see [LICENSE.md](LICENSE.md).

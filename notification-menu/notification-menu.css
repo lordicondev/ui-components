@@ -30,6 +30,7 @@
     background: var(--surface);
     color: var(--ink);
     cursor: pointer;
+    --icon-filter: var(--filter-ink);
 }
 
 .bell:hover {

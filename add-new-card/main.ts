@@ -1,4 +1,4 @@
 import { defineElement } from '@lordicon/element';
 
-// No trigger to register: the icon uses the built-in `hover`. This is the whole script.
+// Registers <lord-icon> with its built-in triggers. This is the whole script.
 defineElement();

@@ -22,14 +22,17 @@
                     <span class="task__fill" aria-hidden="true"></span>
 
                     <lord-icon
-                        class="task__mark current-color"
+                        class="task__mark"
+                        current-color
                         src="icons/download.json"
-                        trigger="stage-cycle"
+                        loading="interaction"
+                        trigger="follow(data-stage, busy=loop-cycle, done=morph-check)"
                         target=".task__button"
                         state="morph-check"
-                        data-loop="loop-cycle"
                         aria-hidden="true"
-                    ></lord-icon>
+                    >
+                        <img alt="" src="icons/download.svg" />
+                    </lord-icon>
 
                     <!-- Three labels on a strip that slides up one line per stage change.
                          aria-label on the button is copied from whichever is showing. -->
@@ -47,9 +50,10 @@
                 <!-- Absolutely placed, so nothing below moves to make room. -->
                 <p class="toast" role="status" data-shown="false">
                     <lord-icon
-                        class="toast__mark current-color"
+                        class="toast__mark"
+                        current-color
                         src="icons/check-circle.json"
-                        trigger="shown-attention"
+                        trigger="follow(data-shown)"
                         target=".toast"
                         state="in-reveal"
                         aria-hidden="true"
@@ -59,7 +63,7 @@
                 </p>
             </div>
 
-            <div class="task" id="kind-upload" data-page>
+            <div class="task" id="kind-upload" data-page hidden>
                 <button
                     class="task__button"
                     type="button"
@@ -71,12 +75,12 @@
 
                     <!-- The second page: a different icon and three different words. -->
                     <lord-icon
-                        class="task__mark current-color"
+                        class="task__mark"
+                        current-color
                         src="icons/upload.json"
-                        trigger="stage-cycle"
+                        trigger="follow(data-stage, busy=loop-cycle, done=morph-select)"
                         target=".task__button"
                         state="morph-select"
-                        data-loop="loop-cycle"
                         aria-hidden="true"
                     ></lord-icon>
 
@@ -93,9 +97,10 @@
 
                 <p class="toast" role="status" data-shown="false">
                     <lord-icon
-                        class="toast__mark current-color"
+                        class="toast__mark"
+                        current-color
                         src="icons/check-circle.json"
-                        trigger="shown-attention"
+                        trigger="follow(data-shown)"
                         target=".toast"
                         state="in-reveal"
                         aria-hidden="true"

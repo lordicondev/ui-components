@@ -80,12 +80,14 @@
 .nav__item {
     --nav-fill: transparent;
     --nav-mark: var(--ink-muted);
+    --icon-filter: var(--filter-ink-muted);
 }
 
 .nav__item:hover,
 .nav__item[aria-current='page'] {
     --nav-fill: var(--surface-muted);
     --nav-mark: var(--ink);
+    --icon-filter: var(--filter-ink);
 }
 
 .nav__item {

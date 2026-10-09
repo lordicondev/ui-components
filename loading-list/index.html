@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Loading list</title>
+        <link rel="stylesheet" href="./loading-list.css" />
+        <script type="module" src="./main.ts"></script>
+    </head>
+
+    <body>
+        <main class="demo">
+            <section class="progress" aria-labelledby="progress-title">
+                <h1 class="progress__title" id="progress-title">Processing your request</h1>
+
+                <ol class="steps" aria-live="polite">
+                    <!-- data-status is the whole state of a step. All three icons follow it, and the
+                         stylesheet shows the one that matches. -->
+                    <li class="step" id="step-upload" data-status="pending">
+                        <span class="step__mark">
+                            <lord-icon
+                                class="step__spinner"
+                                current-color
+                                src="icons/spinner-circle.json"
+                                trigger="follow(data-status, active=loop-snake-alt)"
+                                target=".step"
+                                aria-hidden="true"
+                            >
+                                <img alt="" src="icons/spinner-circle.svg" />
+                            </lord-icon>
+                            <lord-icon
+                                class="step__done"
+                                current-color
+                                src="icons/check-circle.json"
+                                trigger="follow(data-status, done=in-reveal)"
+                                target=".step"
+                                state="in-reveal"
+                                aria-hidden="true"
+                            ></lord-icon>
+                            <lord-icon
+                                class="step__failed"
+                                current-color
+                                src="icons/cross-circle.json"
+                                trigger="follow(data-status, failed=in-reveal)"
+                                target=".step"
+                                state="in-reveal"
+                                aria-hidden="true"
+                            ></lord-icon>
+                        </span>
+
+                        <span class="step__label">Uploading files</span>
+                        <span class="step__said visually-hidden">Waiting</span>
+                    </li>
+
+                    <li class="step" id="step-validate" data-status="pending">
+                        <span class="step__mark">
+                            <lord-icon
+                                class="step__spinner"
+                                current-color
+                                src="icons/spinner-circle.json"
+                                trigger="follow(data-status, active=loop-snake-alt)"
+                                target=".step"
+                                aria-hidden="true"
+                            >
+                                <img alt="" src="icons/spinner-circle.svg" />
+                            </lord-icon>
+                            <lord-icon
+                                class="step__done"
+                                current-color
+                                src="icons/check-circle.json"
+                                trigger="follow(data-status, done=in-reveal)"
+                                target=".step"
+                                state="in-reveal"
+                                aria-hidden="true"
+                            ></lord-icon>
+                            <lord-icon
+                                class="step__failed"
+                                current-color
+                                src="icons/cross-circle.json"
+                                trigger="follow(data-status, failed=in-reveal)"
+                                target=".step"
+                                state="in-reveal"
+                                aria-hidden="true"
+                            ></lord-icon>
+                        </span>
+
+                        <span class="step__label">Validating data</span>
+                        <span class="step__said visually-hidden">Waiting</span>
+                    </li>
+
+                    <li class="step" id="step-optimize" data-status="pending">
+                        <span class="step__mark">
+                            <lord-icon
+                                class="step__spinner"
+                                current-color
+                                src="icons/spinner-circle.json"
+                                trigger="follow(data-status, active=loop-snake-alt)"
+                                target=".step"
+                                aria-hidden="true"
+                            >
+                                <img alt="" src="icons/spinner-circle.svg" />
+                            </lord-icon>
+                            <lord-icon
+                                class="step__done"
+                                current-color
+                                src="icons/check-circle.json"
+                                trigger="follow(data-status, done=in-reveal)"
+                                target=".step"
+                                state="in-reveal"
+                                aria-hidden="true"
+                            ></lord-icon>
+                            <lord-icon
+                                class="step__failed"
+                                current-color
+                                src="icons/cross-circle.json"
+                                trigger="follow(data-status, failed=in-reveal)"
+                                target=".step"
+                                state="in-reveal"
+                                aria-hidden="true"
+                            ></lord-icon>
+                        </span>
+
+                        <span class="step__label">Optimizing images</span>
+                        <span class="step__said visually-hidden">Waiting</span>
+                    </li>
+
+                    <li class="step" id="step-preview" data-status="pending">
+                        <span class="step__mark">
+                            <lord-icon
+                                class="step__spinner"
+                                current-color
+                                src="icons/spinner-circle.json"
+                                trigger="follow(data-status, active=loop-snake-alt)"
+                                target=".step"
+                                aria-hidden="true"
+                            >
+                                <img alt="" src="icons/spinner-circle.svg" />
+                            </lord-icon>
+                            <lord-icon
+                                class="step__done"
+                                current-color
+                                src="icons/check-circle.json"
+                                trigger="follow(data-status, done=in-reveal)"
+                                target=".step"
+                                state="in-reveal"
+                                aria-hidden="true"
+                            ></lord-icon>
+                            <lord-icon
+                                class="step__failed"
+                                current-color
+                                src="icons/cross-circle.json"
+                                trigger="follow(data-status, failed=in-reveal)"
+                                target=".step"
+                                state="in-reveal"
+                                aria-hidden="true"
+                            ></lord-icon>
+                        </span>
+
+                        <span class="step__label">Generating preview</span>
+                        <span class="step__said visually-hidden">Waiting</span>
+                        <button class="step__retry" type="button" hidden>Retry</button>
+                    </li>
+
+                    <li class="step" id="step-finish" data-status="pending">
+                        <span class="step__mark">
+                            <lord-icon
+                                class="step__spinner"
+                                current-color
+                                src="icons/spinner-circle.json"
+                                trigger="follow(data-status, active=loop-snake-alt)"
+                                target=".step"
+                                aria-hidden="true"
+                            >
+                                <img alt="" src="icons/spinner-circle.svg" />
+                            </lord-icon>
+                            <lord-icon
+                                class="step__done"
+                                current-color
+                                src="icons/check-circle.json"
+                                trigger="follow(data-status, done=in-reveal)"
+                                target=".step"
+                                state="in-reveal"
+                                aria-hidden="true"
+                            ></lord-icon>
+                            <lord-icon
+                                class="step__failed"
+                                current-color
+                                src="icons/cross-circle.json"
+                                trigger="follow(data-status, failed=in-reveal)"
+                                target=".step"
+                                state="in-reveal"
+                                aria-hidden="true"
+                            ></lord-icon>
+                        </span>
+
+                        <span class="step__label">Finishing up</span>
+                        <span class="step__said visually-hidden">Waiting</span>
+                    </li>
+                </ol>
+            </section>
+        </main>
+    </body>
+</html>

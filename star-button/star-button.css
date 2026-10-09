@@ -21,6 +21,7 @@
    would leave; the shape says which state it is. No transition: only the fill animates. */
 .star {
     --star-mark: var(--ink-subtle);
+    --icon-filter: var(--filter-ink-subtle);
 }
 
 .star:hover {
@@ -29,6 +30,7 @@
 
 .star[aria-pressed='true'] {
     --star-mark: var(--accent);
+    --icon-filter: var(--filter-accent);
 }
 
 .star[aria-pressed='true']:hover {

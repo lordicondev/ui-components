@@ -78,6 +78,7 @@
     border-radius: var(--radius-md);
     background: var(--surface-muted);
     color: var(--ink);
+    --icon-filter: var(--filter-ink);
     cursor: pointer;
 }
 
@@ -92,6 +93,7 @@
     border: 0;
     background: none;
     color: var(--ink-muted);
+    --icon-filter: var(--filter-ink-muted);
     cursor: pointer;
 }
 
@@ -107,6 +109,7 @@
     border-radius: var(--radius-md);
     background: var(--accent);
     color: var(--ink-inverse);
+    --icon-filter: var(--filter-ink-inverse);
     box-shadow: var(--composer-halo);
     cursor: pointer;
 }

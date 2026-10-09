@@ -15,13 +15,13 @@ npm run dev
 
 ## Triggers
 
-| Trigger               | Watches                      | On                           |
-| --------------------- | ---------------------------- | ---------------------------- |
-| `focus-attention`     | `data-focused` on `.field`   | the magnifier, default state |
-| `clearable-attention` | `data-clearable` on `.field` | the cross, state `in-reveal` |
+| Trigger                  | Watches                      | On                           |
+| ------------------------ | ---------------------------- | ---------------------------- |
+| `follow(data-focused)`   | `data-focused` on `.field`   | the magnifier, default state |
+| `follow(data-clearable)` | `data-clearable` on `.field` | the cross, state `in-reveal` |
 
-Both are `booleanAttention`: the icon plays once each time its attribute turns true.
-`in-reveal` is an entrance state, which is why the cross draws itself rather than appearing.
+Each plays once every time its attribute turns true. `in-reveal` is an entrance state,
+which is why the cross draws itself rather than appearing.
 
 ## Notes
 
@@ -39,5 +39,8 @@ Both are `booleanAttention`: the icon plays once each time its attribute turns t
 
 ---
 
-Exported from [lordicondev/system-showcase](https://github.com/lordicondev/system-showcase/tree/main/demos/search-bar), where it sits
-alongside the other demos and the triggers it uses.
+Exported from [lordicondev/ui-components](https://github.com/lordicondev/ui-components/tree/main/demos/search-bar), where it sits
+alongside the other demos.
+
+The code is MIT. The icons are under the [Lordicon License Terms](https://lordicon.com/licenses);
+see [LICENSE.md](LICENSE.md).

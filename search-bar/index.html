@@ -16,21 +16,27 @@
                     <label class="visually-hidden" for="q">Search</label>
 
                     <lord-icon
-                        class="field__mark current-color"
+                        class="field__mark"
+                        current-color
                         src="icons/magnifier.json"
-                        trigger="focus-attention"
+                        loading="interaction"
+                        trigger="follow(data-focused)"
                         target=".field"
                         aria-hidden="true"
-                    ></lord-icon>
+                    >
+                        <img alt="" src="icons/magnifier.svg" />
+                    </lord-icon>
 
                     <input class="field__input" id="q" type="search" placeholder="Search" />
                     <!-- in-reveal starts from an empty frame, so the cross draws itself in.
                          The stylesheet shows the button on the same attribute. -->
                     <button class="field__clear" type="button" aria-label="Clear search">
                         <lord-icon
-                            class="field__mark current-color"
+                            class="field__mark"
+                            current-color
                             src="icons/cross.json"
-                            trigger="clearable-attention"
+                            loading="interaction"
+                            trigger="follow(data-clearable)"
                             target=".field"
                             state="in-reveal"
                             aria-hidden="true"

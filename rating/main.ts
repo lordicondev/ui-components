@@ -1,11 +1,8 @@
-import { defineElement, Element } from '@lordicon/element';
-import { previewMorph } from '@shared/triggers/preview-morph.ts';
+import { defineElement } from '@lordicon/element';
+import { PreviewMorph } from '@shared/triggers/preview-morph.ts';
 
-// Triggers have to be registered before defineElement().
-// data-chosen is the rating; the icon morphs on it. data-lit is the preview; the icon nudges on it.
-Element.defineTrigger('preview-morph', previewMorph('data-chosen', 'data-lit'));
-
-defineElement();
+// The built-in triggers, plus one of our own for the stars.
+defineElement({ triggers: { 'preview-morph': PreviewMorph } });
 
 const group = document.querySelector<HTMLFieldSetElement>('.rating')!;
 const stars = [...group.querySelectorAll<HTMLElement>('.star')];

@@ -15,15 +15,15 @@ npm run dev
 
 ## Triggers
 
-| Trigger           | Watches                    | On                               |
-| ----------------- | -------------------------- | -------------------------------- |
-| `stage-cycle`     | `data-stage` on the button | the download icon, `morph-check` |
-| `shown-attention` | `data-shown` on the toast  | the tick, state `in-reveal`      |
+| Trigger                                                 | Watches                    | On                          |
+| ------------------------------------------------------- | -------------------------- | --------------------------- |
+| `follow(data-stage, busy=loop-cycle, done=morph-check)` | `data-stage` on the button | the download icon           |
+| `follow(data-shown)`                                    | `data-shown` on the toast  | the tick, state `in-reveal` |
 
-`stageCycle('data-stage')` loops the icon's `loop-*` state while busy, plays the first
-half of the morph on done, and the second half back on idle. A finish that lands mid-loop
-waits for the loop to come round, so the icon never stops halfway through a turn. Which
-loop and which morph are `data-loop` and `state` on the icon.
+A value map: `busy` loops `loop-cycle`, `done` plays the first half of `morph-check`, and
+any other value (idle) plays the second half back. A finish that lands mid-loop waits for
+the loop to come round, so the icon never stops halfway through a turn. The upload icon
+maps `done` to its `morph-select`.
 
 ## Notes
 
@@ -42,5 +42,8 @@ loop and which morph are `data-loop` and `state` on the icon.
 
 ---
 
-Exported from [lordicondev/system-showcase](https://github.com/lordicondev/system-showcase/tree/main/demos/button-progress), where it sits
-alongside the other demos and the triggers it uses.
+Exported from [lordicondev/ui-components](https://github.com/lordicondev/ui-components/tree/main/demos/button-progress), where it sits
+alongside the other demos.
+
+The code is MIT. The icons are under the [Lordicon License Terms](https://lordicon.com/licenses);
+see [LICENSE.md](LICENSE.md).

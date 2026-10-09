@@ -37,6 +37,7 @@
     height: var(--icon-size-24);
     margin-top: 1px;
     color: var(--ink-subtle);
+    --icon-filter: var(--filter-ink-subtle);
 }
 
 .option:hover .option__tick {
@@ -45,6 +46,7 @@
 
 .option[data-checked='true'] .option__tick {
     color: var(--accent);
+    --icon-filter: var(--filter-accent);
 }
 
 .option[data-checked='true']:hover .option__tick {

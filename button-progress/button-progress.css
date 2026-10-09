@@ -30,6 +30,7 @@
     background: var(--accent);
     box-shadow: var(--shadow-accent);
     color: var(--ink-inverse);
+    --icon-filter: var(--filter-ink-inverse);
     font-weight: 500;
     cursor: pointer;
 }

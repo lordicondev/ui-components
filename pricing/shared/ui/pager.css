@@ -1,0 +1,40 @@
+/* The dots that page between the parts of a demo. Where they sit is the demo's business. */
+.pager {
+    display: flex;
+    gap: var(--space-4);
+}
+
+/* A small dot inside a button big enough to hit. */
+.pager__dot {
+    display: grid;
+    place-items: center;
+    width: var(--space-24);
+    height: var(--space-24);
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: pointer;
+}
+
+.pager__dot::before {
+    content: '';
+    width: var(--space-8);
+    height: var(--space-8);
+    border-radius: var(--radius-pill);
+    background: var(--border-strong);
+    transition: background 150ms ease;
+}
+
+.pager__dot:hover::before {
+    background: var(--ink-subtle);
+}
+
+.pager__dot[aria-pressed='true']::before {
+    background: var(--accent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .pager__dot::before {
+        transition: none;
+    }
+}
