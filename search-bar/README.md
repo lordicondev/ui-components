@@ -39,8 +39,8 @@ which is why the cross draws itself rather than appearing.
 
 ---
 
-Exported from [lordicondev/ui-components](https://github.com/lordicondev/ui-components/tree/main/demos/search-bar), where it sits
-alongside the other demos.
+Exported from [lordicondev/ui-components](https://github.com/lordicondev/ui-components/tree/main/demos/search-bar) 1.0.0,
+where it sits alongside the other demos.
 
 The code is MIT. The icons are under the [Lordicon License Terms](https://lordicon.com/licenses);
 see [LICENSE.md](LICENSE.md).

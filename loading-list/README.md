@@ -40,8 +40,8 @@ are only there to have something to show.
 
 ---
 
-Exported from [lordicondev/ui-components](https://github.com/lordicondev/ui-components/tree/main/demos/loading-list), where it sits
-alongside the other demos.
+Exported from [lordicondev/ui-components](https://github.com/lordicondev/ui-components/tree/main/demos/loading-list) 1.0.0,
+where it sits alongside the other demos.
 
 The code is MIT. The icons are under the [Lordicon License Terms](https://lordicon.com/licenses);
 see [LICENSE.md](LICENSE.md).
