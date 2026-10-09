@@ -1,0 +1,70 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "title": "Demo manifest",
+    "description": "Everything the portal needs to build a demo page. The portal reads nothing else.",
+    "type": "object",
+    "additionalProperties": false,
+    "required": ["slug", "title", "description", "tags", "icons", "fragments"],
+    "properties": {
+        "$schema": {
+            "type": "string"
+        },
+        "slug": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+            "description": "Folder name. The only identity a demo has \u2014 never change it after publishing."
+        },
+        "title": {
+            "type": "string",
+            "minLength": 1
+        },
+        "description": {
+            "type": "string",
+            "minLength": 1
+        },
+        "tags": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            },
+            "minItems": 1
+        },
+        "icons": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            },
+            "description": "Icon aliases from shared/icons.json. The export ships exactly these."
+        },
+        "fragments": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["id", "file", "region", "lang", "title"],
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "file": {
+                        "type": "string"
+                    },
+                    "region": {
+                        "type": "string"
+                    },
+                    "lang": {
+                        "enum": ["html", "ts", "css"]
+                    },
+                    "title": {
+                        "type": "string"
+                    },
+                    "note": {
+                        "type": "string",
+                        "description": "One line of context, shown under the title in the portal."
+                    }
+                }
+            }
+        }
+    }
+}

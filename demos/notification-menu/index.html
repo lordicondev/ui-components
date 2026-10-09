@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Notification menu</title>
+        <link rel="stylesheet" href="./notification-menu.css" />
+        <script type="module" src="./main.ts"></script>
+    </head>
+    <body>
+        <main class="demo">
+            <div class="stage">
+                <!-- #region bell -->
+                <!-- popovertarget opens the panel; the browser closes it on Escape or a
+                     click away. data-count is the count: the icon rings when it goes up and
+                     the badge is drawn from it. aria-expanded is written by popovers(). -->
+                <button
+                    class="bell"
+                    type="button"
+                    popovertarget="feed"
+                    data-count="0"
+                    aria-label="Notifications"
+                >
+                    <lord-icon
+                        class="bell__mark"
+                        current-color
+                        src="icons/bell.json"
+                        trigger="follow(data-count)"
+                        target=".bell"
+                        aria-hidden="true"
+                    >
+                        <img alt="" src="icons/bell.svg" />
+                    </lord-icon>
+
+                    <span class="bell__badge" aria-hidden="true" hidden></span>
+                </button>
+                <!-- #endregion -->
+
+                <div class="menu popover" id="feed" popover>
+                    <div class="menu__head" data-rise>
+                        <h2 class="menu__title">Notification</h2>
+                        <button class="menu__read" type="button">Mark as read</button>
+                    </div>
+
+                    <ul class="feed">
+                        <!-- #region item -->
+                        <!-- One notification. data-unread is the dot and the tint. data-rise
+                             marks a row the panel brings in; data-reveal marks the words that
+                             arrive one after another. -->
+                        <li class="feed__row" data-unread data-rise>
+                            <button class="row" type="button">
+                                <span class="row__mark">
+                                    <lord-icon
+                                        class="row__icon"
+                                        current-color
+                                        src="icons/heart.json"
+                                        trigger="hover"
+                                        target=".row"
+                                        aria-hidden="true"
+                                    ></lord-icon>
+                                </span>
+
+                                <span class="row__body">
+                                    <span class="row__title" data-reveal>
+                                        Anna liked your Bell component
+                                    </span>
+                                    <span class="row__time">2 min ago</span>
+                                </span>
+
+                                <span class="row__dot" aria-hidden="true"></span>
+                                <span class="visually-hidden">Unread</span>
+                            </button>
+                        </li>
+                        <!-- #endregion -->
+
+                        <li class="feed__row" data-unread data-rise>
+                            <button class="row" type="button">
+                                <span class="row__mark">
+                                    <lord-icon
+                                        class="row__icon"
+                                        current-color
+                                        src="icons/download.json"
+                                        trigger="hover"
+                                        target=".row"
+                                        aria-hidden="true"
+                                    ></lord-icon>
+                                </span>
+
+                                <span class="row__body">
+                                    <span class="row__title" data-reveal>
+                                        Version 1.4.0 is now available
+                                    </span>
+                                    <span class="row__time">1 hour ago</span>
+                                </span>
+
+                                <span class="row__dot" aria-hidden="true"></span>
+                                <span class="visually-hidden">Unread</span>
+                            </button>
+                        </li>
+
+                        <li class="feed__row" data-rise>
+                            <button class="row" type="button">
+                                <span class="row__mark">
+                                    <lord-icon
+                                        class="row__icon"
+                                        current-color
+                                        src="icons/message.json"
+                                        trigger="hover"
+                                        target=".row"
+                                        aria-hidden="true"
+                                    ></lord-icon>
+                                </span>
+
+                                <span class="row__body">
+                                    <span class="row__title" data-reveal>
+                                        Marek commented: “amazing job!”
+                                    </span>
+                                    <span class="row__time">yesterday</span>
+                                </span>
+                            </button>
+                        </li>
+
+                        <li class="feed__row" data-rise>
+                            <button class="row" type="button">
+                                <span class="row__mark">
+                                    <lord-icon
+                                        class="row__icon"
+                                        current-color
+                                        src="icons/star.json"
+                                        trigger="hover"
+                                        target=".row"
+                                        aria-hidden="true"
+                                    ></lord-icon>
+                                </span>
+
+                                <span class="row__body">
+                                    <span class="row__title" data-reveal>
+                                        Your plugin just passed 500 stars
+                                    </span>
+                                    <span class="row__time">2 days ago</span>
+                                </span>
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- The demo's own controls, not part of the component. -->
+            <form class="controls">
+                <label class="controls__label" for="count">Notifications</label>
+                <input
+                    class="controls__input"
+                    id="count"
+                    type="number"
+                    min="0"
+                    max="99"
+                    value="5"
+                    inputmode="numeric"
+                />
+                <button class="controls__go" type="submit">Set</button>
+            </form>
+        </main>
+    </body>
+</html>

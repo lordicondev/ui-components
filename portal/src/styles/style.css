@@ -1,0 +1,918 @@
+@import './palette.css';
+@import './tokens.css';
+
+/* The portal renders code, so it carries the mono face the demos do not need. Font URLs are
+   relative to this file, so they hold when the site lives under a path. */
+@font-face {
+    font-family: 'Figtree';
+    font-style: normal;
+    font-weight: 300 900;
+    font-display: swap;
+    src: url('fonts/figtree-latin.woff2') format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+        U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212,
+        U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 400 700;
+    font-display: swap;
+    src: url('fonts/jetbrains-mono-latin.woff2') format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+        U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212,
+        U+2215, U+FEFF, U+FFFD;
+}
+
+/* Arial with Figtree's measurements, for the moment before Figtree arrives, as in the demos. */
+@font-face {
+    font-family: 'Figtree fallback';
+    src: local('Arial'), local('Liberation Sans');
+    size-adjust: 100.3%;
+    ascent-override: 94.7%;
+    descent-override: 24.9%;
+    line-gap-override: 0%;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+[hidden] {
+    display: none !important;
+}
+
+/* Until the script defines <lord-icon> it is an unknown inline element with no size. */
+lord-icon {
+    display: inline-block;
+    width: var(--icon-size-32);
+    height: var(--icon-size-32);
+}
+
+/* A placeholder inside the icon fills it until the icon is ready. */
+lord-icon:not(:defined) > img {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+/* Placeholders are black. Set --icon-filter wherever an icon's colour is set. */
+lord-icon > img {
+    filter: var(--icon-filter);
+}
+
+body {
+    margin: 0;
+    background: var(--surface);
+    color: var(--ink);
+    --icon-filter: var(--filter-ink);
+    font-family: var(--font-ui);
+    font-size: var(--text-base);
+    line-height: var(--leading-base);
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Links read as text with a quiet underline, and take the accent under the pointer. */
+a {
+    color: inherit;
+    text-decoration-color: var(--border-strong);
+    text-underline-offset: 3px;
+    transition:
+        color 150ms ease,
+        text-decoration-color 150ms ease;
+}
+
+a:hover {
+    color: var(--accent-strong);
+    text-decoration-color: currentcolor;
+}
+
+h1,
+h2 {
+    margin: 0;
+    line-height: var(--leading-xl);
+}
+
+:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+}
+
+.skip-link {
+    position: absolute;
+    left: -9999px;
+}
+
+.skip-link:focus {
+    left: var(--space-16);
+    top: var(--space-16);
+    padding: var(--space-8) var(--space-12);
+    border-radius: var(--radius-md);
+    background: var(--surface);
+}
+
+/* Syntax highlighting, written in by the code_highlight plugin. */
+/* highlight */
+
+/* Layout ------------------------------------------------------------------ */
+
+/* minmax(0, 1fr), not 1fr: a track defaults to min-content as its floor, and a wide code
+   block would push the whole page sideways rather than scroll inside its own box. */
+.layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+}
+
+/* Capped and centred: left-aligned content on a 2560px screen reads as a mistake, not as
+   breathing room. `width: 100%` is load-bearing — an auto margin on a grid item drops the
+   stretch and the column would size to its widest code block instead.
+
+   The side padding is the same --gutter the demos use, so the text under a demo starts
+   where the demo's own content does. */
+.layout__main {
+    width: 100%;
+    min-width: 0;
+    max-width: 1080px;
+    margin-inline: auto;
+    padding: var(--main-top) var(--gutter) var(--space-64);
+
+    /* Named so the intro below can subtract exactly what the page is padded by. */
+    --main-top: var(--space-32);
+}
+
+/* Sections space themselves out below; the last one does not need to space itself from
+   the end of the page as well. */
+.layout__main > :last-child,
+.demo-page > :last-child {
+    margin-bottom: 0;
+}
+
+@media (min-width: 900px) {
+    .layout {
+        grid-template-columns: 240px minmax(0, 1fr);
+    }
+
+    .sidebar {
+        min-width: 0;
+    }
+
+    .layout__main {
+        --main-top: var(--space-48);
+    }
+}
+
+/* Sidebar ------------------------------------------------------------------ */
+
+/* Rows as in the demos' own sidebar: quiet at rest, filled when hovered or current. */
+.sidebar {
+    position: relative;
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    gap: var(--space-16);
+    padding: var(--space-16) var(--gutter);
+    border-bottom: 1px solid var(--border-soft);
+    background: var(--surface);
+}
+
+.sidebar__home {
+    display: block;
+    width: fit-content;
+}
+
+/* On a phone, level with the foot of the logo at the right; in the column, at its foot. */
+.sidebar__version {
+    position: absolute;
+    top: calc(var(--space-16) + 36px);
+    right: var(--gutter);
+    margin: 0;
+    color: var(--ink-muted);
+    font-size: var(--text-xs);
+    line-height: 1;
+    translate: 0 -100%;
+}
+
+/* The logo keeps its own colours, so its placeholder is not recoloured. */
+.sidebar__home lord-icon {
+    display: block;
+    width: auto;
+    height: 36px;
+    aspect-ratio: 987 / 221;
+    --icon-filter: none;
+}
+
+.sidebar__list {
+    display: flex;
+    gap: var(--space-4);
+    margin: 0;
+    padding: 0;
+    overflow-x: auto;
+    list-style: none;
+}
+
+.sidebar__link {
+    display: block;
+    padding: var(--space-4) var(--space-12);
+    border-radius: var(--radius-md);
+    color: var(--ink-soft);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.sidebar__link:hover {
+    background: var(--surface-muted);
+    color: var(--ink);
+}
+
+.sidebar__link[aria-current='page'] {
+    background: var(--surface-muted);
+    color: var(--ink);
+    font-weight: 600;
+}
+
+@media (min-width: 900px) {
+    .sidebar {
+        position: sticky;
+        top: 0;
+        height: 100vh;
+        padding: var(--space-32) var(--space-16);
+        border-right: 1px solid var(--border-soft);
+        border-bottom: 0;
+        overflow-y: auto;
+    }
+
+    .sidebar__home {
+        padding-inline: var(--space-12);
+    }
+
+    .sidebar__version {
+        position: static;
+        margin-top: auto;
+        padding-inline: var(--space-12);
+        translate: none;
+    }
+
+    .sidebar__list {
+        flex-direction: column;
+        gap: 2px;
+        overflow-x: visible;
+    }
+}
+
+/* Buttons ------------------------------------------------------------------ */
+
+/* A link that does something: bordered like the demos' toolbar buttons. */
+.button {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-8);
+    padding: var(--space-8) var(--space-16);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    background: var(--surface);
+    color: var(--ink);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    text-decoration: none;
+    transition:
+        background 150ms ease,
+        border-color 150ms ease;
+}
+
+.button:hover {
+    border-color: var(--border-strong);
+    background: var(--surface-muted);
+    color: var(--ink);
+}
+
+.button lord-icon {
+    width: var(--icon-size-20);
+    height: var(--icon-size-20);
+    margin-right: calc(var(--space-4) * -1);
+}
+
+.buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-8);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+/* A quiet button inside a box: the copy buttons. */
+.copy {
+    flex: none;
+    padding: 2px var(--space-8);
+    border: 0;
+    border-radius: var(--radius-sm);
+    background: none;
+    color: var(--ink-muted);
+    font-size: var(--text-xs);
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.copy:hover {
+    background: var(--border-soft);
+    color: var(--ink);
+}
+
+/* Home --------------------------------------------------------------------- */
+
+.hero {
+    padding-top: var(--space-32);
+}
+
+.hero__eyebrow {
+    margin: 0 0 var(--space-16);
+    color: var(--accent-strong);
+    font-size: var(--text-sm);
+    font-weight: 600;
+}
+
+.hero__title {
+    max-width: 16ch;
+    font-size: var(--text-2xl);
+    line-height: var(--leading-2xl);
+    letter-spacing: -0.01em;
+}
+
+@media (min-width: 720px) {
+    .hero__title {
+        font-size: var(--text-3xl);
+        line-height: var(--leading-3xl);
+    }
+}
+
+.hero__lead {
+    max-width: 56ch;
+    margin: var(--space-16) 0 0;
+    color: var(--ink-soft);
+    font-size: var(--text-lg);
+    line-height: var(--leading-lg);
+}
+
+/* One line for the developer, under the lead for everyone. */
+.hero__note {
+    margin: var(--space-16) 0 var(--space-32);
+    color: var(--ink-muted);
+    font-size: var(--text-sm);
+}
+
+.listing {
+    margin-top: var(--space-96);
+}
+
+.listing__title {
+    font-size: var(--text-lg);
+}
+
+/* The one filter: chips as light as the demos' toggles. The chosen one is tinted, as a
+   picked tool is in the menu-bar demo. */
+.filter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-8);
+    margin-top: var(--space-16);
+}
+
+/* The chips need the script. In place from the first paint, so the cards do not move. */
+@media (scripting: none) {
+    .filter {
+        display: none;
+    }
+}
+
+.chip {
+    padding: var(--space-4) var(--space-12);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-pill);
+    background: var(--surface);
+    color: var(--ink-soft);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    cursor: pointer;
+    transition:
+        background 150ms ease,
+        border-color 150ms ease,
+        color 150ms ease;
+}
+
+.chip:hover {
+    background: var(--surface-muted);
+    color: var(--ink);
+}
+
+.chip[aria-pressed='true'] {
+    border-color: var(--accent-surface);
+    background: var(--accent-surface);
+    color: var(--accent-ink);
+}
+
+.cards {
+    display: grid;
+    gap: var(--space-16);
+    margin: var(--space-24) 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+@media (min-width: 720px) {
+    .cards {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (min-width: 1240px) {
+    .cards {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+/* The whole card is the link, so the pointer and keyboard focus reach the icon too. On a
+   phone the icon sits beside the words, so the list stays short; from two columns up, above
+   them. */
+.card__link {
+    display: grid;
+    grid-template-columns: var(--icon-size-48) minmax(0, 1fr);
+    align-content: start;
+    column-gap: var(--space-16);
+    height: 100%;
+    padding: var(--space-16);
+    border: 1px solid var(--border-soft);
+    border-radius: var(--radius-lg);
+    background: var(--surface);
+    box-shadow: var(--shadow-sm);
+    color: inherit;
+    text-decoration: none;
+    transition: border-color 150ms ease;
+}
+
+.card__link:hover {
+    border-color: var(--border);
+    color: inherit;
+}
+
+@media (min-width: 720px) {
+    .card__link {
+        grid-template-columns: minmax(0, 1fr);
+        padding: var(--space-24);
+    }
+}
+
+/* The icon sits in a well, as a single icon does in the demos. Under the pointer the well
+   takes the accent, as a picked tool does. */
+.card__icon {
+    display: grid;
+    place-items: center;
+    grid-row: span 2;
+    width: var(--icon-size-48);
+    height: var(--icon-size-48);
+    border-radius: var(--radius-md);
+    background: var(--surface-muted);
+    color: var(--ink);
+    --icon-filter: var(--filter-ink);
+    transition:
+        background 150ms ease,
+        color 150ms ease;
+}
+
+.card__icon lord-icon {
+    width: var(--icon-size-24);
+    height: var(--icon-size-24);
+}
+
+@media (min-width: 720px) {
+    .card__icon {
+        grid-row: auto;
+        margin-bottom: var(--space-16);
+    }
+}
+
+.card__link:hover .card__icon,
+.card__link:focus-visible .card__icon {
+    background: var(--accent-surface);
+    color: var(--accent);
+    --icon-filter: var(--filter-accent);
+}
+
+.card__title {
+    font-size: var(--text-base);
+    line-height: var(--leading-base);
+}
+
+.card__description {
+    margin: var(--space-4) 0 0;
+    color: var(--ink-muted);
+    font-size: var(--text-sm);
+    line-height: var(--leading-sm);
+}
+
+.cards__empty {
+    color: var(--ink-muted);
+    font-size: var(--text-sm);
+}
+
+/* Filtering rearranges the list. Naming each card lets the browser tween the survivors
+   from their old places to their new ones, so the list reflows in front of you instead of
+   snapping. Only the duration and the curve are ours; the movement is the browser's. */
+::view-transition-group(*) {
+    animation-duration: 300ms;
+    animation-timing-function: cubic-bezier(0.3, 0, 0.2, 1);
+}
+
+/* Demo page ---------------------------------------------------------------- */
+
+.demo-page h1 {
+    font-size: var(--text-2xl);
+    line-height: var(--leading-2xl);
+}
+
+/* The title and whatever you can do to the demo share a line. */
+.demo-page__title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-16);
+}
+
+.demo-page__lead {
+    max-width: 62ch;
+    margin: var(--space-8) 0 0;
+    color: var(--ink-muted);
+}
+
+.actions {
+    display: flex;
+    flex: none;
+    gap: var(--space-8);
+}
+
+/* A square toolbar button, as in the demos. */
+.action {
+    display: grid;
+    padding: var(--space-8);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    color: var(--ink);
+    transition:
+        background 150ms ease,
+        border-color 150ms ease;
+    place-items: center;
+}
+
+.action:hover {
+    border-color: var(--border-strong);
+    background: var(--surface-muted);
+    color: var(--ink);
+}
+
+.action lord-icon {
+    width: var(--icon-size-20);
+    height: var(--icon-size-20);
+}
+
+/* The title, the description and the demo are the whole of the first screen, and the size
+   of it is settled in CSS: a stage measured only after the frame reports back would push
+   everything under it down the moment the demo loaded.
+
+   It stops short of the full screen by the "Take it with you" title and one line of its
+   text, so it is clear the page goes on below the demo. */
+.demo-page__intro {
+    display: flex;
+    flex-direction: column;
+    min-height: calc(100dvh - var(--main-top) - var(--peek));
+
+    --peek: calc(var(--leading-xl) + var(--space-8) + var(--leading-base));
+}
+
+/* The demo sits in the page rather than in a box of its own — a frame around it would
+   read as another control, and these demos are the page.
+
+   It reaches out past the side padding so the demo supplies the gutter itself: the same
+   --gutter, computed against nearly the same width, so a control inside the frame lines
+   up with the text above and below it instead of being indented twice. */
+.stage {
+    display: flex;
+    flex: 1;
+    margin-top: var(--space-32);
+    margin-inline: calc(var(--gutter) * -1);
+}
+
+/* The wrapper fills the stage, and the frame fills the wrapper. Only a demo taller than
+   the screen adds anything to this, from sizeStage. */
+.stage__frame {
+    display: grid;
+    flex: 1;
+    min-height: 320px;
+}
+
+.stage__frame iframe {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+.take-it,
+.reading,
+.icons-used {
+    margin-bottom: var(--space-96);
+}
+
+.take-it h2,
+.reading h2,
+.icons-used h2 {
+    margin-bottom: var(--space-8);
+    font-size: var(--text-lg);
+}
+
+.take-it p {
+    max-width: 68ch;
+    margin: 0 0 var(--space-16);
+    color: var(--ink-muted);
+    font-size: var(--text-sm);
+}
+
+.take-it code {
+    font-family: var(--font-mono);
+    font-size: 0.95em;
+}
+
+.take-it .take-it__note {
+    margin: var(--space-8) 0 var(--space-24);
+    font-size: var(--text-xs);
+    line-height: var(--leading-sm);
+}
+
+/* The command in a filled field, as the demos draw an input. */
+.terminal {
+    display: flex;
+    align-items: center;
+    gap: var(--space-8);
+    padding: var(--space-8) var(--space-8) var(--space-8) var(--space-16);
+    border: 1px solid var(--border-soft);
+    border-radius: var(--radius-md);
+    background: var(--surface-muted);
+}
+
+/* A command that scrolls sideways hides its own tail on a phone, so this one wraps —
+   with the tighter leading a wrapped command needs to still read as one line of shell. */
+.terminal__body {
+    flex: 1;
+    min-width: 0;
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    line-height: var(--leading-sm);
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+.reading__legend {
+    max-width: 68ch;
+    margin: 0 0 var(--space-16);
+    color: var(--ink-muted);
+    font-size: var(--text-sm);
+}
+
+/* Code blocks ------------------------------------------------------------- */
+
+.code {
+    margin: 0 0 var(--space-12);
+    border: 1px solid var(--border-soft);
+    border-radius: var(--radius-lg);
+    background: var(--surface);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+}
+
+.code__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: var(--space-4) var(--space-12);
+    padding: var(--space-12) var(--space-16);
+    cursor: pointer;
+    list-style: none;
+}
+
+.code__head:hover .code__title {
+    color: var(--accent-strong);
+}
+
+/* Replace the disclosure marker with a chevron that lines up with the text. */
+.code__head::-webkit-details-marker {
+    display: none;
+}
+
+.code__head::before,
+.imports__link::before {
+    content: '';
+    flex: none;
+    width: 6px;
+    height: 6px;
+    margin-inline: 2px 4px;
+    border-right: 1.5px solid var(--ink-subtle);
+    border-bottom: 1.5px solid var(--ink-subtle);
+    transform: translateY(-2px) rotate(-45deg);
+    transition: transform 150ms ease;
+}
+
+.code[open] > .code__head::before,
+.imports[open] > .imports__link::before {
+    transform: translateY(-3px) rotate(45deg);
+}
+
+.code[open] > .code__head {
+    border-bottom: 1px solid var(--border-soft);
+}
+
+.code__title {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    transition: color 150ms ease;
+}
+
+.code__note {
+    color: var(--ink-muted);
+    font-size: var(--text-xs);
+}
+
+.code__bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-8) var(--space-12) 0 var(--space-16);
+    background: var(--surface-muted);
+}
+
+.code__lang {
+    color: var(--ink-subtle);
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+}
+
+/* The highlight theme brings its own padding and background; the block already has both. */
+.code__body code.hljs {
+    padding: 0;
+    background: none;
+}
+
+.code__body {
+    margin: 0;
+    padding: var(--space-12) var(--space-16) var(--space-16);
+    background: var(--surface-muted);
+    overflow-x: auto;
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    line-height: var(--leading-sm);
+    tab-size: 4;
+}
+
+/* TS | JS as a segmented control: the chosen side is a raised pill in a sunken track. */
+.switch {
+    display: inline-flex;
+    gap: 2px;
+    padding: 2px;
+    border-radius: var(--radius-md);
+    background: var(--border-soft);
+}
+
+.switch__option {
+    padding: 0 var(--space-8);
+    border: 0;
+    border-radius: 6px;
+    background: none;
+    color: var(--ink-muted);
+    font-size: var(--text-xs);
+    font-weight: 500;
+    line-height: var(--leading-sm);
+    cursor: pointer;
+}
+
+.switch__option:hover {
+    color: var(--ink);
+}
+
+.switch__option[aria-pressed='true'] {
+    background: var(--surface);
+    box-shadow: var(--shadow-sm);
+    color: var(--ink);
+}
+
+/* Quiet on purpose. These files are listed so that no import on the page is a dead end,
+   not as a second half of the demo — so the link is all that shows until someone wants
+   them, and then it steps aside and they take its place, looking like every other block. */
+.imports[open] > .imports__link {
+    display: none;
+}
+
+/* Padded like a block head, so its marker sits under the markers above it. */
+.imports__link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-8);
+    padding: var(--space-4) var(--space-16);
+    color: var(--ink-muted);
+    font-size: var(--text-sm);
+    cursor: pointer;
+    list-style: none;
+}
+
+.imports__link:hover {
+    color: var(--ink);
+}
+
+.imports__link::-webkit-details-marker {
+    display: none;
+}
+
+.imports__count {
+    color: var(--ink-subtle);
+    font-size: var(--text-xs);
+}
+
+/* No wrapper of its own: the blocks inside carry the same spacing as the ones above, so
+   the list reads as one run of files rather than as a box within a box. */
+
+/* Icons -------------------------------------------------------------------- */
+
+.icon-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--text-sm);
+}
+
+/* The first two columns are as wide as their content; the id takes what is left. */
+.icon-table th:first-child,
+.icon-table td:first-child {
+    width: var(--icon-size-40);
+}
+
+.icon-table th:nth-child(2),
+.icon-table td:nth-child(2) {
+    width: 1%;
+    white-space: nowrap;
+}
+
+.icon-table th:last-child,
+.icon-table td:last-child {
+    width: 100%;
+    padding-right: 0;
+}
+
+.icon-table th {
+    padding: 0 var(--space-16) var(--space-8) 0;
+    color: var(--ink-muted);
+    font-size: var(--text-xs);
+    font-weight: 500;
+    text-align: left;
+}
+
+.icon-table td {
+    padding: var(--space-8) var(--space-16) var(--space-8) 0;
+    border-top: 1px solid var(--border-soft);
+}
+
+/* Each preview in a well, as the cards on the index show theirs. */
+.icon-table__well {
+    display: grid;
+    place-items: center;
+    width: var(--icon-size-40);
+    height: var(--icon-size-40);
+    border-radius: var(--radius-md);
+    background: var(--surface-muted);
+    color: var(--ink);
+    --icon-filter: var(--filter-ink);
+}
+
+.icon-table__well lord-icon {
+    width: var(--icon-size-24);
+    height: var(--icon-size-24);
+}
+
+.icon-table code {
+    font-family: var(--font-mono);
+}
+
+.icon-table__id {
+    color: var(--ink-muted);
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+}
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+}

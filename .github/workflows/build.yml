@@ -1,0 +1,61 @@
+name: Build
+
+on:
+    push:
+        branches: ['main']
+    pull_request:
+        branches: ['main']
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+
+        # Only for pushing the standalone branch, on main.
+        permissions:
+            contents: write
+
+        steps:
+            - uses: actions/checkout@v4
+
+            - uses: actions/setup-node@v4
+              with:
+                  node-version: 24.x
+                  cache: 'npm'
+
+            - uses: denoland/setup-deno@v2
+              with:
+                  deno-version: v2.x
+
+            - run: npm ci
+
+            - name: Build demos, exports and the portal
+              run: npm run build:release
+
+            # Every link in the release build leads somewhere, and none to localhost.
+            - name: Links
+              run: npm run check:links -- --release
+
+            # The promise on every demo page is that the export runs untouched. This is
+            # where that promise is kept honest.
+            - name: Every export installs and builds on its own
+              run: |
+                  for demo in export/*/; do
+                      echo "::group::$demo"
+                      (cd "$demo" && npm install --no-audit --no-fund && npx tsc --noEmit && npx vite build)
+                      echo "::endgroup::"
+                  done
+
+            - name: Keep the site
+              uses: actions/upload-artifact@v4
+              with:
+                  name: site
+                  path: portal/_site
+                  retention-days: 14
+
+            # StackBlitz and giget read the standalone branch, so it has to follow main.
+            - name: Publish the standalone branch
+              if: github.ref == 'refs/heads/main'
+              run: |
+                  git config user.name "github-actions[bot]"
+                  git config user.email "github-actions[bot]@users.noreply.github.com"
+                  npm run publish:export -- --push

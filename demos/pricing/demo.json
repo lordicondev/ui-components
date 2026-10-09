@@ -1,0 +1,50 @@
+{
+    "$schema": "../../schemas/demo.schema.json",
+    "slug": "pricing",
+    "title": "Pricing",
+    "description": "Three plans whose icons play when the pointer enters the card. In four layouts.",
+    "tags": ["cards", "hover"],
+    "icons": ["puzzle-piece", "rocket", "avatars-group", "check-circle-solid"],
+    "fragments": [
+        {
+            "id": "setup",
+            "file": "main.ts",
+            "region": "setup",
+            "lang": "ts",
+            "title": "Define the element",
+            "note": "Built-in triggers only. Apart from the dots, this is the whole script."
+        },
+        {
+            "id": "markup",
+            "file": "index.html",
+            "region": "markup",
+            "lang": "html",
+            "title": "A plan card",
+            "note": "target points the icon at the card, so the whole card is the hover area. The ticks are plain SVG."
+        },
+        {
+            "id": "colour",
+            "file": "pricing.css",
+            "region": "colour",
+            "lang": "css",
+            "title": "Grey icons and accent ones",
+            "note": "The icons inherit color through current-color. The black SVGs take a filter."
+        },
+        {
+            "id": "raised",
+            "file": "pricing.css",
+            "region": "raised",
+            "lang": "css",
+            "title": "The icon on the top border",
+            "note": "Positioned on the card and pulled up by half its height, so it sits on the line."
+        },
+        {
+            "id": "compact",
+            "file": "pricing.css",
+            "region": "compact",
+            "lang": "css",
+            "title": "Name and price in one row",
+            "note": "No icon in the markup. The rule is the head's bottom border."
+        }
+    ]
+}

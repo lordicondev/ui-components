@@ -1,0 +1,50 @@
+{
+    "$schema": "../../schemas/demo.schema.json",
+    "slug": "search-bar",
+    "title": "Search bar",
+    "description": "A field whose magnifier greets the cursor, and whose clear button draws itself once the typing has stopped.",
+    "tags": ["form", "action"],
+    "icons": ["magnifier", "cross"],
+    "fragments": [
+        {
+            "id": "setup",
+            "file": "main.ts",
+            "region": "setup",
+            "lang": "ts",
+            "title": "Define the element",
+            "note": "Built-in triggers only. What each icon follows is written in its markup."
+        },
+        {
+            "id": "markup",
+            "file": "index.html",
+            "region": "markup",
+            "lang": "html",
+            "title": "The field",
+            "note": "Two attributes on the wrapper. Each icon follows one of them."
+        },
+        {
+            "id": "clear",
+            "file": "index.html",
+            "region": "clear",
+            "lang": "html",
+            "title": "The clear button",
+            "note": "state=\"in-reveal\" is why the cross draws itself in."
+        },
+        {
+            "id": "settle",
+            "file": "../../shared/ui/field.ts",
+            "region": "settle",
+            "lang": "ts",
+            "title": "When the clear button appears",
+            "note": "From shared/ui/field.ts: half a second after the typing pauses."
+        },
+        {
+            "id": "hide",
+            "file": "../../shared/ui/field.css",
+            "region": "hide",
+            "lang": "css",
+            "title": "Hidden but still taking up room",
+            "note": "From shared/ui/field.css. The stylesheet reads the same attribute the icon does."
+        }
+    ]
+}

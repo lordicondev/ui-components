@@ -1,0 +1,66 @@
+{
+    "$schema": "../../schemas/demo.schema.json",
+    "slug": "loading-list",
+    "title": "Loading list",
+    "description": "Five steps of a job, each with a spinner that turns into a tick or a cross. The state of a step is one attribute.",
+    "tags": ["progress", "status", "follow"],
+    "icons": ["spinner-circle", "check-circle", "cross-circle"],
+    "fragments": [
+        {
+            "id": "setup",
+            "file": "main.ts",
+            "region": "setup",
+            "lang": "ts",
+            "title": "Define the element",
+            "note": "Built-in triggers only."
+        },
+        {
+            "id": "markup",
+            "file": "index.html",
+            "region": "markup",
+            "lang": "html",
+            "title": "A step with three icons",
+            "note": "Each icon follows data-status on the row and plays its own state for one value."
+        },
+        {
+            "id": "api",
+            "file": "main.ts",
+            "region": "api",
+            "lang": "ts",
+            "title": "Set a step's status",
+            "note": "The API is one function. Call it from your own process."
+        },
+        {
+            "id": "scenario",
+            "file": "main.ts",
+            "region": "scenario",
+            "lang": "ts",
+            "title": "A made-up process",
+            "note": "Timers stand in for real work. A failure stops the run."
+        },
+        {
+            "id": "retry",
+            "file": "main.ts",
+            "region": "retry",
+            "lang": "ts",
+            "title": "Retry from the failed step",
+            "note": "The same run(), started from where it stopped."
+        },
+        {
+            "id": "swap",
+            "file": "loading-list.css",
+            "region": "swap",
+            "lang": "css",
+            "title": "One cell, three icons",
+            "note": "The stylesheet shows the icon for the status."
+        },
+        {
+            "id": "colour",
+            "file": "loading-list.css",
+            "region": "colour",
+            "lang": "css",
+            "title": "Faint, then solid",
+            "note": "The icons inherit color through current-color."
+        }
+    ]
+}

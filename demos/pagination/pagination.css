@@ -1,0 +1,151 @@
+@import '@shared/styles/index.css';
+@import '@shared/ui/pager.css';
+
+/* A row above, the dots below. */
+.demo {
+    display: grid;
+    grid-template-rows: 1fr auto;
+    justify-items: center;
+    align-items: center;
+    gap: var(--space-48);
+    min-height: 100dvh;
+    padding: var(--space-64) var(--gutter) var(--space-32);
+}
+
+.pages {
+    display: flex;
+    align-items: center;
+    gap: var(--space-96);
+}
+
+/* The bare chevrons carry 8px of padding to be big enough to hit; the gap gives it back
+   so the visible distance matches the other rows. */
+.pages--bare {
+    gap: calc(var(--space-96) - var(--space-8));
+}
+
+.numbers {
+    position: relative;
+    display: flex;
+    gap: var(--space-4);
+}
+
+/*
+ * The frame's two edges do not move together. The leading edge goes first, so the frame
+ * stretches to the new page; the trailing edge follows once it has arrived. Times and
+ * curves are from the reference recording.
+ */
+.numbers {
+    --frame-lead: 130ms cubic-bezier(0.4, 0, 1, 1);
+    --frame-trail: 300ms cubic-bezier(0.215, 0.61, 0.355, 1) 130ms;
+}
+
+/* #region frame */
+.numbers__frame {
+    position: absolute;
+    inset-block: 0;
+    left: var(--frame-left);
+    right: var(--frame-right);
+    border: 1px solid var(--accent);
+    border-radius: var(--radius-md);
+    pointer-events: none;
+    transition:
+        right var(--frame-lead),
+        left var(--frame-trail);
+}
+
+.numbers[data-going='back'] .numbers__frame {
+    transition:
+        left var(--frame-lead),
+        right var(--frame-trail);
+}
+/* #endregion */
+
+/* Hidden until the row has been measured, which is when `data-going` is first set. */
+.numbers:not([data-going]) .numbers__frame {
+    opacity: 0;
+}
+
+/* A square: as wide as a line of text plus padding is tall. A minimum, so a two-digit
+   page can widen it. */
+.page {
+    display: grid;
+    place-items: center;
+    min-width: calc(var(--leading-base) + 2 * var(--space-8));
+    padding: var(--space-8);
+    border: 0;
+    border-radius: var(--radius-md);
+    background: none;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.page:hover {
+    background: var(--surface-muted);
+}
+
+.step {
+    display: flex;
+    align-items: center;
+    gap: var(--space-8);
+    padding: var(--space-8);
+    border: 0;
+    border-radius: var(--radius-md);
+    background: none;
+    color: var(--ink);
+    font-weight: 500;
+    --icon-filter: var(--filter-ink);
+    cursor: pointer;
+}
+
+.step:disabled {
+    color: var(--ink-subtle);
+    --icon-filter: var(--filter-ink-subtle);
+    cursor: default;
+}
+
+/* One arrow icon for both buttons. Flipping the next one flips its animation too. */
+.step__mark {
+    flex: none;
+    width: var(--icon-size-24);
+    height: var(--icon-size-24);
+}
+
+.step--next .step__mark {
+    scale: -1 1;
+}
+
+/* Everything that differs between the three rows. */
+/* #region variants */
+.step--boxed {
+    border: 1px solid var(--border);
+    background: var(--surface);
+}
+
+.step--boxed:hover:not(:disabled),
+.step--labelled:hover:not(:disabled) {
+    background: var(--surface-muted);
+}
+
+.step--boxed:active:not(:disabled),
+.step--labelled:active:not(:disabled) {
+    background: var(--surface-sunken);
+}
+
+/* No box to tint, so the chevron changes colour instead. */
+.step--bare:hover:not(:disabled) {
+    color: var(--accent);
+}
+
+.step--labelled .step__mark,
+.step--bare .step__mark {
+    width: var(--icon-size-20);
+    height: var(--icon-size-20);
+}
+/* #endregion */
+
+@media (prefers-reduced-motion: reduce) {
+    .numbers__frame {
+        transition: none;
+    }
+}

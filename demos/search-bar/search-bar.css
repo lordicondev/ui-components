@@ -1,0 +1,13 @@
+@import '@shared/styles/index.css';
+@import '@shared/ui/field.css';
+
+.demo {
+    display: grid;
+    place-items: center;
+    min-height: 100dvh;
+    padding: var(--space-64) var(--gutter);
+}
+
+.search {
+    width: min(374px, 100%);
+}

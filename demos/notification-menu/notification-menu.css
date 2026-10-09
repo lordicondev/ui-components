@@ -1,0 +1,232 @@
+@import '@shared/styles/index.css';
+@import '@shared/ui/popover.css';
+@import '@shared/ui/menu.css';
+
+/* The bell near the top, so the panel has room to hang under it. */
+.demo {
+    display: grid;
+    grid-template-rows: 1fr auto;
+    justify-items: center;
+    gap: var(--space-48);
+    min-height: 100dvh;
+    padding: var(--space-48) var(--gutter) var(--space-32);
+}
+
+/* A box for the badge to hang off. */
+.stage {
+    display: grid;
+    align-self: start;
+    justify-items: center;
+}
+
+/* Resting, hovered, and open. aria-expanded is written by popovers(). */
+.bell {
+    position: relative;
+    display: grid;
+    place-items: center;
+    padding: var(--space-8);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    background: var(--surface);
+    color: var(--ink);
+    cursor: pointer;
+    --icon-filter: var(--filter-ink);
+}
+
+.bell:hover {
+    background: var(--surface-muted);
+}
+
+.bell[aria-expanded='true'] {
+    background: var(--border-soft);
+}
+
+.bell__mark {
+    display: block;
+    width: var(--icon-size-24);
+    height: var(--icon-size-24);
+}
+
+/* Hung off the button's corner, so the button keeps its size. A circle at one digit,
+   a pill at two. */
+.bell__badge {
+    position: absolute;
+    top: calc(var(--space-8) * -1);
+    right: calc(var(--space-12) * -1);
+    min-width: var(--icon-size-24);
+    padding: 0 var(--space-4);
+    border-radius: var(--radius-pill);
+    background: var(--accent);
+    color: var(--ink-inverse);
+    font-size: var(--text-xs);
+    line-height: var(--leading-base);
+    font-weight: 700;
+    text-align: center;
+    transform-origin: center;
+}
+
+/* The panel is menu.css's. Only the width is this demo's. */
+.menu {
+    --menu-width: 350px;
+    max-width: calc(100vw - var(--space-24));
+}
+
+.menu__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-12);
+}
+
+.menu__title {
+    margin: 0;
+    font-size: var(--text-sm);
+    line-height: var(--leading-base);
+    font-weight: 700;
+}
+
+.menu__read {
+    padding: var(--space-4) var(--space-12);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    background: var(--surface);
+    font-size: var(--text-sm);
+    line-height: var(--leading-base);
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.menu__read:hover {
+    background: var(--surface-muted);
+}
+
+.feed {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+/* #region tint */
+/* What a row is filled with, at rest and hovered. The fill itself is the background
+   image below, so main.ts can animate its width. No transition. */
+.feed__row {
+    --row-fill: transparent;
+    --row-hover: var(--surface-muted);
+}
+
+.feed__row[data-unread] {
+    --row-fill: var(--accent-surface);
+    --row-hover: color-mix(in srgb, var(--accent) 10%, var(--accent-surface));
+}
+
+.feed__row:has(.row:hover) {
+    --row-fill: var(--row-hover);
+}
+/* #endregion */
+
+/* Adjacent unread rows form one rounded block: the edges where they meet are square. */
+.feed__row {
+    border-radius: var(--radius-md);
+    background-image: linear-gradient(var(--row-fill), var(--row-fill));
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+.feed__row[data-unread]:has(+ [data-unread]) {
+    border-end-start-radius: 0;
+    border-end-end-radius: 0;
+}
+
+[data-unread] + .feed__row[data-unread] {
+    border-start-start-radius: 0;
+    border-start-end-radius: 0;
+}
+
+/* The row is menu.css's, with two lines of text. The <li> paints the fill and owns the
+   rounding, so the row's own hover fill is off. */
+.row {
+    --row-align: flex-start;
+    --row-gap: var(--space-12);
+    --row-pad: var(--space-12);
+    --row-hover: transparent;
+    border-radius: inherit;
+}
+
+/* The disc the icon sits in. */
+.row__mark {
+    display: grid;
+    flex: none;
+    place-items: center;
+    width: var(--icon-size-40);
+    height: var(--icon-size-40);
+    border-radius: var(--radius-pill);
+    background: var(--surface-muted);
+}
+
+.row__body {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    min-width: 0;
+    font-size: var(--text-sm);
+    font-weight: 500;
+}
+
+.row__title {
+    line-height: var(--leading-base);
+}
+
+.row__time {
+    color: var(--ink-subtle);
+    line-height: var(--leading-sm);
+}
+
+/* Not animated: the tint already says the row is new. */
+.row__dot {
+    flex: none;
+    width: 6px;
+    height: 6px;
+    margin-top: var(--space-4);
+    border-radius: var(--radius-pill);
+    background: var(--accent);
+}
+
+.controls {
+    display: flex;
+    align-items: center;
+    gap: var(--space-8);
+    padding: var(--space-12);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    background: var(--surface);
+}
+
+.controls__label {
+    font-size: var(--text-sm);
+    font-weight: 500;
+}
+
+.controls__input {
+    width: 72px;
+    padding: var(--space-4) var(--space-8);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    background: var(--surface);
+    font-size: var(--text-sm);
+    font-weight: 500;
+}
+
+.controls__go {
+    padding: var(--space-4) var(--space-12);
+    border: 0;
+    border-radius: var(--radius-md);
+    background: var(--accent);
+    color: var(--ink-inverse);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.controls__go:hover {
+    background: var(--accent-strong);
+}

@@ -1,0 +1,25 @@
+{{# One demo in the index listing. Its icon waits for the pointer, a click or focus on the
+    card, and shows an image of its first frame until then. The view-transition-name lets a
+    filter change move the card instead of crossfading the list. #}}
+<li
+    class="card"
+    data-tags="{{ demo.tags.join(' ') }}"
+    style="view-transition-name: demo-{{ demo.slug }}"
+>
+    <a class="card__link" href="{{ demo.links.page |> url }}">
+        <span class="card__icon">
+            <lord-icon
+                current-color
+                src="{{ `${demo.links.app}icons/${demo.cover}.json` |> url }}"
+                loading="interaction"
+                trigger="hover"
+                target=".card__link"
+                aria-hidden="true"
+            >
+                <img alt="" src="{{ `${demo.links.app}icons/${demo.cover}.svg` |> url }}" />
+            </lord-icon>
+        </span>
+        <h2 class="card__title">{{ demo.title }}</h2>
+        <p class="card__description">{{ demo.description }}</p>
+    </a>
+</li>

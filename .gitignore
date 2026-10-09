@@ -1,0 +1,14 @@
+node_modules/
+dist/
+export/
+portal/_site/
+*.local
+.DS_Store
+
+# Working material, not part of the project.
+_todo/
+portal/src/_data/
+portal/src/styles/palette.css
+portal/src/styles/tokens.css
+portal/src/fonts/
+portal/src/icons/

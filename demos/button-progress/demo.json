@@ -1,0 +1,66 @@
+{
+    "$schema": "../../schemas/demo.schema.json",
+    "slug": "button-progress",
+    "title": "Button progress",
+    "description": "A button that fills while the work runs, loops its icon until the work stops, and shows a receipt. As a download and as an upload.",
+    "tags": ["action", "status"],
+    "icons": ["download", "upload", "check-circle"],
+    "fragments": [
+        {
+            "id": "setup",
+            "file": "main.ts",
+            "region": "setup",
+            "lang": "ts",
+            "title": "Define the element",
+            "note": "Built-in triggers only. What each icon follows is written in its markup."
+        },
+        {
+            "id": "markup",
+            "file": "index.html",
+            "region": "markup",
+            "lang": "html",
+            "title": "The button",
+            "note": "data-stage for what it is doing, data-progress for how far. The icon maps each stage to a state."
+        },
+        {
+            "id": "api",
+            "file": "main.ts",
+            "region": "api",
+            "lang": "ts",
+            "title": "Set progress and stage",
+            "note": "Two attributes. Everything on screen reads them."
+        },
+        {
+            "id": "run",
+            "file": "main.ts",
+            "region": "run",
+            "lang": "ts",
+            "title": "One press, one cycle",
+            "note": "The pretend transfer. A real one would call report() from onprogress."
+        },
+        {
+            "id": "says",
+            "file": "main.ts",
+            "region": "says",
+            "lang": "ts",
+            "title": "Slide the label strip",
+            "note": "Always upwards. Wrapping uses a copy of the first label past the end."
+        },
+        {
+            "id": "fill",
+            "file": "button-progress.css",
+            "region": "fill",
+            "lang": "css",
+            "title": "The progress bar",
+            "note": "Scaled, not widened. The transition smooths the steps; done fades it out."
+        },
+        {
+            "id": "toast",
+            "file": "button-progress.css",
+            "region": "toast",
+            "lang": "css",
+            "title": "The receipt opening and leaving",
+            "note": "Opens from the middle to the edge. Leaves by fading; the box snaps back afterwards."
+        }
+    ]
+}

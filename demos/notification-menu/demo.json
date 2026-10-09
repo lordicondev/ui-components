@@ -1,0 +1,66 @@
+{
+    "$schema": "../../schemas/demo.schema.json",
+    "slug": "notification-menu",
+    "title": "Notification menu",
+    "description": "A bell that rings when the count goes up, over a panel that unrolls and brings its rows in behind it.",
+    "tags": ["overlay", "navigation", "hover", "state"],
+    "icons": ["bell", "heart", "download", "message", "star"],
+    "fragments": [
+        {
+            "id": "setup",
+            "file": "main.ts",
+            "region": "setup",
+            "lang": "ts",
+            "title": "Define the element",
+            "note": "Built-in triggers only. What each icon follows is written in its markup."
+        },
+        {
+            "id": "bell",
+            "file": "index.html",
+            "region": "bell",
+            "lang": "html",
+            "title": "The bell button",
+            "note": "popovertarget opens the panel. data-count is what the icon watches."
+        },
+        {
+            "id": "count",
+            "file": "main.ts",
+            "region": "count",
+            "lang": "ts",
+            "title": "Set the count",
+            "note": "Writes the attribute and draws the badge. Nothing here reaches for the icon."
+        },
+        {
+            "id": "seen",
+            "file": "main.ts",
+            "region": "seen",
+            "lang": "ts",
+            "title": "Opening the menu clears the count",
+            "note": "The count goes down, so the bell stays quiet."
+        },
+        {
+            "id": "item",
+            "file": "index.html",
+            "region": "item",
+            "lang": "html",
+            "title": "One notification",
+            "note": "data-unread is the dot and the tint. data-rise marks a row the panel brings in."
+        },
+        {
+            "id": "entrance",
+            "file": "main.ts",
+            "region": "entrance",
+            "lang": "ts",
+            "title": "Start the tint with the row",
+            "note": "popovers() hands back each row's delay; the tint starts from it."
+        },
+        {
+            "id": "tint",
+            "file": "notification-menu.css",
+            "region": "tint",
+            "lang": "css",
+            "title": "The colour of a row",
+            "note": "The fill is a background image, so main.ts can animate its width."
+        }
+    ]
+}

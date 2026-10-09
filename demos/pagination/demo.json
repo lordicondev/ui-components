@@ -1,0 +1,66 @@
+{
+    "$schema": "../../schemas/demo.schema.json",
+    "slug": "pagination",
+    "title": "Pagination",
+    "description": "A frame that stretches to the page you picked and then catches up with itself, in three styles of button.",
+    "tags": ["navigation", "action"],
+    "icons": ["arrow-left", "chevron-left"],
+    "fragments": [
+        {
+            "id": "setup",
+            "file": "main.ts",
+            "region": "setup",
+            "lang": "ts",
+            "title": "Define the element",
+            "note": "Built-in triggers only. What each icon follows is written in its markup."
+        },
+        {
+            "id": "markup",
+            "file": "index.html",
+            "region": "markup",
+            "lang": "html",
+            "title": "The pages and the frame",
+            "note": "aria-current says which page it is. The frame is one element for the row."
+        },
+        {
+            "id": "turn",
+            "file": "main.ts",
+            "region": "turn",
+            "lang": "ts",
+            "title": "Change page",
+            "note": "Move aria-current, place the frame, disable the step with nowhere to go."
+        },
+        {
+            "id": "place",
+            "file": "main.ts",
+            "region": "place",
+            "lang": "ts",
+            "title": "Place the frame",
+            "note": "Measured, so the row can have any number of pages at any width."
+        },
+        {
+            "id": "frame",
+            "file": "pagination.css",
+            "region": "frame",
+            "lang": "css",
+            "title": "The frame's two transitions",
+            "note": "The direction decides which edge leaves first."
+        },
+        {
+            "id": "steps",
+            "file": "index.html",
+            "region": "steps",
+            "lang": "html",
+            "title": "One arrow icon, flipped for next",
+            "note": "Flipping the button flips its animation with it."
+        },
+        {
+            "id": "variants",
+            "file": "pagination.css",
+            "region": "variants",
+            "lang": "css",
+            "title": "The three button styles",
+            "note": "A box, a box with a word, and no box at all. Everything else is shared."
+        }
+    ]
+}

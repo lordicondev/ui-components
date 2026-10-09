@@ -1,0 +1,50 @@
+---
+layout: layouts/base.vto
+---
+
+<section class="hero">
+    <p class="hero__eyebrow">{{ demos.demos.length }} demos of Lordicon system icons</p>
+    <h1 class="hero__title">An icon is a reaction, not a decoration</h1>
+    <p class="hero__lead">
+        A star that fills when you press it. A lock that wakes when you click into the field. A
+        bell that rings when something new arrives. Everyday controls, each with an icon that
+        moves because something happened, and each ready to copy into your own project.
+    </p>
+    <p class="hero__note">The control sets its state; the icon follows. No animation code to write.</p>
+
+    <a class="button" href="{{ demos.site.repo }}" target="_blank" rel="noopener">
+        The project on GitHub
+        <lord-icon
+            current-color
+            src="{{ '/icons/arrow-out-square.json' |> url }}"
+            loading="interaction"
+            trigger="hover"
+            target=".button"
+            aria-hidden="true"
+        >
+            <img alt="" src="{{ '/icons/arrow-out-square.svg' |> url }}" />
+        </lord-icon>
+    </a>
+</section>
+
+<section class="listing" id="demos" aria-labelledby="listing-title">
+    <h2 class="listing__title" id="listing-title">All demos</h2>
+
+    {{# Without JavaScript every demo is listed and the stylesheet hides the filter. #}}
+    <div class="filter" role="group" aria-label="Show the demos tagged" data-filter>
+        <button type="button" class="chip" data-tag="" aria-pressed="true">All</button>
+        {{ for tag of demos.site.tags }}
+            <button type="button" class="chip" data-tag="{{ tag }}" aria-pressed="false">
+                {{ tag }}
+            </button>
+        {{ /for }}
+    </div>
+
+    <ul class="cards">
+        {{ for demo of demos.demos }}
+            {{ comp.card({ demo }) }}
+        {{ /for }}
+    </ul>
+
+    <p class="cards__empty" hidden data-empty>No demo carries that tag yet.</p>
+</section>

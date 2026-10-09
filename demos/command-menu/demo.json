@@ -1,0 +1,77 @@
+{
+    "$schema": "../../schemas/demo.schema.json",
+    "slug": "command-menu",
+    "title": "Command menu",
+    "description": "A palette you open with a shortcut and walk with the arrow keys while the caret stays in the field.",
+    "tags": ["overlay", "navigation", "form"],
+    "icons": [
+        "magnifier",
+        "cross",
+        "file-text",
+        "clock-arrow-rotate-left",
+        "link",
+        "copy",
+        "trash-bin",
+        "cog",
+        "avatar-circle",
+        "cross-circle"
+    ],
+    "fragments": [
+        {
+            "id": "setup",
+            "file": "main.ts",
+            "region": "setup",
+            "lang": "ts",
+            "title": "Define the element",
+            "note": "Built-in triggers only. What each icon follows is written in its markup."
+        },
+        {
+            "id": "field",
+            "file": "index.html",
+            "region": "field",
+            "lang": "html",
+            "title": "The search field",
+            "note": "data-keys makes the input the controller for the arrow keys."
+        },
+        {
+            "id": "palette",
+            "file": "index.html",
+            "region": "palette",
+            "lang": "html",
+            "title": "The rows",
+            "note": "A listbox of options. data-choose marks a row that can be chosen and arrowed to."
+        },
+        {
+            "id": "keys",
+            "file": "main.ts",
+            "region": "keys",
+            "lang": "ts",
+            "title": "The keyboard shortcut",
+            "note": "togglePopover() on the panel. The button is not involved."
+        },
+        {
+            "id": "filter",
+            "file": "main.ts",
+            "region": "filter",
+            "lang": "ts",
+            "title": "Filter the rows",
+            "note": "hidden on the rows; the empty state gets data-shown for its icon."
+        },
+        {
+            "id": "reset",
+            "file": "main.ts",
+            "region": "reset",
+            "lang": "ts",
+            "title": "Open empty",
+            "note": "Cleared on beforetoggle, before the panel is painted."
+        },
+        {
+            "id": "empty",
+            "file": "command-menu.css",
+            "region": "empty",
+            "lang": "css",
+            "title": "Hide empty groups",
+            "note": "Whether a group still has a visible row is a question CSS can ask with :has()."
+        }
+    ]
+}

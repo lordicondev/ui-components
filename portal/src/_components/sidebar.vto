@@ -1,0 +1,43 @@
+{{# The demo list. On narrow screens it becomes a scrolling strip above the content. #}}
+<nav class="sidebar" aria-label="Demos">
+    <a class="sidebar__home" href="{{ '/' |> url }}" aria-label="{{ demos.site.title }}">
+        <lord-icon
+            src="{{ '/images/logo.json' |> url }}"
+            loading="interaction"
+            trigger="hover"
+            target=".sidebar__home"
+            aria-hidden="true"
+        >
+            <img alt="" src="{{ '/images/logo.svg' |> url }}" />
+        </lord-icon>
+    </a>
+
+    <ul class="sidebar__list">
+        {{ for demo of demos.demos }}
+            <li>
+                <a
+                    class="sidebar__link"
+                    href="{{ demo.links.page |> url }}"
+                    {{ if url === demo.links.page }}aria-current="page"{{ /if }}
+                >
+                    {{ demo.title }}
+                </a>
+            </li>
+        {{ /for }}
+    </ul>
+
+    <p class="sidebar__version">v{{ demos.site.version }}</p>
+
+    {{# On a phone the list is a strip that scrolls sideways. It starts at the current demo,
+        before the first paint, so it does not jump. #}}
+    <script>
+        (() => {
+            const current = document.querySelector('.sidebar__link[aria-current]');
+            const strip = current?.closest('.sidebar__list');
+            if (!strip || strip.scrollWidth <= strip.clientWidth) return;
+            const offset =
+                current.getBoundingClientRect().left - strip.getBoundingClientRect().left;
+            strip.scrollLeft = offset - (strip.clientWidth - current.offsetWidth) / 2;
+        })();
+    </script>
+</nav>

@@ -1,0 +1,42 @@
+{
+    "$schema": "../../schemas/demo.schema.json",
+    "slug": "checkbox-list",
+    "title": "Checkbox list",
+    "description": "Native checkboxes whose tick is an icon following data-checked, in three styles.",
+    "tags": ["form", "toggle", "settings"],
+    "icons": ["check-box-empty", "check-circle-empty", "radio-button"],
+    "fragments": [
+        {
+            "id": "setup",
+            "file": "main.ts",
+            "region": "setup",
+            "lang": "ts",
+            "title": "Define the element",
+            "note": "Built-in triggers only. What each icon follows is written in its markup."
+        },
+        {
+            "id": "markup",
+            "file": "index.html",
+            "region": "markup",
+            "lang": "html",
+            "title": "A checkbox with an icon for a tick",
+            "note": "The input stays; the icon is what you see. It follows data-checked on the label."
+        },
+        {
+            "id": "wiring",
+            "file": "main.ts",
+            "region": "wiring",
+            "lang": "ts",
+            "title": "Mirror checked into an attribute",
+            "note": "checked is a property, and nothing can watch a property."
+        },
+        {
+            "id": "colour",
+            "file": "checkbox-list.css",
+            "region": "colour",
+            "lang": "css",
+            "title": "Resting, hovered, chosen",
+            "note": "Plain CSS rules; the icon inherits colour. No transition."
+        }
+    ]
+}

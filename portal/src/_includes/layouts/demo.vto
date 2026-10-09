@@ -1,0 +1,203 @@
+---
+layout: layouts/base.vto
+---
+
+<article class="demo-page">
+    {{# The head and the stage fill the first screen from CSS, so nothing below them moves
+        when the demo loads. #}}
+    <div class="demo-page__intro">
+        <header class="demo-page__head">
+        <div class="demo-page__title">
+            <h1>{{ demo.title }}</h1>
+
+            {{# Actions on the demo, on the title's line. #}}
+            <div class="actions">
+                <a
+                    class="action"
+                    href="{{ demo.links.app |> url }}"
+                    target="_blank"
+                    rel="noopener"
+                    title="Open the demo full screen"
+                    aria-label="Open the demo full screen"
+                >
+                    <lord-icon
+                        current-color
+                        src="{{ '/icons/arrow-out-square.json' |> url }}"
+                        loading="interaction"
+                        trigger="hover"
+                        target=".action"
+                        aria-hidden="true"
+                    >
+                        <img alt="" src="{{ '/icons/arrow-out-square.svg' |> url }}" />
+                    </lord-icon>
+                </a>
+            </div>
+        </div>
+
+            <p class="demo-page__lead">{{ demo.description }}</p>
+        </header>
+
+    {{# The demo in an iframe, which keeps its styles out of the portal. The frame's height
+        comes from the demo, so it never scrolls. #}}
+        <section class="stage">
+            <div class="stage__frame" data-frame>
+                <iframe
+                    src="{{ demo.links.app |> url }}"
+                    title="{{ demo.title }} demo"
+                    data-stage
+                ></iframe>
+            </div>
+        </section>
+    </div>
+
+    <section class="take-it">
+        <h2>Take it with you</h2>
+        <p>
+            This demo also exists as a standalone project —
+            <code>npm install &amp;&amp; npm run dev</code>, no changes needed.
+        </p>
+
+        <div class="terminal">
+            <pre class="terminal__body"><code>{{ demo.links.terminal }}</code></pre>
+            <button type="button" class="copy" data-copy>Copy</button>
+        </div>
+
+        {{# What the command does, since the slug appears in it twice. #}}
+        <p class="take-it__note">
+            Copies the <code>{{ demo.slug }}</code> folder of the
+            <code>{{ demos.site.standaloneBranch }}</code> branch — where every demo lives
+            on its own — into <code>./{{ demo.slug }}</code>.
+        </p>
+
+        {{# Run it, download it, read it. #}}
+        <ul class="buttons">
+            <li>
+                <a
+                    class="button"
+                    href="{{ demo.links.stackblitz }}"
+                    target="_blank"
+                    rel="noopener"
+                >Open in StackBlitz</a>
+            </li>
+            <li><a class="button" href="{{ demo.links.zip |> url }}">Download ZIP</a></li>
+            <li>
+                <a class="button" href="{{ demo.links.github }}" target="_blank" rel="noopener">
+                    Code on GitHub
+                </a>
+            </li>
+        </ul>
+    </section>
+
+    <section class="reading">
+        <h2>How it works</h2>
+        <p class="reading__legend">
+            Define the element, put the icon in the markup, set the control's state. Then
+            the parts that make this demo different.
+        </p>
+        {{ for fragment of demo.fragments }}
+            {{ comp.code({
+                title: fragment.title,
+                note: fragment.note,
+                lang: fragment.lang,
+                collapsed: fragment.collapsed,
+                variants: "ts" in fragment,
+                ts: fragment.ts,
+                js: fragment.js,
+                code: fragment.code,
+            }) }}
+        {{ /for }}
+    </section>
+
+    <section class="reading">
+        <h2>Every file</h2>
+        <p class="reading__legend">
+            The demo's own files, whole, at the paths the export uses.
+        </p>
+        {{ for file of demo.own }}
+            {{ comp.code({
+                title: file.path,
+                note: `${file.lines} lines`,
+                lang: file.lang,
+                collapsed: true,
+                variants: "ts" in file,
+                ts: file.ts,
+                js: file.js,
+                code: file.code,
+            }) }}
+        {{ /for }}
+
+        {{# The shared files the demo imports, folded: they are the same under every demo. #}}
+        <details class="imports">
+            <summary class="imports__link">
+                What it imports
+                <span class="imports__count">{{ demo.imported.length }} shared files</span>
+            </summary>
+
+            <div class="imports__files">
+                {{ for file of demo.imported }}
+                    {{ comp.code({
+                        title: file.path,
+                        note: `${file.lines} lines`,
+                        lang: file.lang,
+                        collapsed: true,
+                        variants: "ts" in file,
+                        ts: file.ts,
+                        js: file.js,
+                        code: file.code,
+                    }) }}
+                {{ /for }}
+            </div>
+        </details>
+    </section>
+
+    <section class="icons-used">
+        <h2>Icons</h2>
+        <p class="reading__legend">
+            Hover a preview to play it. The icons are under the
+            <a href="https://lordicon.com/licenses" target="_blank" rel="noopener">Lordicon License
+                Terms</a>, not the MIT licence of the code.
+        </p>
+
+        <table class="icon-table">
+            <thead>
+                <tr>
+                    <th scope="col"><span class="visually-hidden">Preview</span></th>
+                    <th scope="col">Used as</th>
+                    <th scope="col">Lordicon icon</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{ for icon of demo.icons }}
+                    <tr>
+                        <td class="icon-table__preview">
+                            <span class="icon-table__well">
+                                <lord-icon
+                                    current-color
+                                    src="{{ `${demo.links.app}icons/${icon.alias}.json` |> url }}"
+                                    loading="interaction"
+                                    trigger="hover"
+                                    aria-hidden="true"
+                                >
+                                    <img
+                                        alt=""
+                                        src="{{ `${demo.links.app}icons/${icon.alias}.svg` |> url }}"
+                                    />
+                                </lord-icon>
+                            </span>
+                        </td>
+                        <td><code>{{ icon.alias }}</code></td>
+                        <td class="icon-table__id">
+                            {{ if icon.url }}
+                                <a href="{{ icon.url }}" target="_blank" rel="noopener">
+                                    {{ icon.id }}
+                                </a>
+                            {{ else }}
+                                {{ icon.id }}
+                            {{ /if }}
+                        </td>
+                    </tr>
+                {{ /for }}
+            </tbody>
+        </table>
+    </section>
+</article>

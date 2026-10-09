@@ -1,0 +1,50 @@
+@import '@shared/styles/index.css';
+
+.demo {
+    display: grid;
+    place-items: center;
+    min-height: 100dvh;
+    padding: var(--space-64) var(--gutter);
+}
+
+.rating {
+    display: flex;
+    align-items: center;
+    gap: var(--space-8);
+    margin: 0;
+    padding: var(--space-8) var(--space-12);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+}
+
+/* No text selection: people sweep back and forth across the row. */
+.star {
+    display: flex;
+    cursor: pointer;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+/* Coloured when lit. No transition: the stagger comes from the state changes. */
+.star {
+    --star-mark: var(--ink-subtle);
+    --icon-filter: var(--filter-ink-subtle);
+}
+
+.star[data-lit='true'] {
+    --star-mark: var(--accent);
+    --icon-filter: var(--filter-accent);
+}
+
+.star__mark {
+    width: var(--icon-size-24);
+    height: var(--icon-size-24);
+    color: var(--star-mark);
+}
+
+/* The radio is invisible, so its focus ring has to land on the star instead. */
+.star__input:focus-visible ~ .star__mark {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+    border-radius: var(--radius-sm);
+}

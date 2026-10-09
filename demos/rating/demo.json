@@ -1,0 +1,66 @@
+{
+    "$schema": "../../schemas/demo.schema.json",
+    "slug": "rating",
+    "title": "Rating",
+    "description": "Five stars that light up one after another, and fill the same way when you pick one.",
+    "tags": ["form", "toggle", "social"],
+    "icons": ["star"],
+    "fragments": [
+        {
+            "id": "setup",
+            "file": "main.ts",
+            "region": "setup",
+            "lang": "ts",
+            "title": "Define the element",
+            "note": "The built-in triggers, plus one of our own for the stars."
+        },
+        {
+            "id": "markup",
+            "file": "index.html",
+            "region": "markup",
+            "lang": "html",
+            "title": "One star",
+            "note": "A real radio underneath. data-chosen is the rating, data-lit the preview."
+        },
+        {
+            "id": "wiring",
+            "file": "main.ts",
+            "region": "wiring",
+            "lang": "ts",
+            "title": "Pointer and keyboard set the state",
+            "note": "Hover previews, change chooses. Nothing here mentions an icon."
+        },
+        {
+            "id": "preview",
+            "file": "main.ts",
+            "region": "preview",
+            "lang": "ts",
+            "title": "Light the stars up to the pointer",
+            "note": "Lighting up runs; going dark happens at once."
+        },
+        {
+            "id": "choose",
+            "file": "main.ts",
+            "region": "choose",
+            "lang": "ts",
+            "title": "Fill the stars up to the rating",
+            "note": "Only the stars that change are in the run."
+        },
+        {
+            "id": "runs",
+            "file": "main.ts",
+            "region": "runs",
+            "lang": "ts",
+            "title": "One star every 80ms",
+            "note": "The stagger lives here, in the state changes, not in the icons."
+        },
+        {
+            "id": "clear",
+            "file": "main.ts",
+            "region": "clear",
+            "lang": "ts",
+            "title": "Click the top star to clear",
+            "note": "A radio cannot be unchecked by clicking it, so the demo does it a tick later."
+        }
+    ]
+}

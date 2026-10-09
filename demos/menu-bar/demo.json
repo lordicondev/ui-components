@@ -1,0 +1,74 @@
+{
+    "$schema": "../../schemas/demo.schema.json",
+    "slug": "menu-bar",
+    "title": "Menu bar",
+    "description": "A toolbar where the picked tool and the list style morph into place, the action plays on press, and every button shows its name.",
+    "tags": ["toolbar", "toggle", "action"],
+    "icons": [
+        "brush-alt",
+        "paint-bucket",
+        "pencil",
+        "pen-nib",
+        "bullet-list",
+        "check-list",
+        "three-dots-vertical"
+    ],
+    "fragments": [
+        {
+            "id": "setup",
+            "file": "main.ts",
+            "region": "setup",
+            "lang": "ts",
+            "title": "Define the element",
+            "note": "Built-in triggers only. What each icon follows is written in its markup."
+        },
+        {
+            "id": "markup",
+            "file": "index.html",
+            "region": "markup",
+            "lang": "html",
+            "title": "One tool",
+            "note": "A real radio underneath. data-selected is what the icon and the stylesheet read."
+        },
+        {
+            "id": "toggle",
+            "file": "index.html",
+            "region": "toggle",
+            "lang": "html",
+            "title": "One list button",
+            "note": "A toggle. aria-pressed is an attribute already, so the icon follows it with nothing in between."
+        },
+        {
+            "id": "action",
+            "file": "index.html",
+            "region": "action",
+            "lang": "html",
+            "title": "One action button",
+            "note": "No attribute to follow: nothing about it changes after a press."
+        },
+        {
+            "id": "wiring",
+            "file": "main.ts",
+            "region": "wiring",
+            "lang": "ts",
+            "title": "Copy the radio's choice into an attribute",
+            "note": "checked is a property, and nothing can watch a property."
+        },
+        {
+            "id": "lists",
+            "file": "main.ts",
+            "region": "lists",
+            "lang": "ts",
+            "title": "One kind of list or none",
+            "note": "Pressing one list button releases the other; pressing it again releases it."
+        },
+        {
+            "id": "selected",
+            "file": "menu-bar.css",
+            "region": "selected",
+            "lang": "css",
+            "title": "The selected tool",
+            "note": "Three custom properties; the icon takes its colour through current-color."
+        }
+    ]
+}

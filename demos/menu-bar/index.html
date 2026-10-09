@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Menu bar</title>
+        <link rel="stylesheet" href="./menu-bar.css" />
+        <script type="module" src="./main.ts"></script>
+    </head>
+    <body>
+        <main class="demo">
+            <div class="menu-bar">
+                <fieldset class="menu-bar__tools">
+                    <legend class="visually-hidden">Tool</legend>
+
+                    <!-- #region markup -->
+                    <!-- One tool. The radio is the real control, only invisible. data-selected
+                         mirrors its checked state for the icon and the stylesheet. The
+                         tooltip span is the radio's name; tooltip.css draws it. -->
+                    <label class="tool" data-selected="true">
+                        <input
+                            class="tool__input visually-hidden"
+                            type="radio"
+                            name="tool"
+                            value="brush"
+                            checked
+                        />
+
+                        <lord-icon
+                            class="tool__mark"
+                            current-color
+                            src="icons/brush-alt.json"
+                            trigger="follow(data-selected)"
+                            target=".tool"
+                            state="morph-change"
+                            aria-hidden="true"
+                        >
+                            <img alt="" src="icons/brush-alt.morph-change.svg" />
+                        </lord-icon>
+
+                        <span class="tooltip">Brush</span>
+                    </label>
+                    <!-- #endregion -->
+
+                    <label class="tool" data-selected="false">
+                        <input
+                            class="tool__input visually-hidden"
+                            type="radio"
+                            name="tool"
+                            value="fill"
+                        />
+
+                        <lord-icon
+                            class="tool__mark"
+                            current-color
+                            src="icons/paint-bucket.json"
+                            trigger="follow(data-selected)"
+                            target=".tool"
+                            state="morph-select"
+                            aria-hidden="true"
+                        >
+                            <img alt="" src="icons/paint-bucket.svg" />
+                        </lord-icon>
+
+                        <span class="tooltip">Fill</span>
+                    </label>
+
+                    <label class="tool" data-selected="false">
+                        <input
+                            class="tool__input visually-hidden"
+                            type="radio"
+                            name="tool"
+                            value="pencil"
+                        />
+
+                        <lord-icon
+                            class="tool__mark"
+                            current-color
+                            src="icons/pencil.json"
+                            trigger="follow(data-selected)"
+                            target=".tool"
+                            state="morph-select"
+                            aria-hidden="true"
+                        >
+                            <img alt="" src="icons/pencil.svg" />
+                        </lord-icon>
+
+                        <span class="tooltip">Pencil</span>
+                    </label>
+
+                    <label class="tool" data-selected="false">
+                        <input
+                            class="tool__input visually-hidden"
+                            type="radio"
+                            name="tool"
+                            value="pen"
+                        />
+
+                        <lord-icon
+                            class="tool__mark"
+                            current-color
+                            src="icons/pen-nib.json"
+                            trigger="follow(data-selected)"
+                            target=".tool"
+                            state="morph-select"
+                            aria-hidden="true"
+                        >
+                            <img alt="" src="icons/pen-nib.svg" />
+                        </lord-icon>
+
+                        <span class="tooltip">Pen</span>
+                    </label>
+                </fieldset>
+
+                <span class="menu-bar__rule"></span>
+
+                <div class="menu-bar__lists" role="group" aria-label="List">
+                    <!-- #region toggle -->
+                    <!-- A toggle: aria-pressed is its state, and the icon follows it. -->
+                    <button class="list" type="button" aria-pressed="false">
+                        <lord-icon
+                            class="list__mark"
+                            current-color
+                            src="icons/bullet-list.json"
+                            trigger="follow(aria-pressed)"
+                            target=".list"
+                            state="morph-select"
+                            aria-hidden="true"
+                        >
+                            <img alt="" src="icons/bullet-list.svg" />
+                        </lord-icon>
+
+                        <span class="tooltip">Bullet list</span>
+                    </button>
+                    <!-- #endregion -->
+
+                    <button class="list" type="button" aria-pressed="false">
+                        <lord-icon
+                            class="list__mark"
+                            current-color
+                            src="icons/check-list.json"
+                            trigger="follow(aria-pressed)"
+                            target=".list"
+                            state="morph-change"
+                            aria-hidden="true"
+                        >
+                            <img alt="" src="icons/check-list.svg" />
+                        </lord-icon>
+
+                        <span class="tooltip">Checklist</span>
+                    </button>
+                </div>
+
+                <span class="menu-bar__rule"></span>
+
+                <!-- #region action -->
+                <!-- An action, not a state: no attribute to follow, the icon plays once. -->
+                <button class="action" type="button">
+                    <lord-icon
+                        class="action__mark"
+                        current-color
+                        src="icons/three-dots-vertical.json"
+                        loading="interaction"
+                        trigger="click"
+                        target=".action"
+                        aria-hidden="true"
+                    >
+                        <img alt="" src="icons/three-dots-vertical.svg" />
+                    </lord-icon>
+
+                    <span class="tooltip">More options</span>
+                </button>
+                <!-- #endregion -->
+            </div>
+        </main>
+    </body>
+</html>

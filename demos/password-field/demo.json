@@ -1,0 +1,66 @@
+{
+    "$schema": "../../schemas/demo.schema.json",
+    "slug": "password-field",
+    "title": "Password field",
+    "description": "A lock that answers focus, an eye that follows the toggle, and a hint that arrives word by word.",
+    "tags": ["form", "toggle", "validation"],
+    "icons": ["lock", "eye", "warning-circle"],
+    "fragments": [
+        {
+            "id": "setup",
+            "file": "main.ts",
+            "region": "setup",
+            "lang": "ts",
+            "title": "Define the element",
+            "note": "Built-in triggers only. What each icon follows is written in its markup."
+        },
+        {
+            "id": "markup",
+            "file": "index.html",
+            "region": "markup",
+            "lang": "html",
+            "title": "The field and the lock",
+            "note": "The lock watches data-focused on the field it sits in, through target."
+        },
+        {
+            "id": "toggle",
+            "file": "index.html",
+            "region": "toggle",
+            "lang": "html",
+            "title": "The reveal toggle and the eye",
+            "note": "aria-pressed on the button. state picks the morph."
+        },
+        {
+            "id": "hint",
+            "file": "index.html",
+            "region": "hint",
+            "lang": "html",
+            "title": "The error message and its icon",
+            "note": "data-raised counts how many times the message has been shown."
+        },
+        {
+            "id": "wiring",
+            "file": "main.ts",
+            "region": "wiring",
+            "lang": "ts",
+            "title": "Set the control state",
+            "note": "Nothing here mentions an icon."
+        },
+        {
+            "id": "hint-in",
+            "file": "main.ts",
+            "region": "hint-in",
+            "lang": "ts",
+            "title": "Show the message",
+            "note": "Slides in; the words use the same wave the accordion uses."
+        },
+        {
+            "id": "hint-out",
+            "file": "main.ts",
+            "region": "hint-out",
+            "lang": "ts",
+            "title": "Hide the message",
+            "note": "A drop and a fade, then hidden. Safe to call on every keystroke."
+        }
+    ]
+}

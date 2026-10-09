@@ -1,0 +1,53 @@
+@import '@shared/styles/index.css';
+
+.demo {
+    display: grid;
+    place-items: center;
+    min-height: 100dvh;
+    padding: var(--space-64) var(--gutter);
+}
+
+.star {
+    display: flex;
+    align-items: center;
+    gap: var(--space-12);
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: pointer;
+}
+
+/* #region colour */
+/* Resting, hovered, starred, and starred under the pointer. Hover shows the colour a press
+   would leave; the shape says which state it is. No transition: only the fill animates. */
+.star {
+    --star-mark: var(--ink-subtle);
+    --icon-filter: var(--filter-ink-subtle);
+}
+
+.star:hover {
+    --star-mark: var(--accent);
+}
+
+.star[aria-pressed='true'] {
+    --star-mark: var(--accent);
+    --icon-filter: var(--filter-accent);
+}
+
+.star[aria-pressed='true']:hover {
+    --star-mark: var(--accent-strong);
+}
+/* #endregion */
+
+.star__mark {
+    width: var(--icon-size-24);
+    height: var(--icon-size-24);
+    color: var(--star-mark);
+}
+
+/* Tabular figures, so 24 to 25 does not change the button's width. */
+.star__count {
+    color: var(--ink-soft);
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+}

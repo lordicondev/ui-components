@@ -1,0 +1,79 @@
+@import '@shared/styles/index.css';
+@import '@shared/ui/popover.css';
+@import '@shared/ui/menu.css';
+@import '@shared/ui/field.css';
+
+/* Near the top, so the panel has room to open downward. */
+.demo {
+    display: grid;
+    align-content: start;
+    justify-items: center;
+    min-height: 100dvh;
+    padding: var(--space-64) var(--gutter) var(--space-48);
+}
+
+/* Pressed while the palette is open. aria-expanded is written by popovers(). */
+.opener {
+    padding: var(--space-8) var(--space-12);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    background: var(--surface);
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.opener:hover,
+.opener[aria-expanded='true'] {
+    background: var(--surface-sunken);
+}
+
+/* Groups sit a step further apart than rows. */
+.menu {
+    --menu-width: 400px;
+    --menu-gap: var(--space-16);
+}
+
+.commands {
+    display: flex;
+    flex: none;
+    flex-direction: column;
+    gap: var(--menu-gap, var(--space-12));
+}
+
+/* #region empty */
+/* A group whose rows are all hidden goes too, heading included; and so does the list when
+   every group has gone. The panel's height follows, without animating. */
+.menu__group:not(:has(.row:not([hidden]))),
+.commands:not(:has(.row:not([hidden]))) {
+    display: none;
+}
+
+.empty {
+    display: grid;
+    justify-items: center;
+    gap: var(--space-4);
+    margin: 0;
+    padding: var(--space-24) 0;
+    color: var(--ink);
+    font-size: var(--text-sm);
+}
+/* #endregion */
+
+.empty__mark {
+    display: block;
+    width: var(--icon-size-24);
+    height: var(--icon-size-24);
+    color: var(--ink-muted);
+}
+
+/* The search bar's field, with no border at rest: the panel already has an edge. The
+   border stays, transparent, so the words do not move when focus lights it. */
+.field {
+    flex: none;
+    border-color: transparent;
+}
+
+/* The prompt is a step smaller than what you type. */
+.field__input::placeholder {
+    font-size: var(--text-sm);
+}

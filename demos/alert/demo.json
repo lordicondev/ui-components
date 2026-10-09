@@ -1,0 +1,66 @@
+{
+    "$schema": "../../schemas/demo.schema.json",
+    "slug": "alert",
+    "title": "Alerts",
+    "description": "Four kinds of alert, and icons that greet the card they arrive on.",
+    "tags": ["feedback", "entrance", "status"],
+    "icons": ["info-circle", "check-circle", "warning-triangle", "cross-circle", "cross"],
+    "fragments": [
+        {
+            "id": "setup",
+            "file": "main.ts",
+            "region": "setup",
+            "lang": "ts",
+            "title": "Define the element",
+            "note": "Built-in triggers only. What each icon follows is written in its markup."
+        },
+        {
+            "id": "markup",
+            "file": "index.html",
+            "region": "markup",
+            "lang": "html",
+            "title": "One alert card",
+            "note": "The icon watches the card it sits in, through target. The image inside shows until the icon is ready."
+        },
+        {
+            "id": "build",
+            "file": "main.ts",
+            "region": "build",
+            "lang": "ts",
+            "title": "Fill a card in",
+            "note": "Sets data-kind and the icon's src. The deck is made of these."
+        },
+        {
+            "id": "queue",
+            "file": "main.ts",
+            "region": "queue",
+            "lang": "ts",
+            "title": "Queue the next alert",
+            "note": "Four kinds, then the button rests until one is dismissed."
+        },
+        {
+            "id": "dismiss",
+            "file": "main.ts",
+            "region": "dismiss",
+            "lang": "ts",
+            "title": "Stack the deck and dismiss a card",
+            "note": "--depth per card drives the stylesheet. Dismissing waits for the transitions."
+        },
+        {
+            "id": "deck",
+            "file": "alert.css",
+            "region": "deck",
+            "lang": "css",
+            "title": "The deck: position, size and fade from --depth",
+            "note": "translate and scale are separate properties, so they can take different times."
+        },
+        {
+            "id": "leaving",
+            "file": "alert.css",
+            "region": "leaving",
+            "lang": "css",
+            "title": "The way out",
+            "note": "A drop and a fade, over a deck that is already closing up."
+        }
+    ]
+}

@@ -1,0 +1,786 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Pricing</title>
+        <link rel="stylesheet" href="./pricing.css" />
+        <script type="module" src="./main.ts"></script>
+    </head>
+
+    <body>
+        <main class="demo">
+            <section class="plans" id="layout-icons" data-page aria-label="Plans">
+                <!-- #region markup -->
+                <!-- target makes the whole card the hover area for the plan's icon. The ticks are
+                     plain SVG. -->
+                <article class="plan">
+                    <div class="plan__head">
+                        <span class="plan__well">
+                            <lord-icon
+                                class="plan__icon"
+                                current-color
+                                src="icons/puzzle-piece.json"
+                                loading="interaction"
+                                trigger="hover"
+                                target=".plan"
+                                aria-hidden="true"
+                            >
+                                <img alt="" src="icons/puzzle-piece.svg" />
+                            </lord-icon>
+                        </span>
+                        <h2 class="plan__name">Starter</h2>
+                        <p class="plan__price">$10/month</p>
+                    </div>
+
+                    <!-- #skip -->
+                    <div class="plan__features">
+                        <h3 class="plan__lead">Key features:</h3>
+                        <ul class="features">
+                            <li class="feature">
+                                <img
+                                    class="feature__tick"
+                                    alt=""
+                                    src="icons/check-circle-solid.svg"
+                                />
+                                100 GB storage
+                            </li>
+                            <li class="feature">
+                                <img
+                                    class="feature__tick"
+                                    alt=""
+                                    src="icons/check-circle-solid.svg"
+                                />
+                                Sync across 2 devices
+                            </li>
+                            <li class="feature">
+                                <img
+                                    class="feature__tick"
+                                    alt=""
+                                    src="icons/check-circle-solid.svg"
+                                />
+                                7-day version history
+                            </li>
+                            <li class="feature">
+                                <img
+                                    class="feature__tick"
+                                    alt=""
+                                    src="icons/check-circle-solid.svg"
+                                />
+                                Email support
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- #endskip -->
+
+                    <button class="plan__action" type="button">Try for free</button>
+                </article>
+                <!-- #endregion -->
+
+                <article class="plan plan--featured">
+                    <div class="plan__head">
+                        <span class="plan__well">
+                            <lord-icon
+                                class="plan__icon"
+                                current-color
+                                src="icons/rocket.json"
+                                loading="interaction"
+                                trigger="hover"
+                                target=".plan"
+                                aria-hidden="true"
+                            >
+                                <img alt="" src="icons/rocket.svg" />
+                            </lord-icon>
+                        </span>
+                        <h2 class="plan__name">Plus</h2>
+                        <p class="plan__price">$12/month</p>
+                    </div>
+
+                    <div class="plan__features">
+                        <h3 class="plan__lead">Key features:</h3>
+                        <ul class="features">
+                            <li class="feature">
+                                <img
+                                    class="feature__tick"
+                                    alt=""
+                                    src="icons/check-circle-solid.svg"
+                                />
+                                2 TB storage
+                            </li>
+                            <li class="feature">
+                                <img
+                                    class="feature__tick"
+                                    alt=""
+                                    src="icons/check-circle-solid.svg"
+                                />
+                                Unlimited devices
+                            </li>
+                            <li class="feature">
+                                <img
+                                    class="feature__tick"
+                                    alt=""
+                                    src="icons/check-circle-solid.svg"
+                                />
+                                30-day version history
+                            </li>
+                            <li class="feature">
+                                <img
+                                    class="feature__tick"
+                                    alt=""
+                                    src="icons/check-circle-solid.svg"
+                                />
+                                Advanced sharing controls
+                            </li>
+                            <li class="feature">
+                                <img
+                                    class="feature__tick"
+                                    alt=""
+                                    src="icons/check-circle-solid.svg"
+                                />
+                                Priority support
+                            </li>
+                        </ul>
+                    </div>
+
+                    <button class="plan__action" type="button">Get started</button>
+                </article>
+
+                <article class="plan">
+                    <div class="plan__head">
+                        <span class="plan__well">
+                            <lord-icon
+                                class="plan__icon"
+                                current-color
+                                src="icons/avatars-group.json"
+                                loading="interaction"
+                                trigger="hover"
+                                target=".plan"
+                                aria-hidden="true"
+                            >
+                                <img alt="" src="icons/avatars-group.svg" />
+                            </lord-icon>
+                        </span>
+                        <h2 class="plan__name">Business</h2>
+                        <p class="plan__price">$24/month</p>
+                    </div>
+
+                    <div class="plan__features">
+                        <h3 class="plan__lead">Key features:</h3>
+                        <ul class="features">
+                            <li class="feature">
+                                <img
+                                    class="feature__tick"
+                                    alt=""
+                                    src="icons/check-circle-solid.svg"
+                                />
+                                5 TB storage per user
+                            </li>
+                            <li class="feature">
+                                <img
+                                    class="feature__tick"
+                                    alt=""
+                                    src="icons/check-circle-solid.svg"
+                                />
+                                Admin console
+                            </li>
+                            <li class="feature">
+                                <img
+                                    class="feature__tick"
+                                    alt=""
+                                    src="icons/check-circle-solid.svg"
+                                />
+                                SSO &amp; audit logs
+                            </li>
+                            <li class="feature">
+                                <img
+                                    class="feature__tick"
+                                    alt=""
+                                    src="icons/check-circle-solid.svg"
+                                />
+                                Dedicated account manager
+                            </li>
+                        </ul>
+                    </div>
+
+                    <button class="plan__action" type="button">Contact sales</button>
+                </article>
+            </section>
+
+            <section class="plans" id="layout-badge" data-page hidden aria-label="Plans">
+                <article class="plan">
+                    <div class="plan__head">
+                        <span class="plan__well">
+                            <lord-icon
+                                class="plan__icon"
+                                current-color
+                                src="icons/puzzle-piece.json"
+                                loading="interaction"
+                                trigger="hover"
+                                target=".plan"
+                                aria-hidden="true"
+                            >
+                                <img alt="" src="icons/puzzle-piece.svg" />
+                            </lord-icon>
+                        </span>
+                        <h2 class="plan__name">Starter</h2>
+                        <p class="plan__price">$10/month</p>
+                    </div>
+
+                    <div class="plan__features">
+                        <h3 class="plan__lead">Key features:</h3>
+                        <ul class="features">
+                            <li class="feature">
+                                <img
+                                    class="feature__tick"
+                                    alt=""
+                                    src="icons/check-circle-solid.svg"
+                                />
+                                100 GB storage
+                            </li>
+                            <li class="feature">
+                                <img
+                                    class="feature__tick"
+                                    alt=""
+                                    src="icons/check-circle-solid.svg"
+                                />
+                                Sync across 2 devices
+                            </li>
+                            <li class="feature">
+                                <img
+                                    class="feature__tick"
+                                    alt=""
+                                    src="icons/check-circle-solid.svg"
+                                />
+                                7-day version history
+                            </li>
+                            <li class="feature">
+                                <img
+                                    class="feature__tick"
+                                    alt=""
+                                    src="icons/check-circle-solid.svg"
+                                />
+                                Email support
+                            </li>
+                        </ul>
+                    </div>
+
+                    <button class="plan__action" type="button">Try for free</button>
+                </article>
+
+                <article class="plan plan--featured">
+                    <p class="plan__badge">Bestseller</p>
+
+                    <div class="plan__head">
+                        <span class="plan__well">
+                            <lord-icon
+                                class="plan__icon"
+                                current-color
+                                src="icons/rocket.json"
+                                loading="interaction"
+                                trigger="hover"
+                                target=".plan"
+                                aria-hidden="true"
+                            >
+                                <img alt="" src="icons/rocket.svg" />
+                            </lord-icon>
+                        </span>
+                        <h2 class="plan__name">Plus</h2>
+                        <p class="plan__price">$12/month</p>
+                    </div>
+
+                    <div class="plan__features">
+                        <h3 class="plan__lead">Key features:</h3>
+                        <ul class="features">
+                            <li class="feature">
+                                <img
+                                    class="feature__tick"
+                                    alt=""
+                                    src="icons/check-circle-solid.svg"
+                                />
+                                2 TB storage
+                            </li>
+                            <li class="feature">
+                                <img
+                                    class="feature__tick"
+                                    alt=""
+                                    src="icons/check-circle-solid.svg"
+                                />
+                                Unlimited devices
+                            </li>
+                            <li class="feature">
+                                <img
+                                    class="feature__tick"
+                                    alt=""
+                                    src="icons/check-circle-solid.svg"
+                                />
+                                30-day version history
+                            </li>
+                            <li class="feature">
+                                <img
+                                    class="feature__tick"
+                                    alt=""
+                                    src="icons/check-circle-solid.svg"
+                                />
+                                Advanced sharing controls
+                            </li>
+                            <li class="feature">
+                                <img
+                                    class="feature__tick"
+                                    alt=""
+                                    src="icons/check-circle-solid.svg"
+                                />
+                                Priority support
+                            </li>
+                        </ul>
+                    </div>
+
+                    <button class="plan__action" type="button">Get started</button>
+                </article>
+
+                <article class="plan">
+                    <div class="plan__head">
+                        <span class="plan__well">
+                            <lord-icon
+                                class="plan__icon"
+                                current-color
+                                src="icons/avatars-group.json"
+                                loading="interaction"
+                                trigger="hover"
+                                target=".plan"
+                                aria-hidden="true"
+                            >
+                                <img alt="" src="icons/avatars-group.svg" />
+                            </lord-icon>
+                        </span>
+                        <h2 class="plan__name">Business</h2>
+                        <p class="plan__price">$24/month</p>
+                    </div>
+
+                    <div class="plan__features">
+                        <h3 class="plan__lead">Key features:</h3>
+                        <ul class="features">
+                            <li class="feature">
+                                <img
+                                    class="feature__tick"
+                                    alt=""
+                                    src="icons/check-circle-solid.svg"
+                                />
+                                5 TB storage per user
+                            </li>
+                            <li class="feature">
+                                <img
+                                    class="feature__tick"
+                                    alt=""
+                                    src="icons/check-circle-solid.svg"
+                                />
+                                Admin console
+                            </li>
+                            <li class="feature">
+                                <img
+                                    class="feature__tick"
+                                    alt=""
+                                    src="icons/check-circle-solid.svg"
+                                />
+                                SSO &amp; audit logs
+                            </li>
+                            <li class="feature">
+                                <img
+                                    class="feature__tick"
+                                    alt=""
+                                    src="icons/check-circle-solid.svg"
+                                />
+                                Dedicated account manager
+                            </li>
+                        </ul>
+                    </div>
+
+                    <button class="plan__action" type="button">Contact sales</button>
+                </article>
+            </section>
+
+            <section
+                class="plans plans--raised"
+                id="layout-raised"
+                data-page
+                hidden
+                aria-label="Plans"
+            >
+                <article class="plan">
+                    <div class="plan__head">
+                        <span class="plan__well">
+                            <lord-icon
+                                class="plan__icon"
+                                current-color
+                                src="icons/puzzle-piece.json"
+                                loading="interaction"
+                                trigger="hover"
+                                target=".plan"
+                                aria-hidden="true"
+                            >
+                                <img alt="" src="icons/puzzle-piece.svg" />
+                            </lord-icon>
+                        </span>
+                        <h2 class="plan__name">Starter</h2>
+                        <p class="plan__price">$10/month</p>
+                    </div>
+
+                    <div class="plan__features">
+                        <h3 class="plan__lead">Key features:</h3>
+                        <ul class="features">
+                            <li class="feature">
+                                <img
+                                    class="feature__tick"
+                                    alt=""
+                                    src="icons/check-circle-solid.svg"
+                                />
+                                100 GB storage
+                            </li>
+                            <li class="feature">
+                                <img
+                                    class="feature__tick"
+                                    alt=""
+                                    src="icons/check-circle-solid.svg"
+                                />
+                                Sync across 2 devices
+                            </li>
+                            <li class="feature">
+                                <img
+                                    class="feature__tick"
+                                    alt=""
+                                    src="icons/check-circle-solid.svg"
+                                />
+                                7-day version history
+                            </li>
+                            <li class="feature">
+                                <img
+                                    class="feature__tick"
+                                    alt=""
+                                    src="icons/check-circle-solid.svg"
+                                />
+                                Email support
+                            </li>
+                        </ul>
+                    </div>
+
+                    <button class="plan__action" type="button">Try for free</button>
+                </article>
+
+                <article class="plan plan--featured">
+                    <div class="plan__head">
+                        <span class="plan__well">
+                            <lord-icon
+                                class="plan__icon"
+                                current-color
+                                src="icons/rocket.json"
+                                loading="interaction"
+                                trigger="hover"
+                                target=".plan"
+                                aria-hidden="true"
+                            >
+                                <img alt="" src="icons/rocket.svg" />
+                            </lord-icon>
+                        </span>
+                        <h2 class="plan__name">Plus</h2>
+                        <p class="plan__price">$12/month</p>
+                    </div>
+
+                    <div class="plan__features">
+                        <h3 class="plan__lead">Key features:</h3>
+                        <ul class="features">
+                            <li class="feature">
+                                <img
+                                    class="feature__tick"
+                                    alt=""
+                                    src="icons/check-circle-solid.svg"
+                                />
+                                2 TB storage
+                            </li>
+                            <li class="feature">
+                                <img
+                                    class="feature__tick"
+                                    alt=""
+                                    src="icons/check-circle-solid.svg"
+                                />
+                                Unlimited devices
+                            </li>
+                            <li class="feature">
+                                <img
+                                    class="feature__tick"
+                                    alt=""
+                                    src="icons/check-circle-solid.svg"
+                                />
+                                30-day version history
+                            </li>
+                            <li class="feature">
+                                <img
+                                    class="feature__tick"
+                                    alt=""
+                                    src="icons/check-circle-solid.svg"
+                                />
+                                Advanced sharing controls
+                            </li>
+                            <li class="feature">
+                                <img
+                                    class="feature__tick"
+                                    alt=""
+                                    src="icons/check-circle-solid.svg"
+                                />
+                                Priority support
+                            </li>
+                        </ul>
+                    </div>
+
+                    <button class="plan__action" type="button">Get started</button>
+                </article>
+
+                <article class="plan">
+                    <div class="plan__head">
+                        <span class="plan__well">
+                            <lord-icon
+                                class="plan__icon"
+                                current-color
+                                src="icons/avatars-group.json"
+                                loading="interaction"
+                                trigger="hover"
+                                target=".plan"
+                                aria-hidden="true"
+                            >
+                                <img alt="" src="icons/avatars-group.svg" />
+                            </lord-icon>
+                        </span>
+                        <h2 class="plan__name">Business</h2>
+                        <p class="plan__price">$24/month</p>
+                    </div>
+
+                    <div class="plan__features">
+                        <h3 class="plan__lead">Key features:</h3>
+                        <ul class="features">
+                            <li class="feature">
+                                <img
+                                    class="feature__tick"
+                                    alt=""
+                                    src="icons/check-circle-solid.svg"
+                                />
+                                5 TB storage per user
+                            </li>
+                            <li class="feature">
+                                <img
+                                    class="feature__tick"
+                                    alt=""
+                                    src="icons/check-circle-solid.svg"
+                                />
+                                Admin console
+                            </li>
+                            <li class="feature">
+                                <img
+                                    class="feature__tick"
+                                    alt=""
+                                    src="icons/check-circle-solid.svg"
+                                />
+                                SSO &amp; audit logs
+                            </li>
+                            <li class="feature">
+                                <img
+                                    class="feature__tick"
+                                    alt=""
+                                    src="icons/check-circle-solid.svg"
+                                />
+                                Dedicated account manager
+                            </li>
+                        </ul>
+                    </div>
+
+                    <button class="plan__action" type="button">Contact sales</button>
+                </article>
+            </section>
+
+            <section
+                class="plans plans--compact"
+                id="layout-compact"
+                data-page
+                hidden
+                aria-label="Plans"
+            >
+                <article class="plan">
+                    <div class="plan__head">
+                        <h2 class="plan__name">Starter</h2>
+                        <p class="plan__price">$10/month</p>
+                    </div>
+
+                    <div class="plan__features">
+                        <h3 class="plan__lead">Key features:</h3>
+                        <ul class="features">
+                            <li class="feature">
+                                <img
+                                    class="feature__tick"
+                                    alt=""
+                                    src="icons/check-circle-solid.svg"
+                                />
+                                100 GB storage
+                            </li>
+                            <li class="feature">
+                                <img
+                                    class="feature__tick"
+                                    alt=""
+                                    src="icons/check-circle-solid.svg"
+                                />
+                                Sync across 2 devices
+                            </li>
+                            <li class="feature">
+                                <img
+                                    class="feature__tick"
+                                    alt=""
+                                    src="icons/check-circle-solid.svg"
+                                />
+                                7-day version history
+                            </li>
+                            <li class="feature">
+                                <img
+                                    class="feature__tick"
+                                    alt=""
+                                    src="icons/check-circle-solid.svg"
+                                />
+                                Email support
+                            </li>
+                        </ul>
+                    </div>
+
+                    <button class="plan__action" type="button">Try for free</button>
+                </article>
+
+                <article class="plan plan--featured">
+                    <div class="plan__head">
+                        <h2 class="plan__name">Plus</h2>
+                        <p class="plan__price">$12/month</p>
+                    </div>
+
+                    <div class="plan__features">
+                        <h3 class="plan__lead">Key features:</h3>
+                        <ul class="features">
+                            <li class="feature">
+                                <img
+                                    class="feature__tick"
+                                    alt=""
+                                    src="icons/check-circle-solid.svg"
+                                />
+                                2 TB storage
+                            </li>
+                            <li class="feature">
+                                <img
+                                    class="feature__tick"
+                                    alt=""
+                                    src="icons/check-circle-solid.svg"
+                                />
+                                Unlimited devices
+                            </li>
+                            <li class="feature">
+                                <img
+                                    class="feature__tick"
+                                    alt=""
+                                    src="icons/check-circle-solid.svg"
+                                />
+                                30-day version history
+                            </li>
+                            <li class="feature">
+                                <img
+                                    class="feature__tick"
+                                    alt=""
+                                    src="icons/check-circle-solid.svg"
+                                />
+                                Advanced sharing controls
+                            </li>
+                            <li class="feature">
+                                <img
+                                    class="feature__tick"
+                                    alt=""
+                                    src="icons/check-circle-solid.svg"
+                                />
+                                Priority support
+                            </li>
+                        </ul>
+                    </div>
+
+                    <button class="plan__action" type="button">Get started</button>
+                </article>
+
+                <article class="plan">
+                    <div class="plan__head">
+                        <h2 class="plan__name">Business</h2>
+                        <p class="plan__price">$24/month</p>
+                    </div>
+
+                    <div class="plan__features">
+                        <h3 class="plan__lead">Key features:</h3>
+                        <ul class="features">
+                            <li class="feature">
+                                <img
+                                    class="feature__tick"
+                                    alt=""
+                                    src="icons/check-circle-solid.svg"
+                                />
+                                5 TB storage per user
+                            </li>
+                            <li class="feature">
+                                <img
+                                    class="feature__tick"
+                                    alt=""
+                                    src="icons/check-circle-solid.svg"
+                                />
+                                Admin console
+                            </li>
+                            <li class="feature">
+                                <img
+                                    class="feature__tick"
+                                    alt=""
+                                    src="icons/check-circle-solid.svg"
+                                />
+                                SSO &amp; audit logs
+                            </li>
+                            <li class="feature">
+                                <img
+                                    class="feature__tick"
+                                    alt=""
+                                    src="icons/check-circle-solid.svg"
+                                />
+                                Dedicated account manager
+                            </li>
+                        </ul>
+                    </div>
+
+                    <button class="plan__action" type="button">Contact sales</button>
+                </article>
+            </section>
+
+            <div class="pager">
+                <button
+                    class="pager__dot"
+                    type="button"
+                    aria-pressed="true"
+                    aria-controls="layout-icons"
+                    aria-label="Icon above the name"
+                ></button>
+                <button
+                    class="pager__dot"
+                    type="button"
+                    aria-pressed="false"
+                    aria-controls="layout-badge"
+                    aria-label="With a badge"
+                ></button>
+                <button
+                    class="pager__dot"
+                    type="button"
+                    aria-pressed="false"
+                    aria-controls="layout-raised"
+                    aria-label="Icon on the edge"
+                ></button>
+                <button
+                    class="pager__dot"
+                    type="button"
+                    aria-pressed="false"
+                    aria-controls="layout-compact"
+                    aria-label="Name and price in one row"
+                ></button>
+            </div>
+        </main>
+    </body>
+</html>

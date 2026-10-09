@@ -1,0 +1,77 @@
+{
+    "$schema": "../../schemas/demo.schema.json",
+    "slug": "input-form",
+    "title": "Input form",
+    "description": "A composer at the foot of the page, so its menu opens upward, with a submenu and a search inside.",
+    "tags": ["overlay", "form", "hover", "navigation"],
+    "icons": [
+        "plus",
+        "microphone",
+        "arrow-up",
+        "link",
+        "folder",
+        "chevron-right",
+        "bulb",
+        "plug",
+        "magnifier",
+        "cross"
+    ],
+    "fragments": [
+        {
+            "id": "setup",
+            "file": "main.ts",
+            "region": "setup",
+            "lang": "ts",
+            "title": "Define the element",
+            "note": "Built-in triggers only. What each icon follows is written in its markup."
+        },
+        {
+            "id": "composer",
+            "file": "index.html",
+            "region": "composer",
+            "lang": "html",
+            "title": "The composer and the plus button",
+            "note": "popovertarget is all it takes to open the menu."
+        },
+        {
+            "id": "row",
+            "file": "index.html",
+            "region": "row",
+            "lang": "html",
+            "title": "The row that opens the submenu",
+            "note": "No data-choose: it is a route, not an answer. Two icons share one target."
+        },
+        {
+            "id": "open",
+            "file": "main.ts",
+            "region": "open",
+            "lang": "ts",
+            "title": "Wire the panels and the field",
+            "note": "Two calls into shared/ui. The demo's own code starts below."
+        },
+        {
+            "id": "submenu",
+            "file": "main.ts",
+            "region": "submenu",
+            "lang": "ts",
+            "title": "Open the submenu on hover, close it after a grace period",
+            "note": "Opening on click and closing on Escape are the browser's."
+        },
+        {
+            "id": "choose",
+            "file": "main.ts",
+            "region": "choose",
+            "lang": "ts",
+            "title": "After a choice",
+            "note": "popovers() closes the panels and raises popover-choose."
+        },
+        {
+            "id": "filter",
+            "file": "main.ts",
+            "region": "filter",
+            "lang": "ts",
+            "title": "Filter the projects",
+            "note": "hidden rather than a class: out of the layout and the accessibility tree."
+        }
+    ]
+}

@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>{{ title ? `${title} — ${demos.site.title}` : demos.site.title }}</title>
+        <link rel="icon" href="{{ '/favicon.ico' |> url }}" sizes="16x16 32x32 48x48" />
+        <link
+            rel="icon"
+            href="{{ '/favicon/favicon-32x32.png' |> url }}"
+            type="image/png"
+            sizes="32x32"
+        />
+        <link
+            rel="icon"
+            href="{{ '/favicon/favicon-16x16.png' |> url }}"
+            type="image/png"
+            sizes="16x16"
+        />
+        <link rel="apple-touch-icon" href="{{ '/favicon/apple-touch-icon.png' |> url }}" />
+        <link rel="manifest" href="{{ '/favicon/site.webmanifest' |> url }}" />
+        <link rel="stylesheet" href="{{ '/style.css' |> url }}" />
+        <link
+            rel="preload"
+            href="{{ '/fonts/figtree-latin.woff2' |> url }}"
+            as="font"
+            type="font/woff2"
+            crossorigin
+        />
+        <script type="module" src="{{ '/main.js' |> url }}"></script>
+    </head>
+    <body class="layout">
+        <a class="skip-link" href="#content">Skip to content</a>
+
+        {{ comp.sidebar({ demos, url }) }}
+
+        <main id="content" class="layout__main">{{ content }}</main>
+    </body>
+</html>

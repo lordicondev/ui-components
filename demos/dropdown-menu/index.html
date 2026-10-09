@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Dropdown menu</title>
+        <link rel="stylesheet" href="./dropdown-menu.css" />
+        <script type="module" src="./main.ts"></script>
+    </head>
+    <body>
+        <main class="demo">
+            <!-- popovertarget opens the menu. popovers() decides which way it opens. -->
+            <button class="dots" type="button" popovertarget="edit" aria-label="More options">
+                <lord-icon
+                    class="dots__mark"
+                    current-color
+                    src="icons/three-dots-vertical.json"
+                    loading="interaction"
+                    trigger="hover"
+                    target=".dots"
+                    aria-hidden="true"
+                >
+                    <img alt="" src="icons/three-dots-vertical.svg" />
+                </lord-icon>
+            </button>
+
+            <!-- #region menu -->
+            <!-- role="menu" and tabindex="-1" on the rows: one tab stop. data-keys marks the
+                 element the arrow keys talk to; data-choose marks a row that can be chosen
+                 (popover.ts closes the menu on it) and arrowed to (menu.ts). -->
+            <div class="menu popover" id="edit" popover role="menu" tabindex="-1" data-keys>
+                <div class="menu__group" role="group" aria-labelledby="edit-heading">
+                    <p class="menu__heading" data-rise id="edit-heading">Edit</p>
+                    <div class="menu__list">
+                        <!-- prettier-ignore -->
+                        <button class="row" type="button" role="menuitem" tabindex="-1" data-choose data-rise>
+                            <lord-icon
+                                class="row__icon"
+                                current-color
+                                src="icons/pencil-line.json"
+                                trigger="follow(data-active)"
+                                target=".row"
+                                aria-hidden="true"
+                            ></lord-icon>
+                            <span class="row__label" data-reveal>Rename</span>
+                        </button>
+                        <!-- #skip -->
+                        <!-- prettier-ignore -->
+                        <button class="row" type="button" role="menuitem" tabindex="-1" data-choose data-rise>
+                            <lord-icon
+                                class="row__icon"
+                                current-color
+                                src="icons/copy.json"
+                                trigger="follow(data-active)"
+                                target=".row"
+                                aria-hidden="true"
+                            ></lord-icon>
+                            <span class="row__label" data-reveal>Duplicate</span>
+                        </button>
+                        <!-- #endskip -->
+                    </div>
+                </div>
+                <!-- #skip -->
+
+                <div class="menu__group" role="group" aria-labelledby="share-heading">
+                    <p class="menu__heading" data-rise id="share-heading">Share</p>
+                    <div class="menu__list">
+                        <!-- prettier-ignore -->
+                        <button class="row" type="button" role="menuitem" tabindex="-1" data-choose data-rise>
+                            <lord-icon
+                                class="row__icon"
+                                current-color
+                                src="icons/link.json"
+                                trigger="follow(data-active)"
+                                target=".row"
+                                aria-hidden="true"
+                            ></lord-icon>
+                            <span class="row__label" data-reveal>Copy link</span>
+                        </button>
+                        <!-- prettier-ignore -->
+                        <button class="row" type="button" role="menuitem" tabindex="-1" data-choose data-rise>
+                            <lord-icon
+                                class="row__icon"
+                                current-color
+                                src="icons/avatars-group.json"
+                                trigger="follow(data-active)"
+                                target=".row"
+                                aria-hidden="true"
+                            ></lord-icon>
+                            <span class="row__label" data-reveal>Share with Team</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- No heading: this row belongs to no group. data-danger colours it. -->
+                <div class="menu__list">
+                    <!-- prettier-ignore -->
+                    <button class="row" type="button" role="menuitem" tabindex="-1" data-choose data-rise data-danger>
+                        <lord-icon
+                            class="row__icon"
+                            current-color
+                            src="icons/trash-bin.json"
+                            trigger="follow(data-active)"
+                            target=".row"
+                            aria-hidden="true"
+                        ></lord-icon>
+                        <span class="row__label" data-reveal>Delete</span>
+                    </button>
+                </div>
+                <!-- #endskip -->
+            </div>
+            <!-- #endregion -->
+        </main>
+    </body>
+</html>

@@ -1,0 +1,38 @@
+{
+    "tasks": {
+        "lume": "echo \"import 'lume/cli.ts'\" | deno run -A -",
+        "build": "deno task lume",
+        "serve": "deno task lume -s",
+        "preview": "deno run -N -R -S jsr:@std/http@^1/file-server _site --host 127.0.0.1 --port 3000"
+    },
+    "imports": {
+        "lume/": "https://deno.land/x/lume@v3.2.5/",
+        "@lordicon/element": "npm:@lordicon/element@^3.0.2"
+    },
+    "compilerOptions": {
+        "types": [
+            "lume/types.ts"
+        ]
+    },
+    "fmt": {
+        "lineWidth": 100,
+        "indentWidth": 4,
+        "singleQuote": true,
+        "exclude": [
+            "_site",
+            "src/_data",
+            "src/favicon",
+            "src/fonts",
+            "src/images",
+            "src/styles/palette.css",
+            "src/styles/tokens.css"
+        ]
+    },
+    "lint": {
+        "exclude": [
+            "_site",
+            "src/_data",
+            "src/fonts"
+        ]
+    }
+}

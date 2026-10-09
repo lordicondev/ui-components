@@ -1,0 +1,94 @@
+/*
+ * The look of a menu: the panel, its group headings and its rows. Placement and the
+ * opening animation are in popover.ts and popover.css; the keyboard cursor is in menu.ts.
+ *
+ * Import after popover.css, which resets the UA popover rules at the same specificity.
+ * Most demos only need to set `--menu-width`.
+ */
+
+/* `display: flex` matters: popover.css hides a closed panel with `display: none`, and an
+   author `display` is what keeps the browser's own hiding rule from applying. */
+.menu {
+    display: flex;
+    flex-direction: column;
+    gap: var(--menu-gap, var(--space-12));
+    width: var(--menu-width);
+    padding: var(--menu-pad, var(--space-12));
+    border: 1px solid var(--border-soft);
+    border-radius: var(--radius-lg);
+    background: var(--surface);
+    box-shadow: var(--shadow-sm);
+    /* The UA sheet gives a popover `color: CanvasText`; nothing inherits past it. */
+    color: var(--ink);
+}
+
+/* The panel takes focus when it opens so arrow keys have somewhere to land, but the cursor
+   drawn by menu.ts is what the eye should follow, not a ring around the whole box. */
+.menu[data-keys]:focus {
+    outline: none;
+}
+
+.menu__group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+}
+
+.menu__heading {
+    margin: 0;
+    color: var(--ink-muted);
+    font-size: var(--text-sm);
+    line-height: var(--leading-sm);
+    font-weight: 600;
+}
+
+/* `flex: none`: a column animating from `height: 0` squashes its children unless they
+   refuse to shrink. */
+.menu__list {
+    display: flex;
+    flex-direction: column;
+    flex: none;
+}
+
+/* Two variables colour a row: `--row-fill` at rest and `--row-hover` under the cursor.
+   A row that is already tinted, such as an unread notification, sets both. */
+.row {
+    --row-fill: transparent;
+    --row-hover: var(--surface-muted);
+    display: flex;
+    align-items: var(--row-align, center);
+    gap: var(--row-gap, var(--space-8));
+    width: 100%;
+    padding: var(--row-pad, var(--space-8));
+    border: 0;
+    border-radius: var(--radius-md);
+    background: var(--row-fill);
+    color: var(--ink);
+    font: inherit;
+    text-align: start;
+    cursor: pointer;
+}
+
+/* `data-active` is written by the keyboard cursor and by the pointer alike, so hovered and
+   arrowed-to are one state with one look. No transition: this is a state, not a movement. */
+.row:hover,
+.row[data-active='true'] {
+    background: var(--row-hover);
+}
+
+/* The rows touch, so the focus ring goes inside the row rather than over its neighbours. */
+.row:focus-visible {
+    outline-offset: -2px;
+}
+
+.row__icon {
+    display: block;
+    flex: none;
+    width: var(--icon-size-24);
+    height: var(--icon-size-24);
+}
+
+.row__label {
+    flex: 1;
+    font-weight: 500;
+}

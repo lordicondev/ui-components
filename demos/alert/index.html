@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Alerts</title>
+        <link rel="stylesheet" href="./alert.css" />
+        <script type="module" src="./main.ts"></script>
+    </head>
+    <body>
+        <main class="demo">
+            <section class="page" data-page aria-label="Every kind of alert">
+                <!-- Every kind at once. The close buttons are not focusable: dismissing
+                     belongs to the second page. -->
+                <ul class="alerts">
+                    <!-- #region markup -->
+                    <!-- A kind is data-kind on the card. intro plays the icon once the card's
+                         own entrance has finished; hover plays it again. The image shows until
+                         the icon is ready. -->
+                    <li class="alert" data-kind="info">
+                        <lord-icon
+                            class="alert__icon"
+                            current-color
+                            src="icons/info-circle.json"
+                            intro="hover-pinch, after=.alert"
+                            trigger="hover"
+                            target=".alert"
+                            aria-hidden="true"
+                        >
+                            <img alt="" src="icons/info-circle.svg" />
+                        </lord-icon>
+
+                        <!-- #skip -->
+                        <div class="alert__body">
+                            <p class="alert__title">Scheduled maintenance</p>
+                            <p class="alert__message">
+                                Online banking will be unavailable Sunday 2–4 AM ET for scheduled
+                                maintenance.
+                            </p>
+                        </div>
+
+                        <button
+                            class="alert__close"
+                            type="button"
+                            aria-label="Dismiss"
+                            tabindex="-1"
+                        >
+                            <lord-icon
+                                class="alert__close-icon"
+                                current-color
+                                src="icons/cross.json"
+                                loading="interaction"
+                                trigger="hover"
+                                target=".alert__close"
+                                aria-hidden="true"
+                            >
+                                <img alt="" src="icons/cross.svg" />
+                            </lord-icon>
+                        </button>
+                        <!-- #endskip -->
+                    </li>
+                    <!-- #endregion -->
+                    <li class="alert" data-kind="success">
+                        <lord-icon
+                            class="alert__icon"
+                            current-color
+                            src="icons/check-circle.json"
+                            intro="hover-pinch, after=.alert"
+                            trigger="hover"
+                            target=".alert"
+                            aria-hidden="true"
+                        >
+                            <img alt="" src="icons/check-circle.svg" />
+                        </lord-icon>
+
+                        <div class="alert__body">
+                            <p class="alert__title">Transfer complete</p>
+                            <p class="alert__message">
+                                $1,250.00 was successfully sent to Alex Morgan.
+                            </p>
+                        </div>
+
+                        <button
+                            class="alert__close"
+                            type="button"
+                            aria-label="Dismiss"
+                            tabindex="-1"
+                        >
+                            <lord-icon
+                                class="alert__close-icon"
+                                current-color
+                                src="icons/cross.json"
+                                loading="interaction"
+                                trigger="hover"
+                                target=".alert__close"
+                                aria-hidden="true"
+                            >
+                                <img alt="" src="icons/cross.svg" />
+                            </lord-icon>
+                        </button>
+                    </li>
+                    <li class="alert" data-kind="warning">
+                        <lord-icon
+                            class="alert__icon"
+                            current-color
+                            src="icons/warning-triangle.json"
+                            intro="hover-pinch, after=.alert"
+                            trigger="hover"
+                            target=".alert"
+                            aria-hidden="true"
+                        >
+                            <img alt="" src="icons/warning-triangle.svg" />
+                        </lord-icon>
+
+                        <div class="alert__body">
+                            <p class="alert__title">Low balance</p>
+                            <p class="alert__message">
+                                Your checking account is below $100. Consider transferring funds to
+                                avoid overdraft.
+                            </p>
+                        </div>
+
+                        <button
+                            class="alert__close"
+                            type="button"
+                            aria-label="Dismiss"
+                            tabindex="-1"
+                        >
+                            <lord-icon
+                                class="alert__close-icon"
+                                current-color
+                                src="icons/cross.json"
+                                loading="interaction"
+                                trigger="hover"
+                                target=".alert__close"
+                                aria-hidden="true"
+                            >
+                                <img alt="" src="icons/cross.svg" />
+                            </lord-icon>
+                        </button>
+                    </li>
+                    <li class="alert" data-kind="error">
+                        <lord-icon
+                            class="alert__icon"
+                            current-color
+                            src="icons/cross-circle.json"
+                            intro="hover-pinch, after=.alert"
+                            trigger="hover"
+                            target=".alert"
+                            aria-hidden="true"
+                        >
+                            <img alt="" src="icons/cross-circle.svg" />
+                        </lord-icon>
+
+                        <div class="alert__body">
+                            <p class="alert__title">Payment declined</p>
+                            <p class="alert__message">
+                                Your card ending in 4242 was declined. Check your details and try
+                                again.
+                            </p>
+                        </div>
+
+                        <button
+                            class="alert__close"
+                            type="button"
+                            aria-label="Dismiss"
+                            tabindex="-1"
+                        >
+                            <lord-icon
+                                class="alert__close-icon"
+                                current-color
+                                src="icons/cross.json"
+                                loading="interaction"
+                                trigger="hover"
+                                target=".alert__close"
+                                aria-hidden="true"
+                            >
+                                <img alt="" src="icons/cross.svg" />
+                            </lord-icon>
+                        </button>
+                    </li>
+                </ul>
+            </section>
+
+            <section class="page page--deck" data-page aria-label="Alerts as they arrive" hidden>
+                <ul class="alerts stack" data-list="queue" role="status" aria-live="polite"></ul>
+                <button class="add" type="button" data-add>Show an alert</button>
+            </section>
+
+            <div class="pager">
+                <button
+                    class="pager__dot"
+                    type="button"
+                    aria-pressed="true"
+                    aria-label="Every kind of alert"
+                ></button>
+                <button
+                    class="pager__dot"
+                    type="button"
+                    aria-pressed="false"
+                    aria-label="Alerts as they arrive"
+                ></button>
+            </div>
+
+            <!-- The deck's cards are cloned from this: the same card as above, filled in by
+                 build(). -->
+            <template id="alert-template">
+                <li class="alert">
+                    <lord-icon
+                        class="alert__icon"
+                        current-color
+                        intro="hover-pinch, after=.alert"
+                        trigger="hover"
+                        target=".alert"
+                        aria-hidden="true"
+                    ></lord-icon>
+
+                    <div class="alert__body">
+                        <p class="alert__title"></p>
+                        <p class="alert__message"></p>
+                    </div>
+
+                    <button class="alert__close" type="button" aria-label="Dismiss">
+                        <lord-icon
+                            class="alert__close-icon"
+                            current-color
+                            src="icons/cross.json"
+                            trigger="hover"
+                            target=".alert__close"
+                            aria-hidden="true"
+                        ></lord-icon>
+                    </button>
+                </li>
+            </template>
+        </main>
+    </body>
+</html>

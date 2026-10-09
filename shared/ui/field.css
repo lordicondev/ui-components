@@ -1,0 +1,74 @@
+/*
+ * The look of a text field wired by field.ts. A demo overrides the resting border or the
+ * focused look with a rule of its own after this import.
+ */
+.field {
+    display: flex;
+    align-items: center;
+    gap: var(--space-8);
+    padding: var(--space-8);
+    border: 1px solid var(--border-soft);
+    border-radius: var(--radius-md);
+    background: var(--surface-muted);
+}
+
+.field[data-focused='true'] {
+    border-color: var(--accent-border);
+    box-shadow: var(--shadow-accent);
+}
+
+.field__input {
+    flex: 1;
+    min-width: 0;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--ink);
+    font-weight: 500;
+}
+
+.field__input::placeholder {
+    color: var(--ink-muted);
+}
+
+/* The box draws the focused state; no second ring inside it. */
+.field__input:focus-visible {
+    outline: none;
+}
+
+/* A search input has a clear button of its own; this field brings its own. */
+.field__input::-webkit-search-cancel-button {
+    appearance: none;
+}
+
+/* #region hide */
+/* `visibility` rather than `hidden`: the button keeps its box, so the field does not
+   change width when it appears. It is out of the tab order either way. */
+.field__clear {
+    display: grid;
+    place-items: center;
+    visibility: hidden;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--ink-muted);
+    cursor: pointer;
+}
+
+.field[data-clearable='true'] .field__clear {
+    visibility: visible;
+}
+/* #endregion */
+
+.field__clear:hover {
+    color: var(--ink);
+}
+
+/* Both icons take the placeholder's grey; the typed words are the only full-strength ink. */
+.field__mark {
+    flex: none;
+    width: var(--icon-size-24);
+    height: var(--icon-size-24);
+    color: var(--ink-muted);
+    --icon-filter: var(--filter-ink-muted);
+}

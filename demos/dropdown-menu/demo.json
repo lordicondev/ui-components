@@ -1,0 +1,42 @@
+{
+    "$schema": "../../schemas/demo.schema.json",
+    "slug": "dropdown-menu",
+    "title": "Dropdown menu",
+    "description": "A menu of grouped commands whose rows answer the arrow keys and the pointer through one attribute.",
+    "tags": ["overlay", "navigation", "action"],
+    "icons": ["three-dots-vertical", "pencil-line", "copy", "link", "avatars-group", "trash-bin"],
+    "fragments": [
+        {
+            "id": "setup",
+            "file": "main.ts",
+            "region": "setup",
+            "lang": "ts",
+            "title": "Define the element",
+            "note": "Built-in triggers only. What each icon follows is written in its markup."
+        },
+        {
+            "id": "menu",
+            "file": "index.html",
+            "region": "menu",
+            "lang": "html",
+            "title": "The panel, a group and a row",
+            "note": "data-keys for the arrow keys, data-choose for a row that can be chosen."
+        },
+        {
+            "id": "wiring",
+            "file": "main.ts",
+            "region": "wiring",
+            "lang": "ts",
+            "title": "Wire the panel and the keys",
+            "note": "Two calls into shared/ui. The rest is markup."
+        },
+        {
+            "id": "danger",
+            "file": "dropdown-menu.css",
+            "region": "danger",
+            "lang": "css",
+            "title": "The destructive row",
+            "note": "One rule. The icon takes the colour through current-color."
+        }
+    ]
+}

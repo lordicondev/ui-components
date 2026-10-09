@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Add to cart</title>
+        <link rel="stylesheet" href="./add-to-cart.css" />
+        <script type="module" src="./main.ts"></script>
+    </head>
+    <body>
+        <main class="demo">
+            <div class="shelf">
+                <!-- #region markup -->
+                <!-- aria-pressed is the state: the basket morphs on it and the button opens
+                     on it. The words are aria-hidden; aria-pressed already says the same.
+                     The tooltip span is the button's name. -->
+                <button class="cart" type="button" aria-pressed="false">
+                    <lord-icon
+                        class="cart__mark"
+                        current-color
+                        src="icons/shopping-basket.json"
+                        loading="interaction"
+                        trigger="follow(aria-pressed)"
+                        target=".cart"
+                        state="morph-add"
+                        aria-hidden="true"
+                    >
+                        <img alt="" src="icons/shopping-basket.svg" />
+                    </lord-icon>
+
+                    <span class="cart__said" aria-hidden="true">
+                        <span class="cart__label">Added to cart</span>
+                    </span>
+
+                    <span class="tooltip">Add to cart</span>
+                </button>
+                <!-- #endregion -->
+
+                <!-- #region favorite -->
+                <!-- The same trigger and attribute. morph-select fills the heart; the
+                     stylesheet colours it from the same aria-pressed. -->
+                <button class="favorite" type="button" aria-pressed="false">
+                    <lord-icon
+                        class="favorite__mark"
+                        current-color
+                        src="icons/heart.json"
+                        loading="interaction"
+                        trigger="follow(aria-pressed)"
+                        target=".favorite"
+                        state="morph-select"
+                        aria-hidden="true"
+                    >
+                        <img alt="" src="icons/heart.svg" />
+                    </lord-icon>
+
+                    <span class="tooltip">Add to favorites</span>
+                </button>
+                <!-- #endregion -->
+            </div>
+        </main>
+    </body>
+</html>

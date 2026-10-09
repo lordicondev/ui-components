@@ -1,0 +1,42 @@
+name: Test
+
+on:
+    push:
+        branches: ['main']
+    pull_request:
+        branches: ['main']
+
+jobs:
+    test:
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@v4
+
+            - name: Use Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 24.x
+                  cache: 'npm'
+
+            - run: npm ci
+
+            - name: Check
+              run: npm run check
+
+            - name: Formatting
+              run: npm run format:check
+
+            - name: Tests
+              run: npm test
+
+            # The portal has its own toolchain.
+            - uses: denoland/setup-deno@v2
+              with:
+                  deno-version: v2.x
+
+            - name: Portal formatting and lint
+              working-directory: portal
+              run: |
+                  deno fmt --check
+                  deno lint

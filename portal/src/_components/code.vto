@@ -1,0 +1,31 @@
+{{# One code block in a <details>. The TS | JS switch appears when both versions exist. #}}
+<details class="code" data-code {{ if !collapsed }}open{{ /if }}>
+    <summary class="code__head">
+        <span class="code__title">{{ title }}</span>
+        {{ if note }}<span class="code__note">{{ note }}</span>{{ /if }}
+    </summary>
+
+    <div class="code__bar">
+        {{ if variants }}
+            <span class="switch" role="group" aria-label="Language">
+                <button type="button" class="switch__option" data-lang="ts" aria-pressed="true">
+                    TS
+                </button>
+                <button type="button" class="switch__option" data-lang="js" aria-pressed="false">
+                    JS
+                </button>
+            </span>
+        {{ else }}
+            <span class="code__lang">{{ lang }}</span>
+        {{ /if }}
+
+        <button type="button" class="copy" data-copy>Copy</button>
+    </div>
+
+    {{ if variants }}
+        <pre class="code__body" data-variant="ts"><code class="language-ts">{{ ts |> escape }}</code></pre>
+        <pre class="code__body" data-variant="js" hidden><code class="language-js">{{ js |> escape }}</code></pre>
+    {{ else }}
+        <pre class="code__body" data-variant="static"><code class="language-{{ lang }}">{{ code |> escape }}</code></pre>
+    {{ /if }}
+</details>

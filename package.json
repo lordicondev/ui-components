@@ -1,0 +1,49 @@
+{
+    "name": "ui-components",
+    "version": "1.0.0",
+    "private": true,
+    "type": "module",
+    "description": "Animated Lordicon system icons reacting to real UI control state.",
+    "license": "MIT",
+    "scripts": {
+        "start": "cd portal && deno task preview",
+        "dev": "node scripts/dev.ts",
+        "dev:portal": "cd portal && deno task serve",
+        "build": "npm run build:demos && npm run export && npm run prepare:portal && npm run build:portal",
+        "build:release": "SITE_URL=https://components.lordicon.com/ npm run build",
+        "build:demos": "node scripts/build-demos.ts",
+        "export": "node scripts/export-demo.ts",
+        "publish:export": "node scripts/publish-export.ts",
+        "prepare:portal": "node scripts/prepare-portal.ts",
+        "build:portal": "cd portal && deno task build",
+        "check": "npm run check:types && npm run check:lint && npm run check:icons && npm run check:manifests && npm run check:sources && npm run check:fragments",
+        "check:types": "tsc --noEmit",
+        "check:lint": "eslint .",
+        "check:icons": "node scripts/check-icons.ts",
+        "check:manifests": "node scripts/check-manifests.ts",
+        "check:sources": "node scripts/check-sources.ts",
+        "check:fragments": "node scripts/check-fragments.ts",
+        "check:links": "node scripts/check-links.ts",
+        "format": "prettier --write .",
+        "format:check": "prettier --check .",
+        "test": "vitest run"
+    },
+    "dependencies": {
+        "@lordicon/element": "^3.0.2"
+    },
+    "devDependencies": {
+        "@eslint/js": "^10.0.1",
+        "@types/node": "^26.6.4",
+        "ajv": "^8.20.0",
+        "eslint": "^10.12.0",
+        "fflate": "^0.8.3",
+        "globals": "^17.13.0",
+        "happy-dom": "^20.14.6",
+        "prettier": "^3.9.9",
+        "ts-blank-space": "^0.9.0",
+        "typescript": "^6.0.3",
+        "typescript-eslint": "^8.71.1",
+        "vite": "^8.3.4",
+        "vitest": "^5.0.3"
+    }
+}

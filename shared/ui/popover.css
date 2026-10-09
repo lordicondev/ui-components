@@ -1,0 +1,63 @@
+/*
+ * The look of a popover panel, which way it opened, and how it leaves. Placement and the
+ * opening animation are in popover.ts, which writes `data-direction` on the panel before
+ * it is painted.
+ */
+
+/* The UA sheet pins a popover to all four edges and centres it with auto margins.
+   popover.ts sets two of the edges, so the rest is undone here. */
+.popover {
+    position: fixed;
+    inset: auto;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    /* The UA `overflow: auto` would clip a submenu reaching across the gap. The opening
+       animation clips from an inline style and hands back to this afterwards. */
+    overflow: visible;
+}
+
+/* The browser hides a closed popover from its own stylesheet, and any author `display`
+   overrides that. Without this rule, a panel given `display: flex` is never hidden. */
+.popover:not(:popover-open) {
+    display: none;
+}
+
+/* Leaving is a CSS transition. A closing popover leaves the top layer at once; the
+   `allow-discrete` transitions hold `display` and `overlay` until the fade is over. */
+.popover {
+    --popover-leave: var(--space-12);
+    opacity: 0;
+    translate: 0 var(--popover-leave);
+    transition:
+        opacity 160ms ease-in,
+        translate 160ms ease-in,
+        overlay 160ms allow-discrete,
+        display 160ms allow-discrete;
+}
+
+.popover:popover-open {
+    opacity: 1;
+    translate: 0 0;
+    transition: none;
+}
+
+/* Opening upward: the panel leaves upward too, and while it is still short its rows
+   overflow at the top, so the ones nearest the control show first. Children must not
+   shrink, or the flex column squashes them instead of overflowing. */
+.popover[data-direction='up'] {
+    --popover-leave: calc(var(--space-12) * -1);
+    justify-content: flex-end;
+}
+
+.popover[data-direction='up'] > * {
+    flex-shrink: 0;
+}
+
+/* popover.ts skips its animations under reduced motion too. */
+@media (prefers-reduced-motion: reduce) {
+    .popover {
+        translate: 0 0;
+        transition: none;
+    }
+}

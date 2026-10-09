@@ -1,0 +1,42 @@
+{
+    "$schema": "../../schemas/demo.schema.json",
+    "slug": "star-button",
+    "title": "Star button",
+    "description": "A star that fills as you press it, with a count read back off the same attribute.",
+    "tags": ["action", "toggle", "social"],
+    "icons": ["star"],
+    "fragments": [
+        {
+            "id": "setup",
+            "file": "main.ts",
+            "region": "setup",
+            "lang": "ts",
+            "title": "Define the element",
+            "note": "Built-in triggers only. What each icon follows is written in its markup."
+        },
+        {
+            "id": "markup",
+            "file": "index.html",
+            "region": "markup",
+            "lang": "html",
+            "title": "The button and its icon",
+            "note": "The icon, the stylesheet and the count all read aria-pressed."
+        },
+        {
+            "id": "wiring",
+            "file": "main.ts",
+            "region": "wiring",
+            "lang": "ts",
+            "title": "Flip the attribute on click",
+            "note": "No lock, and no mention of an icon."
+        },
+        {
+            "id": "colour",
+            "file": "star-button.css",
+            "region": "colour",
+            "lang": "css",
+            "title": "Colour from the same attribute",
+            "note": "One custom property, four states. The icon inherits it through current-color."
+        }
+    ]
+}

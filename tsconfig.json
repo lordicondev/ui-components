@@ -1,0 +1,32 @@
+{
+    "compilerOptions": {
+        "target": "ES2022",
+        "lib": ["ES2022", "DOM", "DOM.Iterable"],
+        "module": "ESNext",
+        "moduleResolution": "bundler",
+        "moduleDetection": "force",
+        "allowImportingTsExtensions": true,
+        "resolveJsonModule": true,
+        "isolatedModules": true,
+        "noEmit": true,
+        "skipLibCheck": true,
+        "useDefineForClassFields": true,
+
+        /* The whole point of the project: strip the types and you still have readable JS. */
+        "erasableSyntaxOnly": true,
+        "verbatimModuleSyntax": true,
+
+        "strict": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "noFallthroughCasesInSwitch": true,
+        "noUncheckedSideEffectImports": true,
+
+        "types": ["node", "vite/client"],
+        "paths": {
+            "@shared/*": ["./shared/*"]
+        }
+    },
+    "include": ["shared/**/*.ts", "demos/**/*.ts", "scripts/**/*.ts", "*.ts"],
+    "exclude": ["node_modules", "dist", "export", "portal"]
+}

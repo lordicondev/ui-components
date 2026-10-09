@@ -1,0 +1,12 @@
+{
+    "name": "ui-components",
+    "title": "UI Components by Lordicon",
+    "description": "Animated Lordicon system icons reacting to real UI control state.",
+    "siteUrl": "https://components.lordicon.com/",
+    "repo": {
+        "owner": "lordicondev",
+        "name": "ui-components",
+        "branch": "main",
+        "exportBranch": "standalone"
+    }
+}

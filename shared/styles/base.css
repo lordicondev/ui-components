@@ -1,0 +1,115 @@
+/*
+ * Fonts, reset and default typography. Nothing control-specific: every demo styles its
+ * own control. Only the UI face is here; the mono face is the portal's.
+ */
+@font-face {
+    font-family: 'Figtree';
+    font-style: normal;
+    font-weight: 300 900;
+    font-display: swap;
+    src: url('../fonts/figtree-latin.woff2') format('woff2');
+    unicode-range:
+        U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308,
+        U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+    font-family: 'Figtree';
+    font-style: normal;
+    font-weight: 300 900;
+    font-display: swap;
+    src: url('../fonts/figtree-latin-ext.woff2') format('woff2');
+    unicode-range:
+        U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329,
+        U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113,
+        U+2C60-2C7F, U+A720-A7FF;
+}
+
+/* Arial with Figtree's measurements, for the moment before Figtree arrives, so the text does
+   not move when it does. Measured on Figtree at 400 and 500. */
+@font-face {
+    font-family: 'Figtree fallback';
+    src: local('Arial'), local('Liberation Sans');
+    size-adjust: 100.3%;
+    ascent-override: 94.7%;
+    descent-override: 24.9%;
+    line-gap-override: 0%;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/* An author `display` on a component would beat the UA rule for [hidden], and then
+   `el.hidden = true` would stop working. Settled once here. */
+[hidden] {
+    display: none !important;
+}
+
+body {
+    margin: 0;
+    background: var(--surface);
+    color: var(--ink);
+    --icon-filter: var(--filter-ink);
+    font-family: var(--font-ui);
+    font-size: var(--text-base);
+    line-height: var(--leading-base);
+    -webkit-font-smoothing: antialiased;
+}
+
+button,
+input,
+textarea,
+select {
+    font: inherit;
+    color: inherit;
+}
+
+/* A second click on a button would otherwise select its label. */
+button {
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+}
+
+/*
+ * In the accessibility tree but not on screen: labels and legends that the visual design
+ * has no room for. Clipped rather than `display: none`, which would remove it from the
+ * tree too, and it also hides live radio inputs that must stay reachable by keyboard.
+ */
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+
+/*
+ * Until the script defines <lord-icon> it is an unknown inline element with no size. These
+ * rules give it the box it will have, so nothing moves when it is defined.
+ */
+lord-icon {
+    display: inline-block;
+    width: var(--icon-size-32);
+    height: var(--icon-size-32);
+}
+
+/* A placeholder inside the icon fills it until the icon is ready. */
+lord-icon:not(:defined) > img {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+/* Placeholders are black. Set --icon-filter wherever an icon's colour is set. */
+lord-icon > img {
+    filter: var(--icon-filter);
+}

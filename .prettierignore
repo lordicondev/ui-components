@@ -1,0 +1,9 @@
+dist/
+export/
+portal/_site/
+shared/public/icons/
+shared/styles/palette.css
+_todo/
+
+# The portal is formatted by `deno fmt`.
+portal/

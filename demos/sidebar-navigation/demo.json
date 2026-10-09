@@ -1,0 +1,61 @@
+{
+    "$schema": "../../schemas/demo.schema.json",
+    "slug": "sidebar-navigation",
+    "title": "Sidebar navigation",
+    "description": "Seven destinations whose icons answer the pointer and the keyboard, and one attribute that says where you are.",
+    "tags": ["navigation", "hover", "state"],
+    "icons": [
+        "grid-widget",
+        "cart",
+        "box-front",
+        "avatars-two",
+        "price-tag",
+        "bar-chart-vertical",
+        "cog",
+        "three-dots-vertical",
+        "magnifier",
+        "cross"
+    ],
+    "fragments": [
+        {
+            "id": "setup",
+            "file": "main.ts",
+            "region": "setup",
+            "lang": "ts",
+            "title": "Define the element",
+            "note": "Built-in triggers only. What each icon follows is written in its markup."
+        },
+        {
+            "id": "markup",
+            "file": "index.html",
+            "region": "markup",
+            "lang": "html",
+            "title": "One destination",
+            "note": "target points the icon at the link, so the whole row is the hover area."
+        },
+        {
+            "id": "navigate",
+            "file": "main.ts",
+            "region": "navigate",
+            "lang": "ts",
+            "title": "Move aria-current on click",
+            "note": "Added to one link, removed from the rest. No icon in sight."
+        },
+        {
+            "id": "state",
+            "file": "sidebar-navigation.css",
+            "region": "state",
+            "lang": "css",
+            "title": "Hovered and current rows",
+            "note": "Two custom properties: the fill and the icon colour."
+        },
+        {
+            "id": "fit",
+            "file": "sidebar-navigation.css",
+            "region": "fit",
+            "lang": "css",
+            "title": "The sidebar's height",
+            "note": "Drawn at 814px, never shorter than its contents, never taller than the screen."
+        }
+    ]
+}

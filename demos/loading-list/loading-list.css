@@ -1,0 +1,110 @@
+@import '@shared/styles/index.css';
+
+.demo {
+    display: grid;
+    place-items: center;
+    min-height: 100dvh;
+    padding: var(--space-64) var(--gutter);
+}
+
+.progress {
+    width: 100%;
+    max-width: 360px;
+    padding: var(--space-16);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    background: var(--surface);
+    box-shadow: 0 1px 1.5px rgb(0 0 0 / 4%);
+}
+
+.progress__title {
+    margin: 0;
+    font-size: var(--text-base);
+    font-weight: 600;
+}
+
+.steps {
+    margin: 0;
+    padding: var(--space-16) 0 0;
+    list-style: none;
+}
+
+.step {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: var(--space-12) 0;
+    color: var(--ink-strong);
+    font-size: var(--text-sm);
+    line-height: var(--leading-sm);
+}
+
+.step + .step {
+    border-top: 1px solid var(--border-soft);
+}
+
+.step__mark {
+    display: grid;
+    flex: none;
+}
+
+.step__mark > lord-icon {
+    width: var(--icon-size-24);
+    height: var(--icon-size-24);
+}
+
+.step__retry {
+    margin-left: auto;
+    padding: 1px var(--space-8);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    background: var(--surface);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.step__retry:hover {
+    background: var(--surface-muted);
+}
+
+/* #region swap */
+/* Three icons in one cell. The one for the status shows; the others are hidden but still
+   laid out, so they load with the page and are ready to play the moment they show. */
+.step__mark > * {
+    grid-area: 1 / 1;
+    visibility: hidden;
+}
+
+.step[data-status='pending'] .step__spinner,
+.step[data-status='active'] .step__spinner,
+.step[data-status='done'] .step__done,
+.step[data-status='failed'] .step__failed {
+    visibility: visible;
+}
+/* #endregion */
+
+/* #region colour */
+/* Faint until a step starts. The spinner has a placeholder, so it takes a filter too. */
+.step__spinner {
+    color: var(--ink-muted);
+    --icon-filter: var(--filter-ink-muted);
+}
+
+.step[data-status='pending'] .step__label {
+    color: var(--ink-faint);
+}
+
+.step[data-status='pending'] .step__spinner {
+    color: var(--ink-faint);
+    --icon-filter: var(--filter-ink-faint);
+}
+
+.step__done {
+    color: var(--success);
+}
+
+.step__failed {
+    color: var(--danger);
+}
+/* #endregion */

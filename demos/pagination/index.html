@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Pagination</title>
+        <link rel="stylesheet" href="./pagination.css" />
+        <script type="module" src="./main.ts"></script>
+    </head>
+    <body>
+        <main class="demo">
+            <nav class="pages" id="style-arrows" data-page aria-label="Pagination">
+                <!-- #region steps -->
+                <!-- One arrow icon for both buttons. The stylesheet flips the next button's
+                     icon, and its animation with it. -->
+                <button
+                    class="step step--boxed"
+                    type="button"
+                    data-step="-1"
+                    aria-label="Previous page"
+                >
+                    <lord-icon
+                        class="step__mark"
+                        current-color
+                        src="icons/arrow-left.json"
+                        loading="interaction"
+                        trigger="click"
+                        target=".step"
+                        state="hover-slide"
+                        aria-hidden="true"
+                    >
+                        <img alt="" src="icons/arrow-left.svg" />
+                    </lord-icon>
+                </button>
+                <!-- #endregion -->
+
+                <!-- #region markup -->
+                <!-- The frame is one element for the row, so it can travel between pages.
+                     aria-current is what says which page is current. -->
+                <div class="numbers">
+                    <span class="numbers__frame" aria-hidden="true"></span>
+
+                    <button class="page" type="button">1</button>
+                    <button class="page" type="button" aria-current="page">2</button>
+                    <button class="page" type="button">3</button>
+                    <button class="page" type="button">4</button>
+                </div>
+                <!-- #endregion -->
+
+                <button
+                    class="step step--boxed step--next"
+                    type="button"
+                    data-step="1"
+                    aria-label="Next page"
+                >
+                    <lord-icon
+                        class="step__mark"
+                        current-color
+                        src="icons/arrow-left.json"
+                        loading="interaction"
+                        trigger="click"
+                        target=".step"
+                        state="hover-slide"
+                        aria-hidden="true"
+                    >
+                        <img alt="" src="icons/arrow-left.svg" />
+                    </lord-icon>
+                </button>
+            </nav>
+
+            <nav class="pages" id="style-labelled" data-page hidden aria-label="Pagination">
+                <button class="step step--labelled" type="button" data-step="-1">
+                    <lord-icon
+                        class="step__mark"
+                        current-color
+                        src="icons/chevron-left.json"
+                        trigger="click"
+                        target=".step"
+                        aria-hidden="true"
+                    ></lord-icon>
+                    Previous
+                </button>
+
+                <div class="numbers">
+                    <span class="numbers__frame" aria-hidden="true"></span>
+
+                    <button class="page" type="button">1</button>
+                    <button class="page" type="button" aria-current="page">2</button>
+                    <button class="page" type="button">3</button>
+                    <button class="page" type="button">4</button>
+                </div>
+
+                <button class="step step--labelled step--next" type="button" data-step="1">
+                    Next
+                    <lord-icon
+                        class="step__mark"
+                        current-color
+                        src="icons/chevron-left.json"
+                        trigger="click"
+                        target=".step"
+                        aria-hidden="true"
+                    ></lord-icon>
+                </button>
+            </nav>
+
+            <nav class="pages pages--bare" id="style-bare" data-page hidden aria-label="Pagination">
+                <button
+                    class="step step--bare"
+                    type="button"
+                    data-step="-1"
+                    aria-label="Previous page"
+                >
+                    <lord-icon
+                        class="step__mark"
+                        current-color
+                        src="icons/chevron-left.json"
+                        trigger="click"
+                        target=".step"
+                        aria-hidden="true"
+                    ></lord-icon>
+                </button>
+
+                <div class="numbers">
+                    <span class="numbers__frame" aria-hidden="true"></span>
+
+                    <button class="page" type="button">1</button>
+                    <button class="page" type="button" aria-current="page">2</button>
+                    <button class="page" type="button">3</button>
+                    <button class="page" type="button">4</button>
+                </div>
+
+                <button
+                    class="step step--bare step--next"
+                    type="button"
+                    data-step="1"
+                    aria-label="Next page"
+                >
+                    <lord-icon
+                        class="step__mark"
+                        current-color
+                        src="icons/chevron-left.json"
+                        trigger="click"
+                        target=".step"
+                        aria-hidden="true"
+                    ></lord-icon>
+                </button>
+            </nav>
+
+            <div class="pager">
+                <button
+                    class="pager__dot"
+                    type="button"
+                    aria-pressed="true"
+                    aria-controls="style-arrows"
+                    aria-label="Arrow buttons"
+                ></button>
+                <button
+                    class="pager__dot"
+                    type="button"
+                    aria-pressed="false"
+                    aria-controls="style-labelled"
+                    aria-label="Chevrons with labels"
+                ></button>
+                <button
+                    class="pager__dot"
+                    type="button"
+                    aria-pressed="false"
+                    aria-controls="style-bare"
+                    aria-label="Chevrons alone"
+                ></button>
+            </div>
+        </main>
+    </body>
+</html>

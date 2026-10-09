@@ -1,0 +1,50 @@
+{
+    "$schema": "../../schemas/demo.schema.json",
+    "slug": "accordion",
+    "title": "Accordion",
+    "description": "A chevron that morphs with aria-expanded, over a panel that animates its own height.",
+    "tags": ["disclosure", "toggle", "navigation"],
+    "icons": ["chevron-down"],
+    "fragments": [
+        {
+            "id": "setup",
+            "file": "main.ts",
+            "region": "setup",
+            "lang": "ts",
+            "title": "Define the element",
+            "note": "Built-in triggers only. What each icon follows is written in its markup."
+        },
+        {
+            "id": "markup",
+            "file": "index.html",
+            "region": "markup",
+            "lang": "html",
+            "title": "One accordion item",
+            "note": "aria-expanded is the state. The icon reads it off the button through target."
+        },
+        {
+            "id": "wiring",
+            "file": "main.ts",
+            "region": "wiring",
+            "lang": "ts",
+            "title": "Open and close on click",
+            "note": "Flip the attribute, then move the text and the panel. No icon in sight."
+        },
+        {
+            "id": "panel",
+            "file": "main.ts",
+            "region": "panel",
+            "lang": "ts",
+            "title": "Animate the panel height",
+            "note": "Measure, animate, then hand the height back to the stylesheet."
+        },
+        {
+            "id": "clip",
+            "file": "accordion.css",
+            "region": "clip",
+            "lang": "css",
+            "title": "Chevron colour, and the panel that clips",
+            "note": "Colour changes at once. The shrinking panel is what hides the text."
+        }
+    ]
+}

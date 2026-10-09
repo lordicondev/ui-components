@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Sidebar navigation</title>
+        <link rel="stylesheet" href="./sidebar-navigation.css" />
+        <script type="module" src="./main.ts"></script>
+    </head>
+    <body>
+        <main class="demo">
+            <div class="sidebar">
+                <div class="sidebar__top">
+                    <p class="brand">
+                        <!-- The logo is an inline SVG, not a Lordicon icon. -->
+                        <span class="brand__mark" aria-hidden="true">
+                            <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="40" height="40" rx="4" fill="#edf9f1" />
+                                <path
+                                    fill="#08c18a"
+                                    fill-rule="evenodd"
+                                    clip-rule="evenodd"
+                                    d="M23.2981 16.7L26.2974 13.7022C26.9288 13.0782 28 13.5128 28 14.4043V25.9718C28 27.0973 27.0867 28 25.9704 28H14.0296C12.9133 28 12 27.0973 12 25.9718V14.4155C12 13.5239 13.0712 13.0782 13.7026 13.7134L16.7019 16.7223L19.1261 12.5098C19.5208 11.8301 20.4905 11.8301 20.8739 12.5098L23.2981 16.7ZM17.6378 22.7846C18.3369 22.7846 18.9119 22.2163 18.9119 21.5253C18.9119 20.8344 18.3369 20.2661 17.6378 20.2661C16.9387 20.2661 16.3636 20.8344 16.3636 21.5253C16.3636 22.2274 16.9274 22.7846 17.6378 22.7846ZM22.723 22.7846C23.4221 22.7846 23.9972 22.2163 23.9972 21.5253C23.9972 20.8344 23.4221 20.2661 22.723 20.2661C22.024 20.2661 21.4489 20.8344 21.4489 21.5253C21.4489 22.2274 22.024 22.7846 22.723 22.7846Z"
+                                />
+                            </svg>
+                        </span>
+
+                        Lordicon
+                    </p>
+
+                    <!-- The search bar demo's field: same attributes, same triggers. -->
+                    <form class="search" role="search">
+                        <div class="field" data-focused="false" data-clearable="false">
+                            <label class="visually-hidden" for="q">Search</label>
+
+                            <lord-icon
+                                class="field__mark"
+                                current-color
+                                src="icons/magnifier.json"
+                                loading="interaction"
+                                trigger="follow(data-focused)"
+                                target=".field"
+                                aria-hidden="true"
+                            >
+                                <img alt="" src="icons/magnifier.svg" />
+                            </lord-icon>
+
+                            <input class="field__input" id="q" type="search" placeholder="Search" />
+
+                            <button class="field__clear" type="button" aria-label="Clear search">
+                                <lord-icon
+                                    class="field__mark"
+                                    current-color
+                                    src="icons/cross.json"
+                                    loading="interaction"
+                                    trigger="follow(data-clearable)"
+                                    target=".field"
+                                    state="in-reveal"
+                                    aria-hidden="true"
+                                ></lord-icon>
+                            </button>
+                        </div>
+                    </form>
+
+                    <nav class="nav" aria-label="Main">
+                        <ul class="nav__group">
+                            <!-- #region markup -->
+                            <!-- One destination. aria-current is the state; the stylesheet
+                                 tints the row that has it. target=".nav__item" makes the
+                                 whole row the hover area. -->
+                            <li>
+                                <a class="nav__item" href="#overview" aria-current="page">
+                                    <lord-icon
+                                        class="nav__mark"
+                                        current-color
+                                        src="icons/grid-widget.json"
+                                        loading="interaction"
+                                        trigger="hover"
+                                        target=".nav__item"
+                                        aria-hidden="true"
+                                    >
+                                        <img alt="" src="icons/grid-widget.svg" />
+                                    </lord-icon>
+
+                                    <span class="nav__label">Overview</span>
+                                </a>
+                            </li>
+                            <!-- #endregion -->
+
+                            <li>
+                                <a class="nav__item" href="#orders">
+                                    <lord-icon
+                                        class="nav__mark"
+                                        current-color
+                                        src="icons/cart.json"
+                                        loading="interaction"
+                                        trigger="hover"
+                                        target=".nav__item"
+                                        aria-hidden="true"
+                                    >
+                                        <img alt="" src="icons/cart.svg" />
+                                    </lord-icon>
+
+                                    <span class="nav__label">Orders</span>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a class="nav__item" href="#products">
+                                    <lord-icon
+                                        class="nav__mark"
+                                        current-color
+                                        src="icons/box-front.json"
+                                        loading="interaction"
+                                        trigger="hover"
+                                        target=".nav__item"
+                                        aria-hidden="true"
+                                    >
+                                        <img alt="" src="icons/box-front.svg" />
+                                    </lord-icon>
+
+                                    <span class="nav__label">Products</span>
+                                </a>
+                            </li>
+                        </ul>
+
+                        <hr class="nav__rule" />
+
+                        <ul class="nav__group">
+                            <li>
+                                <a class="nav__item" href="#customers">
+                                    <lord-icon
+                                        class="nav__mark"
+                                        current-color
+                                        src="icons/avatars-two.json"
+                                        loading="interaction"
+                                        trigger="hover"
+                                        target=".nav__item"
+                                        aria-hidden="true"
+                                    >
+                                        <img alt="" src="icons/avatars-two.svg" />
+                                    </lord-icon>
+
+                                    <span class="nav__label">Customers</span>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a class="nav__item" href="#discounts">
+                                    <lord-icon
+                                        class="nav__mark"
+                                        current-color
+                                        src="icons/price-tag.json"
+                                        loading="interaction"
+                                        trigger="hover"
+                                        target=".nav__item"
+                                        aria-hidden="true"
+                                    >
+                                        <img alt="" src="icons/price-tag.svg" />
+                                    </lord-icon>
+
+                                    <span class="nav__label">Discounts</span>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a class="nav__item" href="#analytics">
+                                    <lord-icon
+                                        class="nav__mark"
+                                        current-color
+                                        src="icons/bar-chart-vertical.json"
+                                        loading="interaction"
+                                        trigger="hover"
+                                        target=".nav__item"
+                                        aria-hidden="true"
+                                    >
+                                        <img alt="" src="icons/bar-chart-vertical.svg" />
+                                    </lord-icon>
+
+                                    <span class="nav__label">Analytics</span>
+                                </a>
+                            </li>
+                        </ul>
+
+                        <hr class="nav__rule" />
+
+                        <ul class="nav__group">
+                            <li>
+                                <!-- hover-mechanic turns the cog; its default state pinches. -->
+                                <a class="nav__item" href="#settings">
+                                    <lord-icon
+                                        class="nav__mark"
+                                        current-color
+                                        src="icons/cog.json"
+                                        loading="interaction"
+                                        trigger="hover"
+                                        target=".nav__item"
+                                        state="hover-mechanic"
+                                        aria-hidden="true"
+                                    >
+                                        <img alt="" src="icons/cog.svg" />
+                                    </lord-icon>
+
+                                    <span class="nav__label">Settings</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+
+                <button class="account" type="button">
+                    <span class="account__avatar" aria-hidden="true">D</span>
+                    <span class="account__name">Dave Lee</span>
+
+                    <lord-icon
+                        class="account__mark"
+                        current-color
+                        src="icons/three-dots-vertical.json"
+                        loading="interaction"
+                        trigger="hover"
+                        target=".account"
+                        aria-hidden="true"
+                    >
+                        <img alt="" src="icons/three-dots-vertical.svg" />
+                    </lord-icon>
+                </button>
+            </div>
+        </main>
+    </body>
+</html>

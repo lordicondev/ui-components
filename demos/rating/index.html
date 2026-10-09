@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Rating</title>
+        <link rel="stylesheet" href="./rating.css" />
+        <script type="module" src="./main.ts"></script>
+    </head>
+    <body>
+        <main class="demo">
+            <fieldset class="rating">
+                <legend class="visually-hidden">Rate this</legend>
+
+                <!-- #region markup -->
+                <!-- One star. data-chosen is the rating, data-lit the preview. The icon
+                     morphs on the first and nudges on the second; the stylesheet colours
+                     on the second. The radio is the real control, only invisible. -->
+                <label class="star" data-chosen="true" data-lit="true">
+                    <input
+                        class="star__input visually-hidden"
+                        type="radio"
+                        name="rating"
+                        value="1"
+                    />
+
+                    <lord-icon
+                        class="star__mark"
+                        current-color
+                        src="icons/star.json"
+                        trigger="preview-morph(data-chosen, preview=data-lit)"
+                        target=".star"
+                        state="morph-select"
+                        aria-hidden="true"
+                    >
+                        <img alt="" src="icons/star.morph-select.svg" />
+                    </lord-icon>
+
+                    <span class="visually-hidden">1 star</span>
+                </label>
+                <!-- #endregion -->
+
+                <label class="star" data-chosen="true" data-lit="true">
+                    <input
+                        class="star__input visually-hidden"
+                        type="radio"
+                        name="rating"
+                        value="2"
+                        checked
+                    />
+
+                    <lord-icon
+                        class="star__mark"
+                        current-color
+                        src="icons/star.json"
+                        trigger="preview-morph(data-chosen, preview=data-lit)"
+                        target=".star"
+                        state="morph-select"
+                        aria-hidden="true"
+                    >
+                        <img alt="" src="icons/star.morph-select.svg" />
+                    </lord-icon>
+
+                    <span class="visually-hidden">2 stars</span>
+                </label>
+
+                <label class="star" data-chosen="false" data-lit="false">
+                    <input
+                        class="star__input visually-hidden"
+                        type="radio"
+                        name="rating"
+                        value="3"
+                    />
+
+                    <lord-icon
+                        class="star__mark"
+                        current-color
+                        src="icons/star.json"
+                        trigger="preview-morph(data-chosen, preview=data-lit)"
+                        target=".star"
+                        state="morph-select"
+                        aria-hidden="true"
+                    >
+                        <img alt="" src="icons/star.svg" />
+                    </lord-icon>
+
+                    <span class="visually-hidden">3 stars</span>
+                </label>
+
+                <label class="star" data-chosen="false" data-lit="false">
+                    <input
+                        class="star__input visually-hidden"
+                        type="radio"
+                        name="rating"
+                        value="4"
+                    />
+
+                    <lord-icon
+                        class="star__mark"
+                        current-color
+                        src="icons/star.json"
+                        trigger="preview-morph(data-chosen, preview=data-lit)"
+                        target=".star"
+                        state="morph-select"
+                        aria-hidden="true"
+                    >
+                        <img alt="" src="icons/star.svg" />
+                    </lord-icon>
+
+                    <span class="visually-hidden">4 stars</span>
+                </label>
+
+                <label class="star" data-chosen="false" data-lit="false">
+                    <input
+                        class="star__input visually-hidden"
+                        type="radio"
+                        name="rating"
+                        value="5"
+                    />
+
+                    <lord-icon
+                        class="star__mark"
+                        current-color
+                        src="icons/star.json"
+                        trigger="preview-morph(data-chosen, preview=data-lit)"
+                        target=".star"
+                        state="morph-select"
+                        aria-hidden="true"
+                    >
+                        <img alt="" src="icons/star.svg" />
+                    </lord-icon>
+
+                    <span class="visually-hidden">5 stars</span>
+                </label>
+            </fieldset>
+        </main>
+    </body>
+</html>

@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Button progress</title>
+        <link rel="stylesheet" href="./button-progress.css" />
+        <script type="module" src="./main.ts"></script>
+    </head>
+    <body>
+        <main class="demo">
+            <div class="task" id="kind-download" data-page>
+                <!-- #region markup -->
+                <!-- data-stage is the state: the icon, the fill, the label and the toast read
+                     it. data-progress is 0 to 100 and the bar follows it. -->
+                <button
+                    class="task__button"
+                    type="button"
+                    data-stage="idle"
+                    data-progress="0"
+                    aria-label="Download file"
+                >
+                    <span class="task__fill" aria-hidden="true"></span>
+
+                    <lord-icon
+                        class="task__mark"
+                        current-color
+                        src="icons/download.json"
+                        loading="interaction"
+                        trigger="follow(data-stage, busy=loop-cycle, done=morph-check)"
+                        target=".task__button"
+                        state="morph-check"
+                        aria-hidden="true"
+                    >
+                        <img alt="" src="icons/download.svg" />
+                    </lord-icon>
+                    <!-- #skip -->
+
+                    <!-- Three labels on a strip that slides up one line per stage change.
+                         aria-label on the button is copied from whichever is showing. -->
+                    <span class="task__says" aria-hidden="true">
+                        <span class="task__lines">
+                            <span class="task__line">Download file</span>
+                            <span class="task__line"
+                                >Downloading<i class="task__dots"><i></i><i></i><i></i></i
+                            ></span>
+                            <span class="task__line">Downloaded</span>
+                        </span>
+                    </span>
+                    <!-- #endskip -->
+                </button>
+                <!-- #endregion -->
+
+                <!-- Absolutely placed, so nothing below moves to make room. -->
+                <p class="toast" role="status" data-shown="false">
+                    <lord-icon
+                        class="toast__mark"
+                        current-color
+                        src="icons/check-circle.json"
+                        trigger="follow(data-shown)"
+                        target=".toast"
+                        state="in-reveal"
+                        aria-hidden="true"
+                    ></lord-icon>
+
+                    <span class="toast__text">File downloaded – lordicon-icons.zip</span>
+                </p>
+            </div>
+
+            <div class="task" id="kind-upload" data-page hidden>
+                <button
+                    class="task__button"
+                    type="button"
+                    data-stage="idle"
+                    data-progress="0"
+                    aria-label="Upload file"
+                >
+                    <span class="task__fill" aria-hidden="true"></span>
+
+                    <!-- The second page: a different icon and three different words. -->
+                    <lord-icon
+                        class="task__mark"
+                        current-color
+                        src="icons/upload.json"
+                        trigger="follow(data-stage, busy=loop-cycle, done=morph-check)"
+                        target=".task__button"
+                        state="morph-check"
+                        aria-hidden="true"
+                    ></lord-icon>
+
+                    <span class="task__says" aria-hidden="true">
+                        <span class="task__lines">
+                            <span class="task__line">Upload file</span>
+                            <span class="task__line"
+                                >Uploading<i class="task__dots"><i></i><i></i><i></i></i
+                            ></span>
+                            <span class="task__line">Uploaded</span>
+                        </span>
+                    </span>
+                </button>
+
+                <p class="toast" role="status" data-shown="false">
+                    <lord-icon
+                        class="toast__mark"
+                        current-color
+                        src="icons/check-circle.json"
+                        trigger="follow(data-shown)"
+                        target=".toast"
+                        state="in-reveal"
+                        aria-hidden="true"
+                    ></lord-icon>
+
+                    <span class="toast__text">File uploaded – icon-heart.json</span>
+                </p>
+            </div>
+
+            <div class="pager">
+                <button
+                    class="pager__dot"
+                    type="button"
+                    aria-pressed="true"
+                    aria-controls="kind-download"
+                    aria-label="Download"
+                ></button>
+                <button
+                    class="pager__dot"
+                    type="button"
+                    aria-pressed="false"
+                    aria-controls="kind-upload"
+                    aria-label="Upload"
+                ></button>
+            </div>
+        </main>
+    </body>
+</html>
