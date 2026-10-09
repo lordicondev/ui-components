@@ -112,16 +112,16 @@
 
                 <span class="menu-bar__rule"></span>
 
-                <div class="menu-bar__actions">
-                    <!-- An action, not a state: no attribute to follow, the icon plays once. -->
-                    <button class="action" type="button">
+                <div class="menu-bar__lists" role="group" aria-label="List">
+                    <!-- A toggle: aria-pressed is its state, and the icon follows it. -->
+                    <button class="list" type="button" aria-pressed="false">
                         <lord-icon
-                            class="action__mark"
+                            class="list__mark"
                             current-color
                             src="icons/bullet-list.json"
-                            loading="interaction"
-                            trigger="click"
-                            target=".action"
+                            trigger="follow(aria-pressed)"
+                            target=".list"
+                            state="morph-select"
                             aria-hidden="true"
                         >
                             <img alt="" src="icons/bullet-list.svg" />
@@ -130,14 +130,14 @@
                         <span class="tooltip">Bullet list</span>
                     </button>
 
-                    <button class="action" type="button">
+                    <button class="list" type="button" aria-pressed="false">
                         <lord-icon
-                            class="action__mark"
+                            class="list__mark"
                             current-color
                             src="icons/check-list.json"
-                            loading="interaction"
-                            trigger="click"
-                            target=".action"
+                            trigger="follow(aria-pressed)"
+                            target=".list"
+                            state="morph-change"
                             aria-hidden="true"
                         >
                             <img alt="" src="icons/check-list.svg" />
@@ -149,6 +149,7 @@
 
                 <span class="menu-bar__rule"></span>
 
+                <!-- An action, not a state: no attribute to follow, the icon plays once. -->
                 <button class="action" type="button">
                     <lord-icon
                         class="action__mark"

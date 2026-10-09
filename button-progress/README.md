@@ -17,13 +17,12 @@ npm run dev
 
 | Trigger                                                 | Watches                    | On                          |
 | ------------------------------------------------------- | -------------------------- | --------------------------- |
-| `follow(data-stage, busy=loop-cycle, done=morph-check)` | `data-stage` on the button | the download icon           |
+| `follow(data-stage, busy=loop-cycle, done=morph-check)` | `data-stage` on the button | the download or upload icon |
 | `follow(data-shown)`                                    | `data-shown` on the toast  | the tick, state `in-reveal` |
 
 A value map: `busy` loops `loop-cycle`, `done` plays the first half of `morph-check`, and
 any other value (idle) plays the second half back. A finish that lands mid-loop waits for
-the loop to come round, so the icon never stops halfway through a turn. The upload icon
-maps `done` to its `morph-select`.
+the loop to come round, so the icon never stops halfway through a turn.
 
 ## Notes
 

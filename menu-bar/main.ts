@@ -19,5 +19,16 @@ function follow(): void {
 
 document.querySelector('.menu-bar__tools')!.addEventListener('change', follow);
 
+const lists = [...document.querySelectorAll<HTMLButtonElement>('.list')];
+
+// A paragraph is one kind of list or none: pressing one releases the other, and pressing
+// it again releases it. aria-pressed is an attribute, so the icons follow it as it is.
+for (const list of lists) {
+    list.addEventListener('click', () => {
+        const on = list.getAttribute('aria-pressed') !== 'true';
+        for (const other of lists) other.setAttribute('aria-pressed', String(other === list && on));
+    });
+}
+
 // Every button's name is the span inside it; tooltips() shows it on hover and focus.
 tooltips();
