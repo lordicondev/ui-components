@@ -195,8 +195,9 @@ h2 {
     translate: 0 -100%;
 }
 
-/* The logo keeps its own colours, so its placeholder is not recoloured. */
+/* The logo stays #121331, also under the pointer, where links turn to the accent. */
 .sidebar__home lord-icon {
+    color: #121331;
     display: block;
     width: auto;
     height: 36px;
