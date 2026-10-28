@@ -4,6 +4,7 @@
     "title": "Pricing",
     "description": "Cards comparing subscription plans, in four layouts. Each plan’s icon plays when you hover over its card.",
     "tags": ["cards", "hover"],
+    "stage": "large",
     "icons": ["puzzle-piece", "rocket", "avatars-group", "check-circle-solid"],
     "fragments": [
         {

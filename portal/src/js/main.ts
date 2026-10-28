@@ -27,7 +27,8 @@ function sizeStage() {
         const frame = stage.querySelector('[data-stage]');
         const needed = frame ? (reported.get(frame) ?? 0) : 0;
 
-        stage.style.minHeight = needed ? `${needed}px` : '';
+        if (needed) stage.style.setProperty('--needed', `${needed}px`);
+        else stage.style.removeProperty('--needed');
     }
 }
 

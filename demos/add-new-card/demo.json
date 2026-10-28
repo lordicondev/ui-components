@@ -4,6 +4,7 @@
     "title": "Add new card",
     "description": "An empty, dashed tile for adding a new item to a grid. Its plus icon turns when you hover over it.",
     "tags": ["action", "hover", "payment"],
+    "stage": "small",
     "icons": ["plus"],
     "fragments": [
         {

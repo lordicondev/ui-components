@@ -4,6 +4,7 @@
     "title": "Accordion",
     "description": "A stack of headings that each open a section of content. The chevron morphs as a section opens or closes.",
     "tags": ["disclosure", "toggle", "navigation"],
+    "stage": "medium",
     "icons": ["chevron-down"],
     "fragments": [
         {

@@ -4,6 +4,7 @@
     "title": "Sidebar navigation",
     "description": "A side menu linking to pages of an app. Icons react to hover and the keyboard, and the current page is highlighted.",
     "tags": ["navigation", "hover", "state"],
+    "stage": "large",
     "icons": [
         "grid-widget",
         "cart",

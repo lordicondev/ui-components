@@ -98,6 +98,7 @@ for (const slug of listDemos()) {
 
     demos.push({
         ...manifest,
+        stage: manifest.stage ?? 'large',
         icons: manifest.icons.map((alias) => {
             const entry = lockfile.get(alias);
             return {

@@ -29,12 +29,16 @@
             },
             "minItems": 1
         },
+        "stage": {
+            "enum": ["small", "medium", "large"],
+            "description": "How tall the demo's frame is in the portal: small 360px, medium 520px, large the rest of the first screen. Pick the smallest that fits the demo with its menus open. Large when left out."
+        },
         "icons": {
             "type": "array",
             "items": {
                 "type": "string"
             },
-            "description": "Icon aliases from shared/icons.json. The export ships exactly these."
+            "description": "Icon aliases from shared/icons.json. The export ships these, plus the pager's arrows."
         },
         "fragments": {
             "type": "array",

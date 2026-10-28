@@ -612,18 +612,34 @@ h2 {
     height: var(--icon-size-20);
 }
 
-/* The title, the description and the demo are the whole of the first screen, and the size
-   of it is settled in CSS: a stage measured only after the frame reports back would push
-   everything under it down the moment the demo loaded.
-
-   It stops short of the full screen by the "Take it with you" title and one line of its
-   text, so it is clear the page goes on below the demo. */
+/* The size of the frame is settled in CSS: a stage measured only after the frame reports
+   back would push everything under it down the moment the demo loaded. Each demo picks a
+   size in its manifest. */
 .demo-page__intro {
     display: flex;
     flex-direction: column;
-    min-height: calc(100dvh - var(--main-top) - var(--peek));
+}
+
+/* A large demo makes the title, the description and the demo the whole of the first screen.
+   It stops short of it by the "Get the code" title and one line of its text, so it is clear
+   the page goes on below the demo, and at a 720px frame under a two-line head. */
+.demo-page--large .demo-page__intro {
+    min-height: min(calc(100dvh - var(--main-top) - var(--peek)), calc(720px + 128px));
 
     --peek: calc(var(--leading-xl) + var(--space-8) + var(--leading-base));
+}
+
+.demo-page--small {
+    --frame-min: 360px;
+}
+
+.demo-page--medium {
+    --frame-min: 520px;
+}
+
+/* Enough for the command menu's open palette on a short screen. */
+.demo-page--large {
+    --frame-min: 600px;
 }
 
 /* The demo sits in the page rather than in a box of its own — a frame around it would
@@ -639,12 +655,12 @@ h2 {
     margin-inline: calc(var(--gutter) * -1);
 }
 
-/* The wrapper fills the stage, and the frame fills the wrapper. Only a demo taller than
-   the screen adds anything to this, from sizeStage. */
+/* The wrapper fills the stage, and the frame fills the wrapper. A demo taller than its
+   frame reports its height, and sizeStage passes it on as --needed. */
 .stage__frame {
     display: grid;
     flex: 1;
-    min-height: 320px;
+    min-height: max(var(--frame-min, 320px), var(--needed, 0px));
 }
 
 .stage__frame iframe {

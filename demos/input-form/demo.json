@@ -4,6 +4,7 @@
     "title": "Input form",
     "description": "A message composer pinned to the bottom of the page. Its menu opens upward, with a submenu and a search inside.",
     "tags": ["overlay", "form", "hover", "navigation"],
+    "stage": "small",
     "icons": [
         "plus",
         "microphone",

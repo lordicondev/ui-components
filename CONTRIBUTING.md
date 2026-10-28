@@ -41,7 +41,8 @@ Each demo is its own Vite project; `scripts/lib/vite-config.ts` builds one confi
 1. Create `demos/<slug>/` with `index.html`, `main.ts`, `<slug>.css` and `README.md`.
 2. In `main.ts`, call `defineElement()` in the `setup` region; other imports go below it.
    What each icon does is its `trigger` attribute in the markup.
-3. Write `demo.json`. It points at `schemas/demo.schema.json`, so an editor helps.
+3. Write `demo.json`. It points at `schemas/demo.schema.json`, so an editor helps. Pick the
+   smallest `stage` (the frame's height in the portal) that fits the demo with its menus open.
 4. Mark the parts worth reading with `#region` / `#endregion` and list them as
    `fragments`. Every region must be a fragment. `#skip` … `#endskip` inside a region
    collapses a stretch to an ellipsis.

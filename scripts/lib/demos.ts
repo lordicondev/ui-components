@@ -16,6 +16,8 @@ export type DemoManifest = {
     title: string;
     description: string;
     tags: string[];
+    /** How tall the portal's frame is. Large when left out. */
+    stage?: 'small' | 'medium' | 'large';
     icons: string[];
     fragments: Fragment[];
 };

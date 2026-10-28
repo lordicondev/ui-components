@@ -2,9 +2,9 @@
 layout: layouts/base.vto
 ---
 
-<article class="demo-page">
-    {{# The head and the stage fill the first screen from CSS, so nothing below them moves
-        when the demo loads. #}}
+<article class="demo-page demo-page--{{ demo.stage }}">
+    {{# The stage's height comes from CSS, by the size the demo picks, so nothing below it
+        moves when the demo loads. #}}
     <div class="demo-page__intro">
         <header class="demo-page__head">
         <div class="demo-page__title">
@@ -51,7 +51,7 @@ layout: layouts/base.vto
     </div>
 
     <section class="take-it">
-        <h2>Take it with you</h2>
+        <h2>Get the code</h2>
         <p>
             This demo also exists as a standalone project —
             <code>npm install &amp;&amp; npm run dev</code>, no changes needed.
@@ -109,7 +109,7 @@ layout: layouts/base.vto
     </section>
 
     <section class="reading">
-        <h2>Every file</h2>
+        <h2>Source files</h2>
         <p class="reading__legend">
             The demo's own files, whole, at the paths the export uses.
         </p>

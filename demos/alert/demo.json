@@ -4,6 +4,7 @@
     "title": "Alerts",
     "description": "Short messages about a change or a problem, in four types. Each icon plays as the alert appears.",
     "tags": ["feedback", "entrance", "status"],
+    "stage": "large",
     "icons": ["info-circle", "check-circle", "warning-triangle", "cross-circle", "cross"],
     "fragments": [
         {

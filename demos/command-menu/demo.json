@@ -4,6 +4,7 @@
     "title": "Command menu",
     "description": "A search palette for jumping to commands, opened with a keyboard shortcut. Icons react as you move through the commands with the mouse or the arrow keys.",
     "tags": ["overlay", "navigation", "form"],
+    "stage": "large",
     "icons": [
         "magnifier",
         "cross",

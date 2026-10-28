@@ -4,6 +4,7 @@
     "title": "Loading list",
     "description": "A checklist showing the steps of a running task. Each spinner turns into a tick or a cross when its step finishes.",
     "tags": ["progress", "status", "follow"],
+    "stage": "medium",
     "icons": ["spinner-circle", "check-circle", "cross-circle"],
     "fragments": [
         {
