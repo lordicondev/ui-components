@@ -3,7 +3,7 @@
     "slug": "search-bar",
     "title": "Search bar",
     "description": "A search field with a clear button. The magnifier reacts when you click into the field, and the cross icon appears once you stop typing.",
-    "tags": ["form", "action"],
+    "group": "inputs",
     "stage": "small",
     "icons": ["magnifier", "cross"],
     "fragments": [

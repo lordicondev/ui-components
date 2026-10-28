@@ -3,7 +3,7 @@
     "slug": "checkbox-list",
     "title": "Checkbox list",
     "description": "A list of options to tick, in three styles. The checkbox icon morphs into a tick when you select it.",
-    "tags": ["form", "toggle", "settings"],
+    "group": "inputs",
     "stage": "medium",
     "icons": ["check-box-empty", "check-circle-empty", "radio-button"],
     "fragments": [

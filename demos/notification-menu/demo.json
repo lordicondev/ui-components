@@ -3,7 +3,7 @@
     "slug": "notification-menu",
     "title": "Notification menu",
     "description": "A bell that opens a list of recent notifications. It rings when a new one arrives.",
-    "tags": ["overlay", "navigation", "hover", "state"],
+    "group": "menus",
     "stage": "medium",
     "icons": ["bell", "heart", "download", "message", "star"],
     "fragments": [

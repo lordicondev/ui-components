@@ -3,7 +3,7 @@
     "slug": "add-to-cart",
     "title": "Add to cart",
     "description": "A product action with an Add to cart button and a heart for saving. The button confirms the item was added, and the heart fills when you save it.",
-    "tags": ["commerce", "toggle", "action"],
+    "group": "buttons",
     "stage": "small",
     "icons": ["shopping-basket", "heart"],
     "fragments": [

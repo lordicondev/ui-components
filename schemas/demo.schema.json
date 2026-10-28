@@ -4,7 +4,7 @@
     "description": "Everything the portal needs to build a demo page. The portal reads nothing else.",
     "type": "object",
     "additionalProperties": false,
-    "required": ["slug", "title", "description", "tags", "icons", "fragments"],
+    "required": ["slug", "title", "description", "group", "icons", "fragments"],
     "properties": {
         "$schema": {
             "type": "string"
@@ -22,12 +22,9 @@
             "type": "string",
             "minLength": 1
         },
-        "tags": {
-            "type": "array",
-            "items": {
-                "type": "string"
-            },
-            "minItems": 1
+        "group": {
+            "enum": ["buttons", "inputs", "menus", "navigation", "feedback", "cards"],
+            "description": "The section of the portal's index the demo is listed in. Titles and order are in scripts/prepare-portal.ts."
         },
         "stage": {
             "enum": ["small", "medium", "large"],

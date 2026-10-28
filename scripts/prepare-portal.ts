@@ -4,7 +4,7 @@
  *
  * Usage: npm run prepare:portal
  */
-import { cpSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { cpSync, existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { loadConfig, repoRoot } from './lib/config.ts';
 import { demoDir, listDemos, readManifest, type Fragment } from './lib/demos.ts';
@@ -81,20 +81,45 @@ async function files(slug: string) {
     };
 }
 
+/** The sections of the index, in order. A demo names its own in `group`. */
+const GROUPS = [
+    { id: 'buttons', title: 'Buttons' },
+    { id: 'inputs', title: 'Forms and inputs' },
+    { id: 'menus', title: 'Menus' },
+    { id: 'navigation', title: 'Navigation' },
+    { id: 'feedback', title: 'Feedback and progress' },
+    { id: 'cards', title: 'Cards' },
+];
+
 /**
- * The icon each card on the index shows is the demo's first, except where another card
- * shows that one already.
+ * A card on the index shows the demo's thumbnail video. Without one, it shows an icon: the
+ * demo's first, except where another card shows that one already.
  */
 const COVERS: Record<string, string> = {
     'command-menu': 'file-text',
     'input-form': 'microphone',
 };
 
+/** The video and its first frame, from portal/src/thumbnails/, if the demo has them. */
+function thumbnail(slug: string) {
+    const dir = resolve(repoRoot, 'portal/src/thumbnails');
+    if (!existsSync(resolve(dir, `${slug}.mp4`))) return undefined;
+    if (!existsSync(resolve(dir, `${slug}.webp`))) {
+        throw new Error(`portal/src/thumbnails/${slug}.mp4 has no ${slug}.webp poster`);
+    }
+    return { video: `/thumbnails/${slug}.mp4`, poster: `/thumbnails/${slug}.webp` };
+}
+
 const demos = [];
 
 for (const slug of listDemos()) {
     const { $schema: _schema, ...manifest } = readManifest(slug) as Record<string, unknown> &
         ReturnType<typeof readManifest>;
+
+    // A group with no section would leave the demo off the index.
+    if (!GROUPS.some((group) => group.id === manifest.group)) {
+        throw new Error(`demos/${slug}/demo.json: no index section for group "${manifest.group}"`);
+    }
 
     demos.push({
         ...manifest,
@@ -108,6 +133,7 @@ for (const slug of listDemos()) {
             };
         }),
         cover: COVERS[slug] ?? manifest.icons[0],
+        thumbnail: thumbnail(slug),
         links: demoLinks(config, slug),
         fragments: await Promise.all(
             manifest.fragments.map((fragment) => demoFragment(slug, fragment)),
@@ -118,9 +144,6 @@ for (const slug of listDemos()) {
     console.log(`  ${slug}`);
 }
 
-/** Every tag a demo can be filtered by. Each one is a chip on the index. */
-const tags = [...new Set(demos.flatMap((demo) => demo.tags))].sort();
-
 mkdirSync(resolve(repoRoot, 'portal/src/_data'), { recursive: true });
 writeFileSync(
     target,
@@ -130,10 +153,10 @@ writeFileSync(
                 title: config.title,
                 description: config.description,
                 version,
-                tags,
                 standaloneBranch: config.repo.exportBranch,
                 repo: repoUrl(config),
             },
+            groups: GROUPS,
             demos,
         },
         null,

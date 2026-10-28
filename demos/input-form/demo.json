@@ -3,7 +3,7 @@
     "slug": "input-form",
     "title": "Input form",
     "description": "A message composer pinned to the bottom of the page. Its menu opens upward, with a submenu and a search inside.",
-    "tags": ["overlay", "form", "hover", "navigation"],
+    "group": "inputs",
     "stage": "small",
     "icons": [
         "plus",

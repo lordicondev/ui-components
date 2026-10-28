@@ -27,24 +27,16 @@ layout: layouts/base.vto
     </a>
 </section>
 
-<section class="listing" id="demos" aria-labelledby="listing-title">
-    <h2 class="listing__title" id="listing-title">All demos</h2>
+<section class="listing" id="demos" aria-label="Demos">
+    {{ for group of demos.groups }}
+        <section class="group" aria-labelledby="group-{{ group.id }}">
+            <h2 class="group__title" id="group-{{ group.id }}">{{ group.title }}</h2>
 
-    {{# Without JavaScript every demo is listed and the stylesheet hides the filter. #}}
-    <div class="filter" role="group" aria-label="Show the demos tagged" data-filter>
-        <button type="button" class="chip" data-tag="" aria-pressed="true">All</button>
-        {{ for tag of demos.site.tags }}
-            <button type="button" class="chip" data-tag="{{ tag }}" aria-pressed="false">
-                {{ tag }}
-            </button>
-        {{ /for }}
-    </div>
-
-    <ul class="cards">
-        {{ for demo of demos.demos }}
-            {{ comp.card({ demo }) }}
-        {{ /for }}
-    </ul>
-
-    <p class="cards__empty" hidden data-empty>No demo carries that tag yet.</p>
+            <ul class="cards">
+                {{ for demo of demos.demos.filter((demo) => demo.group === group.id) }}
+                    {{ comp.card({ demo }) }}
+                {{ /for }}
+            </ul>
+        </section>
+    {{ /for }}
 </section>

@@ -3,7 +3,7 @@
     "slug": "star-button",
     "title": "Star button",
     "description": "A button for starring an item, with a counter. The star morphs into a filled one when you press it, and the count goes up.",
-    "tags": ["action", "toggle", "social"],
+    "group": "buttons",
     "stage": "small",
     "icons": ["star"],
     "fragments": [

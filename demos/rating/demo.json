@@ -3,7 +3,7 @@
     "slug": "rating",
     "title": "Rating",
     "description": "A row of five stars for rating something. Stars light up one by one as you hover and morph into filled stars when you pick a rating.",
-    "tags": ["form", "toggle", "social"],
+    "group": "inputs",
     "stage": "small",
     "icons": ["star"],
     "fragments": [

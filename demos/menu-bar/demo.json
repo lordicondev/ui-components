@@ -3,7 +3,7 @@
     "slug": "menu-bar",
     "title": "Menu bar",
     "description": "A toolbar of tools and formatting options. Icons morph into place as you pick a tool or list style, and play when pressed.",
-    "tags": ["toolbar", "toggle", "action"],
+    "group": "buttons",
     "stage": "small",
     "icons": [
         "brush-alt",

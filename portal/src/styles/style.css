@@ -403,82 +403,31 @@ h2 {
     margin-top: var(--space-96);
 }
 
-.listing__title {
-    font-size: var(--text-lg);
+.group + .group {
+    margin-top: var(--space-64);
 }
 
-/* The one filter: chips as light as the demos' toggles. The chosen one is tinted, as a
-   picked tool is in the menu-bar demo. */
-.filter {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-8);
-    margin-top: var(--space-16);
+.group__title {
+    font-size: var(--text-xl);
+    line-height: var(--leading-xl);
 }
 
-/* The chips need the script. In place from the first paint, so the cards do not move. */
-@media (scripting: none) {
-    .filter {
-        display: none;
-    }
-}
-
-.chip {
-    padding: var(--space-4) var(--space-12);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-pill);
-    background: var(--surface);
-    color: var(--ink-soft);
-    font-size: var(--text-sm);
-    font-weight: 500;
-    cursor: pointer;
-    transition:
-        background 150ms ease,
-        border-color 150ms ease,
-        color 150ms ease;
-}
-
-.chip:hover {
-    background: var(--surface-muted);
-    color: var(--ink);
-}
-
-.chip[aria-pressed='true'] {
-    border-color: var(--accent-surface);
-    background: var(--accent-surface);
-    color: var(--accent-ink);
-}
-
+/* As many columns of at least 260px as fit: three beside the sidebar, one on a phone. */
 .cards {
     display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr));
     gap: var(--space-16);
-    margin: var(--space-24) 0 0;
+    margin: var(--space-16) 0 0;
     padding: 0;
     list-style: none;
 }
 
-@media (min-width: 720px) {
-    .cards {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-}
-
-@media (min-width: 1240px) {
-    .cards {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-}
-
-/* The whole card is the link, so the pointer and keyboard focus reach the icon too. On a
-   phone the icon sits beside the words, so the list stays short; from two columns up, above
-   them. */
+/* The whole card is the link, so the pointer and keyboard focus reach the video too. */
 .card__link {
-    display: grid;
-    grid-template-columns: var(--icon-size-48) minmax(0, 1fr);
-    align-content: start;
-    column-gap: var(--space-16);
+    display: flex;
+    flex-direction: column;
     height: 100%;
-    padding: var(--space-16);
+    overflow: hidden;
     border: 1px solid var(--border-soft);
     border-radius: var(--radius-lg);
     background: var(--surface);
@@ -493,50 +442,55 @@ h2 {
     color: inherit;
 }
 
-@media (min-width: 720px) {
-    .card__link {
-        grid-template-columns: minmax(0, 1fr);
-        padding: var(--space-24);
-    }
-}
-
-/* The icon sits in a well, as a single icon does in the demos. Under the pointer the well
-   takes the accent, as a picked tool does. */
-.card__icon {
+/* 4:3, as the videos are recorded. The still sits under the video, which fades in once it
+   plays and out when it stops, so the card never shows an empty frame. */
+.card__media {
+    position: relative;
     display: grid;
     place-items: center;
-    grid-row: span 2;
+    aspect-ratio: 4 / 3;
+    border-bottom: 1px solid var(--border-soft);
+    background: var(--surface-muted);
+}
+
+.card__poster,
+.card__video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.card__video {
+    opacity: 0;
+    transition: opacity 200ms ease;
+}
+
+.card__video[data-playing] {
+    opacity: 1;
+}
+
+/* A demo without a video yet shows its icon, which takes the accent under the pointer. */
+.card__media lord-icon {
     width: var(--icon-size-48);
     height: var(--icon-size-48);
-    border-radius: var(--radius-md);
-    background: var(--surface-muted);
     color: var(--ink);
     --icon-filter: var(--filter-ink);
-    transition:
-        background 150ms ease,
-        color 150ms ease;
+    transition: color 150ms ease;
 }
 
-.card__icon lord-icon {
-    width: var(--icon-size-24);
-    height: var(--icon-size-24);
-}
-
-@media (min-width: 720px) {
-    .card__icon {
-        grid-row: auto;
-        margin-bottom: var(--space-16);
-    }
-}
-
-.card__link:hover .card__icon,
-.card__link:focus-visible .card__icon {
-    background: var(--accent-surface);
+.card__link:hover .card__media lord-icon,
+.card__link:focus-visible .card__media lord-icon {
     color: var(--accent);
-    --icon-filter: var(--filter-accent);
+}
+
+.card__body {
+    padding: var(--space-16) var(--space-24) var(--space-24);
 }
 
 .card__title {
+    margin: 0;
     font-size: var(--text-base);
     line-height: var(--leading-base);
 }
@@ -548,17 +502,10 @@ h2 {
     line-height: var(--leading-sm);
 }
 
-.cards__empty {
-    color: var(--ink-muted);
-    font-size: var(--text-sm);
-}
-
-/* Filtering rearranges the list. Naming each card lets the browser tween the survivors
-   from their old places to their new ones, so the list reflows in front of you instead of
-   snapping. Only the duration and the curve are ours; the movement is the browser's. */
-::view-transition-group(*) {
-    animation-duration: 300ms;
-    animation-timing-function: cubic-bezier(0.3, 0, 0.2, 1);
+@media (prefers-reduced-motion: reduce) {
+    .card__video {
+        transition: none;
+    }
 }
 
 /* Demo page ---------------------------------------------------------------- */

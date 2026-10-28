@@ -3,7 +3,7 @@
     "slug": "button-progress",
     "title": "Button progress",
     "description": "A button that shows the progress of a download or upload. The icon loops while the file transfers, then a receipt confirms it’s done.",
-    "tags": ["action", "status"],
+    "group": "feedback",
     "stage": "small",
     "icons": ["download", "upload", "check-circle"],
     "fragments": [

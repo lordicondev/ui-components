@@ -3,7 +3,7 @@
     "slug": "password-field",
     "title": "Password field",
     "description": "A password input with a show/hide toggle and error messages. The lock reacts when you click into the field, and the eye morphs open and closed with the toggle.",
-    "tags": ["form", "toggle", "validation"],
+    "group": "inputs",
     "stage": "small",
     "icons": ["lock", "eye", "warning-circle"],
     "fragments": [

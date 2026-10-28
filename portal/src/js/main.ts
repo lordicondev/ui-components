@@ -82,66 +82,52 @@ for (const reveal of document.querySelectorAll<HTMLDetailsElement>('.imports')) 
 }
 
 /**
- * Index filter. The markup ships unfiltered and the control takes its place from the first
- * paint; without JavaScript the stylesheet hides it and the list still works. The chosen
- * tag lives in the hash, so a filtered index is a link.
+ * Card videos on the index. One plays from the start while the pointer or keyboard focus is
+ * on its card, and fades back to the still when that leaves. A touch screen has no pointer
+ * to follow, so there a video plays while its card crosses the middle of the screen, which
+ * is one card at a time. Under reduced motion, or when the reader asks to save data, the
+ * stills stay.
  */
-const filter = document.querySelector<HTMLElement>('[data-filter]');
+const previews = [...document.querySelectorAll<HTMLVideoElement>('[data-preview]')];
+const still = matchMedia('(prefers-reduced-motion: reduce)');
+const saving = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection
+    ?.saveData;
 
-if (filter) {
-    const chips = [...filter.querySelectorAll<HTMLButtonElement>('[data-tag]')];
-    const cards = document.querySelectorAll<HTMLElement>('.card');
-    const empty = document.querySelector<HTMLElement>('[data-empty]');
-
-    /**
-     * Wraps a filter change in a view transition where supported, so the cards that stay
-     * slide to their new place. Skipped under reduced motion; the change runs either way.
-     */
-    type Transitions = Document & { startViewTransition?: (change: () => void) => unknown };
-    const view = document as Transitions;
-
-    const settle = (change: () => void) => {
-        const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
-        if (still || !view.startViewTransition) change();
-        else view.startViewTransition(change);
-    };
-
-    const apply = (wanted: string) => {
-        for (const chip of chips) {
-            chip.setAttribute('aria-pressed', String((chip.dataset.tag ?? '') === wanted));
-        }
-
-        let shown = 0;
-        for (const card of cards) {
-            const match = !wanted || (card.dataset.tags ?? '').split(' ').includes(wanted);
-            card.hidden = !match;
-            if (match) shown++;
-        }
-
-        if (empty) empty.hidden = shown > 0;
-    };
-
-    /** The tag in `#tag-<name>`, or '' when there is none or it matches no chip. */
-    const fromHash = () => {
-        const wanted = location.hash.startsWith('#tag-') ? location.hash.slice(5) : '';
-        return chips.some((chip) => chip.dataset.tag === wanted) ? wanted : '';
-    };
-
-    for (const chip of chips) {
-        chip.addEventListener('click', () => {
-            const wanted = chip.dataset.tag ?? '';
-
-            // replaceState, not location.hash: no jump, and Back leaves the page.
-            history.replaceState(null, '', wanted ? `#tag-${wanted}` : location.pathname);
-            settle(() => apply(wanted));
-        });
+function preview(video: HTMLVideoElement, on: boolean) {
+    if (!on || still.matches) {
+        delete video.dataset.playing; // the stylesheet fades it out
+        video.pause();
+        return;
     }
 
-    addEventListener('hashchange', () => settle(() => apply(fromHash())));
+    video.currentTime = 0;
+    // A pause before playback starts rejects the promise; the card has been left by then.
+    video
+        .play()
+        .then(() => {
+            if (!video.paused) video.dataset.playing = '';
+        })
+        .catch(() => undefined);
+}
 
-    // No transition on the first pass.
-    apply(fromHash());
+for (const video of previews) {
+    const card = video.closest<HTMLElement>('.card__link')!;
+    const follows = (event: PointerEvent) => event.pointerType !== 'touch';
 
-    // Arriving with a tag in the hash: go straight to the list.
-    if (fromHash()) document.getElementById('demos')?.scrollIntoView();
+    card.addEventListener('pointerenter', (event) => follows(event) && preview(video, true));
+    card.addEventListener('pointerleave', (event) => follows(event) && preview(video, false));
+    card.addEventListener('focus', () => preview(video, true));
+    card.addEventListener('blur', () => preview(video, false));
+}
+
+if (previews.length && matchMedia('(hover: none)').matches && !saving) {
+    const seen = new IntersectionObserver(
+        (entries) => {
+            for (const entry of entries) {
+                preview(entry.target as HTMLVideoElement, entry.isIntersecting);
+            }
+        },
+        { rootMargin: '-45% 0px' },
+    );
+    for (const video of previews) seen.observe(video);
 }

@@ -53,6 +53,7 @@ site.add('js/main.ts', '/main.js');
 site.add('fonts');
 site.add('icons');
 site.add('images');
+site.add('thumbnails');
 site.add('favicon');
 site.add('favicon.ico');
 

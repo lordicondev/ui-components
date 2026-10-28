@@ -6,9 +6,16 @@ The site that presents the demos. It never builds a demo: everything it renders 
 [Lume](https://lume.land) on Deno, Vento templates.
 
 `src/images/` holds the logo (the Lottie file and its first frame as an SVG placeholder) and
-`og.png`, the 1200×630 link preview. `src/favicon/` holds the favicons and the web manifest;
-`src/favicon.ico` sits at the root, where browsers look for it. The icons, fonts and tokens in
-`src/` are copied in from `shared/` by `prepare:portal`; edit them there.
+`og.png`, the 1200×630 link preview. `src/thumbnails/` holds each demo's card video for the index,
+`<slug>.mp4` (4:3, a seamless loop), and its first frame as `<slug>.webp`:
+
+```sh
+ffmpeg -i <slug>.mp4 -frames:v 1 -c:v libwebp -quality 90 <slug>.webp
+```
+
+A demo without a video gets its icon on the card instead. `src/favicon/` holds the favicons and the
+web manifest; `src/favicon.ico` sits at the root, where browsers look for it. The icons, fonts and
+tokens in `src/` are copied in from `shared/` by `prepare:portal`; edit them there.
 
 ## Running it
 

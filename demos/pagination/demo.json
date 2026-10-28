@@ -3,7 +3,7 @@
     "slug": "pagination",
     "title": "Pagination",
     "description": "Page navigation for long lists, in three button styles. A highlight slides to the page you pick.",
-    "tags": ["navigation", "action"],
+    "group": "navigation",
     "stage": "small",
     "icons": ["arrow-left", "chevron-left"],
     "fragments": [

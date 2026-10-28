@@ -3,7 +3,7 @@
     "slug": "dropdown-menu",
     "title": "Dropdown menu",
     "description": "A menu of grouped actions that opens from a button. Icons react to the mouse and the arrow keys.",
-    "tags": ["overlay", "navigation", "action"],
+    "group": "menus",
     "stage": "medium",
     "icons": ["three-dots-vertical", "pencil-line", "copy", "link", "avatars-group", "trash-bin"],
     "fragments": [
