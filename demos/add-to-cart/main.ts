@@ -10,6 +10,7 @@ import { tooltips } from '@shared/ui/tooltip.ts';
 
 const cart = document.querySelector<HTMLButtonElement>('.cart')!;
 const label = document.querySelector<HTMLElement>('.cart__label')!;
+const status = document.querySelector<HTMLElement>('[role="status"]')!;
 const favorite = document.querySelector<HTMLButtonElement>('.favorite')!;
 
 tooltips();
@@ -37,17 +38,33 @@ function rename(button: HTMLButtonElement, to: string): void {
 const WORDS_WAIT = 100;
 const WORDS_RUN = 300;
 
+/**
+ * How long the button says "Added to cart", from the last press. The basket takes 1000ms
+ * to become a tick, so the tick is seen for a second before the button closes.
+ */
+const SAYING_MS = 2000;
+
+let closing: ReturnType<typeof setTimeout> | undefined;
+
 // #region wiring
+// Every press adds. Pressing again while the button says so only keeps it open longer.
 cart.addEventListener('click', () => {
-    const added = cart.getAttribute('aria-pressed') !== 'true';
+    clearTimeout(closing);
+    closing = setTimeout(backToBasket, SAYING_MS);
 
-    cart.setAttribute('aria-pressed', String(added)); // the basket follows on its own
-    rename(cart, added ? 'Remove from cart' : 'Add to cart');
+    if (cart.dataset.added === 'true') return;
 
-    // Closing has no text animation: the box narrows and clips the words.
-    if (added) revealText(label, { delay: WORDS_WAIT, duration: WORDS_RUN });
-    else settleText(label);
+    cart.dataset.added = 'true'; // the basket follows on its own
+    status.textContent = 'Added to cart';
+    revealText(label, { delay: WORDS_WAIT, duration: WORDS_RUN });
 });
+
+// No text animation on the way back: the box narrows and clips the words.
+function backToBasket(): void {
+    cart.dataset.added = 'false';
+    status.textContent = '';
+    settleText(label);
+}
 
 favorite.addEventListener('click', () => {
     const kept = favorite.getAttribute('aria-pressed') !== 'true';

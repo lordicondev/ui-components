@@ -21,7 +21,7 @@
             "region": "markup",
             "lang": "html",
             "title": "The cart button",
-            "note": "aria-pressed is the state. The words inside are what it looks like."
+            "note": "data-added says the button is confirming a press. A status repeats the words for a screen reader."
         },
         {
             "id": "favorite",
@@ -29,15 +29,15 @@
             "region": "favorite",
             "lang": "html",
             "title": "The favourite button",
-            "note": "Same trigger, same attribute, a different morph."
+            "note": "A toggle: the same trigger on aria-pressed, a different morph."
         },
         {
             "id": "wiring",
             "file": "main.ts",
             "region": "wiring",
             "lang": "ts",
-            "title": "Flip the attribute on click",
-            "note": "The cart also renames itself and starts its words."
+            "title": "Say it, then close again",
+            "note": "A timer from the last press closes it. Presses while it is open only keep it open."
         },
         {
             "id": "measure",

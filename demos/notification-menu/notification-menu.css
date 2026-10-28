@@ -100,6 +100,13 @@
     background: var(--surface-muted);
 }
 
+/* Nothing to mark. aria-disabled, not disabled, so keyboard focus is not dropped. */
+.menu__read[aria-disabled='true'] {
+    background: var(--surface);
+    color: var(--ink-subtle);
+    cursor: default;
+}
+
 .feed {
     margin: 0;
     padding: 0;
@@ -181,7 +188,11 @@
     line-height: var(--leading-sm);
 }
 
-/* Not animated: the tint already says the row is new. */
+/* Only on an unread row. Not animated: the tint already says the row is new. */
+.feed__row:not([data-unread]) :is(.row__dot, .row__unread) {
+    display: none;
+}
+
 .row__dot {
     flex: none;
     width: 6px;

@@ -24,20 +24,20 @@
             "note": "popovertarget opens the panel. data-count is what the icon watches."
         },
         {
+            "id": "unread",
+            "file": "main.ts",
+            "region": "unread",
+            "lang": "ts",
+            "title": "Unread rows are the count",
+            "note": "Opening the panel reads nothing. A click on a row, or Mark as read, does."
+        },
+        {
             "id": "count",
             "file": "main.ts",
             "region": "count",
             "lang": "ts",
-            "title": "Set the count",
+            "title": "Show the count",
             "note": "Writes the attribute and draws the badge. Nothing here reaches for the icon."
-        },
-        {
-            "id": "seen",
-            "file": "main.ts",
-            "region": "seen",
-            "lang": "ts",
-            "title": "Opening the menu clears the count",
-            "note": "The count goes down, so the bell stays quiet."
         },
         {
             "id": "item",
@@ -45,7 +45,7 @@
             "region": "item",
             "lang": "html",
             "title": "One notification",
-            "note": "data-unread is the dot and the tint. data-rise marks a row the panel brings in."
+            "note": "Every row has a dot. data-unread, set from main.ts, shows it and the tint."
         },
         {
             "id": "entrance",

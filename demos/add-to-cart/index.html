@@ -11,16 +11,17 @@
         <main class="demo">
             <div class="shelf">
                 <!-- #region markup -->
-                <!-- aria-pressed is the state: the basket morphs on it and the button opens
-                     on it. The words are aria-hidden; aria-pressed already says the same.
-                     The tooltip span is the button's name. -->
-                <button class="cart" type="button" aria-pressed="false">
+                <!-- An action, not a toggle: every press adds. data-added is "true" while the
+                     button says so, then main.ts sets it back. The basket morphs into a tick
+                     and back on it, and the button opens and closes on it. The words are
+                     aria-hidden; the status below says them. The tooltip span is the name. -->
+                <button class="cart" type="button" data-added="false">
                     <lord-icon
                         class="cart__mark"
                         current-color
                         src="icons/shopping-basket.json"
                         loading="interaction"
-                        trigger="follow(aria-pressed)"
+                        trigger="follow(data-added)"
                         target=".cart"
                         state="morph-add"
                         aria-hidden="true"
@@ -34,6 +35,8 @@
 
                     <span class="tooltip">Add to cart</span>
                 </button>
+
+                <p class="visually-hidden" role="status"></p>
                 <!-- #endregion -->
 
                 <!-- #region favorite -->

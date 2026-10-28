@@ -39,15 +39,17 @@
                 <div class="menu popover" id="feed" popover>
                     <div class="menu__head" data-rise>
                         <h2 class="menu__title">Notification</h2>
-                        <button class="menu__read" type="button">Mark as read</button>
+                        <button class="menu__read" type="button" aria-disabled="true">
+                            Mark as read
+                        </button>
                     </div>
 
                     <ul class="feed">
                         <!-- #region item -->
-                        <!-- One notification. data-unread is the dot and the tint. data-rise
-                             marks a row the panel brings in; data-reveal marks the words that
-                             arrive one after another. -->
-                        <li class="feed__row" data-unread data-rise>
+                        <!-- One notification. main.ts sets data-unread, which shows the dot
+                             and the tint. data-rise marks a row the panel brings in;
+                             data-reveal marks the words that arrive one after another. -->
+                        <li class="feed__row" data-rise>
                             <button class="row" type="button">
                                 <span class="row__mark">
                                     <lord-icon
@@ -66,14 +68,13 @@
                                     </span>
                                     <span class="row__time">2 min ago</span>
                                 </span>
-
                                 <span class="row__dot" aria-hidden="true"></span>
-                                <span class="visually-hidden">Unread</span>
+                                <span class="row__unread visually-hidden">Unread</span>
                             </button>
                         </li>
                         <!-- #endregion -->
 
-                        <li class="feed__row" data-unread data-rise>
+                        <li class="feed__row" data-rise>
                             <button class="row" type="button">
                                 <span class="row__mark">
                                     <lord-icon
@@ -92,9 +93,8 @@
                                     </span>
                                     <span class="row__time">1 hour ago</span>
                                 </span>
-
                                 <span class="row__dot" aria-hidden="true"></span>
-                                <span class="visually-hidden">Unread</span>
+                                <span class="row__unread visually-hidden">Unread</span>
                             </button>
                         </li>
 
@@ -117,6 +117,8 @@
                                     </span>
                                     <span class="row__time">yesterday</span>
                                 </span>
+                                <span class="row__dot" aria-hidden="true"></span>
+                                <span class="row__unread visually-hidden">Unread</span>
                             </button>
                         </li>
 
@@ -139,6 +141,8 @@
                                     </span>
                                     <span class="row__time">2 days ago</span>
                                 </span>
+                                <span class="row__dot" aria-hidden="true"></span>
+                                <span class="row__unread visually-hidden">Unread</span>
                             </button>
                         </li>
                     </ul>
@@ -146,15 +150,15 @@
             </div>
 
             <!-- The demo's own controls, not part of the component. -->
-            <form class="controls">
+            <form class="controls" novalidate>
                 <label class="controls__label" for="count">Notifications</label>
                 <input
                     class="controls__input"
                     id="count"
                     type="number"
                     min="0"
-                    max="99"
-                    value="5"
+                    max="4"
+                    value="3"
                     inputmode="numeric"
                 />
                 <button class="controls__go" type="submit">Set</button>
