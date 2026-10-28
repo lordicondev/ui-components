@@ -32,27 +32,27 @@ toggle.addEventListener('click', () => {
 Each demo has a page on the [portal](https://components.lordicon.com/) with the demo
 running, the code that matters, and every file it is made of.
 
-| Demo                                            | What it shows                                                                                                                      |
-| ----------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| [Accordion](demos/accordion/)                   | A chevron that morphs with aria-expanded, over a panel that animates its own height.                                               |
-| [Add new card](demos/add-new-card/)             | A dashed tile with a plus that turns on hover. The whole script is defineElement().                                                |
-| [Add to cart](demos/add-to-cart/)               | A button that opens to say what it did, and a heart that stays filled. One attribute each.                                         |
-| [Alerts](demos/alert/)                          | Four kinds of alert, and icons that greet the card they arrive on.                                                                 |
-| [Button progress](demos/button-progress/)       | A button that fills while the work runs, loops its icon until the work stops, and shows a receipt. As a download and as an upload. |
-| [Checkbox list](demos/checkbox-list/)           | Native checkboxes whose tick is an icon following data-checked, in three styles.                                                   |
-| [Command menu](demos/command-menu/)             | A palette you open with a shortcut and walk with the arrow keys while the caret stays in the field.                                |
-| [Dropdown menu](demos/dropdown-menu/)           | A menu of grouped commands whose rows answer the arrow keys and the pointer through one attribute.                                 |
-| [Input form](demos/input-form/)                 | A composer at the foot of the page, so its menu opens upward, with a submenu and a search inside.                                  |
-| [Loading list](demos/loading-list/)             | Five steps of a job, each with a spinner that turns into a tick or a cross. The state of a step is one attribute.                  |
-| [Menu bar](demos/menu-bar/)                     | A toolbar where the picked tool and the list style morph into place, the action plays on press, and every button shows its name.   |
-| [Notification menu](demos/notification-menu/)   | A bell that rings when the count goes up, over a panel that unrolls and brings its rows in behind it.                              |
-| [Pagination](demos/pagination/)                 | A frame that stretches to the page you picked and then catches up with itself, in three styles of button.                          |
-| [Password field](demos/password-field/)         | A lock that answers focus, an eye that follows the toggle, and a hint that arrives word by word.                                   |
-| [Pricing](demos/pricing/)                       | Three plans whose icons play when the pointer enters the card. In four layouts.                                                    |
-| [Rating](demos/rating/)                         | Five stars that light up one after another, and fill the same way when you pick one.                                               |
-| [Search bar](demos/search-bar/)                 | A field whose magnifier greets the cursor, and whose clear button draws itself once the typing has stopped.                        |
-| [Sidebar navigation](demos/sidebar-navigation/) | Seven destinations whose icons answer the pointer and the keyboard, and one attribute that says where you are.                     |
-| [Star button](demos/star-button/)               | A star that fills as you press it, with a count read back off the same attribute.                                                  |
+| Demo                                            | What it shows                                                                                                                                                   |
+| ----------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Accordion](demos/accordion/)                   | A stack of headings that each open a section of content. The chevron morphs as a section opens or closes.                                                       |
+| [Add new card](demos/add-new-card/)             | An empty, dashed tile for adding a new item to a grid. Its plus icon turns when you hover over it.                                                              |
+| [Add to cart](demos/add-to-cart/)               | A product action with an Add to cart button and a heart for saving. The button confirms the item was added, and the heart fills when you save it.               |
+| [Alerts](demos/alert/)                          | Short messages about a change or a problem, in four types. Each icon plays as the alert appears.                                                                |
+| [Button progress](demos/button-progress/)       | A button that shows the progress of a download or upload. The icon loops while the file transfers, then a receipt confirms it’s done.                           |
+| [Checkbox list](demos/checkbox-list/)           | A list of options to tick, in three styles. The checkbox icon morphs into a tick when you select it.                                                            |
+| [Command menu](demos/command-menu/)             | A search palette for jumping to commands, opened with a keyboard shortcut. Icons react as you move through the commands with the mouse or the arrow keys.       |
+| [Dropdown menu](demos/dropdown-menu/)           | A menu of grouped actions that opens from a button. Icons react to the mouse and the arrow keys.                                                                |
+| [Input form](demos/input-form/)                 | A message composer pinned to the bottom of the page. Its menu opens upward, with a submenu and a search inside.                                                 |
+| [Loading list](demos/loading-list/)             | A checklist showing the steps of a running task. Each spinner turns into a tick or a cross when its step finishes.                                              |
+| [Menu bar](demos/menu-bar/)                     | A toolbar of tools and formatting options. Icons morph into place as you pick a tool or list style, and play when pressed.                                      |
+| [Notification menu](demos/notification-menu/)   | A bell that opens a list of recent notifications. It rings when a new one arrives.                                                                              |
+| [Pagination](demos/pagination/)                 | Page navigation for long lists, in three button styles. A highlight slides to the page you pick.                                                                |
+| [Password field](demos/password-field/)         | A password input with a show/hide toggle and error messages. The lock reacts when you click into the field, and the eye morphs open and closed with the toggle. |
+| [Pricing](demos/pricing/)                       | Cards comparing subscription plans, in four layouts. Each plan’s icon plays when you hover over its card.                                                       |
+| [Rating](demos/rating/)                         | A row of five stars for rating something. Stars light up one by one as you hover and morph into filled stars when you pick a rating.                            |
+| [Search bar](demos/search-bar/)                 | A search field with a clear button. The magnifier reacts when you click into the field, and the cross icon appears once you stop typing.                        |
+| [Sidebar navigation](demos/sidebar-navigation/) | A side menu linking to pages of an app. Icons react to hover and the keyboard, and the current page is highlighted.                                             |
+| [Star button](demos/star-button/)               | A button for starring an item, with a counter. The star morphs into a filled one when you press it, and the count goes up.                                      |
 
 ## Take a demo
 

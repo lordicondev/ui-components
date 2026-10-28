@@ -2,7 +2,7 @@
     "$schema": "../../schemas/demo.schema.json",
     "slug": "search-bar",
     "title": "Search bar",
-    "description": "A field whose magnifier greets the cursor, and whose clear button draws itself once the typing has stopped.",
+    "description": "A search field with a clear button. The magnifier reacts when you click into the field, and the cross icon appears once you stop typing.",
     "tags": ["form", "action"],
     "icons": ["magnifier", "cross"],
     "fragments": [

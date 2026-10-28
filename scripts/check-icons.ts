@@ -14,6 +14,7 @@ import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { demoDir, listDemos, readManifest } from './lib/demos.ts';
 import {
+    PAGER_ICONS,
     PORTAL_ICONS,
     fingerprint,
     iconFiles,
@@ -23,9 +24,11 @@ import {
     placeholderAlias,
     placeholdersIn,
     readLockfile,
+    shippedIcons,
     type IconEntry,
     writeLockfile,
 } from './lib/icons.ts';
+import { demoSources } from './lib/sources.ts';
 
 const listOnly = process.argv.includes('--list');
 const record = process.argv.includes('--record');
@@ -38,6 +41,9 @@ for (const slug of listDemos()) {
 }
 for (const alias of PORTAL_ICONS) {
     declared.set(alias, [...(declared.get(alias) ?? []), 'the portal']);
+}
+for (const alias of PAGER_ICONS) {
+    declared.set(alias, [...(declared.get(alias) ?? []), 'the pager']);
 }
 
 const lockfile = new Map(readLockfile().map((entry) => [entry.alias, entry]));
@@ -109,7 +115,9 @@ for (const file of readdirSync(iconsDir).filter((file) => file.endsWith('.svg'))
 
 for (const slug of listDemos()) {
     const html = readFileSync(resolve(demoDir(slug), 'index.html'), 'utf8');
-    const icons = readManifest(slug).icons;
+    const manifest = readManifest(slug);
+    const fragmentFiles = manifest.fragments.map((fragment) => fragment.file);
+    const icons = shippedIcons(manifest.icons, demoSources(slug, fragmentFiles));
 
     for (const name of placeholdersIn(html)) {
         if (!existsSync(resolve(iconsDir, `${name}.svg`))) {

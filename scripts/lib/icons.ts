@@ -2,6 +2,7 @@ import { createHash } from 'node:crypto';
 import { readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { repoRoot } from './config.ts';
+import type { SourceFile } from './sources.ts';
 
 /**
  * Where an icon in shared/public/icons came from.
@@ -32,6 +33,19 @@ export type Lockfile = { comment: string; icons: IconEntry[] };
  * the same set and are checked and fetched the same way.
  */
 export const PORTAL_ICONS = ['arrow-out-square'];
+
+/**
+ * Icons the arrows of shared/ui/pager.ts use. A demo with a pager loads them without
+ * declaring them: they switch between the demo's parts and are not part of its component,
+ * so the portal does not list them.
+ */
+export const PAGER_ICONS = ['chevron-left'];
+
+/** The icons a demo ships: the ones it declares, plus the pager's if it imports the pager. */
+export function shippedIcons(declared: string[], files: SourceFile[]): string[] {
+    const paged = files.some((file) => file.exportPath === 'shared/ui/pager.ts');
+    return [...new Set([...declared, ...(paged ? PAGER_ICONS : [])])];
+}
 
 export const iconsDir = resolve(repoRoot, 'shared/public/icons');
 export const lockfilePath = resolve(repoRoot, 'shared/icons.json');

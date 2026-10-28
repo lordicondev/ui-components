@@ -2,7 +2,7 @@
     "$schema": "../../schemas/demo.schema.json",
     "slug": "dropdown-menu",
     "title": "Dropdown menu",
-    "description": "A menu of grouped commands whose rows answer the arrow keys and the pointer through one attribute.",
+    "description": "A menu of grouped actions that opens from a button. Icons react to the mouse and the arrow keys.",
     "tags": ["overlay", "navigation", "action"],
     "icons": ["three-dots-vertical", "pencil-line", "copy", "link", "avatars-group", "trash-bin"],
     "fragments": [

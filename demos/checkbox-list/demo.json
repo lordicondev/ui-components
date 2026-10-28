@@ -2,7 +2,7 @@
     "$schema": "../../schemas/demo.schema.json",
     "slug": "checkbox-list",
     "title": "Checkbox list",
-    "description": "Native checkboxes whose tick is an icon following data-checked, in three styles.",
+    "description": "A list of options to tick, in three styles. The checkbox icon morphs into a tick when you select it.",
     "tags": ["form", "toggle", "settings"],
     "icons": ["check-box-empty", "check-circle-empty", "radio-button"],
     "fragments": [

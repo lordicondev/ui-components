@@ -2,7 +2,7 @@
     "$schema": "../../schemas/demo.schema.json",
     "slug": "password-field",
     "title": "Password field",
-    "description": "A lock that answers focus, an eye that follows the toggle, and a hint that arrives word by word.",
+    "description": "A password input with a show/hide toggle and error messages. The lock reacts when you click into the field, and the eye morphs open and closed with the toggle.",
     "tags": ["form", "toggle", "validation"],
     "icons": ["lock", "eye", "warning-circle"],
     "fragments": [

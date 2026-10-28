@@ -2,7 +2,7 @@
     "$schema": "../../schemas/demo.schema.json",
     "slug": "add-to-cart",
     "title": "Add to cart",
-    "description": "A button that opens to say what it did, and a heart that stays filled. One attribute each.",
+    "description": "A product action with an Add to cart button and a heart for saving. The button confirms the item was added, and the heart fills when you save it.",
     "tags": ["commerce", "toggle", "action"],
     "icons": ["shopping-basket", "heart"],
     "fragments": [

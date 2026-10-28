@@ -2,7 +2,7 @@
     "$schema": "../../schemas/demo.schema.json",
     "slug": "pagination",
     "title": "Pagination",
-    "description": "A frame that stretches to the page you picked and then catches up with itself, in three styles of button.",
+    "description": "Page navigation for long lists, in three button styles. A highlight slides to the page you pick.",
     "tags": ["navigation", "action"],
     "icons": ["arrow-left", "chevron-left"],
     "fragments": [

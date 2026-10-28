@@ -2,7 +2,7 @@
     "$schema": "../../schemas/demo.schema.json",
     "slug": "loading-list",
     "title": "Loading list",
-    "description": "Five steps of a job, each with a spinner that turns into a tick or a cross. The state of a step is one attribute.",
+    "description": "A checklist showing the steps of a running task. Each spinner turns into a tick or a cross when its step finishes.",
     "tags": ["progress", "status", "follow"],
     "icons": ["spinner-circle", "check-circle", "cross-circle"],
     "fragments": [

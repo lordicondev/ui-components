@@ -2,7 +2,7 @@
     "$schema": "../../schemas/demo.schema.json",
     "slug": "add-new-card",
     "title": "Add new card",
-    "description": "A dashed tile with a plus that turns on hover. The whole script is defineElement().",
+    "description": "An empty, dashed tile for adding a new item to a grid. Its plus icon turns when you hover over it.",
     "tags": ["action", "hover", "payment"],
     "icons": ["plus"],
     "fragments": [

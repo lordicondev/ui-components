@@ -1,6 +1,8 @@
-/* The dots that page between the parts of a demo. Where they sit is the demo's business. */
+/* The dots and arrows that page between the parts of a demo. Where they sit is the demo's
+   business. */
 .pager {
     display: flex;
+    align-items: center;
     gap: var(--space-4);
 }
 
@@ -33,8 +35,44 @@
     background: var(--accent);
 }
 
+/* The same box as a dot. */
+.pager__step {
+    display: grid;
+    place-items: center;
+    width: var(--space-24);
+    height: var(--space-24);
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--ink-muted);
+    --icon-filter: var(--filter-ink-muted);
+    cursor: pointer;
+    transition: color 150ms ease;
+}
+
+.pager__step:hover:not(:disabled) {
+    color: var(--ink);
+}
+
+.pager__step:disabled {
+    color: var(--ink-faint);
+    --icon-filter: var(--filter-ink-faint);
+    cursor: default;
+}
+
+.pager__step lord-icon {
+    width: var(--icon-size-16);
+    height: var(--icon-size-16);
+}
+
+/* One left chevron for both arrows. Flipping the next one flips its animation too. */
+.pager__step--next lord-icon {
+    scale: -1 1;
+}
+
 @media (prefers-reduced-motion: reduce) {
-    .pager__dot::before {
+    .pager__dot::before,
+    .pager__step {
         transition: none;
     }
 }

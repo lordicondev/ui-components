@@ -8,6 +8,7 @@ import { readFileSync, readdirSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { repoRoot } from './lib/config.ts';
 import { listDemos, readManifest } from './lib/demos.ts';
+import { shippedIcons } from './lib/icons.ts';
 import { demoSources } from './lib/sources.ts';
 
 /** How a demo loads an icon: <lord-icon src="icons/lock.json">. */
@@ -41,9 +42,10 @@ for (const slug of listDemos()) {
         .join('\n');
 
     const loaded = new Set([...own.matchAll(ICON_REFERENCE)].map(([, alias]) => alias));
+    const shipped = shippedIcons(manifest.icons, files);
 
     for (const alias of loaded) {
-        if (!manifest.icons.includes(alias)) {
+        if (!shipped.includes(alias)) {
             problems.push(
                 `${slug}: loads icons/${alias}.json but does not declare "${alias}" — ` +
                     'the export would ship without it',

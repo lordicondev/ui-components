@@ -143,7 +143,8 @@ writeFileSync(
 
 console.log(`\nwrote ${target}`);
 
-// The portal uses the same tokens and typeface as the demos.
+// The portal uses the same tokens as the demos. Its fonts sit next to theirs: Inter and the
+// mono face are the portal's own.
 for (const [from, to] of [
     ['shared/styles/palette.css', 'portal/src/styles/palette.css'],
     ['shared/styles/tokens.css', 'portal/src/styles/tokens.css'],

@@ -96,6 +96,8 @@ imports".
 
 `shared/public/icons/` holds only the icons the demos use, as Lottie JSON. A demo declares
 them by alias: `lock` is `system-outline-94-lock`, `lock-solid` is `system-solid-94-lock`.
+The pager's arrows are the exception: `PAGER_ICONS` in `scripts/lib/icons.ts` ships with every
+demo that imports the pager, undeclared, so the portal does not list it as the demo's icon.
 `shared/icons.json` records where each came from. Swapping a file by hand is normal:
 
 ```sh

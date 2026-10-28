@@ -2,7 +2,7 @@
     "$schema": "../../schemas/demo.schema.json",
     "slug": "notification-menu",
     "title": "Notification menu",
-    "description": "A bell that rings when the count goes up, over a panel that unrolls and brings its rows in behind it.",
+    "description": "A bell that opens a list of recent notifications. It rings when a new one arrives.",
     "tags": ["overlay", "navigation", "hover", "state"],
     "icons": ["bell", "heart", "download", "message", "star"],
     "fragments": [

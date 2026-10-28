@@ -2,7 +2,7 @@
     "$schema": "../../schemas/demo.schema.json",
     "slug": "rating",
     "title": "Rating",
-    "description": "Five stars that light up one after another, and fill the same way when you pick one.",
+    "description": "A row of five stars for rating something. Stars light up one by one as you hover and morph into filled stars when you pick a rating.",
     "tags": ["form", "toggle", "social"],
     "icons": ["star"],
     "fragments": [

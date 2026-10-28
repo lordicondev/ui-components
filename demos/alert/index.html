@@ -189,6 +189,24 @@
 
             <div class="pager">
                 <button
+                    class="pager__step"
+                    type="button"
+                    data-step="-1"
+                    aria-label="Previous"
+                    disabled
+                >
+                    <lord-icon
+                        current-color
+                        src="icons/chevron-left.json"
+                        loading="interaction"
+                        trigger="click"
+                        target=".pager__step"
+                        aria-hidden="true"
+                    >
+                        <img alt="" src="icons/chevron-left.svg" />
+                    </lord-icon>
+                </button>
+                <button
                     class="pager__dot"
                     type="button"
                     aria-pressed="true"
@@ -200,6 +218,23 @@
                     aria-pressed="false"
                     aria-label="Alerts as they arrive"
                 ></button>
+                <button
+                    class="pager__step pager__step--next"
+                    type="button"
+                    data-step="1"
+                    aria-label="Next"
+                >
+                    <lord-icon
+                        current-color
+                        src="icons/chevron-left.json"
+                        loading="interaction"
+                        trigger="click"
+                        target=".pager__step"
+                        aria-hidden="true"
+                    >
+                        <img alt="" src="icons/chevron-left.svg" />
+                    </lord-icon>
+                </button>
             </div>
 
             <!-- The deck's cards are cloned from this: the same card as above, filled in by

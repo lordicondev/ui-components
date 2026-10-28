@@ -2,7 +2,7 @@
     "$schema": "../../schemas/demo.schema.json",
     "slug": "input-form",
     "title": "Input form",
-    "description": "A composer at the foot of the page, so its menu opens upward, with a submenu and a search inside.",
+    "description": "A message composer pinned to the bottom of the page. Its menu opens upward, with a submenu and a search inside.",
     "tags": ["overlay", "form", "hover", "navigation"],
     "icons": [
         "plus",

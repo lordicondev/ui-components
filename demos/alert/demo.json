@@ -2,7 +2,7 @@
     "$schema": "../../schemas/demo.schema.json",
     "slug": "alert",
     "title": "Alerts",
-    "description": "Four kinds of alert, and icons that greet the card they arrive on.",
+    "description": "Short messages about a change or a problem, in four types. Each icon plays as the alert appears.",
     "tags": ["feedback", "entrance", "status"],
     "icons": ["info-circle", "check-circle", "warning-triangle", "cross-circle", "cross"],
     "fragments": [

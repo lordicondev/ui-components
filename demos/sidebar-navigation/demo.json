@@ -2,7 +2,7 @@
     "$schema": "../../schemas/demo.schema.json",
     "slug": "sidebar-navigation",
     "title": "Sidebar navigation",
-    "description": "Seven destinations whose icons answer the pointer and the keyboard, and one attribute that says where you are.",
+    "description": "A side menu linking to pages of an app. Icons react to hover and the keyboard, and the current page is highlighted.",
     "tags": ["navigation", "hover", "state"],
     "icons": [
         "grid-widget",

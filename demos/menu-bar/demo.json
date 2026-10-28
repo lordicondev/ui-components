@@ -2,7 +2,7 @@
     "$schema": "../../schemas/demo.schema.json",
     "slug": "menu-bar",
     "title": "Menu bar",
-    "description": "A toolbar where the picked tool and the list style morph into place, the action plays on press, and every button shows its name.",
+    "description": "A toolbar of tools and formatting options. Icons morph into place as you pick a tool or list style, and play when pressed.",
     "tags": ["toolbar", "toggle", "action"],
     "icons": [
         "brush-alt",

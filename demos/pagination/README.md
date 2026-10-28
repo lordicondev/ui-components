@@ -34,5 +34,5 @@ the arrow has a `hover-slide` state, the chevron uses its default.
 - A step with nowhere to go is `disabled`. A disabled button fires no click, so its icon
   holds still without any extra code.
 - The three rows are three separate controls and each remembers its own page. The dots
-  are `shared/ui/pager.ts`. Every row is measured before the first one is hidden, because a
+  and arrows under them are `shared/ui/pager.ts`. Every row is measured before the first one is hidden, because a
   hidden row has no widths to measure.

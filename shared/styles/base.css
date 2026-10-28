@@ -1,6 +1,6 @@
 /*
  * Fonts, reset and default typography. Nothing control-specific: every demo styles its
- * own control. Only the UI face is here; the mono face is the portal's.
+ * own control. Only the UI face is here; Inter and the mono face are the portal's.
  */
 @font-face {
     font-family: 'Figtree';

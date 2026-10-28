@@ -2,7 +2,7 @@
     "$schema": "../../schemas/demo.schema.json",
     "slug": "accordion",
     "title": "Accordion",
-    "description": "A chevron that morphs with aria-expanded, over a panel that animates its own height.",
+    "description": "A stack of headings that each open a section of content. The chevron morphs as a section opens or closes.",
     "tags": ["disclosure", "toggle", "navigation"],
     "icons": ["chevron-down"],
     "fragments": [

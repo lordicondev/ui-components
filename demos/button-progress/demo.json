@@ -2,7 +2,7 @@
     "$schema": "../../schemas/demo.schema.json",
     "slug": "button-progress",
     "title": "Button progress",
-    "description": "A button that fills while the work runs, loops its icon until the work stops, and shows a receipt. As a download and as an upload.",
+    "description": "A button that shows the progress of a download or upload. The icon loops while the file transfers, then a receipt confirms it’s done.",
     "tags": ["action", "status"],
     "icons": ["download", "upload", "check-circle"],
     "fragments": [

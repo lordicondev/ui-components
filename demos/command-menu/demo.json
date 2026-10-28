@@ -2,7 +2,7 @@
     "$schema": "../../schemas/demo.schema.json",
     "slug": "command-menu",
     "title": "Command menu",
-    "description": "A palette you open with a shortcut and walk with the arrow keys while the caret stays in the field.",
+    "description": "A search palette for jumping to commands, opened with a keyboard shortcut. Icons react as you move through the commands with the mouse or the arrow keys.",
     "tags": ["overlay", "navigation", "form"],
     "icons": [
         "magnifier",

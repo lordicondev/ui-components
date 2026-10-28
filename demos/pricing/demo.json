@@ -2,7 +2,7 @@
     "$schema": "../../schemas/demo.schema.json",
     "slug": "pricing",
     "title": "Pricing",
-    "description": "Three plans whose icons play when the pointer enters the card. In four layouts.",
+    "description": "Cards comparing subscription plans, in four layouts. Each plan’s icon plays when you hover over its card.",
     "tags": ["cards", "hover"],
     "icons": ["puzzle-piece", "rocket", "avatars-group", "check-circle-solid"],
     "fragments": [
