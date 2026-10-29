@@ -43,63 +43,59 @@
     line-height: var(--leading-lg);
 }
 
-/* The rows stack in a box as wide as the screen up to 2400px, which three sets fill. */
+/* The rows, as wide as the screen up to 2400px. Three sets fill that. */
 .marquee {
     position: relative;
     display: grid;
+    /* One column as wide as the box, not as wide as a row's three sets. */
+    grid-template-columns: minmax(0, 1fr);
     gap: var(--space-16);
     width: 100%;
     max-width: 2400px;
     margin-block: calc(var(--space-4) * -1);
+    user-select: none;
+}
+
+/* A number that is not inherited, so changing it restyles the track and nothing inside. */
+@property --progress {
+    syntax: '<number>';
+    inherits: false;
+    initial-value: 0;
 }
 
 /* #region scroll */
-/* Three identical sets side by side. The track slides left by one and starts over. */
+/* The track holds the chips three times. --progress from 0 to 1 slides it left by one set,
+   where it looks as it did at 0, so it can start over. main.ts moves --progress. */
 .row {
-    overflow: hidden;
-    contain: layout paint style;
+    overflow: clip;
     /* Room for the focus ring, which is 4px outside the chip. */
     padding-block: var(--space-4);
 }
 
 .track {
+    --copies: 3;
     display: flex;
     width: max-content;
+    transform: translateX(calc(var(--progress) * -100% / var(--copies)));
     will-change: transform;
-    animation: scroll 60s linear infinite;
-    animation-delay: calc(60s * var(--phase) * -1);
 }
 
-.row--right .track {
-    animation-direction: reverse;
+.row--right {
+    --direction: -1;
 }
-
-@keyframes scroll {
-    to {
-        transform: translateX(calc(-100% / 3));
-    }
-}
-
 /* #endregion */
 
-/* Every row takes 60s a round, so a longer row moves faster. The phase is how far into the
-   round each row starts. */
-.row--1 {
-    --phase: 0.22;
+/* Where each row starts, from 0 to 1. */
+.row--1 .track {
+    --progress: 0.22;
 }
 
-.row--2 {
-    --phase: 0.07;
+.row--2 .track {
+    --progress: 0.93;
 }
 
-.row--3 {
-    --phase: 0.29;
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .track {
-        animation: none;
-    }
+.row--3 .track {
+    --progress: 0.29;
 }
 
 .set {
@@ -111,8 +107,8 @@
 }
 
 /* #region colour */
-/* One custom property per chip, the hover colour is a darker mix of it. The icon takes the
-   text colour through current-color. */
+/* Each chip sets --chip, and hover darkens it. The icon is white like the text through
+   current-color, and its placeholder through the filter. */
 .chip {
     --chip-fill: var(--chip);
     --icon-filter: var(--filter-ink-inverse);

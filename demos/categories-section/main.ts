@@ -5,8 +5,7 @@ import { defineElement } from '@lordicon/element';
 defineElement();
 // #endregion
 
-import { glide } from '@shared/motion/glide.ts';
+import { marquee } from '@shared/motion/marquee.ts';
 
-// Each row eases in on load, and to a stop under the pointer or keyboard focus, so a chip
-// can be clicked. It speeds up again afterwards.
-glide(document.querySelectorAll('.row'));
+// Scrolls the rows. A row stops under the pointer, so a chip can be clicked.
+marquee(document.querySelectorAll('.row'));

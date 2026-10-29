@@ -2,7 +2,7 @@
     "$schema": "../../schemas/demo.schema.json",
     "slug": "categories-section",
     "title": "Categories section",
-    "description": "Three rows of category chips that scroll without end, the middle one the other way. Each chip’s icon plays when you hover over it.",
+    "description": "Three rows of category chips that scroll without end, the middle one the other way. A row stops under the pointer, and the chip’s icon plays.",
     "group": "navigation",
     "stage": "large",
     "icons": [
@@ -40,7 +40,7 @@
             "region": "setup",
             "lang": "ts",
             "title": "Define the element",
-            "note": "Built-in triggers only. Apart from the glide call, this is the whole script."
+            "note": "Built-in triggers only. The rest of the script is one call that scrolls the rows."
         },
         {
             "id": "markup",
@@ -48,23 +48,23 @@
             "region": "markup",
             "lang": "html",
             "title": "A row of chips",
-            "note": "target points the icon at its chip, so the whole chip is the hover area. Two copies of the set follow, hidden from the keyboard and from screen readers."
+            "note": "target points the icon at its chip, so the whole chip is the hover area. The track holds the set three times; the copies are hidden from screen readers and the Tab key."
         },
         {
             "id": "scroll",
             "file": "categories-section.css",
             "region": "scroll",
             "lang": "css",
-            "title": "The endless scroll",
-            "note": "The track moves by one set and starts over. Only transform changes, so the browser does not repaint."
+            "title": "Slide by one set, then start over",
+            "note": "--progress from 0 to 1 moves the track by one set. Only transform changes, so nothing is repainted."
         },
         {
-            "id": "glide",
-            "file": "../../shared/motion/glide.ts",
-            "region": "glide",
+            "id": "frame",
+            "file": "../../shared/motion/marquee.ts",
+            "region": "frame",
             "lang": "ts",
             "title": "Slow to a stop, then pick up",
-            "note": "Only the playback rate of the CSS animation changes. It eases out to 0 under the pointer or keyboard focus and eases back in afterwards."
+            "note": "One loop moves every row at its own rate. The rate eases to 0 under the pointer or keyboard focus, and back to 1 after."
         },
         {
             "id": "colour",
@@ -72,7 +72,7 @@
             "region": "colour",
             "lang": "css",
             "title": "Chip colours",
-            "note": "One custom property per chip. Hover mixes it with black; the icon follows the text colour."
+            "note": "One custom property per chip. Hover mixes it with black."
         }
     ]
 }

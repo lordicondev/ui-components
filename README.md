@@ -39,7 +39,7 @@ running, the code that matters, and every file it is made of.
 | [Add to cart](demos/add-to-cart/)               | A product action with an Add to cart button and a heart for saving. The button confirms the item was added, and the heart fills when you save it.               |
 | [Alerts](demos/alert/)                          | Short messages about a change or a problem, in four types. Each icon plays as the alert appears.                                                                |
 | [Button progress](demos/button-progress/)       | A button that shows the progress of a download or upload. The icon loops while the file transfers, then a receipt confirms it’s done.                           |
-| [Categories section](demos/categories-section/) | Three rows of category chips that scroll without end, the middle one the other way. Each chip’s icon plays when you hover over it.                              |
+| [Categories section](demos/categories-section/) | Three rows of category chips that scroll without end, the middle one the other way. A row stops under the pointer, and the chip’s icon plays.                   |
 | [Checkbox list](demos/checkbox-list/)           | A list of options to tick, in three styles. The checkbox icon morphs into a tick when you select it.                                                            |
 | [Command menu](demos/command-menu/)             | A search palette for jumping to commands, opened with a keyboard shortcut. Icons react as you move through the commands with the mouse or the arrow keys.       |
 | [Dropdown menu](demos/dropdown-menu/)           | A menu of grouped actions that opens from a button. Icons react to the mouse and the arrow keys.                                                                |
