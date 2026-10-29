@@ -1,0 +1,78 @@
+{
+    "$schema": "../../schemas/demo.schema.json",
+    "slug": "mega-menu",
+    "title": "Mega menu",
+    "description": "A site header whose Resources link opens a wide panel of tiles. A tile lights up and its icon plays when you hover over it.",
+    "group": "menus",
+    "stage": "large",
+    "icons": [
+        "chevron-down",
+        "bar-chart-vertical",
+        "wrench",
+        "link",
+        "credit-card-back",
+        "shield-heart",
+        "clipboard-bar-chart",
+        "avatar",
+        "code",
+        "question-circle"
+    ],
+    "fragments": [
+        {
+            "id": "setup",
+            "file": "main.ts",
+            "region": "setup",
+            "lang": "ts",
+            "title": "Define the element",
+            "note": "Built-in triggers only. Apart from three lines for the chevron, this is the whole script."
+        },
+        {
+            "id": "trigger",
+            "file": "index.html",
+            "region": "trigger",
+            "lang": "html",
+            "title": "The Resources button",
+            "note": "The browser opens and closes the panel; the chevron turns with it."
+        },
+        {
+            "id": "expanded",
+            "file": "main.ts",
+            "region": "expanded",
+            "lang": "ts",
+            "title": "Keep aria-expanded in step",
+            "note": "One listener writes the panel's state onto the button, where the chevron can follow it."
+        },
+        {
+            "id": "tile",
+            "file": "index.html",
+            "region": "tile",
+            "lang": "html",
+            "title": "A tile",
+            "note": "Hovering anywhere on a tile plays its icon."
+        },
+        {
+            "id": "hover",
+            "file": "mega-menu.css",
+            "region": "hover",
+            "lang": "css",
+            "title": "Light up the whole tile",
+            "note": "The same look for the pointer and the keyboard."
+        },
+        {
+            "id": "open",
+            "file": "mega-menu.css",
+            "region": "open",
+            "lang": "css",
+            "title": "Slide down from under the header",
+            "note": "CSS alone animates the panel in and out, with transform only, so it stays smooth."
+        },
+        {
+            "id": "rows",
+            "file": "mega-menu.css",
+            "region": "rows",
+            "lang": "css",
+            "title": "Rows that drop in",
+            "note": "The tiles keep settling for a moment after the sheet has stopped."
+        }
+    ]
+}

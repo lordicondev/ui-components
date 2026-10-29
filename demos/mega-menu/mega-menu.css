@@ -1,0 +1,341 @@
+@import '@shared/styles/index.css';
+
+/* The header's height, so the panel can open right under it. */
+:root {
+    --header-height: 73px;
+}
+
+.header {
+    position: sticky;
+    top: 0;
+    border-bottom: 1px solid var(--border-soft);
+    background: var(--surface);
+}
+
+/* Logo and links on the left, the two buttons on the right, 1200px at most. */
+.bar {
+    display: flex;
+    align-items: center;
+    gap: var(--space-48);
+    max-width: calc(1200px + 2 * var(--space-32));
+    height: calc(var(--header-height) - 1px);
+    margin: 0 auto;
+    padding: 0 var(--space-32);
+}
+
+.logo {
+    display: flex;
+}
+
+.nav {
+    display: flex;
+    gap: var(--space-4);
+}
+
+.nav__link {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    padding: var(--space-8) var(--space-12);
+    border: 0;
+    border-radius: var(--radius-md);
+    background: none;
+    color: var(--gray-700);
+    font-weight: 500;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.nav__link:hover,
+.nav__trigger[aria-expanded='true'] {
+    background: var(--surface-muted);
+}
+
+/* Its own layer: its frames then repaint 16px, not the whole page under the opening panel. */
+.nav__chevron {
+    width: var(--icon-size-16);
+    height: var(--icon-size-16);
+    --icon-filter: var(--filter-ink-soft);
+    will-change: transform;
+}
+
+.actions {
+    display: flex;
+    gap: var(--space-8);
+    margin-left: auto;
+}
+
+.button {
+    padding: var(--space-8) var(--space-12);
+    border: 1px solid transparent;
+    border-radius: var(--radius-md);
+    font-weight: 500;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.button--quiet {
+    border-color: var(--border);
+    background: var(--surface);
+    color: var(--ink);
+}
+
+.button--primary {
+    background: var(--accent);
+    color: var(--ink-inverse);
+    box-shadow: var(--shadow-accent);
+}
+
+/* The popover is in the top layer, so it is placed like a fixed element: the full width of
+   the screen, under the header. It draws nothing itself and lets clicks through; it only
+   clips the sheet, with room below for the sheet's shadow. */
+.panel {
+    position: fixed;
+    inset: var(--header-height) 0 auto;
+    width: auto;
+    margin: 0;
+    padding: 0 0 var(--space-48);
+    overflow: clip;
+    border: 0;
+    background: none;
+    pointer-events: none;
+}
+
+.sheet {
+    max-height: calc(100dvh - var(--header-height));
+    padding: var(--space-32) var(--space-32) var(--space-48);
+    overflow-y: auto;
+    border-bottom: 1px solid var(--border-soft);
+    background: var(--surface);
+    box-shadow: 0 12px 24px rgb(155 161 173 / 18%);
+    pointer-events: auto;
+}
+
+/* #region open */
+/* The sheet slides down from under the header and back up, faster: transform only, so
+   nothing is repainted. will-change keeps its layer while open, so it does not flicker as
+   it stops. allow-discrete keeps the closing panel on screen until the sheet is up. */
+.panel {
+    transition:
+        overlay 200ms allow-discrete,
+        display 200ms allow-discrete;
+}
+
+.sheet {
+    translate: 0 -100%;
+    transition: translate 200ms cubic-bezier(0.4, 0, 1, 1);
+    will-change: translate;
+}
+
+.panel:popover-open .sheet {
+    translate: 0 0;
+    transition: translate 340ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+@starting-style {
+    .panel:popover-open .sheet {
+        translate: 0 -100%;
+    }
+}
+/* #endregion */
+
+/* #region rows */
+/* The tiles and the card drop in a row at a time when the panel opens, and keep settling
+   after the sheet has stopped. Closing changes nothing here: they leave with the sheet. */
+.panel :is(.tiles li, .featured) {
+    transition:
+        opacity 360ms ease-out var(--delay),
+        translate 520ms cubic-bezier(0.2, 0.8, 0.2, 1) var(--delay);
+    will-change: opacity, translate;
+}
+
+@starting-style {
+    .panel:popover-open :is(.tiles li, .featured) {
+        opacity: 0;
+        translate: 0 -10px;
+    }
+}
+/* #endregion */
+
+/* When each row starts: the first as the sheet slows down, the card with it. */
+.panel {
+    --delay: 140ms;
+}
+
+.featured {
+    --delay: 170ms;
+}
+
+.tiles li:nth-child(n + 4) {
+    --delay: 230ms;
+}
+
+.tiles li:nth-child(n + 7) {
+    --delay: 320ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .panel,
+    .sheet,
+    .panel:popover-open .sheet,
+    .panel :is(.tiles li, .featured) {
+        transition: none;
+    }
+}
+
+/* The tiles beside the featured card. */
+.panel__inner {
+    display: grid;
+    grid-template-columns: 1fr 360px;
+    gap: var(--space-32);
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.links {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+}
+
+.links__label {
+    margin: 0;
+    padding-left: var(--space-12);
+    color: var(--ink-muted);
+    font-size: var(--text-xs);
+    font-weight: 500;
+    line-height: var(--leading-xs);
+    text-transform: uppercase;
+}
+
+.tiles {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-8);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+/* Icon on the left, the title and the line under it on the right. */
+.tile {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: var(--space-4) var(--space-12);
+    height: 100%;
+    padding: var(--space-12);
+    border-radius: var(--radius-md);
+    color: var(--ink);
+    text-decoration: none;
+}
+
+/* #region hover */
+/* The whole tile lights up, from the pointer or the keyboard. The icon keeps its grey. */
+.tile:hover,
+.tile:focus-visible {
+    background: var(--surface-muted);
+}
+
+.tile__icon {
+    grid-row: span 2;
+    width: var(--icon-size-24);
+    height: var(--icon-size-24);
+    color: var(--ink-muted);
+    --icon-filter: var(--filter-ink-muted);
+}
+/* #endregion */
+
+.tile__title {
+    font-weight: 600;
+}
+
+.tile__text {
+    color: var(--ink-muted);
+    font-size: var(--text-sm);
+    line-height: var(--leading-sm);
+}
+
+.featured {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-12);
+    padding: var(--space-24);
+    border-radius: var(--radius-lg);
+    background: url('./featured.webp') center / cover;
+}
+
+.featured__eyebrow {
+    display: flex;
+    align-items: center;
+    gap: var(--space-8);
+    margin: 0;
+    color: var(--accent-ink);
+    font-size: var(--text-xs);
+    font-weight: 500;
+    line-height: var(--leading-xs);
+    text-transform: uppercase;
+}
+
+.featured__eyebrow::before {
+    content: '';
+    width: var(--space-8);
+    height: var(--space-8);
+    border-radius: var(--radius-pill);
+    background: var(--accent);
+}
+
+.featured__title {
+    margin: 0;
+    font-size: var(--text-xl);
+    font-weight: 600;
+    line-height: var(--leading-xl);
+}
+
+.featured__text {
+    margin: 0 0 var(--space-12);
+    color: var(--ink-soft);
+    font-size: var(--text-sm);
+    line-height: var(--leading-sm);
+}
+
+/* Narrower: two columns of tiles, and the card under them. */
+@media (max-width: 1023px) {
+    .panel__inner {
+        grid-template-columns: 1fr;
+    }
+
+    .tiles {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Phones: one column, and the header keeps the logo, Resources and Get started. */
+@media (max-width: 639px) {
+    .bar {
+        gap: var(--space-8);
+        padding: 0 var(--space-16);
+    }
+
+    .logo img {
+        width: 106px;
+        height: auto;
+    }
+
+    .nav__link--extra,
+    .button--quiet {
+        display: none;
+    }
+
+    .nav__trigger {
+        padding-inline: var(--space-8);
+    }
+
+    .sheet {
+        padding: var(--space-16) var(--space-16) var(--space-32);
+    }
+
+    .tiles {
+        grid-template-columns: 1fr;
+    }
+}

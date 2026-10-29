@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Mega menu</title>
+        <link rel="stylesheet" href="./mega-menu.css" />
+        <script type="module" src="./main.ts"></script>
+    </head>
+
+    <body>
+        <header class="header">
+            <div class="bar">
+                <a class="logo" href="#"
+                    ><img src="./logo.svg" alt="Lordicon" width="132" height="25"
+                /></a>
+
+                <nav class="nav" aria-label="Main">
+                    <a class="nav__link nav__link--extra" href="#">Product</a>
+                    <a class="nav__link nav__link--extra" href="#">Pricing</a>
+                    <!-- #region trigger -->
+                    <!-- popovertarget opens and closes the panel. The chevron follows aria-expanded,
+                         which main.ts keeps in step with the panel. -->
+                    <button
+                        class="nav__link nav__trigger"
+                        type="button"
+                        popovertarget="resources"
+                        aria-expanded="false"
+                    >
+                        Resources
+                        <lord-icon
+                            class="nav__chevron"
+                            current-color
+                            src="icons/chevron-down.json"
+                            loading="interaction"
+                            state="morph-direction"
+                            trigger="follow(aria-expanded)"
+                            target=".nav__trigger"
+                            aria-hidden="true"
+                        >
+                            <img alt="" src="icons/chevron-down.svg" />
+                        </lord-icon>
+                    </button>
+                    <!-- #endregion -->
+                </nav>
+
+                <div class="actions">
+                    <a class="button button--quiet" href="#">Log in</a>
+                    <a class="button button--primary" href="#">Get started</a>
+                </div>
+            </div>
+
+            <!-- The panel only clips; the sheet inside slides down from under the header. -->
+            <div class="panel" id="resources" popover>
+                <div class="sheet">
+                    <div class="panel__inner">
+                        <section class="links" aria-labelledby="resources-label">
+                            <h2 class="links__label" id="resources-label">Resources</h2>
+                            <!-- #region tile -->
+                            <!-- The whole tile is a link, and target makes it the icon's hover area. -->
+                            <ul class="tiles">
+                                <li>
+                                    <a class="tile" href="#">
+                                        <lord-icon
+                                            class="tile__icon"
+                                            current-color
+                                            src="icons/bar-chart-vertical.json"
+                                            loading="interaction"
+                                            trigger="hover"
+                                            target=".tile"
+                                            aria-hidden="true"
+                                        >
+                                            <img alt="" src="icons/bar-chart-vertical.svg" />
+                                        </lord-icon>
+                                        <span class="tile__title">Analytics</span>
+                                        <span class="tile__text"
+                                            >Real-time insights into how people use your
+                                            product</span
+                                        >
+                                    </a>
+                                </li>
+                                <!-- #skip -->
+                                <li>
+                                    <a class="tile" href="#">
+                                        <lord-icon
+                                            class="tile__icon"
+                                            current-color
+                                            src="icons/wrench.json"
+                                            loading="interaction"
+                                            trigger="hover"
+                                            target=".tile"
+                                            aria-hidden="true"
+                                        >
+                                            <img alt="" src="icons/wrench.svg" />
+                                        </lord-icon>
+                                        <span class="tile__title">Automations</span>
+                                        <span class="tile__text"
+                                            >Build workflows without writing a line of code</span
+                                        >
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="tile" href="#">
+                                        <lord-icon
+                                            class="tile__icon"
+                                            current-color
+                                            src="icons/link.json"
+                                            loading="interaction"
+                                            trigger="hover"
+                                            target=".tile"
+                                            aria-hidden="true"
+                                        >
+                                            <img alt="" src="icons/link.svg" />
+                                        </lord-icon>
+                                        <span class="tile__title">Integrations</span>
+                                        <span class="tile__text"
+                                            >Connect with 100+ tools you already use</span
+                                        >
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="tile" href="#">
+                                        <lord-icon
+                                            class="tile__icon"
+                                            current-color
+                                            src="icons/credit-card-back.json"
+                                            loading="interaction"
+                                            trigger="hover"
+                                            target=".tile"
+                                            aria-hidden="true"
+                                        >
+                                            <img alt="" src="icons/credit-card-back.svg" />
+                                        </lord-icon>
+                                        <span class="tile__title">Payments</span>
+                                        <span class="tile__text"
+                                            >Accept payments in any currency, anywhere</span
+                                        >
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="tile" href="#">
+                                        <lord-icon
+                                            class="tile__icon"
+                                            current-color
+                                            src="icons/shield-heart.json"
+                                            loading="interaction"
+                                            trigger="hover"
+                                            target=".tile"
+                                            aria-hidden="true"
+                                        >
+                                            <img alt="" src="icons/shield-heart.svg" />
+                                        </lord-icon>
+                                        <span class="tile__title">Security</span>
+                                        <span class="tile__text"
+                                            >Enterprise-grade protection by default</span
+                                        >
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="tile" href="#">
+                                        <lord-icon
+                                            class="tile__icon"
+                                            current-color
+                                            src="icons/clipboard-bar-chart.json"
+                                            loading="interaction"
+                                            trigger="hover"
+                                            target=".tile"
+                                            aria-hidden="true"
+                                        >
+                                            <img alt="" src="icons/clipboard-bar-chart.svg" />
+                                        </lord-icon>
+                                        <span class="tile__title">Reporting</span>
+                                        <span class="tile__text"
+                                            >Export and share custom reports in seconds</span
+                                        >
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="tile" href="#">
+                                        <lord-icon
+                                            class="tile__icon"
+                                            current-color
+                                            src="icons/avatar.json"
+                                            loading="interaction"
+                                            trigger="hover"
+                                            target=".tile"
+                                            aria-hidden="true"
+                                        >
+                                            <img alt="" src="icons/avatar.svg" />
+                                        </lord-icon>
+                                        <span class="tile__title">Collaboration</span>
+                                        <span class="tile__text"
+                                            >Work together with your team in real time</span
+                                        >
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="tile" href="#">
+                                        <lord-icon
+                                            class="tile__icon"
+                                            current-color
+                                            src="icons/code.json"
+                                            loading="interaction"
+                                            trigger="hover"
+                                            target=".tile"
+                                            aria-hidden="true"
+                                        >
+                                            <img alt="" src="icons/code.svg" />
+                                        </lord-icon>
+                                        <span class="tile__title">Developer API</span>
+                                        <span class="tile__text"
+                                            >Flexible endpoints and webhooks for builders</span
+                                        >
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="tile" href="#">
+                                        <lord-icon
+                                            class="tile__icon"
+                                            current-color
+                                            src="icons/question-circle.json"
+                                            loading="interaction"
+                                            trigger="hover"
+                                            target=".tile"
+                                            aria-hidden="true"
+                                        >
+                                            <img alt="" src="icons/question-circle.svg" />
+                                        </lord-icon>
+                                        <span class="tile__title">Support</span>
+                                        <span class="tile__text"
+                                            >Professional help whenever you need it</span
+                                        >
+                                    </a>
+                                </li>
+                                <!-- #endskip -->
+                            </ul>
+                            <!-- #endregion -->
+                        </section>
+
+                        <aside class="featured" aria-labelledby="featured-title">
+                            <p class="featured__eyebrow">Featured</p>
+                            <h2 class="featured__title" id="featured-title">Discover what’s new</h2>
+                            <p class="featured__text">
+                                Explore the latest features, updates and resources – all in one
+                                place.
+                            </p>
+                            <a class="button button--primary" href="#">Learn more</a>
+                        </aside>
+                    </div>
+                </div>
+            </div>
+        </header>
+    </body>
+</html>

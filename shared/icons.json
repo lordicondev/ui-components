@@ -68,6 +68,17 @@
             "bytes": 23773
         },
         {
+            "alias": "avatar",
+            "source": "manual",
+            "family": "system",
+            "style": "outline",
+            "name": "avatar",
+            "index": 21,
+            "states": 1,
+            "sha256": "b40aaa11c6cb1b1a0b98ad1d0ff73caa659ac5ae83c3ed45fdb397dd8e49e318",
+            "bytes": 6167
+        },
+        {
             "alias": "avatar-circle",
             "source": "manual",
             "family": "system",
@@ -308,6 +319,17 @@
             "bytes": 14146
         },
         {
+            "alias": "clipboard-bar-chart",
+            "source": "manual",
+            "family": "system",
+            "style": "outline",
+            "name": "clipboard-bar-chart",
+            "index": 3973,
+            "states": 3,
+            "sha256": "ae5189375540b959e7ba3d32e9d7df9c2aeaa06b3d5a059df47cfa6bc678c9d3",
+            "bytes": 64783
+        },
+        {
             "alias": "clock-arrow-rotate-left",
             "source": "manual",
             "family": "system",
@@ -317,6 +339,17 @@
             "states": 4,
             "sha256": "09314e8eabf2adf09d1997cb244ac944d78fccd1f032e33edc58deaebc079448",
             "bytes": 43846
+        },
+        {
+            "alias": "code",
+            "source": "manual",
+            "family": "system",
+            "style": "outline",
+            "name": "code",
+            "index": 369,
+            "states": 4,
+            "sha256": "a05efe92ac39c226f57fdb8a374744645e3ae075afdc8a1e8febf27539a7f451",
+            "bytes": 46568
         },
         {
             "alias": "code-solid",
@@ -350,6 +383,17 @@
             "states": 2,
             "sha256": "5393fac6142fb0a86eea04bfa9b0df9b44d320f274091de0cfedeb53212aeeb3",
             "bytes": 20438
+        },
+        {
+            "alias": "credit-card-back",
+            "source": "manual",
+            "family": "system",
+            "style": "outline",
+            "name": "credit-card-back",
+            "index": 392,
+            "states": 3,
+            "sha256": "fda42a3d4bc1f9c19b5d4ac1fec3bf9659e1104bc6200005a4e41e6c5bec925b",
+            "bytes": 45229
         },
         {
             "alias": "cross",
@@ -818,6 +862,17 @@
             "bytes": 71908
         },
         {
+            "alias": "question-circle",
+            "source": "manual",
+            "family": "system",
+            "style": "outline",
+            "name": "question-circle",
+            "index": 2501,
+            "states": 3,
+            "sha256": "4399c5de945dfd199d2a4be5e18e5d3f7eea734c5b2bf875238d518a22451e55",
+            "bytes": 48028
+        },
+        {
             "alias": "radio-button",
             "source": "manual",
             "family": "system",
@@ -838,6 +893,17 @@
             "states": 2,
             "sha256": "4d757c6ab9386f743ce71e03100a783ded03605bb13cc1bbf5529fe70abd4eab",
             "bytes": 47849
+        },
+        {
+            "alias": "shield-heart",
+            "source": "manual",
+            "family": "system",
+            "style": "outline",
+            "name": "shield-heart",
+            "index": 4481,
+            "states": 2,
+            "sha256": "eaba1aaeac1657532ea1240c12d93eb0eb4e8c129e852237b0495e830c8df608",
+            "bytes": 24640
         },
         {
             "alias": "shopping-basket",
@@ -950,6 +1016,17 @@
             "states": 3,
             "sha256": "905b41557f7ff91608ce2058b65a3639421e50d29b5cf403a1bc3d4ff6f5c317",
             "bytes": 30472
+        },
+        {
+            "alias": "wrench",
+            "source": "manual",
+            "family": "system",
+            "style": "outline",
+            "name": "wrench",
+            "index": 409,
+            "states": 3,
+            "sha256": "70d6f0d01e70b4f5a52d8ddd8e1171f228c31179905a1f81202baaf31b291891",
+            "bytes": 111476
         }
     ]
 }

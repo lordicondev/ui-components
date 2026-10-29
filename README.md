@@ -45,6 +45,7 @@ running, the code that matters, and every file it is made of.
 | [Dropdown menu](demos/dropdown-menu/)           | A menu of grouped actions that opens from a button. Icons react to the mouse and the arrow keys.                                                                |
 | [Input form](demos/input-form/)                 | A message composer pinned to the bottom of the page. Its menu opens upward, with a submenu and a search inside.                                                 |
 | [Loading list](demos/loading-list/)             | A checklist showing the steps of a running task. Each spinner turns into a tick or a cross when its step finishes.                                              |
+| [Mega menu](demos/mega-menu/)                   | A site header whose Resources link opens a wide panel of tiles. A tile lights up and its icon plays when you hover over it.                                     |
 | [Menu bar](demos/menu-bar/)                     | A toolbar of tools and formatting options. Icons morph into place as you pick a tool or list style, and play when pressed.                                      |
 | [Notification menu](demos/notification-menu/)   | A bell that opens a list of recent notifications. It rings when a new one arrives.                                                                              |
 | [Pagination](demos/pagination/)                 | Page navigation for long lists, in three button styles. A highlight slides to the page you pick.                                                                |
