@@ -1,44 +1,71 @@
-{{# The demo list. On narrow screens it becomes a scrolling strip above the content. #}}
+{{# The demo list. From 900px it is a column beside the page. Below that it is a bar with
+    a menu button, and the list is a popover that unrolls from under the bar: the browser
+    opens it, closes it on Escape or a tap elsewhere, and keeps it in the tab order after
+    the button. #}}
 <nav class="sidebar" aria-label="Demos">
-    <a class="sidebar__home" href="{{ '/' |> url }}" aria-label="{{ demos.site.title }}">
-        <lord-icon
-            src="{{ '/images/logo.json' |> url }}"
-            loading="interaction"
-            trigger="hover"
-            target=".sidebar__home"
-            aria-hidden="true"
-            current-color
+    <div class="sidebar__bar">
+        <a class="sidebar__home" href="{{ '/' |> url }}" aria-label="{{ demos.site.title }}">
+            <lord-icon
+                src="{{ '/images/logo.json' |> url }}"
+                loading="interaction"
+                trigger="hover"
+                target=".sidebar__home"
+                aria-hidden="true"
+                current-color
+            >
+                <img alt="" src="{{ '/images/logo.svg' |> url }}" />
+            </lord-icon>
+        </a>
+
+        {{# Two icons in one button: the burger at rest, and a cross that draws itself in
+            when the menu opens. aria-expanded is written by main.ts. #}}
+        <button
+            class="sidebar__toggle"
+            type="button"
+            popovertarget="site-menu"
+            aria-expanded="false"
+            aria-label="Menu"
         >
-            <img alt="" src="{{ '/images/logo.svg' |> url }}" />
-        </lord-icon>
-    </a>
+            <lord-icon
+                class="sidebar__burger"
+                current-color
+                src="{{ '/icons/menu-hamburger.json' |> url }}"
+                loading="interaction"
+                trigger="hover"
+                target=".sidebar__toggle"
+                aria-hidden="true"
+            >
+                <img alt="" src="{{ '/icons/menu-hamburger.svg' |> url }}" />
+            </lord-icon>
+            <lord-icon
+                class="sidebar__cross"
+                current-color
+                src="{{ '/icons/cross.json' |> url }}"
+                loading="interaction"
+                trigger="follow(aria-expanded)"
+                target=".sidebar__toggle"
+                state="in-reveal"
+                aria-hidden="true"
+            ></lord-icon>
+        </button>
+    </div>
 
-    <ul class="sidebar__list">
-        {{ for demo of demos.demos }}
-            <li>
-                <a
-                    class="sidebar__link"
-                    href="{{ demo.links.page |> url }}"
-                    {{ if url === demo.links.page }}aria-current="page"{{ /if }}
-                >
-                    {{ demo.title }}
-                </a>
-            </li>
-        {{ /for }}
-    </ul>
+    <div class="sidebar__panel" id="site-menu" popover>
+        <ul class="sidebar__list">
+            {{ for index, demo of demos.demos }}
+                {{# --order staggers the rows as the menu opens. #}}
+                <li style="--order: {{ index }}">
+                    <a
+                        class="sidebar__link"
+                        href="{{ demo.links.page |> url }}"
+                        {{ if url === demo.links.page }}aria-current="page"{{ /if }}
+                    >
+                        {{ demo.title }}
+                    </a>
+                </li>
+            {{ /for }}
+        </ul>
 
-    <p class="sidebar__version">v{{ demos.site.version }}</p>
-
-    {{# On a phone the list is a strip that scrolls sideways. It starts at the current demo,
-        before the first paint, so it does not jump. #}}
-    <script>
-        (() => {
-            const current = document.querySelector('.sidebar__link[aria-current]');
-            const strip = current?.closest('.sidebar__list');
-            if (!strip || strip.scrollWidth <= strip.clientWidth) return;
-            const offset =
-                current.getBoundingClientRect().left - strip.getBoundingClientRect().left;
-            strip.scrollLeft = offset - (strip.clientWidth - current.offsetWidth) / 2;
-        })();
-    </script>
+        <p class="sidebar__version">v{{ demos.site.version }}</p>
+    </div>
 </nav>

@@ -397,6 +397,18 @@
             "bytes": 15732
         },
         {
+            "alias": "menu-hamburger",
+            "source": "manual",
+            "sha256": "c9b470940217fdbc850b0121a14ebad4c5b64ebbcbf2beea53856b58f9aa4ff5",
+            "bytes": 5945,
+            "family": "system",
+            "style": "regular",
+            "name": "menu-hamburger",
+            "index": 379,
+            "states": 1,
+            "note": "Taken from the lordicon.com site assets (main/mobile-menu.json). One state, hover-pinch."
+        },
+        {
             "alias": "message",
             "source": "manual",
             "family": "system",

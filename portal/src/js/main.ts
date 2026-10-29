@@ -3,6 +3,27 @@ import { defineElement } from '@lordicon/element';
 
 defineElement();
 
+/**
+ * The menu on a phone. The browser opens and closes the panel; this keeps the button's
+ * aria-expanded in step, which the cross icon follows, and brings the current demo into
+ * view. Widening the window past the bar closes it.
+ */
+const siteMenu = document.querySelector<HTMLElement>('#site-menu');
+const toggle = document.querySelector<HTMLButtonElement>('.sidebar__toggle');
+
+if (siteMenu && toggle) {
+    siteMenu.addEventListener('toggle', (event) => {
+        const open = (event as ToggleEvent).newState === 'open';
+        toggle.setAttribute('aria-expanded', String(open));
+        if (open) siteMenu.querySelector('[aria-current]')?.scrollIntoView({ block: 'nearest' });
+    });
+
+    const wide = matchMedia('(min-width: 900px)');
+    wide.addEventListener('change', () => {
+        if (wide.matches && siteMenu.matches(':popover-open')) siteMenu.hidePopover();
+    });
+}
+
 /** The height each demo reports. Only matters when a demo outgrows the stage. */
 const reported = new WeakMap<Element, number>();
 

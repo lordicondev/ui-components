@@ -32,7 +32,7 @@ export type Lockfile = { comment: string; icons: IconEntry[] };
  * Icons the portal itself uses in its chrome. They belong to no demo, but they come from
  * the same set and are checked and fetched the same way.
  */
-export const PORTAL_ICONS = ['arrow-out-square'];
+export const PORTAL_ICONS = ['arrow-out-square', 'menu-hamburger', 'cross'];
 
 /**
  * Icons the arrows of shared/ui/pager.ts use. A demo with a pager loads them without

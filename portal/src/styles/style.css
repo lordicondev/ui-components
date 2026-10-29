@@ -188,10 +188,6 @@ h2 {
         grid-template-columns: 240px minmax(0, 1fr);
     }
 
-    .sidebar {
-        min-width: 0;
-    }
-
     .layout__main {
         --main-top: var(--space-48);
     }
@@ -199,33 +195,34 @@ h2 {
 
 /* Sidebar ------------------------------------------------------------------ */
 
-/* Rows as in the demos' own sidebar: quiet at rest, filled when hovered or current. */
+/* On a phone the sidebar is a bar that stays at the top: the logo and the menu button.
+   The menu opens under it, and a page's first screen is measured from under it. */
+:root {
+    --bar: 60px;
+    --above: calc(var(--bar) + 1px); /* the bar and its border */
+    scroll-padding-top: var(--above);
+}
+
 .sidebar {
-    position: relative;
-    display: flex;
+    position: sticky;
+    top: 0;
+    z-index: 10;
     min-width: 0;
-    flex-direction: column;
-    gap: var(--space-16);
-    padding: var(--space-16) var(--gutter);
     border-bottom: 1px solid var(--border-soft);
     background: var(--surface);
+}
+
+.sidebar__bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: var(--bar);
+    padding-inline: var(--gutter);
 }
 
 .sidebar__home {
     display: block;
     width: fit-content;
-}
-
-/* On a phone, level with the foot of the logo at the right; in the column, at its foot. */
-.sidebar__version {
-    position: absolute;
-    top: calc(var(--space-16) + 36px);
-    right: var(--gutter);
-    margin: 0;
-    color: var(--ink-muted);
-    font-size: var(--text-xs);
-    line-height: 1;
-    translate: 0 -100%;
 }
 
 /* The logo stays #121331, also under the pointer, where links turn to the accent. */
@@ -238,22 +235,137 @@ h2 {
     --icon-filter: none;
 }
 
+/* A 44px target; the negative margin lines the icon up with the gutter. */
+.sidebar__toggle {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    margin-right: -10px;
+    padding: 0;
+    border: 0;
+    border-radius: var(--radius-md);
+    background: none;
+    color: var(--ink);
+    --icon-filter: var(--filter-ink);
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Only under a mouse: on a touch screen :hover stays on after the tap. */
+@media (hover: hover) {
+    .sidebar__toggle:hover {
+        background: var(--surface-muted);
+    }
+}
+
+/* The two icons share one cell. The cross shows only while the menu is open. */
+.sidebar__toggle lord-icon {
+    grid-area: 1 / 1;
+    width: var(--icon-size-24);
+    height: var(--icon-size-24);
+}
+
+.sidebar__cross,
+.sidebar__toggle[aria-expanded='true'] .sidebar__burger {
+    visibility: hidden;
+}
+
+.sidebar__toggle[aria-expanded='true'] .sidebar__cross {
+    visibility: visible;
+}
+
+/* The browser's popover box, undone: a sheet from under the bar to the foot of the screen.
+   The list is one column, capped so the rows do not stretch across a tablet. */
+.sidebar__panel {
+    position: fixed;
+    inset: var(--above) 0 0;
+    width: auto;
+    height: auto;
+    max-width: none;
+    max-height: none;
+    margin: 0;
+    padding: var(--space-16) var(--gutter) var(--space-32);
+    border: 0;
+    background: var(--surface);
+    color: inherit;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+}
+
+.sidebar__panel:popover-open {
+    display: block;
+}
+
+/* The page under an open menu does not scroll. */
+:root:has(.sidebar__panel:popover-open) {
+    overflow: hidden;
+}
+
+/* Opening: the sheet unrolls down from the bar, and the rows rise after it, 25ms apart.
+   Past the twelfth they rise together: those are below the fold on most phones.
+   Closing is quicker and quieter: the sheet fades as it lifts back towards the bar.
+   display and overlay keep a closing popover on screen until its fade has run. */
+.sidebar__panel {
+    --opening: 360ms cubic-bezier(0.2, 0, 0, 1);
+    --closing: 160ms cubic-bezier(0.4, 0, 1, 1);
+    opacity: 0;
+    translate: 0 calc(var(--space-8) * -1);
+    transition:
+        opacity var(--closing),
+        translate var(--closing),
+        overlay var(--closing) allow-discrete,
+        display var(--closing) allow-discrete;
+}
+
+.sidebar__panel:popover-open {
+    opacity: 1;
+    translate: 0;
+    clip-path: inset(0);
+    transition:
+        clip-path var(--opening),
+        overlay var(--opening) allow-discrete,
+        display var(--opening) allow-discrete;
+}
+
+.sidebar__panel:popover-open .sidebar__list > li {
+    transition:
+        opacity 240ms ease-out,
+        translate var(--opening);
+    transition-delay: calc(80ms + min(var(--order), 12) * 25ms);
+}
+
+@starting-style {
+    .sidebar__panel:popover-open {
+        clip-path: inset(0 0 100% 0);
+    }
+
+    .sidebar__panel:popover-open .sidebar__list > li {
+        opacity: 0;
+        translate: 0 var(--space-8);
+    }
+}
+
 .sidebar__list {
     display: flex;
-    gap: var(--space-4);
+    flex-direction: column;
+    gap: 2px;
+    max-width: 480px;
     margin: 0;
     padding: 0;
-    overflow-x: auto;
     list-style: none;
 }
 
+/* Rows as in the demos' own sidebar: quiet at rest, filled when hovered or current. On a
+   phone the type is a step up and each row is a 48px target. */
 .sidebar__link {
     display: block;
-    padding: var(--space-4) var(--space-12);
+    padding: var(--space-12);
     border-radius: var(--radius-md);
     color: var(--ink-soft);
-    font-size: var(--text-sm);
+    font-size: var(--text-base);
     font-weight: 500;
+    line-height: var(--leading-base);
     text-decoration: none;
     white-space: nowrap;
 }
@@ -269,10 +381,32 @@ h2 {
     font-weight: 600;
 }
 
+.sidebar__version {
+    margin: var(--space-24) 0 0;
+    padding-inline: var(--space-12);
+    color: var(--ink-muted);
+    font-size: var(--text-xs);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .sidebar__panel,
+    .sidebar__panel:popover-open,
+    .sidebar__panel:popover-open .sidebar__list > li {
+        transition: none;
+    }
+}
+
+/* Beside the page, the column. The panel is always shown: the browser hides a closed
+   popover with a rule of its own, which an author rule outranks. */
 @media (min-width: 900px) {
+    :root {
+        --above: 0px;
+    }
+
     .sidebar {
-        position: sticky;
-        top: 0;
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-16);
         height: 100vh;
         padding: var(--space-32) var(--space-16);
         border-right: 1px solid var(--border-soft);
@@ -280,21 +414,38 @@ h2 {
         overflow-y: auto;
     }
 
-    .sidebar__home {
+    .sidebar__bar {
+        height: auto;
         padding-inline: var(--space-12);
     }
 
-    .sidebar__version {
+    .sidebar__toggle {
+        display: none;
+    }
+
+    .sidebar__panel {
         position: static;
-        margin-top: auto;
-        padding-inline: var(--space-12);
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        padding: 0;
+        overflow: visible;
+        opacity: 1;
         translate: none;
+        transition: none;
     }
 
     .sidebar__list {
-        flex-direction: column;
-        gap: 2px;
-        overflow-x: visible;
+        max-width: none;
+    }
+
+    .sidebar__link {
+        padding: var(--space-4) var(--space-12);
+        font-size: var(--text-sm);
+    }
+
+    .sidebar__version {
+        margin-top: auto;
     }
 }
 
@@ -571,7 +722,10 @@ h2 {
    It stops short of it by the "Get the code" title and one line of its text, so it is clear
    the page goes on below the demo, and at a 720px frame under a two-line head. */
 .demo-page--large .demo-page__intro {
-    min-height: min(calc(100dvh - var(--main-top) - var(--peek)), calc(720px + 128px));
+    min-height: min(
+        calc(100dvh - var(--above) - var(--main-top) - var(--peek)),
+        calc(720px + 128px)
+    );
 
     --peek: calc(var(--leading-xl) + var(--space-8) + var(--leading-base));
 }
