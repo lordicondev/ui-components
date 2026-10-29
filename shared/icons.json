@@ -2,6 +2,17 @@
     "comment": "Where each icon came from. Portal entries track the published Lordicon icon; manual entries were placed by hand and are never overwritten. Run `npm run check:icons -- --record` after editing a file.",
     "icons": [
         {
+            "alias": "api-solid",
+            "source": "manual",
+            "family": "system",
+            "style": "solid",
+            "name": "api",
+            "index": 1327,
+            "states": 2,
+            "sha256": "1664368ee630823580dd6ab422167c6e7726be065b60ff0f502da527d4ccd872",
+            "bytes": 33565
+        },
+        {
             "alias": "arrow-left",
             "source": "manual",
             "family": "system",
@@ -24,6 +35,17 @@
             "bytes": 22792
         },
         {
+            "alias": "arrow-trending-up-solid",
+            "source": "manual",
+            "family": "system",
+            "style": "solid",
+            "name": "arrow-trending-up",
+            "index": 4094,
+            "states": 3,
+            "sha256": "bcd2e299a86ef0ce769d87dd9650a32adfb5bd3078db682c88988c57411f76f6",
+            "bytes": 52520
+        },
+        {
             "alias": "arrow-up",
             "source": "manual",
             "family": "system",
@@ -33,6 +55,17 @@
             "states": 5,
             "sha256": "c3b765f25a9a93fb3e5875990fbd0bd7b40bf967c59d3ce72756889e75bb7269",
             "bytes": 33895
+        },
+        {
+            "alias": "article-solid",
+            "source": "manual",
+            "family": "system",
+            "style": "solid",
+            "name": "article",
+            "index": 362,
+            "states": 3,
+            "sha256": "a323fdd8e8927439c9f62cf036c1142d48bbe711a12f2521365865c6bad99a50",
+            "bytes": 23773
         },
         {
             "alias": "avatar-circle",
@@ -77,6 +110,17 @@
             "states": 3,
             "sha256": "aaed89a3c2cb4ae2bff77639f8a7ef4770bcd0df35d560b5738f6bfb28a87a4b",
             "bytes": 46409
+        },
+        {
+            "alias": "bar-chart-vertical-grow-solid",
+            "source": "manual",
+            "family": "system",
+            "style": "solid",
+            "name": "bar-chart-vertical-grow",
+            "index": 153,
+            "states": 1,
+            "sha256": "5a739c7ad31121ec6eb362c488d4a3c42cbd74d46c2c5ad9043a775e30d6f6d4",
+            "bytes": 6164
         },
         {
             "alias": "bell",
@@ -136,6 +180,28 @@
             "note": "Re-downloaded 2026-10-09: adds morph-select:0.5, so menu-bar can morph it like the tools."
         },
         {
+            "alias": "calculator-simple-solid",
+            "source": "manual",
+            "family": "system",
+            "style": "solid",
+            "name": "calculator-simple",
+            "index": 4014,
+            "states": 3,
+            "sha256": "20c654d5299e5576188fc7963055adaab290ce0edb149ceffbe8c1948813da2b",
+            "bytes": 50423
+        },
+        {
+            "alias": "camera-solid",
+            "source": "manual",
+            "family": "system",
+            "style": "solid",
+            "name": "camera",
+            "index": 61,
+            "states": 2,
+            "sha256": "90feef33d9d1982d63bfaff6b80d6e318de805e793094cbbcb42f1706af2672f",
+            "bytes": 17437
+        },
+        {
             "alias": "cart",
             "source": "manual",
             "family": "system",
@@ -145,6 +211,17 @@
             "states": 4,
             "sha256": "7b6a6403879abe3c8f004a2664964ba8973001556ee317dd66031ad7164c483b",
             "bytes": 40191
+        },
+        {
+            "alias": "cart-solid",
+            "source": "manual",
+            "family": "system",
+            "style": "solid",
+            "name": "cart",
+            "index": 146,
+            "states": 3,
+            "sha256": "f3b26a8539cb9b6dd4b75a1d3b9451ef82ec0f1cc1cad8f630d6c8234dc62a78",
+            "bytes": 32798
         },
         {
             "alias": "check-box-empty",
@@ -242,6 +319,17 @@
             "bytes": 43846
         },
         {
+            "alias": "code-solid",
+            "source": "manual",
+            "family": "system",
+            "style": "solid",
+            "name": "code",
+            "index": 369,
+            "states": 3,
+            "sha256": "51e8077c34601d28dd543ad0c87c72c07bd93a7e04cd733b9f42c8235f4c198f",
+            "bytes": 20221
+        },
+        {
             "alias": "cog",
             "source": "manual",
             "family": "system",
@@ -287,6 +375,17 @@
             "bytes": 39498
         },
         {
+            "alias": "dice-one-solid",
+            "source": "manual",
+            "family": "system",
+            "style": "solid",
+            "name": "dice-one",
+            "index": 4483,
+            "states": 1,
+            "sha256": "65c1e81783cad125ea4a6d881fceca6f0b294e63b4856a0211746c623b1ac1d4",
+            "bytes": 38773
+        },
+        {
             "alias": "download",
             "source": "manual",
             "family": "system",
@@ -296,6 +395,17 @@
             "states": 6,
             "sha256": "c5b610361865134eeedd256fe68a477c4b5042b5730ead9acf539f6a6124bd18",
             "bytes": 65309
+        },
+        {
+            "alias": "email-solid",
+            "source": "manual",
+            "family": "system",
+            "style": "solid",
+            "name": "email",
+            "index": 4073,
+            "states": 2,
+            "sha256": "2f819a43f67ec938533852f9ae74c7010cc06fbba2b7165accc8aa5ab30e4b94",
+            "bytes": 28700
         },
         {
             "alias": "eye",
@@ -320,6 +430,17 @@
             "bytes": 43939
         },
         {
+            "alias": "file-text-solid",
+            "source": "manual",
+            "family": "system",
+            "style": "solid",
+            "name": "file-text",
+            "index": 56,
+            "states": 2,
+            "sha256": "38168c2c04ac8eca274b37758e4324a60ef59b63557b24910518288b75d0f667",
+            "bytes": 31499
+        },
+        {
             "alias": "folder",
             "source": "manual",
             "family": "system",
@@ -329,6 +450,28 @@
             "states": 3,
             "sha256": "fd0729773d5d02757d60a122e69b6aa3a4a54477a419103954befa17a3643b0f",
             "bytes": 20211
+        },
+        {
+            "alias": "globe-solid",
+            "source": "manual",
+            "family": "system",
+            "style": "solid",
+            "name": "globe",
+            "index": 27,
+            "states": 3,
+            "sha256": "ec3ffaa4e191f444d52474eccc5dd80c414406e12c9adec5177b20ed5a024598",
+            "bytes": 37285
+        },
+        {
+            "alias": "grid-bento-solid",
+            "source": "manual",
+            "family": "system",
+            "style": "solid",
+            "name": "grid-bento",
+            "index": 1388,
+            "states": 2,
+            "sha256": "8dc7c8025ac57e861bb0e91d8cc199af03ad5b52593eb6ed9cd56e1e375d3173",
+            "bytes": 23947
         },
         {
             "alias": "grid-widget",
@@ -353,6 +496,39 @@
             "bytes": 39624
         },
         {
+            "alias": "home-solid",
+            "source": "manual",
+            "family": "system",
+            "style": "solid",
+            "name": "home",
+            "index": 63,
+            "states": 3,
+            "sha256": "73f41217ed8d9b2e0b69d77e3966f222c8ce270af2d9935eabb83b41e63777c4",
+            "bytes": 32321
+        },
+        {
+            "alias": "http-solid",
+            "source": "manual",
+            "family": "system",
+            "style": "solid",
+            "name": "http",
+            "index": 2526,
+            "states": 2,
+            "sha256": "78e22ebd02272910952e02cf7281ae615c471e49878a7cca774dfb7287912895",
+            "bytes": 37318
+        },
+        {
+            "alias": "image-mountain-solid",
+            "source": "manual",
+            "family": "system",
+            "style": "solid",
+            "name": "image-mountain",
+            "index": 54,
+            "states": 2,
+            "sha256": "734c9fb60164d76308934c21b1237940bcae045caabeeeb8f6e28f18bce4d4c4",
+            "bytes": 31565
+        },
+        {
             "alias": "info-circle",
             "source": "portal",
             "family": "system",
@@ -364,6 +540,17 @@
             "bytes": 41627
         },
         {
+            "alias": "layers-solid",
+            "source": "manual",
+            "family": "system",
+            "style": "solid",
+            "name": "layers",
+            "index": 12,
+            "states": 1,
+            "sha256": "76684dce93ab866ab201bef23643978986993026762f3e91252633a3f0cca7da",
+            "bytes": 12342
+        },
+        {
             "alias": "link",
             "source": "manual",
             "family": "system",
@@ -373,6 +560,17 @@
             "states": 2,
             "sha256": "833b2c523ddc247b36b8760e94bcecf8383ec84965c5c600014f57875602eac5",
             "bytes": 15082
+        },
+        {
+            "alias": "location-pin-solid",
+            "source": "manual",
+            "family": "system",
+            "style": "solid",
+            "name": "location-pin",
+            "index": 18,
+            "states": 3,
+            "sha256": "0c6fc38e165b8b100b57fa67e7d39f423439884b7797b005fecdb95500a9c1ed",
+            "bytes": 17191
         },
         {
             "alias": "lock",
@@ -431,6 +629,17 @@
             "bytes": 47540
         },
         {
+            "alias": "microphone-solid",
+            "source": "manual",
+            "family": "system",
+            "style": "solid",
+            "name": "microphone",
+            "index": 188,
+            "states": 2,
+            "sha256": "e5ede597f4be537ad3f714df72936466aa96982ebef6953d9a2d67fe9732d4d7",
+            "bytes": 17655
+        },
+        {
             "alias": "paint-bucket",
             "source": "manual",
             "family": "system",
@@ -474,6 +683,61 @@
             "states": 3,
             "sha256": "29de1ecb1ace6c4d6de234884eb6cdb3592c392e5f18c9570c456221775a6960",
             "bytes": 44920
+        },
+        {
+            "alias": "pencil-solid",
+            "source": "manual",
+            "family": "system",
+            "style": "solid",
+            "name": "pencil",
+            "index": 35,
+            "states": 1,
+            "sha256": "5565270fa2429103b18ae35b668079f1e8ee7e66189e641b683402acdbcb8f67",
+            "bytes": 7972
+        },
+        {
+            "alias": "person-cycling-solid",
+            "source": "manual",
+            "family": "system",
+            "style": "solid",
+            "name": "person-cycling",
+            "index": 667,
+            "states": 3,
+            "sha256": "e68e9e1692d434fde9ab2426bcb49532afe2dc845b0251ed423f179fd9802ab5",
+            "bytes": 68363
+        },
+        {
+            "alias": "pet-print-solid",
+            "source": "manual",
+            "family": "system",
+            "style": "solid",
+            "name": "pet-print",
+            "index": 448,
+            "states": 2,
+            "sha256": "a415c7184a50185350b00722e6951799cb7554ab32f94a3e8b49f0341c3d80ce",
+            "bytes": 27227
+        },
+        {
+            "alias": "piggy-bank-solid",
+            "source": "manual",
+            "family": "system",
+            "style": "solid",
+            "name": "piggy-bank",
+            "index": 453,
+            "states": 2,
+            "sha256": "51d1d2819b845c5aa2d958f2ce5439b57e79e73610fe69417cd2f8ad0b536658",
+            "bytes": 38921
+        },
+        {
+            "alias": "pizza-slice-solid",
+            "source": "manual",
+            "family": "system",
+            "style": "solid",
+            "name": "pizza-slice",
+            "index": 13,
+            "states": 2,
+            "sha256": "6da487df4b8f0f19cd6d11a4dc1c030ee5fda25f49d37925d42580dc444ba2e6",
+            "bytes": 31088
         },
         {
             "alias": "plug",
@@ -577,6 +841,17 @@
             "bytes": 18624
         },
         {
+            "alias": "swimming-pool-solid",
+            "source": "manual",
+            "family": "system",
+            "style": "solid",
+            "name": "swimming-pool",
+            "index": 514,
+            "states": 1,
+            "sha256": "68bffe6e5e331051f91518bedec3d8d6cb67f864f50a1d3e06fb458fc490e2c6",
+            "bytes": 31487
+        },
+        {
             "alias": "three-dots-vertical",
             "source": "manual",
             "family": "system",
@@ -609,6 +884,17 @@
             "sha256": "5ed95f2f4e97333a0b6581e0fde6b1783651a7d750d96055b5cc07c430f5160f",
             "bytes": 60906,
             "note": "Re-downloaded 2026-10-09: adds morph-check:0.5, which button-progress plays when the upload is done."
+        },
+        {
+            "alias": "video-camera-solid",
+            "source": "manual",
+            "family": "system",
+            "style": "solid",
+            "name": "video-camera",
+            "index": 4239,
+            "states": 2,
+            "sha256": "a52ced17145bc6415df38ab516da4ec99af50e4f46af6c6c92779c35ca840c59",
+            "bytes": 9218
         },
         {
             "alias": "warning-circle",

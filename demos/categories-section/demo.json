@@ -1,0 +1,78 @@
+{
+    "$schema": "../../schemas/demo.schema.json",
+    "slug": "categories-section",
+    "title": "Categories section",
+    "description": "Three rows of category chips that scroll without end, the middle one the other way. Each chip’s icon plays when you hover over it.",
+    "group": "navigation",
+    "stage": "large",
+    "icons": [
+        "camera-solid",
+        "video-camera-solid",
+        "layers-solid",
+        "grid-bento-solid",
+        "pencil-solid",
+        "image-mountain-solid",
+        "file-text-solid",
+        "article-solid",
+        "microphone-solid",
+        "code-solid",
+        "http-solid",
+        "api-solid",
+        "bar-chart-vertical-grow-solid",
+        "arrow-trending-up-solid",
+        "piggy-bank-solid",
+        "calculator-simple-solid",
+        "cart-solid",
+        "email-solid",
+        "globe-solid",
+        "location-pin-solid",
+        "pizza-slice-solid",
+        "person-cycling-solid",
+        "swimming-pool-solid",
+        "home-solid",
+        "pet-print-solid",
+        "dice-one-solid"
+    ],
+    "fragments": [
+        {
+            "id": "setup",
+            "file": "main.ts",
+            "region": "setup",
+            "lang": "ts",
+            "title": "Define the element",
+            "note": "Built-in triggers only. Apart from the glide call, this is the whole script."
+        },
+        {
+            "id": "markup",
+            "file": "index.html",
+            "region": "markup",
+            "lang": "html",
+            "title": "A row of chips",
+            "note": "target points the icon at its chip, so the whole chip is the hover area. Two copies of the set follow, hidden from the keyboard and from screen readers."
+        },
+        {
+            "id": "scroll",
+            "file": "categories-section.css",
+            "region": "scroll",
+            "lang": "css",
+            "title": "The endless scroll",
+            "note": "The track moves by one set and starts over. Only transform changes, so the browser does not repaint."
+        },
+        {
+            "id": "glide",
+            "file": "../../shared/motion/glide.ts",
+            "region": "glide",
+            "lang": "ts",
+            "title": "Slow to a stop, then pick up",
+            "note": "Only the playback rate of the CSS animation changes. It eases out to 0 under the pointer or keyboard focus and eases back in afterwards."
+        },
+        {
+            "id": "colour",
+            "file": "categories-section.css",
+            "region": "colour",
+            "lang": "css",
+            "title": "Chip colours",
+            "note": "One custom property per chip. Hover mixes it with black; the icon follows the text colour."
+        }
+    ]
+}

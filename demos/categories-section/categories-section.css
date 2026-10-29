@@ -1,0 +1,194 @@
+@import '@shared/styles/index.css';
+
+/* The chip colours are Figma variables that are not in the shared palette. */
+.demo {
+    --salvia: #6ea4d3;
+    --yamabuki: #eeaa2b;
+    --lilac: #de9ccf;
+    --cinnamon: #d8957a;
+    --moss: #4e8a54;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-48);
+    min-height: 100dvh;
+    padding: var(--space-64) 0;
+}
+
+.heading {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-12);
+    padding: 0 var(--gutter);
+    text-align: center;
+    text-wrap: balance;
+}
+
+.heading__title,
+.heading__text {
+    margin: 0;
+}
+
+.heading__title {
+    font-size: clamp(var(--text-2xl), 4vw, var(--text-3xl));
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+.heading__text {
+    color: var(--ink-soft);
+    font-size: var(--text-lg);
+    line-height: var(--leading-lg);
+}
+
+/* The rows stack in a box as wide as the screen up to 2400px, which three sets fill. */
+.marquee {
+    position: relative;
+    display: grid;
+    gap: var(--space-16);
+    width: 100%;
+    max-width: 2400px;
+    margin-block: calc(var(--space-4) * -1);
+}
+
+/* #region scroll */
+/* Three identical sets side by side. The track slides left by one and starts over. */
+.row {
+    overflow: hidden;
+    contain: layout paint style;
+    /* Room for the focus ring, which is 4px outside the chip. */
+    padding-block: var(--space-4);
+}
+
+.track {
+    display: flex;
+    width: max-content;
+    will-change: transform;
+    animation: scroll 60s linear infinite;
+    animation-delay: calc(60s * var(--phase) * -1);
+}
+
+.row--right .track {
+    animation-direction: reverse;
+}
+
+@keyframes scroll {
+    to {
+        transform: translateX(calc(-100% / 3));
+    }
+}
+
+/* #endregion */
+
+/* Every row takes 60s a round, so a longer row moves faster. The phase is how far into the
+   round each row starts. */
+.row--1 {
+    --phase: 0.22;
+}
+
+.row--2 {
+    --phase: 0.07;
+}
+
+.row--3 {
+    --phase: 0.29;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .track {
+        animation: none;
+    }
+}
+
+.set {
+    display: flex;
+    gap: var(--space-16);
+    margin: 0;
+    padding: 0 var(--space-16) 0 0;
+    list-style: none;
+}
+
+/* #region colour */
+/* One custom property per chip, the hover colour is a darker mix of it. The icon takes the
+   text colour through current-color. */
+.chip {
+    --chip-fill: var(--chip);
+    --icon-filter: var(--filter-ink-inverse);
+
+    display: flex;
+    align-items: center;
+    gap: var(--space-8);
+    padding: var(--space-8) var(--space-16);
+    border: 0;
+    border-radius: var(--radius-pill);
+    background: var(--chip-fill);
+    color: var(--ink-inverse);
+    font-weight: 500;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.chip:hover {
+    --chip-fill: color-mix(in oklab, var(--chip) 86%, black);
+}
+/* #endregion */
+
+.chip--signal {
+    --chip: var(--brand-500);
+}
+
+.chip--salvia {
+    --chip: var(--salvia);
+}
+
+.chip--yamabuki {
+    --chip: var(--yamabuki);
+}
+
+.chip--lilac {
+    --chip: var(--lilac);
+}
+
+.chip--cinnamon {
+    --chip: var(--cinnamon);
+}
+
+.chip--moss {
+    --chip: var(--moss);
+}
+
+/* The ends of the rows fade into the page. */
+.marquee::before,
+.marquee::after {
+    content: '';
+    position: absolute;
+    inset: 0 auto;
+    z-index: 1;
+    width: clamp(var(--space-48), 11vw, 160px);
+    pointer-events: none;
+}
+
+.marquee::before {
+    left: 0;
+    background: linear-gradient(to right, var(--surface), transparent);
+}
+
+.marquee::after {
+    right: 0;
+    background: linear-gradient(to left, var(--surface), transparent);
+}
+
+.cta {
+    padding: var(--space-8) var(--space-12);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    background: var(--surface);
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.cta:hover {
+    background: var(--surface-muted);
+}
