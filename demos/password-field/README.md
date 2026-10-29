@@ -33,7 +33,9 @@ as a nudge instead.
 
 - The only accepted password is `password`. The length rule is read from `minlength` on
   the input rather than through `checkValidity()`, because `tooShort` ignores a value the
-  user has not edited, and this field arrives pre-filled.
+  user has not typed, and an empty field counts as missing, not short.
+- The field starts empty with a `placeholder`, which the browser takes away at the first
+  character.
 - The hint answers a submit. A keystroke hides it, and the next Sign in asks again.
   `hideHint()` returns early when the hint is already gone or leaving, so holding
   Backspace does not restart the exit.

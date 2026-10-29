@@ -24,7 +24,7 @@ const MIN = Number(input.getAttribute('minlength'));
 /** What is wrong with the value, or null. */
 function problem(): string | null {
     // Measured here rather than with checkValidity(): `tooShort` only reports a value the
-    // user has edited, and this field arrives pre-filled.
+    // user has typed, and an empty field counts as missing, not short.
     if (input.value.length < MIN) return `Must be at least ${MIN} characters`;
     if (input.value !== CORRECT) return 'That password is not the one we have on file';
     return null;
