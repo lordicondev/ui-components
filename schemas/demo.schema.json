@@ -23,7 +23,7 @@
             "minLength": 1
         },
         "group": {
-            "enum": ["buttons", "inputs", "menus", "navigation", "feedback", "cards"],
+            "enum": ["buttons", "inputs", "menus", "navigation", "feedback", "cards", "text"],
             "description": "The section of the portal's index the demo is listed in. Titles and order are in scripts/prepare-portal.ts."
         },
         "stage": {

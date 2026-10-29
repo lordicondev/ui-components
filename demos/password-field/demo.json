@@ -37,7 +37,7 @@
             "region": "hint",
             "lang": "html",
             "title": "The error message and its icon",
-            "note": "data-raised counts how many times the message has been shown."
+            "note": "The warning icon draws in the first time and nudges on every repeat."
         },
         {
             "id": "wiring",

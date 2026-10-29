@@ -32,7 +32,7 @@
             "region": "markup",
             "lang": "html",
             "title": "One destination",
-            "note": "target points the icon at the link, so the whole row is the hover area."
+            "note": "Hovering anywhere on a row plays its icon, and the current page is tinted."
         },
         {
             "id": "navigate",
@@ -48,7 +48,7 @@
             "region": "state",
             "lang": "css",
             "title": "Hovered and current rows",
-            "note": "Two custom properties: the fill and the icon colour."
+            "note": "The icon changes colour with its row."
         },
         {
             "id": "fit",
@@ -56,7 +56,7 @@
             "region": "fit",
             "lang": "css",
             "title": "The sidebar's height",
-            "note": "Drawn at 814px, never shorter than its contents, never taller than the screen."
+            "note": "The sidebar keeps the height it was designed at whenever the screen allows."
         }
     ]
 }

@@ -29,7 +29,7 @@
             "region": "clear",
             "lang": "html",
             "title": "The clear button",
-            "note": "state=\"in-reveal\" is why the cross draws itself in."
+            "note": "The cross draws itself in when there is something to clear."
         },
         {
             "id": "settle",

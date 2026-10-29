@@ -16,7 +16,7 @@ export type DemoManifest = {
     title: string;
     description: string;
     /** The section of the index it is listed in. */
-    group: 'buttons' | 'inputs' | 'menus' | 'navigation' | 'feedback' | 'cards';
+    group: 'buttons' | 'inputs' | 'menus' | 'navigation' | 'feedback' | 'cards' | 'text';
     /** How tall the portal's frame is. Large when left out. */
     stage?: 'small' | 'medium' | 'large';
     icons: string[];

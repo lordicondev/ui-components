@@ -72,19 +72,23 @@ for (const block of document.querySelectorAll<HTMLElement>('[data-code]')) {
     }
 }
 
-/** Copy the code next to the button. */
+/**
+ * Copy the code next to the button. A fragment that leaves lines out carries the whole
+ * region in data-full, so what is pasted works.
+ */
 for (const button of document.querySelectorAll<HTMLButtonElement>('[data-copy]')) {
     button.addEventListener('click', async () => {
         const shown = button
             .closest('[data-code], .terminal')
-            ?.querySelector<HTMLElement>('[data-variant]:not([hidden]) code, code');
+            ?.querySelector<HTMLElement>('[data-variant]:not([hidden]), pre');
+        const text = shown?.dataset.full ?? shown?.textContent;
 
-        if (!shown?.textContent) return;
+        if (!shown || !text) return;
 
         // Clipboard access can be refused (insecure origin, locked-down browser).
         const original = button.textContent;
         try {
-            await navigator.clipboard.writeText(shown.textContent);
+            await navigator.clipboard.writeText(text);
             button.textContent = 'Copied';
         } catch {
             button.textContent = 'Press Ctrl+C';

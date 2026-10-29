@@ -10,11 +10,19 @@ import { loadConfig, repoRoot } from './lib/config.ts';
 import { demoDir, listDemos, readManifest, type Fragment } from './lib/demos.ts';
 import { PORTAL_ICONS, iconLabel, iconUrl, readLockfile } from './lib/icons.ts';
 import { demoLinks, repoUrl } from './lib/links.ts';
-import { extractRegion, withoutMarkers } from './lib/regions.ts';
+import { extractFragment, withoutMarkers } from './lib/regions.ts';
 import { demoSources } from './lib/sources.ts';
 import { toJavaScript } from './lib/transpile.ts';
 
 type Code = { ts: string; js: string } | { code: string };
+
+/** A stretch of code, or the mark for lines the fragment leaves out. */
+type Segment = { code: string } | { skip: string };
+
+/** What a fragment shows, and what Copy copies: the region with nothing left out. */
+type FragmentCode =
+    | { ts: Segment[]; js: Segment[]; tsFull: string; jsFull: string }
+    | { code: Segment[]; full: string };
 
 type PortalFragment = {
     id: string;
@@ -23,7 +31,7 @@ type PortalFragment = {
     lang: string;
     /** Fragments always start folded. */
     collapsed: boolean;
-} & Code;
+} & FragmentCode;
 
 const target = resolve(repoRoot, 'portal/src/_data/demos.json');
 const config = loadConfig();
@@ -37,13 +45,45 @@ async function code(source: string, filePath: string, lang: string): Promise<Cod
     return { ts: source, js: await toJavaScript(source, filePath) };
 }
 
+/** The parts between skips, with a mark at each skip. */
+function segments(parts: string[], skips: string[]): Segment[] {
+    return parts.flatMap((code, index) =>
+        index < skips.length ? [{ code }, { skip: skips[index] }] : [{ code }],
+    );
+}
+
+/** Stands in for a skip while the TypeScript is turned into JavaScript. */
+const SKIP_LINE = '// @@skip@@';
+
+async function fragmentCode(
+    parts: string[],
+    skips: string[],
+    full: string,
+    filePath: string,
+    lang: string,
+): Promise<FragmentCode> {
+    if (lang !== 'ts') return { code: segments(parts, skips), full };
+
+    // The parts go through the compiler as one program, so each keeps its context.
+    const joined = parts.join(`\n${SKIP_LINE}\n`);
+    const jsParts = (await toJavaScript(joined, filePath))
+        .split(/^[ \t]*\/\/ @@skip@@[ \t]*$/m)
+        .map((part) => part.replace(/^\s*\n|\n\s*$/g, ''));
+
+    return {
+        ts: segments(parts, skips),
+        js: segments(jsParts, skips),
+        tsFull: full,
+        jsFull: await toJavaScript(full, filePath),
+    };
+}
+
 async function demoFragment(slug: string, fragment: Fragment): Promise<PortalFragment> {
     const filePath = resolve(demoDir(slug), fragment.file);
-    const source = extractRegion(
+    const { parts, skips, full } = extractFragment(
         readFileSync(filePath, 'utf8'),
         fragment.region,
         `demos/${slug}/${fragment.file}`,
-        fragment.lang,
     );
 
     return {
@@ -52,7 +92,7 @@ async function demoFragment(slug: string, fragment: Fragment): Promise<PortalFra
         note: fragment.note,
         lang: fragment.lang,
         collapsed: true,
-        ...(await code(source, filePath, fragment.lang)),
+        ...(await fragmentCode(parts, skips, full, filePath, fragment.lang)),
     };
 }
 
@@ -89,6 +129,7 @@ const GROUPS = [
     { id: 'navigation', title: 'Navigation' },
     { id: 'feedback', title: 'Feedback and progress' },
     { id: 'cards', title: 'Cards' },
+    { id: 'text', title: 'Text' },
 ];
 
 /**

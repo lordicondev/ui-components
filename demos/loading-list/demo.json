@@ -53,7 +53,7 @@
             "region": "swap",
             "lang": "css",
             "title": "One cell, three icons",
-            "note": "The stylesheet shows the icon for the status."
+            "note": "Each step shows a spinner, a tick or a cross, chosen by its status alone."
         },
         {
             "id": "colour",

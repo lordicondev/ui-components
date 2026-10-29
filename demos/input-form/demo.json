@@ -32,7 +32,7 @@
             "region": "composer",
             "lang": "html",
             "title": "The composer and the plus button",
-            "note": "popovertarget is all it takes to open the menu."
+            "note": "The plus opens the menu with a plain HTML attribute."
         },
         {
             "id": "row",

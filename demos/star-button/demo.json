@@ -21,7 +21,7 @@
             "region": "markup",
             "lang": "html",
             "title": "The button and its icon",
-            "note": "The icon, the stylesheet and the count all read aria-pressed."
+            "note": "Press it, and the star fills and the count goes up, all from aria-pressed."
         },
         {
             "id": "wiring",

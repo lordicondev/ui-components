@@ -29,7 +29,7 @@
             "region": "wiring",
             "lang": "ts",
             "title": "Mirror checked into an attribute",
-            "note": "checked is a property, and nothing can watch a property."
+            "note": "A few lines let the icon follow a native checkbox."
         },
         {
             "id": "colour",

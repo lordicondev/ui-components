@@ -21,7 +21,7 @@
             "region": "menu",
             "lang": "html",
             "title": "The panel, a group and a row",
-            "note": "data-keys for the arrow keys, data-choose for a row that can be chosen."
+            "note": "Two attributes hook the menu up to the arrow keys and to choosing a row."
         },
         {
             "id": "wiring",
@@ -37,7 +37,7 @@
             "region": "danger",
             "lang": "css",
             "title": "The destructive row",
-            "note": "One rule. The icon takes the colour through current-color."
+            "note": "One rule turns a row and its icon red."
         }
     ]
 }

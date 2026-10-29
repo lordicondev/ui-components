@@ -21,7 +21,7 @@
             "region": "markup",
             "lang": "html",
             "title": "The cart button",
-            "note": "data-added says the button is confirming a press. A status repeats the words for a screen reader."
+            "note": "One attribute drives the tick, the label and what a screen reader hears."
         },
         {
             "id": "favorite",
@@ -29,7 +29,7 @@
             "region": "favorite",
             "lang": "html",
             "title": "The favourite button",
-            "note": "A toggle: the same trigger on aria-pressed, a different morph."
+            "note": "The heart fills and empties with the button's pressed state."
         },
         {
             "id": "wiring",
@@ -45,7 +45,7 @@
             "region": "measure",
             "lang": "ts",
             "title": "Measure the label's width",
-            "note": "Width cannot transition to auto, so the stylesheet gets a number."
+            "note": "The button grows to fit its label, so the script measures it once."
         },
         {
             "id": "open",
@@ -53,7 +53,7 @@
             "region": "open",
             "lang": "css",
             "title": "Open and close the button",
-            "note": "Three transitions. Closing is the same three in reverse."
+            "note": "The button widens to say it was added, then shrinks back."
         },
         {
             "id": "colour",

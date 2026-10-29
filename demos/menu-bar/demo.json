@@ -29,7 +29,7 @@
             "region": "markup",
             "lang": "html",
             "title": "One tool",
-            "note": "A real radio underneath. data-selected is what the icon and the stylesheet read."
+            "note": "A real radio underneath keeps the tools usable from the keyboard; the icon follows it."
         },
         {
             "id": "toggle",
@@ -37,7 +37,7 @@
             "region": "toggle",
             "lang": "html",
             "title": "One list button",
-            "note": "A toggle. aria-pressed is an attribute already, so the icon follows it with nothing in between."
+            "note": "The icon follows aria-pressed directly, with no code in between."
         },
         {
             "id": "action",
@@ -69,7 +69,7 @@
             "region": "selected",
             "lang": "css",
             "title": "The selected tool",
-            "note": "Three custom properties; the icon takes its colour through current-color."
+            "note": "The resting, hovered and selected looks, icon colour included."
         }
     ]
 }

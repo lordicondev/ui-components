@@ -1,0 +1,51 @@
+{
+    "$schema": "../../schemas/demo.schema.json",
+    "slug": "title-with-icon",
+    "title": "Title with icon",
+    "description": "A heading with icons between its words, plain or in a box. Each icon plays when you hover over it.",
+    "group": "text",
+    "stage": "medium",
+    "icons": ["email", "line-graph-arrow-up", "medal-first-place"],
+    "fragments": [
+        {
+            "id": "setup",
+            "file": "main.ts",
+            "region": "setup",
+            "lang": "ts",
+            "title": "Define the element",
+            "note": "Built-in triggers only. Apart from the dots, this is the whole script."
+        },
+        {
+            "id": "markup",
+            "file": "index.html",
+            "region": "markup",
+            "lang": "html",
+            "title": "Icons between the words",
+            "note": "Each icon is an element in the text. It needs no target: the icon itself is the hover area."
+        },
+        {
+            "id": "inline",
+            "file": "title-with-icon.css",
+            "region": "inline",
+            "lang": "css",
+            "title": "As tall as the text",
+            "note": "Sized in em, so the icons follow the font size."
+        },
+        {
+            "id": "boxed",
+            "file": "index.html",
+            "region": "boxed",
+            "lang": "html",
+            "title": "Icons in a box",
+            "note": "The same title with the icons in boxes. Hovering anywhere on a box plays its icon."
+        },
+        {
+            "id": "box",
+            "file": "title-with-icon.css",
+            "region": "box",
+            "lang": "css",
+            "title": "The box",
+            "note": "The box grows and shrinks with the text, like the icons do."
+        }
+    ]
+}

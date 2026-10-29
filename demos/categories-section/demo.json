@@ -48,7 +48,7 @@
             "region": "markup",
             "lang": "html",
             "title": "A row of chips",
-            "note": "target points the icon at its chip, so the whole chip is the hover area. The track holds the set three times; the copies are hidden from screen readers and the Tab key."
+            "note": "Hovering anywhere on a chip plays its icon. Copies of the set fill the loop."
         },
         {
             "id": "scroll",
@@ -56,7 +56,7 @@
             "region": "scroll",
             "lang": "css",
             "title": "Slide by one set, then start over",
-            "note": "--progress from 0 to 1 moves the track by one set. Only transform changes, so nothing is repainted."
+            "note": "One number moves the whole row, so the loop never shows a seam."
         },
         {
             "id": "frame",

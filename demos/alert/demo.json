@@ -21,7 +21,7 @@
             "region": "markup",
             "lang": "html",
             "title": "One alert card",
-            "note": "The icon watches the card it sits in, through target. The image inside shows until the icon is ready."
+            "note": "The icon plays as the card arrives, and again on hover."
         },
         {
             "id": "build",
@@ -53,7 +53,7 @@
             "region": "deck",
             "lang": "css",
             "title": "The deck: position, size and fade from --depth",
-            "note": "translate and scale are separate properties, so they can take different times."
+            "note": "New alerts stack like a deck, the older ones shrinking behind."
         },
         {
             "id": "leaving",

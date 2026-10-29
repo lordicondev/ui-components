@@ -21,7 +21,7 @@
             "region": "markup",
             "lang": "html",
             "title": "One star",
-            "note": "A real radio underneath. data-chosen is the rating, data-lit the preview."
+            "note": "A real radio underneath, so the rating works with the keyboard and a screen reader."
         },
         {
             "id": "wiring",
@@ -37,7 +37,7 @@
             "region": "preview",
             "lang": "ts",
             "title": "Light the stars up to the pointer",
-            "note": "Lighting up runs; going dark happens at once."
+            "note": "Stars light up one by one as the pointer moves, and go dark at once."
         },
         {
             "id": "choose",
@@ -61,7 +61,7 @@
             "region": "clear",
             "lang": "ts",
             "title": "Click the top star to clear",
-            "note": "A radio cannot be unchecked by clicking it, so the demo does it a tick later."
+            "note": "Clicking the top star again clears the rating."
         }
     ]
 }

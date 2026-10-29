@@ -32,7 +32,7 @@
             "region": "field",
             "lang": "html",
             "title": "The search field",
-            "note": "data-keys makes the input the controller for the arrow keys."
+            "note": "The arrow keys move through the list while you keep typing."
         },
         {
             "id": "palette",
@@ -64,7 +64,7 @@
             "region": "reset",
             "lang": "ts",
             "title": "Open empty",
-            "note": "Cleared on beforetoggle, before the panel is painted."
+            "note": "The palette opens fresh every time, without a flash of the last search."
         },
         {
             "id": "empty",

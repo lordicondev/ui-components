@@ -21,7 +21,7 @@
             "region": "markup",
             "lang": "html",
             "title": "The pages and the frame",
-            "note": "aria-current says which page it is. The frame is one element for the row."
+            "note": "One frame slides to the page you pick."
         },
         {
             "id": "turn",
@@ -53,7 +53,7 @@
             "region": "steps",
             "lang": "html",
             "title": "One arrow icon, flipped for next",
-            "note": "Flipping the button flips its animation with it."
+            "note": "Both arrows use the same icon file."
         },
         {
             "id": "variants",

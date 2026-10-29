@@ -1,4 +1,9 @@
-{{# One code block in a <details>. The TS | JS switch appears when both versions exist. #}}
+{{# One code block in a <details>. The TS | JS switch appears when both versions exist.
+    A fragment comes in parts, with a mark where lines are left out, and Copy takes the
+    whole region from data-full. A whole file is one string. #}}
+{{ set tsParts = Array.isArray(ts) ? ts : [{ code: ts }] }}
+{{ set jsParts = Array.isArray(js) ? js : [{ code: js }] }}
+{{ set parts = Array.isArray(code) ? code : [{ code: code }] }}
 <details class="code" data-code {{ if !collapsed }}open{{ /if }}>
     <summary class="code__head">
         <span class="code__title">{{ title }}</span>
@@ -23,9 +28,9 @@
     </div>
 
     {{ if variants }}
-        <pre class="code__body" data-variant="ts"><code class="language-ts">{{ ts |> escape }}</code></pre>
-        <pre class="code__body" data-variant="js" hidden><code class="language-js">{{ js |> escape }}</code></pre>
+        <pre class="code__body" data-variant="ts" {{ if tsFull }}data-full="{{ tsFull |> escape }}"{{ /if }}>{{ for index, part of tsParts }}{{ if index }}{{ "\n" }}{{ /if }}{{ if "skip" in part }}<span class="code__skip" title="Lines left out here. Copy includes them.">{{ part.skip }}⋯</span>{{ else }}<code class="language-ts">{{ part.code |> escape }}</code>{{ /if }}{{ /for }}</pre>
+        <pre class="code__body" data-variant="js" hidden {{ if jsFull }}data-full="{{ jsFull |> escape }}"{{ /if }}>{{ for index, part of jsParts }}{{ if index }}{{ "\n" }}{{ /if }}{{ if "skip" in part }}<span class="code__skip" title="Lines left out here. Copy includes them.">{{ part.skip }}⋯</span>{{ else }}<code class="language-js">{{ part.code |> escape }}</code>{{ /if }}{{ /for }}</pre>
     {{ else }}
-        <pre class="code__body" data-variant="static"><code class="language-{{ lang }}">{{ code |> escape }}</code></pre>
+        <pre class="code__body" data-variant="static" {{ if full }}data-full="{{ full |> escape }}"{{ /if }}>{{ for index, part of parts }}{{ if index }}{{ "\n" }}{{ /if }}{{ if "skip" in part }}<span class="code__skip" title="Lines left out here. Copy includes them.">{{ part.skip }}⋯</span>{{ else }}<code class="language-{{ lang }}">{{ part.code |> escape }}</code>{{ /if }}{{ /for }}</pre>
     {{ /if }}
 </details>

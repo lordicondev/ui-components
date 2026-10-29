@@ -54,6 +54,7 @@ running, the code that matters, and every file it is made of.
 | [Search bar](demos/search-bar/)                 | A search field with a clear button. The magnifier reacts when you click into the field, and the cross icon appears once you stop typing.                        |
 | [Sidebar navigation](demos/sidebar-navigation/) | A side menu linking to pages of an app. Icons react to hover and the keyboard, and the current page is highlighted.                                             |
 | [Star button](demos/star-button/)               | A button for starring an item, with a counter. The star morphs into a filled one when you press it, and the count goes up.                                      |
+| [Title with icon](demos/title-with-icon/)       | A heading with icons between its words, plain or in a box. Each icon plays when you hover over it.                                                              |
 
 ## Take a demo
 

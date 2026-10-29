@@ -21,7 +21,7 @@
             "region": "markup",
             "lang": "html",
             "title": "The button",
-            "note": "data-stage for what it is doing, data-progress for how far. The icon maps each stage to a state."
+            "note": "Two attributes tell the icon, the fill and the label what is happening."
         },
         {
             "id": "api",
@@ -61,7 +61,7 @@
             "region": "toast",
             "lang": "css",
             "title": "The receipt opening and leaving",
-            "note": "Opens from the middle to the edge. Leaves by fading; the box snaps back afterwards."
+            "note": "The receipt slides out of the button, then fades away."
         }
     ]
 }

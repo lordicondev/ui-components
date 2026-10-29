@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Title with icon</title>
+        <link rel="stylesheet" href="./title-with-icon.css" />
+        <script type="module" src="./main.ts"></script>
+    </head>
+
+    <body>
+        <main class="demo">
+            <section id="title-inline" data-page aria-label="Icons in the text">
+                <!-- #region markup -->
+                <!-- The icons sit in the text like words. They are aria-hidden, so the heading
+                     reads as plain text. Each plays when the pointer is on it. -->
+                <h2 class="title">
+                    Read every
+                    <lord-icon
+                        class="title__icon"
+                        current-color
+                        src="icons/email.json"
+                        loading="interaction"
+                        trigger="hover"
+                        aria-hidden="true"
+                    >
+                        <img alt="" src="icons/email.svg" />
+                    </lord-icon>
+                    email from users, track
+                    <!-- #skip -->
+                    <lord-icon
+                        class="title__icon"
+                        current-color
+                        src="icons/line-graph-arrow-up.json"
+                        loading="interaction"
+                        trigger="hover"
+                        aria-hidden="true"
+                    >
+                        <img alt="" src="icons/line-graph-arrow-up.svg" />
+                    </lord-icon>
+                    progress across each release and celebrate every win
+                    <lord-icon
+                        class="title__icon"
+                        current-color
+                        src="icons/medal-first-place.json"
+                        loading="interaction"
+                        trigger="hover"
+                        aria-hidden="true"
+                    >
+                        <img alt="" src="icons/medal-first-place.svg" />
+                    </lord-icon>
+                    <!-- #endskip -->
+                    together with your team.
+                </h2>
+                <!-- #endregion -->
+            </section>
+
+            <section id="title-boxed" data-page hidden aria-label="Icons in boxes">
+                <!-- #region boxed -->
+                <!-- The same title with each icon in a box. target makes the whole box the
+                     hover area. -->
+                <h2 class="title title--boxed">
+                    Read every
+                    <span class="title__box">
+                        <lord-icon
+                            class="title__icon"
+                            current-color
+                            src="icons/email.json"
+                            loading="interaction"
+                            trigger="hover"
+                            target=".title__box"
+                            aria-hidden="true"
+                        >
+                            <img alt="" src="icons/email.svg" />
+                        </lord-icon>
+                    </span>
+                    email from users, track
+                    <!-- #skip -->
+                    <span class="title__box">
+                        <lord-icon
+                            class="title__icon"
+                            current-color
+                            src="icons/line-graph-arrow-up.json"
+                            loading="interaction"
+                            trigger="hover"
+                            target=".title__box"
+                            aria-hidden="true"
+                        >
+                            <img alt="" src="icons/line-graph-arrow-up.svg" />
+                        </lord-icon>
+                    </span>
+                    progress across each release and celebrate every win
+                    <span class="title__box">
+                        <lord-icon
+                            class="title__icon"
+                            current-color
+                            src="icons/medal-first-place.json"
+                            loading="interaction"
+                            trigger="hover"
+                            target=".title__box"
+                            aria-hidden="true"
+                        >
+                            <img alt="" src="icons/medal-first-place.svg" />
+                        </lord-icon>
+                    </span>
+                    <!-- #endskip -->
+                    together with your team.
+                </h2>
+                <!-- #endregion -->
+            </section>
+
+            <div class="pager">
+                <button
+                    class="pager__step"
+                    type="button"
+                    data-step="-1"
+                    aria-label="Previous"
+                    disabled
+                >
+                    <lord-icon
+                        current-color
+                        src="icons/chevron-left.json"
+                        loading="interaction"
+                        trigger="click"
+                        target=".pager__step"
+                        aria-hidden="true"
+                    >
+                        <img alt="" src="icons/chevron-left.svg" />
+                    </lord-icon>
+                </button>
+                <button
+                    class="pager__dot"
+                    type="button"
+                    aria-pressed="true"
+                    aria-controls="title-inline"
+                    aria-label="Icons in the text"
+                ></button>
+                <button
+                    class="pager__dot"
+                    type="button"
+                    aria-pressed="false"
+                    aria-controls="title-boxed"
+                    aria-label="Icons in boxes"
+                ></button>
+                <button
+                    class="pager__step pager__step--next"
+                    type="button"
+                    data-step="1"
+                    aria-label="Next"
+                >
+                    <lord-icon
+                        current-color
+                        src="icons/chevron-left.json"
+                        loading="interaction"
+                        trigger="click"
+                        target=".pager__step"
+                        aria-hidden="true"
+                    >
+                        <img alt="" src="icons/chevron-left.svg" />
+                    </lord-icon>
+                </button>
+            </div>
+        </main>
+    </body>
+</html>

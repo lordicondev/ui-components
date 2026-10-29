@@ -94,6 +94,11 @@ state, then what makes this demo different. Titles say what the reader will see.
 Fragments come from the demo's own files; `shared/` code is listed whole under "What it
 imports".
 
+A fragment starts folded, so its note is what a reader sees first. The note says in one
+sentence what the code gets them; the comments in the code say how it works, for whoever
+copies the file. Do not repeat one in the other. A `#skip` shows as a mark, not code, and
+Copy copies the region whole.
+
 ## Icons
 
 `shared/public/icons/` holds only the icons the demos use, as Lottie JSON. A demo declares

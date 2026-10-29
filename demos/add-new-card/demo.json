@@ -21,7 +21,7 @@
             "region": "markup",
             "lang": "html",
             "title": "The tile",
-            "note": "target points the icon at the tile, so the whole tile is the hover area."
+            "note": "The plus turns wherever the pointer enters the tile."
         },
         {
             "id": "colour",

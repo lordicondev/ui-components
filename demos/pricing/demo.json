@@ -21,7 +21,7 @@
             "region": "markup",
             "lang": "html",
             "title": "A plan card",
-            "note": "target points the icon at the card, so the whole card is the hover area. The ticks are plain SVG."
+            "note": "Hovering anywhere on a plan plays its icon."
         },
         {
             "id": "colour",
@@ -29,7 +29,7 @@
             "region": "colour",
             "lang": "css",
             "title": "Grey icons and accent ones",
-            "note": "The icons inherit color through current-color. The black SVGs take a filter."
+            "note": "Grey icons on the plain cards, accent ones on the featured card."
         },
         {
             "id": "raised",

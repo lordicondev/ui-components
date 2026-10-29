@@ -21,7 +21,7 @@
             "region": "bell",
             "lang": "html",
             "title": "The bell button",
-            "note": "popovertarget opens the panel. data-count is what the icon watches."
+            "note": "The bell rings when the count goes up."
         },
         {
             "id": "unread",
@@ -45,7 +45,7 @@
             "region": "item",
             "lang": "html",
             "title": "One notification",
-            "note": "Every row has a dot. data-unread, set from main.ts, shows it and the tint."
+            "note": "An unread row gets its dot and tint from one attribute."
         },
         {
             "id": "entrance",
@@ -53,7 +53,7 @@
             "region": "entrance",
             "lang": "ts",
             "title": "Start the tint with the row",
-            "note": "popovers() hands back each row's delay; the tint starts from it."
+            "note": "Each row's tint arrives in step with the row."
         },
         {
             "id": "tint",
@@ -61,7 +61,7 @@
             "region": "tint",
             "lang": "css",
             "title": "The colour of a row",
-            "note": "The fill is a background image, so main.ts can animate its width."
+            "note": "The tint grows across the row as it comes in."
         }
     ]
 }

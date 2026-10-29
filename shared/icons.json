@@ -397,6 +397,17 @@
             "bytes": 65309
         },
         {
+            "alias": "email",
+            "source": "manual",
+            "family": "system",
+            "style": "outline",
+            "name": "email",
+            "index": 4073,
+            "states": 2,
+            "sha256": "c7e2a661a06b4fc03e553d6e69565904865f350ebe0291ce60e658337dc7c416",
+            "bytes": 18045
+        },
+        {
             "alias": "email-solid",
             "source": "manual",
             "family": "system",
@@ -551,6 +562,17 @@
             "bytes": 12342
         },
         {
+            "alias": "line-graph-arrow-up",
+            "source": "manual",
+            "family": "system",
+            "style": "outline",
+            "name": "line-graph-arrow-up",
+            "index": 4224,
+            "states": 2,
+            "sha256": "c122e296a2d0e44bdc8f5124fc77e5066dd239a5b8b01508e9d1d2ea0a4416ad",
+            "bytes": 22529
+        },
+        {
             "alias": "link",
             "source": "manual",
             "family": "system",
@@ -593,6 +615,17 @@
             "states": 3,
             "sha256": "619f280709075bdae092cc6504ac3b9ec946544fc0e8411fcde0edff3b9c137d",
             "bytes": 15732
+        },
+        {
+            "alias": "medal-first-place",
+            "source": "manual",
+            "family": "system",
+            "style": "outline",
+            "name": "medal-first-place",
+            "index": 1780,
+            "states": 1,
+            "sha256": "35ff072b44647f1c53befaa10879994d3e9313ebb353ce3ac3f5fa7aa4af16cb",
+            "bytes": 23220
         },
         {
             "alias": "menu-hamburger",

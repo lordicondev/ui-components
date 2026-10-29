@@ -793,6 +793,8 @@ h2 {
 
 .take-it code {
     font-family: var(--font-mono);
+    /* JetBrains Mono would draw <!-- and --> as arrows. Code shows what is typed. */
+    font-variant-ligatures: none;
     font-size: 0.95em;
 }
 
@@ -818,6 +820,7 @@ h2 {
     min-width: 0;
     margin: 0;
     font-family: var(--font-mono);
+    font-variant-ligatures: none;
     font-size: var(--text-xs);
     line-height: var(--leading-sm);
     white-space: pre-wrap;
@@ -905,15 +908,24 @@ h2 {
 .code__lang {
     color: var(--ink-subtle);
     font-family: var(--font-mono);
+    font-variant-ligatures: none;
     font-size: var(--text-xs);
 }
 
 /* The highlight theme brings its own padding and background, and the browser its own
    monospace; the block already has all three. */
 .code__body code.hljs {
+    /* Inline, so the parts of a fragment and the marks between them sit on their own lines. */
+    display: inline;
     padding: 0;
     background: none;
     font-family: inherit;
+}
+
+/* Where a fragment leaves lines out. Not code: it cannot be selected, and Copy skips it. */
+.code__skip {
+    color: var(--ink-subtle);
+    user-select: none;
 }
 
 .code__body {
@@ -922,6 +934,7 @@ h2 {
     background: var(--surface-muted);
     overflow-x: auto;
     font-family: var(--font-mono);
+    font-variant-ligatures: none;
     font-size: var(--text-xs);
     line-height: var(--leading-sm);
     tab-size: 4;
@@ -1051,11 +1064,13 @@ h2 {
 
 .icon-table code {
     font-family: var(--font-mono);
+    font-variant-ligatures: none;
 }
 
 .icon-table__id {
     color: var(--ink-muted);
     font-family: var(--font-mono);
+    font-variant-ligatures: none;
     font-size: var(--text-xs);
 }
 
