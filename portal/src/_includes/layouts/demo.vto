@@ -79,6 +79,13 @@ layout: layouts/base.vto
                     rel="noopener"
                 >Open in StackBlitz</a>
             </li>
+            {{ if demo.codepen }}
+                <li>
+                    <a class="button" href="{{ demo.codepen }}" target="_blank" rel="noopener">
+                        Open in CodePen
+                    </a>
+                </li>
+            {{ /if }}
             <li><a class="button" href="{{ demo.links.zip |> url }}">Download ZIP</a></li>
             <li>
                 <a class="button" href="{{ demo.links.github }}" target="_blank" rel="noopener">

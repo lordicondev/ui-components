@@ -16,6 +16,7 @@ npm run build                   # demos, exports, portal data, then the portal
 npm run build:release           # the same, for https://components.lordicon.com/
 npm run check:links             # every link in the built site; see docs/deploy.md
 npm start                       # the built portal at localhost:3000
+npm run codepen                 # the list to publish pens from; see CodePen below
 ```
 
 `npm run dev:portal` serves the portal with live reload instead. See
@@ -131,6 +132,29 @@ render(icon, {
 
 Render them again after swapping an icon's JSON. `check:icons` fails when a demo shows a
 placeholder that is missing, and warns about an icon without one.
+
+## CodePen
+
+Demos are published on CodePen by hand. `npm run codepen` writes `dist/codepen/index.html`,
+a list of every demo; it opens from disk. For each demo it has:
+
+- **Preview**: the demo as one page, the way the pen will run it;
+- **Open in CodePen**: a new, unsaved pen with the demo in it.
+
+To publish: preview the demo, open it in CodePen while signed in to the Lordicon account,
+save, then put the pen's address in the demo's `demo.json`:
+
+```json
+"codepen": "https://codepen.io/lordicon/pen/AbCdEf"
+```
+
+The portal shows an Open in CodePen button for every demo that has one. To update a pen,
+open the demo in CodePen again and copy the three panes into the published pen.
+
+`scripts/lib/codepen.ts` packs a demo into the three panes. The shared files are inlined
+under their paths, the JavaScript has its types stripped, and assets load from the repo
+on jsDelivr at `main`. A demo whose icons are not on `main` yet shows broken placeholders
+until they are.
 
 ## Deploying
 

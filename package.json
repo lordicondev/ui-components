@@ -14,6 +14,7 @@
         "build:demos": "node scripts/build-demos.ts",
         "export": "node scripts/export-demo.ts",
         "publish:export": "node scripts/publish-export.ts",
+        "codepen": "node scripts/codepen.ts",
         "prepare:portal": "node scripts/prepare-portal.ts",
         "build:portal": "cd portal && deno task build",
         "check": "npm run check:types && npm run check:lint && npm run check:icons && npm run check:manifests && npm run check:sources && npm run check:fragments",

@@ -66,6 +66,11 @@
                     }
                 }
             }
+        },
+        "codepen": {
+            "type": "string",
+            "pattern": "^https://codepen\\.io/[\\w-]+/pen/\\w+$",
+            "description": "The published pen, filled in by hand after saving it. The portal shows an Open in CodePen button when it is set."
         }
     }
 }

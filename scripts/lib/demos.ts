@@ -21,6 +21,8 @@ export type DemoManifest = {
     stage?: 'small' | 'medium' | 'large';
     icons: string[];
     fragments: Fragment[];
+    /** The published pen, if there is one. */
+    codepen?: string;
 };
 
 export const demosDir = resolve(repoRoot, 'demos');
