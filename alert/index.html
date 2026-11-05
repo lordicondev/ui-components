@@ -20,13 +20,13 @@
                         <lord-icon
                             class="alert__icon"
                             current-color
-                            src="icons/info-circle.json"
+                            src="icons/system-outline-367-info-circle.json"
                             intro="hover-pinch, after=.alert"
                             trigger="hover"
                             target=".alert"
                             aria-hidden="true"
                         >
-                            <img alt="" src="icons/info-circle.svg" />
+                            <img alt="" src="icons/system-outline-367-info-circle.svg" />
                         </lord-icon>
 
                         <div class="alert__body">
@@ -46,13 +46,13 @@
                             <lord-icon
                                 class="alert__close-icon"
                                 current-color
-                                src="icons/cross.json"
+                                src="icons/system-outline-38-cross.json"
                                 loading="interaction"
                                 trigger="hover"
                                 target=".alert__close"
                                 aria-hidden="true"
                             >
-                                <img alt="" src="icons/cross.svg" />
+                                <img alt="" src="icons/system-outline-38-cross.svg" />
                             </lord-icon>
                         </button>
                     </li>
@@ -60,13 +60,13 @@
                         <lord-icon
                             class="alert__icon"
                             current-color
-                            src="icons/check-circle.json"
+                            src="icons/system-outline-24-check-circle.json"
                             intro="hover-pinch, after=.alert"
                             trigger="hover"
                             target=".alert"
                             aria-hidden="true"
                         >
-                            <img alt="" src="icons/check-circle.svg" />
+                            <img alt="" src="icons/system-outline-24-check-circle.svg" />
                         </lord-icon>
 
                         <div class="alert__body">
@@ -85,13 +85,13 @@
                             <lord-icon
                                 class="alert__close-icon"
                                 current-color
-                                src="icons/cross.json"
+                                src="icons/system-outline-38-cross.json"
                                 loading="interaction"
                                 trigger="hover"
                                 target=".alert__close"
                                 aria-hidden="true"
                             >
-                                <img alt="" src="icons/cross.svg" />
+                                <img alt="" src="icons/system-outline-38-cross.svg" />
                             </lord-icon>
                         </button>
                     </li>
@@ -99,13 +99,13 @@
                         <lord-icon
                             class="alert__icon"
                             current-color
-                            src="icons/warning-triangle.json"
+                            src="icons/system-outline-1140-warning-triangle.json"
                             intro="hover-pinch, after=.alert"
                             trigger="hover"
                             target=".alert"
                             aria-hidden="true"
                         >
-                            <img alt="" src="icons/warning-triangle.svg" />
+                            <img alt="" src="icons/system-outline-1140-warning-triangle.svg" />
                         </lord-icon>
 
                         <div class="alert__body">
@@ -125,13 +125,13 @@
                             <lord-icon
                                 class="alert__close-icon"
                                 current-color
-                                src="icons/cross.json"
+                                src="icons/system-outline-38-cross.json"
                                 loading="interaction"
                                 trigger="hover"
                                 target=".alert__close"
                                 aria-hidden="true"
                             >
-                                <img alt="" src="icons/cross.svg" />
+                                <img alt="" src="icons/system-outline-38-cross.svg" />
                             </lord-icon>
                         </button>
                     </li>
@@ -139,13 +139,13 @@
                         <lord-icon
                             class="alert__icon"
                             current-color
-                            src="icons/cross-circle.json"
+                            src="icons/system-outline-25-cross-circle.json"
                             intro="hover-pinch, after=.alert"
                             trigger="hover"
                             target=".alert"
                             aria-hidden="true"
                         >
-                            <img alt="" src="icons/cross-circle.svg" />
+                            <img alt="" src="icons/system-outline-25-cross-circle.svg" />
                         </lord-icon>
 
                         <div class="alert__body">
@@ -165,13 +165,13 @@
                             <lord-icon
                                 class="alert__close-icon"
                                 current-color
-                                src="icons/cross.json"
+                                src="icons/system-outline-38-cross.json"
                                 loading="interaction"
                                 trigger="hover"
                                 target=".alert__close"
                                 aria-hidden="true"
                             >
-                                <img alt="" src="icons/cross.svg" />
+                                <img alt="" src="icons/system-outline-38-cross.svg" />
                             </lord-icon>
                         </button>
                     </li>
@@ -185,6 +185,24 @@
 
             <div class="pager">
                 <button
+                    class="pager__step"
+                    type="button"
+                    data-step="-1"
+                    aria-label="Previous"
+                    disabled
+                >
+                    <lord-icon
+                        current-color
+                        src="icons/system-outline-32-chevron-left.json"
+                        loading="interaction"
+                        trigger="click"
+                        target=".pager__step"
+                        aria-hidden="true"
+                    >
+                        <img alt="" src="icons/system-outline-32-chevron-left.svg" />
+                    </lord-icon>
+                </button>
+                <button
                     class="pager__dot"
                     type="button"
                     aria-pressed="true"
@@ -196,6 +214,23 @@
                     aria-pressed="false"
                     aria-label="Alerts as they arrive"
                 ></button>
+                <button
+                    class="pager__step pager__step--next"
+                    type="button"
+                    data-step="1"
+                    aria-label="Next"
+                >
+                    <lord-icon
+                        current-color
+                        src="icons/system-outline-32-chevron-left.json"
+                        loading="interaction"
+                        trigger="click"
+                        target=".pager__step"
+                        aria-hidden="true"
+                    >
+                        <img alt="" src="icons/system-outline-32-chevron-left.svg" />
+                    </lord-icon>
+                </button>
             </div>
 
             <!-- The deck's cards are cloned from this: the same card as above, filled in by
@@ -220,7 +255,7 @@
                         <lord-icon
                             class="alert__close-icon"
                             current-color
-                            src="icons/cross.json"
+                            src="icons/system-outline-38-cross.json"
                             trigger="hover"
                             target=".alert__close"
                             aria-hidden="true"

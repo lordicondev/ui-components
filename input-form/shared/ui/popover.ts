@@ -84,10 +84,12 @@ function roomFor(anchor: HTMLElement, gap: number): PopoverDirection {
  * pinned by the edge it grows away from, so the height animation moves the far edge only.
  *
  * `data-side="inline"` on the panel puts it beside the control instead, for a submenu.
- * It clears the panel the control sits in, not the control itself.
+ * It clears the panel the control sits in, not the control itself. Where neither side has
+ * room, as on a phone, it overlaps that panel from the roomier side. It is also kept on
+ * screen vertically: lined up with the control, it can run past the top or the bottom.
  *
  * Runs before the panel shows, so the browser's own position is never painted, and again
- * after, when the panel has a width to keep on screen.
+ * after, when the panel has a size to keep on screen.
  */
 function place(anchor: HTMLElement, panel: HTMLElement, gap: number, to: PopoverDirection): void {
     const box = anchor.getBoundingClientRect();
@@ -96,20 +98,45 @@ function place(anchor: HTMLElement, panel: HTMLElement, gap: number, to: Popover
     const width = panel.offsetWidth; // 0 while hidden
     const beside = panel.dataset.side === 'inline';
 
-    // Both edges are written every time; an inline `top` from an earlier opening would
-    // otherwise fight a `bottom` set now.
-    panel.style.top = to === 'down' ? `${beside ? box.top : box.bottom + gap}px` : 'auto';
-    panel.style.bottom = to === 'up' ? `${tall - (beside ? box.bottom : box.top - gap)}px` : 'auto';
-
     if (!beside) {
-        panel.style.left = `${Math.max(gap, Math.min(box.left, wide - width - gap))}px`;
+        // Both edges are written every time; an inline `top` from an earlier opening would
+        // otherwise fight a `bottom` set now.
+        panel.style.top = to === 'down' ? `${box.bottom + gap}px` : 'auto';
+        panel.style.bottom = to === 'up' ? `${tall - box.top + gap}px` : 'auto';
+
+        // From the control's left edge where the panel fits. Where it does not, as on a
+        // phone, centred on the control, so a centred button gets a centred panel.
+        const start =
+            box.left + width <= wide - gap ? box.left : (box.left + box.right - width) / 2;
+        panel.style.left = `${Math.max(gap, Math.min(start, wide - width - gap))}px`;
         return;
     }
 
+    const height = fullHeight(panel); // 0 while hidden
+    const top = Math.max(gap, Math.min(box.top, tall - gap - height));
+    const bottom = Math.min(tall - gap, Math.max(box.bottom, gap + height));
+
+    panel.style.top = to === 'down' ? `${top}px` : 'auto';
+    panel.style.bottom = to === 'up' ? `${tall - bottom}px` : 'auto';
+
     const from = anchor.closest<HTMLElement>('[popover]')?.getBoundingClientRect() ?? box;
     const after = from.right + gap;
+    const before = from.left - gap - width;
+    const roomier = wide - from.right >= from.left ? Math.max(gap, wide - gap - width) : gap;
 
-    panel.style.left = `${after + width <= wide - gap ? after : Math.max(gap, from.left - gap - width)}px`;
+    if (after + width <= wide - gap) panel.style.left = `${after}px`;
+    else panel.style.left = `${before >= gap ? before : roomier}px`;
+}
+
+/** The panel's height when open, even while collapse() holds it at 0. */
+function fullHeight(panel: HTMLElement): number {
+    const held = panel.style.height;
+
+    panel.style.height = '';
+    const height = panel.offsetHeight;
+    panel.style.height = held;
+
+    return height;
 }
 
 /**

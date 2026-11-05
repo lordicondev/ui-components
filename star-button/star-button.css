@@ -24,8 +24,11 @@
     --icon-filter: var(--filter-ink-subtle);
 }
 
-.star:hover {
-    --star-mark: var(--accent);
+/* Only under a mouse: on a touch screen :hover stays on after the tap. */
+@media (hover: hover) {
+    .star:hover {
+        --star-mark: var(--accent);
+    }
 }
 
 .star[aria-pressed='true'] {
@@ -33,8 +36,10 @@
     --icon-filter: var(--filter-accent);
 }
 
-.star[aria-pressed='true']:hover {
-    --star-mark: var(--accent-strong);
+@media (hover: hover) {
+    .star[aria-pressed='true']:hover {
+        --star-mark: var(--accent-strong);
+    }
 }
 
 .star__mark {

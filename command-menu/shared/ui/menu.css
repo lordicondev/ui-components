@@ -13,6 +13,8 @@
     flex-direction: column;
     gap: var(--menu-gap, var(--space-12));
     width: var(--menu-width);
+    /* On a phone, no wider than the page between its gutters. */
+    max-width: calc(100vw - 2 * var(--gutter));
     padding: var(--menu-pad, var(--space-12));
     border: 1px solid var(--border-soft);
     border-radius: var(--radius-lg);
@@ -71,9 +73,15 @@
 
 /* `data-active` is written by the keyboard cursor and by the pointer alike, so hovered and
    arrowed-to are one state with one look. No transition: this is a state, not a movement. */
-.row:hover,
 .row[data-active='true'] {
     background: var(--row-hover);
+}
+
+/* Only under a mouse: on a touch screen :hover stays on after the tap. */
+@media (hover: hover) {
+    .row:hover {
+        background: var(--row-hover);
+    }
 }
 
 /* The rows touch, so the focus ring goes inside the row rather than over its neighbours. */

@@ -21,14 +21,14 @@
                     <lord-icon
                         class="option__tick"
                         current-color
-                        src="icons/check-box-empty.json"
+                        src="icons/system-outline-4490-check-box-empty.json"
                         loading="interaction"
                         trigger="follow(data-checked)"
                         target=".option"
                         state="morph-select"
                         aria-hidden="true"
                     >
-                        <img alt="" src="icons/check-box-empty.svg" />
+                        <img alt="" src="icons/system-outline-4490-check-box-empty.svg" />
                     </lord-icon>
 
                     <span class="option__text">
@@ -50,14 +50,17 @@
                     <lord-icon
                         class="option__tick"
                         current-color
-                        src="icons/check-box-empty.json"
+                        src="icons/system-outline-4490-check-box-empty.json"
                         loading="interaction"
                         trigger="follow(data-checked)"
                         target=".option"
                         state="morph-select"
                         aria-hidden="true"
                     >
-                        <img alt="" src="icons/check-box-empty.morph-select.svg" />
+                        <img
+                            alt=""
+                            src="icons/system-outline-4490-check-box-empty.morph-select.svg"
+                        />
                     </lord-icon>
 
                     <span class="option__text">
@@ -79,14 +82,17 @@
                     <lord-icon
                         class="option__tick"
                         current-color
-                        src="icons/check-box-empty.json"
+                        src="icons/system-outline-4490-check-box-empty.json"
                         loading="interaction"
                         trigger="follow(data-checked)"
                         target=".option"
                         state="morph-select"
                         aria-hidden="true"
                     >
-                        <img alt="" src="icons/check-box-empty.morph-select.svg" />
+                        <img
+                            alt=""
+                            src="icons/system-outline-4490-check-box-empty.morph-select.svg"
+                        />
                     </lord-icon>
 
                     <span class="option__text">
@@ -107,7 +113,7 @@
                     <lord-icon
                         class="option__tick"
                         current-color
-                        src="icons/check-circle-empty.json"
+                        src="icons/system-outline-4489-check-circle-empty.json"
                         trigger="follow(data-checked)"
                         target=".option"
                         state="morph-select"
@@ -133,7 +139,7 @@
                     <lord-icon
                         class="option__tick"
                         current-color
-                        src="icons/check-circle-empty.json"
+                        src="icons/system-outline-4489-check-circle-empty.json"
                         trigger="follow(data-checked)"
                         target=".option"
                         state="morph-select"
@@ -159,7 +165,7 @@
                     <lord-icon
                         class="option__tick"
                         current-color
-                        src="icons/check-circle-empty.json"
+                        src="icons/system-outline-4489-check-circle-empty.json"
                         trigger="follow(data-checked)"
                         target=".option"
                         state="morph-select"
@@ -189,7 +195,7 @@
                     <lord-icon
                         class="option__tick"
                         current-color
-                        src="icons/radio-button.json"
+                        src="icons/system-outline-4478-radio-button.json"
                         trigger="follow(data-checked)"
                         target=".option"
                         state="morph-select"
@@ -216,7 +222,7 @@
                     <lord-icon
                         class="option__tick"
                         current-color
-                        src="icons/radio-button.json"
+                        src="icons/system-outline-4478-radio-button.json"
                         trigger="follow(data-checked)"
                         target=".option"
                         state="morph-select"
@@ -242,7 +248,7 @@
                     <lord-icon
                         class="option__tick"
                         current-color
-                        src="icons/radio-button.json"
+                        src="icons/system-outline-4478-radio-button.json"
                         trigger="follow(data-checked)"
                         target=".option"
                         state="morph-select"
@@ -259,6 +265,24 @@
             </fieldset>
 
             <div class="pager">
+                <button
+                    class="pager__step"
+                    type="button"
+                    data-step="-1"
+                    aria-label="Previous"
+                    disabled
+                >
+                    <lord-icon
+                        current-color
+                        src="icons/system-outline-32-chevron-left.json"
+                        loading="interaction"
+                        trigger="click"
+                        target=".pager__step"
+                        aria-hidden="true"
+                    >
+                        <img alt="" src="icons/system-outline-32-chevron-left.svg" />
+                    </lord-icon>
+                </button>
                 <button
                     class="pager__dot"
                     type="button"
@@ -280,6 +304,23 @@
                     aria-controls="style-single"
                     aria-label="Single choice"
                 ></button>
+                <button
+                    class="pager__step pager__step--next"
+                    type="button"
+                    data-step="1"
+                    aria-label="Next"
+                >
+                    <lord-icon
+                        current-color
+                        src="icons/system-outline-32-chevron-left.json"
+                        loading="interaction"
+                        trigger="click"
+                        target=".pager__step"
+                        aria-hidden="true"
+                    >
+                        <img alt="" src="icons/system-outline-32-chevron-left.svg" />
+                    </lord-icon>
+                </button>
             </div>
         </main>
     </body>

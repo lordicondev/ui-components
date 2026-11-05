@@ -58,8 +58,11 @@
     visibility: visible;
 }
 
-.field__clear:hover {
-    color: var(--ink);
+/* Only under a mouse: on a touch screen :hover stays on after the tap. */
+@media (hover: hover) {
+    .field__clear:hover {
+        color: var(--ink);
+    }
 }
 
 /* Both icons take the placeholder's grey; the typed words are the only full-strength ink. */

@@ -1,0 +1,93 @@
+/*
+ * Design tokens by role. Raw values come from palette.css (generated); which grey is a
+ * border and which is muted text is decided here, and so would a dark mode be.
+ */
+:root {
+    /* Text. `--ink*` is always a colour; `--text-*` is always a size. */
+    --ink: var(--gray-950);
+    /* Text that reads as done or in progress, a step lighter than a heading. */
+    --ink-strong: var(--gray-800);
+    /* Body copy: a step down from --ink. */
+    --ink-soft: var(--gray-600);
+    --ink-muted: var(--gray-500);
+    --ink-subtle: var(--gray-400);
+    /* What has not started yet. */
+    --ink-faint: var(--gray-300);
+    --ink-inverse: var(--gray-0);
+
+    /* Backgrounds */
+    --surface: var(--gray-0);
+    --surface-muted: var(--gray-50);
+    /* A well inside a surface: the filled shape a single icon sits in. */
+    --surface-sunken: var(--gray-100);
+
+    /* Outlines */
+    --border: var(--gray-200);
+    /* The edge of a box that already has a fill, such as an input. */
+    --border-soft: var(--gray-100);
+    --border-strong: var(--gray-300);
+    --border-accent: var(--brand-400);
+
+    /* Brand accent */
+    --accent: var(--brand-500);
+    --accent-strong: var(--brand-600);
+    --accent-surface: var(--brand-100);
+    /* The outline of a tinted box, or a small shape on one. */
+    --accent-border: var(--brand-300);
+    /* Text or a mark on either of the above. */
+    --accent-ink: var(--brand-700);
+
+    /* Status. Warning rides the brand ramp — that is what the designs use. */
+    --success: var(--green-700);
+    --success-surface: var(--green-100);
+    --success-border: var(--green-300);
+
+    --warning: var(--brand-500);
+    --warning-surface: var(--brand-100);
+    --warning-border: var(--brand-300);
+
+    --danger: var(--red-700);
+    --danger-surface: var(--red-100);
+    --danger-border: var(--red-300);
+
+    /* Icons. Fed straight into --lord-icon-* by the demos. */
+    --icon-color: var(--gray-950);
+    --icon-accent: var(--brand-500);
+
+    /* Icon placeholders are black SVGs. Each filter turns black into the colour of the same
+       name. Made with a CSS filter generator: make a new one when its colour changes. */
+    --filter-ink: invert(2%) sepia(4%) saturate(4817%) hue-rotate(193deg) brightness(114%)
+        contrast(96%);
+    --filter-ink-soft: invert(33%) sepia(18%) saturate(323%) hue-rotate(182deg) brightness(100%)
+        contrast(90%);
+    --filter-ink-muted: invert(55%) sepia(23%) saturate(191%) hue-rotate(181deg) brightness(84%)
+        contrast(89%);
+    --filter-ink-subtle: invert(70%) sepia(11%) saturate(284%) hue-rotate(181deg) brightness(91%)
+        contrast(86%);
+    --filter-ink-faint: invert(76%) sepia(17%) saturate(99%) hue-rotate(184deg) brightness(99%)
+        contrast(100%);
+    --filter-ink-inverse: invert(100%);
+    --filter-accent: invert(49%) sepia(65%) saturate(3508%) hue-rotate(337deg) brightness(106%)
+        contrast(113%);
+    --filter-accent-strong: invert(29%) sepia(85%) saturate(1790%) hue-rotate(350deg)
+        brightness(94%) contrast(93%);
+    --filter-success: invert(38%) sepia(22%) saturate(2045%) hue-rotate(94deg) brightness(92%)
+        contrast(84%);
+    --filter-warning: var(--filter-accent);
+    --filter-danger: invert(48%) sepia(74%) saturate(7139%) hue-rotate(343deg) brightness(84%)
+        contrast(105%);
+
+    /* Type stacks. The families themselves are in palette.css. */
+    --font-ui:
+        var(--font-ui-name), 'Figtree fallback', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+        Roboto, sans-serif;
+    --font-mono: var(--font-mono-name), ui-monospace, SFMono-Regular, Menlo, monospace;
+
+    /* Side padding of a page. The portal uses the same value, so demo and text line up. */
+    --gutter: clamp(var(--space-16), 5vw, var(--space-48));
+
+    /* A card's halo: no offset, so it reads as lift rather than as a light source. */
+    --shadow-sm: 0 0 7.5px color-mix(in srgb, var(--gray-400) 20%, transparent);
+    /* The same halo under a brand-coloured element. */
+    --shadow-accent: 0 0 7.5px color-mix(in srgb, var(--accent-strong) 40%, transparent);
+}

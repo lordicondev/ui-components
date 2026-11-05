@@ -64,8 +64,11 @@
     cursor: pointer;
 }
 
-.step__retry:hover {
-    background: var(--surface-muted);
+/* Only under a mouse: on a touch screen :hover stays on after the tap. */
+@media (hover: hover) {
+    .step__retry:hover {
+        background: var(--surface-muted);
+    }
 }
 
 /* Three icons in one cell. The one for the status shows; the others are hidden but still

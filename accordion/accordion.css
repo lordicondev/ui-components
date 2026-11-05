@@ -49,8 +49,11 @@
     cursor: pointer;
 }
 
-.item__trigger:hover {
-    background: var(--surface-muted);
+/* Only under a mouse: on a touch screen :hover stays on after the tap. */
+@media (hover: hover) {
+    .item__trigger:hover {
+        background: var(--surface-muted);
+    }
 }
 
 /* The icon turns itself; the stylesheet only colours it. No transition. */

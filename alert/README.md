@@ -36,11 +36,11 @@ the card's own entrance animation has finished, so the two do not compete. After
   waits for the leaving transitions, then removes it.
 - The button queues four and then rests. Which kind comes next depends on which are
   already up, so the order stays the same however you dismiss.
-- The dots are `shared/ui/pager.ts`.
+- The dots and arrows are `shared/ui/pager.ts`.
 
 ---
 
-Exported from [lordicondev/ui-components](https://github.com/lordicondev/ui-components/tree/main/demos/alert) 1.0.0,
+Exported from [lordicondev/ui-components](https://github.com/lordicondev/ui-components/tree/main/demos/alert) 1.1.0,
 where it sits alongside the other demos.
 
 The code is MIT. The icons are under the [Lordicon License Terms](https://lordicon.com/licenses);

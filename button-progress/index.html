@@ -24,14 +24,14 @@
                     <lord-icon
                         class="task__mark"
                         current-color
-                        src="icons/download.json"
+                        src="icons/system-outline-199-download.json"
                         loading="interaction"
                         trigger="follow(data-stage, busy=loop-cycle, done=morph-check)"
                         target=".task__button"
                         state="morph-check"
                         aria-hidden="true"
                     >
-                        <img alt="" src="icons/download.svg" />
+                        <img alt="" src="icons/system-outline-199-download.svg" />
                     </lord-icon>
 
                     <!-- Three labels on a strip that slides up one line per stage change.
@@ -52,7 +52,7 @@
                     <lord-icon
                         class="toast__mark"
                         current-color
-                        src="icons/check-circle.json"
+                        src="icons/system-outline-24-check-circle.json"
                         trigger="follow(data-shown)"
                         target=".toast"
                         state="in-reveal"
@@ -77,7 +77,7 @@
                     <lord-icon
                         class="task__mark"
                         current-color
-                        src="icons/upload.json"
+                        src="icons/system-outline-200-upload.json"
                         trigger="follow(data-stage, busy=loop-cycle, done=morph-check)"
                         target=".task__button"
                         state="morph-check"
@@ -99,7 +99,7 @@
                     <lord-icon
                         class="toast__mark"
                         current-color
-                        src="icons/check-circle.json"
+                        src="icons/system-outline-24-check-circle.json"
                         trigger="follow(data-shown)"
                         target=".toast"
                         state="in-reveal"
@@ -111,6 +111,24 @@
             </div>
 
             <div class="pager">
+                <button
+                    class="pager__step"
+                    type="button"
+                    data-step="-1"
+                    aria-label="Previous"
+                    disabled
+                >
+                    <lord-icon
+                        current-color
+                        src="icons/system-outline-32-chevron-left.json"
+                        loading="interaction"
+                        trigger="click"
+                        target=".pager__step"
+                        aria-hidden="true"
+                    >
+                        <img alt="" src="icons/system-outline-32-chevron-left.svg" />
+                    </lord-icon>
+                </button>
                 <button
                     class="pager__dot"
                     type="button"
@@ -125,6 +143,23 @@
                     aria-controls="kind-upload"
                     aria-label="Upload"
                 ></button>
+                <button
+                    class="pager__step pager__step--next"
+                    type="button"
+                    data-step="1"
+                    aria-label="Next"
+                >
+                    <lord-icon
+                        current-color
+                        src="icons/system-outline-32-chevron-left.json"
+                        loading="interaction"
+                        trigger="click"
+                        target=".pager__step"
+                        aria-hidden="true"
+                    >
+                        <img alt="" src="icons/system-outline-32-chevron-left.svg" />
+                    </lord-icon>
+                </button>
             </div>
         </main>
     </body>

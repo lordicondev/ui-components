@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Icon button</title>
+        <link rel="stylesheet" href="./icon-button.css" />
+        <script type="module" src="./main.ts"></script>
+    </head>
+    <body>
+        <main class="demo">
+            <div class="save">
+                <!-- aria-pressed is the whole state: the icon follows it through `target`
+                     and the stylesheet colours by it. The button has no text, so
+                     aria-label names it. The toast repeats what aria-pressed already
+                     tells a screen reader, so it is aria-hidden. -->
+                <button class="bookmark" type="button" aria-pressed="false" aria-label="Favorite">
+                    <lord-icon
+                        class="bookmark__mark"
+                        current-color
+                        src="icons/system-outline-400-bookmark.json"
+                        loading="interaction"
+                        trigger="follow(aria-pressed)"
+                        target=".bookmark"
+                        state="morph-select"
+                        aria-hidden="true"
+                    >
+                        <img alt="" src="icons/system-outline-400-bookmark.svg" />
+                    </lord-icon>
+                </button>
+
+                <p class="toast" data-shown="false" aria-hidden="true">Added to Favorites</p>
+            </div>
+        </main>
+    </body>
+</html>

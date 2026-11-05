@@ -9,23 +9,23 @@ type Kind = 'info' | 'success' | 'warning' | 'error';
 
 const CONTENT: Record<Kind, { icon: string; title: string; message: string }> = {
     info: {
-        icon: 'info-circle',
+        icon: 'system-outline-367-info-circle',
         title: 'Scheduled maintenance',
         message: 'Online banking will be unavailable Sunday 2–4 AM ET for scheduled maintenance.',
     },
     success: {
-        icon: 'check-circle',
+        icon: 'system-outline-24-check-circle',
         title: 'Transfer complete',
         message: '$1,250.00 was successfully sent to Alex Morgan.',
     },
     warning: {
-        icon: 'warning-triangle',
+        icon: 'system-outline-1140-warning-triangle',
         title: 'Low balance',
         message:
             'Your checking account is below $100. Consider transferring funds to avoid overdraft.',
     },
     error: {
-        icon: 'cross-circle',
+        icon: 'system-outline-25-cross-circle',
         title: 'Payment declined',
         message: 'Your card ending in 4242 was declined. Check your details and try again.',
     },

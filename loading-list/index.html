@@ -15,35 +15,36 @@
 
                 <ol class="steps" aria-live="polite">
                     <!-- data-status is the whole state of a step. All three icons follow it, and the
-                         stylesheet shows the one that matches. -->
+                         stylesheet shows the one that matches. The tick and the cross start from an
+                         empty circle, so the spinner closes into them. -->
                     <li class="step" id="step-upload" data-status="pending">
                         <span class="step__mark">
                             <lord-icon
                                 class="step__spinner"
                                 current-color
-                                src="icons/spinner-circle.json"
-                                trigger="follow(data-status, active=loop-snake-alt)"
+                                src="icons/system-outline-4021-spinner-circle.json"
+                                trigger="follow(data-status, active=loop-rotation-half)"
                                 target=".step"
                                 aria-hidden="true"
                             >
-                                <img alt="" src="icons/spinner-circle.svg" />
+                                <img alt="" src="icons/system-outline-4021-spinner-circle.svg" />
                             </lord-icon>
                             <lord-icon
                                 class="step__done"
                                 current-color
-                                src="icons/check-circle.json"
-                                trigger="follow(data-status, done=in-reveal)"
+                                src="icons/system-outline-24-check-circle.json"
+                                trigger="follow(data-status, done=morph-tick)"
                                 target=".step"
-                                state="in-reveal"
+                                state="morph-tick"
                                 aria-hidden="true"
                             ></lord-icon>
                             <lord-icon
                                 class="step__failed"
                                 current-color
-                                src="icons/cross-circle.json"
-                                trigger="follow(data-status, failed=in-reveal)"
+                                src="icons/system-outline-25-cross-circle.json"
+                                trigger="follow(data-status, failed=morph-cross)"
                                 target=".step"
-                                state="in-reveal"
+                                state="morph-cross"
                                 aria-hidden="true"
                             ></lord-icon>
                         </span>
@@ -57,29 +58,29 @@
                             <lord-icon
                                 class="step__spinner"
                                 current-color
-                                src="icons/spinner-circle.json"
-                                trigger="follow(data-status, active=loop-snake-alt)"
+                                src="icons/system-outline-4021-spinner-circle.json"
+                                trigger="follow(data-status, active=loop-rotation-half)"
                                 target=".step"
                                 aria-hidden="true"
                             >
-                                <img alt="" src="icons/spinner-circle.svg" />
+                                <img alt="" src="icons/system-outline-4021-spinner-circle.svg" />
                             </lord-icon>
                             <lord-icon
                                 class="step__done"
                                 current-color
-                                src="icons/check-circle.json"
-                                trigger="follow(data-status, done=in-reveal)"
+                                src="icons/system-outline-24-check-circle.json"
+                                trigger="follow(data-status, done=morph-tick)"
                                 target=".step"
-                                state="in-reveal"
+                                state="morph-tick"
                                 aria-hidden="true"
                             ></lord-icon>
                             <lord-icon
                                 class="step__failed"
                                 current-color
-                                src="icons/cross-circle.json"
-                                trigger="follow(data-status, failed=in-reveal)"
+                                src="icons/system-outline-25-cross-circle.json"
+                                trigger="follow(data-status, failed=morph-cross)"
                                 target=".step"
-                                state="in-reveal"
+                                state="morph-cross"
                                 aria-hidden="true"
                             ></lord-icon>
                         </span>
@@ -93,29 +94,29 @@
                             <lord-icon
                                 class="step__spinner"
                                 current-color
-                                src="icons/spinner-circle.json"
-                                trigger="follow(data-status, active=loop-snake-alt)"
+                                src="icons/system-outline-4021-spinner-circle.json"
+                                trigger="follow(data-status, active=loop-rotation-half)"
                                 target=".step"
                                 aria-hidden="true"
                             >
-                                <img alt="" src="icons/spinner-circle.svg" />
+                                <img alt="" src="icons/system-outline-4021-spinner-circle.svg" />
                             </lord-icon>
                             <lord-icon
                                 class="step__done"
                                 current-color
-                                src="icons/check-circle.json"
-                                trigger="follow(data-status, done=in-reveal)"
+                                src="icons/system-outline-24-check-circle.json"
+                                trigger="follow(data-status, done=morph-tick)"
                                 target=".step"
-                                state="in-reveal"
+                                state="morph-tick"
                                 aria-hidden="true"
                             ></lord-icon>
                             <lord-icon
                                 class="step__failed"
                                 current-color
-                                src="icons/cross-circle.json"
-                                trigger="follow(data-status, failed=in-reveal)"
+                                src="icons/system-outline-25-cross-circle.json"
+                                trigger="follow(data-status, failed=morph-cross)"
                                 target=".step"
-                                state="in-reveal"
+                                state="morph-cross"
                                 aria-hidden="true"
                             ></lord-icon>
                         </span>
@@ -129,29 +130,29 @@
                             <lord-icon
                                 class="step__spinner"
                                 current-color
-                                src="icons/spinner-circle.json"
-                                trigger="follow(data-status, active=loop-snake-alt)"
+                                src="icons/system-outline-4021-spinner-circle.json"
+                                trigger="follow(data-status, active=loop-rotation-half)"
                                 target=".step"
                                 aria-hidden="true"
                             >
-                                <img alt="" src="icons/spinner-circle.svg" />
+                                <img alt="" src="icons/system-outline-4021-spinner-circle.svg" />
                             </lord-icon>
                             <lord-icon
                                 class="step__done"
                                 current-color
-                                src="icons/check-circle.json"
-                                trigger="follow(data-status, done=in-reveal)"
+                                src="icons/system-outline-24-check-circle.json"
+                                trigger="follow(data-status, done=morph-tick)"
                                 target=".step"
-                                state="in-reveal"
+                                state="morph-tick"
                                 aria-hidden="true"
                             ></lord-icon>
                             <lord-icon
                                 class="step__failed"
                                 current-color
-                                src="icons/cross-circle.json"
-                                trigger="follow(data-status, failed=in-reveal)"
+                                src="icons/system-outline-25-cross-circle.json"
+                                trigger="follow(data-status, failed=morph-cross)"
                                 target=".step"
-                                state="in-reveal"
+                                state="morph-cross"
                                 aria-hidden="true"
                             ></lord-icon>
                         </span>
@@ -166,29 +167,29 @@
                             <lord-icon
                                 class="step__spinner"
                                 current-color
-                                src="icons/spinner-circle.json"
-                                trigger="follow(data-status, active=loop-snake-alt)"
+                                src="icons/system-outline-4021-spinner-circle.json"
+                                trigger="follow(data-status, active=loop-rotation-half)"
                                 target=".step"
                                 aria-hidden="true"
                             >
-                                <img alt="" src="icons/spinner-circle.svg" />
+                                <img alt="" src="icons/system-outline-4021-spinner-circle.svg" />
                             </lord-icon>
                             <lord-icon
                                 class="step__done"
                                 current-color
-                                src="icons/check-circle.json"
-                                trigger="follow(data-status, done=in-reveal)"
+                                src="icons/system-outline-24-check-circle.json"
+                                trigger="follow(data-status, done=morph-tick)"
                                 target=".step"
-                                state="in-reveal"
+                                state="morph-tick"
                                 aria-hidden="true"
                             ></lord-icon>
                             <lord-icon
                                 class="step__failed"
                                 current-color
-                                src="icons/cross-circle.json"
-                                trigger="follow(data-status, failed=in-reveal)"
+                                src="icons/system-outline-25-cross-circle.json"
+                                trigger="follow(data-status, failed=morph-cross)"
                                 target=".step"
-                                state="in-reveal"
+                                state="morph-cross"
                                 aria-hidden="true"
                             ></lord-icon>
                         </span>

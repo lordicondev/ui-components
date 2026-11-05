@@ -1,0 +1,87 @@
+@import '@shared/styles/index.css';
+
+.demo {
+    display: grid;
+    place-items: center;
+    min-height: 100dvh;
+    padding: var(--space-64) var(--gutter);
+}
+
+/* The toast hangs below the button, so the button does not move when it shows. */
+.save {
+    position: relative;
+}
+
+.bookmark {
+    display: grid;
+    place-items: center;
+    padding: var(--space-8);
+    border: 1px solid var(--bookmark-line);
+    border-radius: var(--radius-lg);
+    background: var(--surface);
+    cursor: pointer;
+}
+
+/* Ink at rest, accent once saved. The border darkens under the pointer. No transition:
+   only the fill animates. */
+.bookmark {
+    --bookmark-line: var(--border);
+    --bookmark-mark: var(--ink);
+    --icon-filter: var(--filter-ink);
+}
+
+/* Only under a mouse: on a touch screen :hover stays on after the tap. */
+@media (hover: hover) {
+    .bookmark:hover {
+        --bookmark-line: var(--border-strong);
+    }
+}
+
+.bookmark[aria-pressed='true'] {
+    --bookmark-mark: var(--accent);
+    --icon-filter: var(--filter-accent);
+}
+
+.bookmark__mark {
+    width: var(--icon-size-24);
+    height: var(--icon-size-24);
+    color: var(--bookmark-mark);
+}
+
+.toast {
+    position: absolute;
+    top: calc(100% + var(--space-8));
+    left: 50%;
+    margin: 0;
+    padding: var(--space-4) var(--space-12);
+    border-radius: var(--radius-md);
+    background: var(--ink);
+    color: var(--ink-inverse);
+    font-size: var(--text-sm);
+    line-height: var(--leading-base);
+    font-weight: 500;
+    white-space: nowrap;
+    pointer-events: none;
+}
+
+/* Hidden with `opacity`, so it can fade. It rises into place from just below and sinks
+   back out the same way. */
+.toast {
+    opacity: 0;
+    translate: -50% var(--space-8);
+    transition:
+        opacity 120ms ease,
+        translate 160ms cubic-bezier(0.3, 0, 0.2, 1);
+}
+
+.toast[data-shown='true'] {
+    opacity: 1;
+    translate: -50% 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .toast {
+        translate: -50% 0;
+        transition: none;
+    }
+}

@@ -97,8 +97,11 @@
     cursor: pointer;
 }
 
-.mic:hover {
-    color: var(--ink);
+/* Only under a mouse: on a touch screen :hover stays on after the tap. */
+@media (hover: hover) {
+    .mic:hover {
+        color: var(--ink);
+    }
 }
 
 .send {
@@ -114,8 +117,10 @@
     cursor: pointer;
 }
 
-.send:hover {
-    background: var(--accent-strong);
+@media (hover: hover) {
+    .send:hover {
+        background: var(--accent-strong);
+    }
 }
 
 .plus__mark,
@@ -143,22 +148,25 @@
 
 /* Invisible strips down both sides of the submenu bridge the gap to the menu, so the
    pointer crossing it is never over nothing. Both sides, because the panel can open on
-   either side of the menu. */
-.submenu::before,
-.submenu::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: var(--space-12);
-}
+   either side of the menu. Mouse only: on a phone the submenu overlaps the menu, and a
+   strip there would catch taps meant for its rows. */
+@media (hover: hover) {
+    .submenu::before,
+    .submenu::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: var(--space-12);
+    }
 
-.submenu::before {
-    right: 100%;
-}
+    .submenu::before {
+        right: 100%;
+    }
 
-.submenu::after {
-    left: 100%;
+    .submenu::after {
+        left: 100%;
+    }
 }
 
 /* The chevron on the row that opens the submenu. */
@@ -237,6 +245,8 @@
     visibility: visible;
 }
 
-.field__clear:hover {
-    color: var(--ink);
+@media (hover: hover) {
+    .field__clear:hover {
+        color: var(--ink);
+    }
 }

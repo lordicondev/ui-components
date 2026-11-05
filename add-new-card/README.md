@@ -27,7 +27,7 @@ plus half a circle, which ends where it started.
 
 ---
 
-Exported from [lordicondev/ui-components](https://github.com/lordicondev/ui-components/tree/main/demos/add-new-card) 1.0.0,
+Exported from [lordicondev/ui-components](https://github.com/lordicondev/ui-components/tree/main/demos/add-new-card) 1.1.0,
 where it sits alongside the other demos.
 
 The code is MIT. The icons are under the [Lordicon License Terms](https://lordicon.com/licenses);

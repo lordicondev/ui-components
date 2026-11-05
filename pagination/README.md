@@ -34,12 +34,12 @@ the arrow has a `hover-slide` state, the chevron uses its default.
 - A step with nowhere to go is `disabled`. A disabled button fires no click, so its icon
   holds still without any extra code.
 - The three rows are three separate controls and each remembers its own page. The dots
-  are `shared/ui/pager.ts`. Every row is measured before the first one is hidden, because a
+  and arrows under them are `shared/ui/pager.ts`. Every row is measured before the first one is hidden, because a
   hidden row has no widths to measure.
 
 ---
 
-Exported from [lordicondev/ui-components](https://github.com/lordicondev/ui-components/tree/main/demos/pagination) 1.0.0,
+Exported from [lordicondev/ui-components](https://github.com/lordicondev/ui-components/tree/main/demos/pagination) 1.1.0,
 where it sits alongside the other demos.
 
 The code is MIT. The icons are under the [Lordicon License Terms](https://lordicon.com/licenses);

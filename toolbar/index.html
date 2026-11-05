@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Toolbar</title>
+        <link rel="stylesheet" href="./toolbar.css" />
+        <script type="module" src="./main.ts"></script>
+    </head>
+    <body>
+        <main class="demo">
+            <div class="toolbar">
+                <fieldset class="toolbar__tools">
+                    <legend class="visually-hidden">Tool</legend>
+
+                    <!-- One tool. The radio is the real control, only invisible. data-selected
+                         mirrors its checked state for the icon and the stylesheet. The
+                         tooltip span is the radio's name; tooltip.css draws it. -->
+                    <label class="tool" data-selected="true">
+                        <input
+                            class="tool__input visually-hidden"
+                            type="radio"
+                            name="tool"
+                            value="brush"
+                            checked
+                        />
+
+                        <lord-icon
+                            class="tool__mark"
+                            current-color
+                            src="icons/system-outline-762-brush-alt.json"
+                            trigger="follow(data-selected)"
+                            target=".tool"
+                            state="morph-change"
+                            aria-hidden="true"
+                        >
+                            <img alt="" src="icons/system-outline-762-brush-alt.morph-change.svg" />
+                        </lord-icon>
+
+                        <span class="tooltip">Brush</span>
+                    </label>
+
+                    <label class="tool" data-selected="false">
+                        <input
+                            class="tool__input visually-hidden"
+                            type="radio"
+                            name="tool"
+                            value="fill"
+                        />
+
+                        <lord-icon
+                            class="tool__mark"
+                            current-color
+                            src="icons/system-outline-1428-paint-bucket.json"
+                            trigger="follow(data-selected)"
+                            target=".tool"
+                            state="morph-select"
+                            aria-hidden="true"
+                        >
+                            <img alt="" src="icons/system-outline-1428-paint-bucket.svg" />
+                        </lord-icon>
+
+                        <span class="tooltip">Fill</span>
+                    </label>
+
+                    <label class="tool" data-selected="false">
+                        <input
+                            class="tool__input visually-hidden"
+                            type="radio"
+                            name="tool"
+                            value="pencil"
+                        />
+
+                        <lord-icon
+                            class="tool__mark"
+                            current-color
+                            src="icons/system-outline-35-pencil.json"
+                            trigger="follow(data-selected)"
+                            target=".tool"
+                            state="morph-select"
+                            aria-hidden="true"
+                        >
+                            <img alt="" src="icons/system-outline-35-pencil.svg" />
+                        </lord-icon>
+
+                        <span class="tooltip">Pencil</span>
+                    </label>
+
+                    <label class="tool" data-selected="false">
+                        <input
+                            class="tool__input visually-hidden"
+                            type="radio"
+                            name="tool"
+                            value="pen"
+                        />
+
+                        <lord-icon
+                            class="tool__mark"
+                            current-color
+                            src="icons/system-outline-4228-pen-nib.json"
+                            trigger="follow(data-selected)"
+                            target=".tool"
+                            state="morph-select"
+                            aria-hidden="true"
+                        >
+                            <img alt="" src="icons/system-outline-4228-pen-nib.svg" />
+                        </lord-icon>
+
+                        <span class="tooltip">Pen</span>
+                    </label>
+                </fieldset>
+
+                <span class="toolbar__rule"></span>
+
+                <div class="toolbar__lists" role="group" aria-label="List">
+                    <!-- A toggle: aria-pressed is its state, and the icon follows it. -->
+                    <button class="list" type="button" aria-pressed="false">
+                        <lord-icon
+                            class="list__mark"
+                            current-color
+                            src="icons/system-outline-1443-bullet-list.json"
+                            trigger="follow(aria-pressed)"
+                            target=".list"
+                            state="morph-select"
+                            aria-hidden="true"
+                        >
+                            <img alt="" src="icons/system-outline-1443-bullet-list.svg" />
+                        </lord-icon>
+
+                        <span class="tooltip">Bullet list</span>
+                    </button>
+
+                    <button class="list" type="button" aria-pressed="false">
+                        <lord-icon
+                            class="list__mark"
+                            current-color
+                            src="icons/system-outline-4381-check-list.json"
+                            trigger="follow(aria-pressed)"
+                            target=".list"
+                            state="morph-change"
+                            aria-hidden="true"
+                        >
+                            <img alt="" src="icons/system-outline-4381-check-list.svg" />
+                        </lord-icon>
+
+                        <span class="tooltip">Checklist</span>
+                    </button>
+                </div>
+
+                <span class="toolbar__rule"></span>
+
+                <!-- An action, not a state: no attribute to follow, the icon plays once. -->
+                <button class="action" type="button">
+                    <lord-icon
+                        class="action__mark"
+                        current-color
+                        src="icons/system-outline-4101-three-dots-vertical.json"
+                        loading="interaction"
+                        trigger="click"
+                        target=".action"
+                        aria-hidden="true"
+                    >
+                        <img alt="" src="icons/system-outline-4101-three-dots-vertical.svg" />
+                    </lord-icon>
+
+                    <span class="tooltip">More options</span>
+                </button>
+            </div>
+        </main>
+    </body>
+</html>

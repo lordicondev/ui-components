@@ -13,15 +13,17 @@ npm run dev
 
 ## Triggers
 
-| Trigger                                 | Watches                  | On          |
-| --------------------------------------- | ------------------------ | ----------- |
-| `follow(data-status, active=loop-spin)` | `data-status` on `.step` | the spinner |
-| `follow(data-status, done=in-reveal)`   | `data-status` on `.step` | the tick    |
-| `follow(data-status, failed=in-reveal)` | `data-status` on `.step` | the cross   |
+| Trigger                                          | Watches                  | On          |
+| ------------------------------------------------ | ------------------------ | ----------- |
+| `follow(data-status, active=loop-rotation-half)` | `data-status` on `.step` | the spinner |
+| `follow(data-status, done=morph-tick)`           | `data-status` on `.step` | the tick    |
+| `follow(data-status, failed=morph-cross)`        | `data-status` on `.step` | the cross   |
 
-`data-status` is `pending`, `active`, `done` or `failed`. The spinner loops while the step
-is active and rests on its default look otherwise. The tick and the cross draw in when the
-step gets their value.
+`data-status` is `pending`, `active`, `done` or `failed`. The spinner turns while the step is
+active and rests on its default look otherwise. The tick and the cross draw into an empty
+circle when the step gets their value, and stay drawn.
+
+All three icons have the same circle, so the spinner closes into the tick or the cross.
 
 ## Adapting it
 
@@ -40,7 +42,7 @@ are only there to have something to show.
 
 ---
 
-Exported from [lordicondev/ui-components](https://github.com/lordicondev/ui-components/tree/main/demos/loading-list) 1.0.0,
+Exported from [lordicondev/ui-components](https://github.com/lordicondev/ui-components/tree/main/demos/loading-list) 1.1.0,
 where it sits alongside the other demos.
 
 The code is MIT. The icons are under the [Lordicon License Terms](https://lordicon.com/licenses);

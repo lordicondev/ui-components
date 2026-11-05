@@ -32,7 +32,7 @@
         padding var(--opening);
 }
 
-.cart[aria-pressed='true'] {
+.cart[data-added='true'] {
     gap: var(--space-8);
     padding: var(--space-8) var(--space-16);
 }
@@ -43,7 +43,7 @@
     transition: width var(--opening);
 }
 
-.cart[aria-pressed='true'] .cart__said {
+.cart[data-added='true'] .cart__said {
     width: var(--said-width, max-content);
 }
 
@@ -57,13 +57,21 @@
     cursor: pointer;
 }
 
-.cart:hover {
-    background: var(--accent-strong);
+/* Only under a mouse: on a touch screen :hover stays on after the tap. */
+@media (hover: hover) {
+    .cart:hover {
+        background: var(--accent-strong);
+    }
 }
 
 /* Pressed. */
 .cart:active {
     background: var(--accent-ink);
+}
+
+/* While the button says what it did, its name would only repeat it. */
+.cart[data-added='true'] > .tooltip {
+    opacity: 0;
 }
 
 /* max-content keeps the words at their own width inside the animating box, and lets
@@ -86,8 +94,10 @@
     cursor: pointer;
 }
 
-.favorite:hover {
-    background: var(--surface-muted);
+@media (hover: hover) {
+    .favorite:hover {
+        background: var(--surface-muted);
+    }
 }
 
 .favorite:active {
