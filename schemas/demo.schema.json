@@ -4,7 +4,7 @@
     "description": "Everything the portal needs to build a demo page. The portal reads nothing else.",
     "type": "object",
     "additionalProperties": false,
-    "required": ["slug", "title", "description", "tags", "icons", "fragments"],
+    "required": ["slug", "title", "description", "group", "icons", "fragments"],
     "properties": {
         "$schema": {
             "type": "string"
@@ -22,19 +22,56 @@
             "type": "string",
             "minLength": 1
         },
-        "tags": {
-            "type": "array",
-            "items": {
-                "type": "string"
-            },
-            "minItems": 1
+        "group": {
+            "enum": [
+                "buttons",
+                "inputs",
+                "menus",
+                "navigation",
+                "feedback",
+                "containers",
+                "sections"
+            ],
+            "description": "The section of the portal's index the demo is listed in. Titles and order are in scripts/prepare-portal.ts."
+        },
+        "stage": {
+            "enum": ["small", "medium", "large"],
+            "description": "How tall the demo's frame is in the portal: small 400px, medium 520px, large the rest of the first screen. Pick the smallest that fits the demo with its menus open. Large when left out."
         },
         "icons": {
             "type": "array",
             "items": {
                 "type": "string"
             },
-            "description": "Icon aliases from shared/icons.json. The export ships exactly these."
+            "description": "Icons by their Lordicon name, as the files in shared/public/icons are named (system-outline-94-lock). The export ships these, plus the pager's arrows."
+        },
+        "iconStates": {
+            "type": "object",
+            "propertyNames": {
+                "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+            },
+            "additionalProperties": {
+                "oneOf": [
+                    {
+                        "type": "string",
+                        "minLength": 1
+                    },
+                    {
+                        "type": "array",
+                        "minItems": 1,
+                        "items": {
+                            "type": "string",
+                            "minLength": 1
+                        }
+                    }
+                ]
+            },
+            "description": "The states the demo plays, by icon, as named in the icon's file without the ratio (morph-select). An icon left out plays its default state. The portal shows them in the icon table."
+        },
+        "iconsNote": {
+            "type": "string",
+            "minLength": 1,
+            "description": "What to know about the icons and their states, after the shared sentence about the Animation state column. Shown above the portal's icon table."
         },
         "fragments": {
             "type": "array",
@@ -65,6 +102,11 @@
                     }
                 }
             }
+        },
+        "codepen": {
+            "type": "string",
+            "pattern": "^https://codepen\\.io/[\\w-]+/pen/\\w+$",
+            "description": "The published pen, filled in by hand after saving it. The portal shows an Open in CodePen button when it is set."
         }
     }
 }

@@ -14,6 +14,7 @@ import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { demoDir, listDemos, readManifest } from './lib/demos.ts';
 import {
+    PAGER_ICONS,
     PORTAL_ICONS,
     fingerprint,
     iconFiles,
@@ -23,9 +24,12 @@ import {
     placeholderAlias,
     placeholdersIn,
     readLockfile,
+    referencedIcons,
+    shippedIcons,
     type IconEntry,
     writeLockfile,
 } from './lib/icons.ts';
+import { demoSources } from './lib/sources.ts';
 
 const listOnly = process.argv.includes('--list');
 const record = process.argv.includes('--record');
@@ -38,6 +42,9 @@ for (const slug of listDemos()) {
 }
 for (const alias of PORTAL_ICONS) {
     declared.set(alias, [...(declared.get(alias) ?? []), 'the portal']);
+}
+for (const alias of PAGER_ICONS) {
+    declared.set(alias, [...(declared.get(alias) ?? []), 'the pager']);
 }
 
 const lockfile = new Map(readLockfile().map((entry) => [entry.alias, entry]));
@@ -90,6 +97,10 @@ for (const entry of lockfile.values()) {
     if (!onDisk.includes(entry.alias)) {
         warnings.push(`${entry.alias}: in the lockfile but the file is gone`);
     }
+    // Files are named as Lordicon names the icon, so the name says which icon it is.
+    if (entry.name && iconLabel(entry) !== entry.alias) {
+        warnings.push(`${entry.alias}: the lockfile says this is ${iconLabel(entry)}`);
+    }
 }
 
 for (const alias of onDisk) {
@@ -109,7 +120,24 @@ for (const file of readdirSync(iconsDir).filter((file) => file.endsWith('.svg'))
 
 for (const slug of listDemos()) {
     const html = readFileSync(resolve(demoDir(slug), 'index.html'), 'utf8');
-    const icons = readManifest(slug).icons;
+    const manifest = readManifest(slug);
+    const fragmentFiles = manifest.fragments.map((fragment) => fragment.file);
+    const sources = demoSources(slug, fragmentFiles);
+    const icons = shippedIcons(manifest.icons, sources);
+
+    // The export ships what the demo declares. An icon its code names but does not declare
+    // would be missing there; one it declares but never names is shipped for nothing.
+    const referenced = referencedIcons(sources);
+    for (const alias of referenced) {
+        if (!icons.includes(alias)) {
+            errors.push(`${slug}: uses ${alias} but does not declare it`);
+        }
+    }
+    for (const alias of icons) {
+        if (!referenced.includes(alias)) {
+            warnings.push(`${slug}: declares ${alias} but no file names icons/${alias}.json`);
+        }
+    }
 
     for (const name of placeholdersIn(html)) {
         if (!existsSync(resolve(iconsDir, `${name}.svg`))) {
@@ -141,8 +169,7 @@ if (errors.length) {
 }
 
 for (const alias of [...declared.keys()].sort()) {
-    const entry = lockfile.get(alias);
-    console.log(`  ${alias.padEnd(20)} ${entry ? iconLabel(entry) : 'unrecorded'}`);
+    console.log(`  ${alias}${lockfile.has(alias) ? '' : '  (unrecorded)'}`);
 }
 console.log(`\n${declared.size} icon(s) in place`);
 

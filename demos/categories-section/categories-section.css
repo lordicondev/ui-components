@@ -1,0 +1,195 @@
+@import '@shared/styles/index.css';
+
+/* The chip colours are Figma variables that are not in the shared palette. */
+.demo {
+    --salvia: #6ea4d3;
+    --yamabuki: #eeaa2b;
+    --lilac: #de9ccf;
+    --cinnamon: #d8957a;
+    --moss: #4e8a54;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-48);
+    min-height: 100dvh;
+    padding: var(--space-64) 0;
+}
+
+.heading {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-12);
+    padding: 0 var(--gutter);
+    text-align: center;
+    text-wrap: balance;
+}
+
+.heading__title,
+.heading__text {
+    margin: 0;
+}
+
+.heading__title {
+    font-size: clamp(var(--text-2xl), 4vw, var(--text-3xl));
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+.heading__text {
+    color: var(--ink-soft);
+    font-size: var(--text-lg);
+    line-height: var(--leading-lg);
+}
+
+/* The rows, as wide as the screen up to 2400px. Three sets fill that. */
+.marquee {
+    position: relative;
+    display: grid;
+    /* One column as wide as the box, not as wide as a row's three sets. */
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-16);
+    width: 100%;
+    max-width: 2400px;
+    margin-block: calc(var(--space-4) * -1);
+    user-select: none;
+}
+
+/* Not inherited, so a change restyles only the track. */
+@property --progress {
+    syntax: '<number>';
+    inherits: false;
+    initial-value: 0;
+}
+
+/* #region scroll */
+/* The track holds the chips three times. --progress from 0 to 1 slides it by one set,
+   then it starts over. main.ts moves it. */
+.row {
+    overflow: clip;
+    /* Room for the focus ring, which is 4px outside the chip. */
+    padding-block: var(--space-4);
+}
+
+.track {
+    --copies: 3;
+    display: flex;
+    width: max-content;
+    transform: translateX(calc(var(--progress) * -100% / var(--copies)));
+    will-change: transform;
+}
+
+.row--right {
+    --direction: -1;
+}
+/* #endregion */
+
+/* Where each row starts, from 0 to 1. */
+.row--1 .track {
+    --progress: 0.22;
+}
+
+.row--2 .track {
+    --progress: 0.93;
+}
+
+.row--3 .track {
+    --progress: 0.29;
+}
+
+.set {
+    display: flex;
+    gap: var(--space-16);
+    margin: 0;
+    padding: 0 var(--space-16) 0 0;
+    list-style: none;
+}
+
+/* #region colour */
+/* Each chip sets --chip, and hover darkens it. The icon is white like the text through
+   current-color, and its placeholder through the filter. */
+.chip {
+    --chip-fill: var(--chip);
+    --icon-filter: var(--filter-ink-inverse);
+
+    display: flex;
+    align-items: center;
+    gap: var(--space-8);
+    padding: var(--space-8) var(--space-16);
+    border: 0;
+    border-radius: var(--radius-pill);
+    background: var(--chip-fill);
+    color: var(--ink-inverse);
+    font-weight: 500;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+/* Only under a mouse: on a touch screen :hover stays on after the tap. */
+@media (hover: hover) {
+    .chip:hover {
+        --chip-fill: color-mix(in oklab, var(--chip) 86%, black);
+    }
+}
+/* #endregion */
+
+.chip--signal {
+    --chip: var(--brand-500);
+}
+
+.chip--salvia {
+    --chip: var(--salvia);
+}
+
+.chip--yamabuki {
+    --chip: var(--yamabuki);
+}
+
+.chip--lilac {
+    --chip: var(--lilac);
+}
+
+.chip--cinnamon {
+    --chip: var(--cinnamon);
+}
+
+.chip--moss {
+    --chip: var(--moss);
+}
+
+/* The ends of the rows fade into the page. */
+.marquee::before,
+.marquee::after {
+    content: '';
+    position: absolute;
+    inset: 0 auto;
+    z-index: 1;
+    width: clamp(var(--space-48), 11vw, 160px);
+    pointer-events: none;
+}
+
+.marquee::before {
+    left: 0;
+    background: linear-gradient(to right, var(--surface), transparent);
+}
+
+.marquee::after {
+    right: 0;
+    background: linear-gradient(to left, var(--surface), transparent);
+}
+
+.cta {
+    padding: var(--space-8) var(--space-12);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    background: var(--surface);
+    font-weight: 500;
+    cursor: pointer;
+}
+
+@media (hover: hover) {
+    .cta:hover {
+        background: var(--surface-muted);
+    }
+}

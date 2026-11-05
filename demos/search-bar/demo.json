@@ -2,9 +2,13 @@
     "$schema": "../../schemas/demo.schema.json",
     "slug": "search-bar",
     "title": "Search bar",
-    "description": "A field whose magnifier greets the cursor, and whose clear button draws itself once the typing has stopped.",
-    "tags": ["form", "action"],
-    "icons": ["magnifier", "cross"],
+    "description": "A search field with a clear button. The magnifier reacts when you click into the field, and the cross icon appears once you stop typing.",
+    "group": "inputs",
+    "stage": "small",
+    "icons": ["system-outline-19-magnifier", "system-outline-38-cross"],
+    "iconStates": {
+        "system-outline-38-cross": "in-reveal"
+    },
     "fragments": [
         {
             "id": "setup",
@@ -28,7 +32,7 @@
             "region": "clear",
             "lang": "html",
             "title": "The clear button",
-            "note": "state=\"in-reveal\" is why the cross draws itself in."
+            "note": "The cross draws itself in when there is something to clear."
         },
         {
             "id": "settle",

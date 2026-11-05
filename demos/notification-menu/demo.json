@@ -2,9 +2,17 @@
     "$schema": "../../schemas/demo.schema.json",
     "slug": "notification-menu",
     "title": "Notification menu",
-    "description": "A bell that rings when the count goes up, over a panel that unrolls and brings its rows in behind it.",
-    "tags": ["overlay", "navigation", "hover", "state"],
-    "icons": ["bell", "heart", "download", "message", "star"],
+    "description": "A bell that opens a list of recent notifications. It rings when a new one arrives.",
+    "group": "menus",
+    "stage": "medium",
+    "icons": [
+        "system-outline-193-bell",
+        "system-outline-20-heart",
+        "system-outline-199-download",
+        "system-outline-4198-message",
+        "system-outline-237-star"
+    ],
+    "iconsNote": "The icons in this menu use the default Hover state, so any System Outline or System Solid icon will fit. Stick with the default animation, as In, Morph and Loop states don’t work well here.",
     "fragments": [
         {
             "id": "setup",
@@ -20,23 +28,23 @@
             "region": "bell",
             "lang": "html",
             "title": "The bell button",
-            "note": "popovertarget opens the panel. data-count is what the icon watches."
+            "note": "The bell rings when the count goes up."
+        },
+        {
+            "id": "unread",
+            "file": "main.ts",
+            "region": "unread",
+            "lang": "ts",
+            "title": "Unread rows are the count",
+            "note": "Opening the panel reads nothing. A click on a row, or Mark as read, does."
         },
         {
             "id": "count",
             "file": "main.ts",
             "region": "count",
             "lang": "ts",
-            "title": "Set the count",
+            "title": "Show the count",
             "note": "Writes the attribute and draws the badge. Nothing here reaches for the icon."
-        },
-        {
-            "id": "seen",
-            "file": "main.ts",
-            "region": "seen",
-            "lang": "ts",
-            "title": "Opening the menu clears the count",
-            "note": "The count goes down, so the bell stays quiet."
         },
         {
             "id": "item",
@@ -44,7 +52,7 @@
             "region": "item",
             "lang": "html",
             "title": "One notification",
-            "note": "data-unread is the dot and the tint. data-rise marks a row the panel brings in."
+            "note": "An unread row gets its dot and tint from one attribute."
         },
         {
             "id": "entrance",
@@ -52,7 +60,7 @@
             "region": "entrance",
             "lang": "ts",
             "title": "Start the tint with the row",
-            "note": "popovers() hands back each row's delay; the tint starts from it."
+            "note": "Each row's tint arrives in step with the row."
         },
         {
             "id": "tint",
@@ -60,7 +68,7 @@
             "region": "tint",
             "lang": "css",
             "title": "The colour of a row",
-            "note": "The fill is a background image, so main.ts can animate its width."
+            "note": "The tint grows across the row as it comes in."
         }
     ]
 }

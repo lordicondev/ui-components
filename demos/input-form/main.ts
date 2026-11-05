@@ -30,13 +30,20 @@ let leaving: ReturnType<typeof setTimeout> | undefined;
 // The pointer resting on the row opens the submenu; leaving both closes it after a grace
 // period, unless focus is inside it. Click and Enter open it through popovertargetaction;
 // Escape and clicking away are the browser's.
+//
+// Not for touch: a finger "leaves" as it lifts, and a submenu opened mid-tap catches the
+// tap and focuses its search.
 for (const element of [opener, projects]) {
-    element.addEventListener('pointerenter', () => {
+    element.addEventListener('pointerenter', (event) => {
+        if (event.pointerType === 'touch') return;
+
         clearTimeout(leaving);
         if (!projects.matches(':popover-open')) projects.showPopover();
     });
 
-    element.addEventListener('pointerleave', () => {
+    element.addEventListener('pointerleave', (event) => {
+        if (event.pointerType === 'touch') return;
+
         clearTimeout(leaving);
         leaving = setTimeout(() => {
             if (!projects.contains(document.activeElement)) projects.hidePopover();
@@ -44,6 +51,11 @@ for (const element of [opener, projects]) {
     });
 }
 // #endregion
+
+// Escape from the search would leave focus on nothing; it goes back to the row.
+projects.addEventListener('beforetoggle', (event) => {
+    if (event.newState === 'closed' && projects.contains(document.activeElement)) opener.focus();
+});
 
 // #region choose
 // A data-choose row was clicked, at either level. popovers() has closed the panels; the
@@ -69,5 +81,13 @@ search.addEventListener('input', () => {
     for (const row of rows) {
         row.hidden = !row.textContent!.toLowerCase().includes(wanted);
     }
+});
+
+// Closing forgets the search, so the submenu opens with every project again.
+projects.addEventListener('toggle', (event) => {
+    if ((event as ToggleEvent).newState !== 'closed' || !search.value) return;
+
+    search.value = '';
+    search.dispatchEvent(new Event('input'));
 });
 // #endregion

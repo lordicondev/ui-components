@@ -33,8 +33,11 @@
     --icon-filter: var(--filter-ink);
 }
 
-.bell:hover {
-    background: var(--surface-muted);
+/* Only under a mouse: on a touch screen :hover stays on after the tap. */
+@media (hover: hover) {
+    .bell:hover {
+        background: var(--surface-muted);
+    }
 }
 
 .bell[aria-expanded='true'] {
@@ -68,7 +71,6 @@
 /* The panel is menu.css's. Only the width is this demo's. */
 .menu {
     --menu-width: 350px;
-    max-width: calc(100vw - var(--space-24));
 }
 
 .menu__head {
@@ -96,8 +98,17 @@
     cursor: pointer;
 }
 
-.menu__read:hover {
-    background: var(--surface-muted);
+@media (hover: hover) {
+    .menu__read:hover {
+        background: var(--surface-muted);
+    }
+}
+
+/* Nothing to mark. aria-disabled, not disabled, so keyboard focus is not dropped. */
+.menu__read[aria-disabled='true'] {
+    background: var(--surface);
+    color: var(--ink-subtle);
+    cursor: default;
 }
 
 .feed {
@@ -119,8 +130,10 @@
     --row-hover: color-mix(in srgb, var(--accent) 10%, var(--accent-surface));
 }
 
-.feed__row:has(.row:hover) {
-    --row-fill: var(--row-hover);
+@media (hover: hover) {
+    .feed__row:has(.row:hover) {
+        --row-fill: var(--row-hover);
+    }
 }
 /* #endregion */
 
@@ -181,7 +194,11 @@
     line-height: var(--leading-sm);
 }
 
-/* Not animated: the tint already says the row is new. */
+/* Only on an unread row. Not animated: the tint already says the row is new. */
+.feed__row:not([data-unread]) :is(.row__dot, .row__unread) {
+    display: none;
+}
+
 .row__dot {
     flex: none;
     width: 6px;
@@ -227,6 +244,8 @@
     cursor: pointer;
 }
 
-.controls__go:hover {
-    background: var(--accent-strong);
+@media (hover: hover) {
+    .controls__go:hover {
+        background: var(--accent-strong);
+    }
 }

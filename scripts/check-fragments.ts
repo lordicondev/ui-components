@@ -14,9 +14,10 @@ import { extractRegion, listRegions, RegionError } from './lib/regions.ts';
 
 /**
  * A code fragment longer than this usually means logic that belongs in a trigger. Markup
- * gets more room: its length comes from one attribute per line, not from complexity.
+ * and styles get more room: one attribute per line, or a hover rule wrapped in
+ * `@media (hover: hover)`, adds length, not complexity.
  */
-const COMFORTABLE = { ts: 25, css: 25, html: 32 };
+const COMFORTABLE = { ts: 25, css: 30, html: 32 };
 const TOO_LONG = { ts: 40, css: 40, html: 48 };
 
 /** A fragment with fewer code lines than this is a comment with a line of code under it. */

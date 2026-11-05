@@ -2,9 +2,20 @@
     "$schema": "../../schemas/demo.schema.json",
     "slug": "loading-list",
     "title": "Loading list",
-    "description": "Five steps of a job, each with a spinner that turns into a tick or a cross. The state of a step is one attribute.",
-    "tags": ["progress", "status", "follow"],
-    "icons": ["spinner-circle", "check-circle", "cross-circle"],
+    "description": "A checklist showing the steps of a running task. Each spinner turns into a tick or a cross when its step finishes.",
+    "group": "feedback",
+    "stage": "medium",
+    "icons": [
+        "system-outline-4021-spinner-circle",
+        "system-outline-24-check-circle",
+        "system-outline-25-cross-circle"
+    ],
+    "iconStates": {
+        "system-outline-4021-spinner-circle": "loop-rotation-half",
+        "system-outline-24-check-circle": "morph-tick",
+        "system-outline-25-cross-circle": "morph-cross"
+    },
+    "iconsNote": "The check and cross animations are pretty special, but the loading icon is up to you. Swap it for another one from the library to give the list your own look.",
     "fragments": [
         {
             "id": "setup",
@@ -52,7 +63,7 @@
             "region": "swap",
             "lang": "css",
             "title": "One cell, three icons",
-            "note": "The stylesheet shows the icon for the status."
+            "note": "Each step shows a spinner, a tick or a cross, chosen by its status alone."
         },
         {
             "id": "colour",

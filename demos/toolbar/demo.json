@@ -1,0 +1,84 @@
+{
+    "$schema": "../../schemas/demo.schema.json",
+    "slug": "toolbar",
+    "title": "Toolbar",
+    "description": "A row of tools and formatting options. Icons morph into place as you pick a tool or list style, and play when pressed.",
+    "group": "buttons",
+    "stage": "small",
+    "icons": [
+        "system-outline-762-brush-alt",
+        "system-outline-1428-paint-bucket",
+        "system-outline-35-pencil",
+        "system-outline-4228-pen-nib",
+        "system-outline-1443-bullet-list",
+        "system-outline-4381-check-list",
+        "system-outline-4101-three-dots-vertical"
+    ],
+    "iconStates": {
+        "system-outline-762-brush-alt": "morph-change",
+        "system-outline-1428-paint-bucket": "morph-select",
+        "system-outline-35-pencil": "morph-select",
+        "system-outline-4228-pen-nib": "morph-select",
+        "system-outline-1443-bullet-list": "morph-select",
+        "system-outline-4381-check-list": "morph-change"
+    },
+    "iconsNote": "Most icons in this toolbar use the Morph state, so they turn solid when selected. You can also use icons with the default Hover state. They won’t turn solid, but they’ll play the full animation and change color. Want different icons? Search for them in the System Outline style.",
+    "fragments": [
+        {
+            "id": "setup",
+            "file": "main.ts",
+            "region": "setup",
+            "lang": "ts",
+            "title": "Define the element",
+            "note": "Built-in triggers only. What each icon follows is written in its markup."
+        },
+        {
+            "id": "markup",
+            "file": "index.html",
+            "region": "markup",
+            "lang": "html",
+            "title": "One tool",
+            "note": "A real radio underneath keeps the tools usable from the keyboard; the icon follows it."
+        },
+        {
+            "id": "toggle",
+            "file": "index.html",
+            "region": "toggle",
+            "lang": "html",
+            "title": "One list button",
+            "note": "The icon follows aria-pressed directly, with no code in between."
+        },
+        {
+            "id": "action",
+            "file": "index.html",
+            "region": "action",
+            "lang": "html",
+            "title": "One action button",
+            "note": "No attribute to follow: nothing about it changes after a press."
+        },
+        {
+            "id": "wiring",
+            "file": "main.ts",
+            "region": "wiring",
+            "lang": "ts",
+            "title": "Copy the radio's choice into an attribute",
+            "note": "checked is a property, and nothing can watch a property."
+        },
+        {
+            "id": "lists",
+            "file": "main.ts",
+            "region": "lists",
+            "lang": "ts",
+            "title": "One kind of list or none",
+            "note": "Pressing one list button releases the other; pressing it again releases it."
+        },
+        {
+            "id": "selected",
+            "file": "toolbar.css",
+            "region": "selected",
+            "lang": "css",
+            "title": "The selected tool",
+            "note": "The resting, hovered and selected looks, icon colour included."
+        }
+    ]
+}

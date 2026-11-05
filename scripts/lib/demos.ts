@@ -15,9 +15,18 @@ export type DemoManifest = {
     slug: string;
     title: string;
     description: string;
-    tags: string[];
+    /** The section of the index it is listed in. */
+    group: 'buttons' | 'inputs' | 'menus' | 'navigation' | 'feedback' | 'containers' | 'sections';
+    /** How tall the portal's frame is. Large when left out. */
+    stage?: 'small' | 'medium' | 'large';
     icons: string[];
+    /** The states the demo plays, by alias. An icon left out plays its default. */
+    iconStates?: Record<string, string | string[]>;
+    /** What to know about the icons and their states, shown above the portal's icon table. */
+    iconsNote?: string;
     fragments: Fragment[];
+    /** The published pen, if there is one. */
+    codepen?: string;
 };
 
 export const demosDir = resolve(repoRoot, 'demos');

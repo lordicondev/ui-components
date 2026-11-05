@@ -87,6 +87,17 @@ for (const file of walk(siteDir)) {
     }
 }
 
+// Links to lordicon.com are built with lordiconUrl(), which adds the UTM tags.
+const { utm } = loadConfig();
+for (const [href, pages] of outside) {
+    const url = new URL(href);
+    if (url.hostname !== 'lordicon.com' && url.hostname !== 'www.lordicon.com') continue;
+    const untagged = Object.entries(utm).some(
+        ([key, value]) => url.searchParams.get(`utm_${key}`) !== value,
+    );
+    if (untagged) problems.push(`${href} has no UTM tags, use lordiconUrl() (on ${[...pages][0]})`);
+}
+
 if (external) {
     const results = await mapLimited([...outside.keys()], 8, check);
     for (const [href, status] of results) {

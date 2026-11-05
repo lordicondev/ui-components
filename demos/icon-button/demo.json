@@ -1,0 +1,55 @@
+{
+    "$schema": "../../schemas/demo.schema.json",
+    "slug": "icon-button",
+    "title": "Icon button",
+    "description": "A bookmark button with no label. The bookmark fills when you press it, and a short message confirms the item was saved.",
+    "group": "buttons",
+    "stage": "small",
+    "icons": ["system-outline-400-bookmark"],
+    "iconStates": {
+        "system-outline-400-bookmark": "morph-select"
+    },
+    "iconsNote": "This simple button uses a System Outline icon with the Morph state. Swap the bookmark for a heart, a cloud or any other System Outline icon with a Morph state. Icons with the default Hover state work too, but instead of turning solid, they play the full animation and only change color.",
+    "fragments": [
+        {
+            "id": "setup",
+            "file": "main.ts",
+            "region": "setup",
+            "lang": "ts",
+            "title": "Define the element",
+            "note": "Built-in triggers only. What each icon follows is written in its markup."
+        },
+        {
+            "id": "markup",
+            "file": "index.html",
+            "region": "markup",
+            "lang": "html",
+            "title": "The button, its icon and the toast",
+            "note": "The bookmark fills and empties with aria-pressed, and nothing else."
+        },
+        {
+            "id": "wiring",
+            "file": "main.ts",
+            "region": "wiring",
+            "lang": "ts",
+            "title": "Flip the attribute, show the toast",
+            "note": "The toast shows for two seconds after saving, and goes when you unsave."
+        },
+        {
+            "id": "colour",
+            "file": "icon-button.css",
+            "region": "colour",
+            "lang": "css",
+            "title": "Colour from the same attribute",
+            "note": "Ink at rest, accent once saved. The icon inherits it through current-color."
+        },
+        {
+            "id": "message",
+            "file": "icon-button.css",
+            "region": "message",
+            "lang": "css",
+            "title": "The toast rising in",
+            "note": "One attribute shows it; a transition does the rest."
+        }
+    ]
+}

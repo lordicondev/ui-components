@@ -80,8 +80,11 @@
     cursor: pointer;
 }
 
-.page:hover {
-    background: var(--surface-muted);
+/* Only under a mouse: on a touch screen :hover stays on after the tap. */
+@media (hover: hover) {
+    .page:hover {
+        background: var(--surface-muted);
+    }
 }
 
 .step {
@@ -122,19 +125,21 @@
     background: var(--surface);
 }
 
-.step--boxed:hover:not(:disabled),
-.step--labelled:hover:not(:disabled) {
-    background: var(--surface-muted);
+@media (hover: hover) {
+    .step--boxed:hover:not(:disabled),
+    .step--labelled:hover:not(:disabled) {
+        background: var(--surface-muted);
+    }
+
+    /* No box to tint, so the chevron changes colour instead. */
+    .step--bare:hover:not(:disabled) {
+        color: var(--accent);
+    }
 }
 
 .step--boxed:active:not(:disabled),
 .step--labelled:active:not(:disabled) {
     background: var(--surface-sunken);
-}
-
-/* No box to tint, so the chevron changes colour instead. */
-.step--bare:hover:not(:disabled) {
-    color: var(--accent);
 }
 
 .step--labelled .step__mark,

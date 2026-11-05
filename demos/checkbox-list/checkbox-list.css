@@ -41,17 +41,20 @@
     --icon-filter: var(--filter-ink-subtle);
 }
 
-.option:hover .option__tick {
-    color: var(--accent);
-}
-
 .option[data-checked='true'] .option__tick {
     color: var(--accent);
     --icon-filter: var(--filter-accent);
 }
 
-.option[data-checked='true']:hover .option__tick {
-    color: var(--accent-strong);
+/* Only under a mouse: on a touch screen :hover stays on after the tap. */
+@media (hover: hover) {
+    .option:hover .option__tick {
+        color: var(--accent);
+    }
+
+    .option[data-checked='true']:hover .option__tick {
+        color: var(--accent-strong);
+    }
 }
 /* #endregion */
 

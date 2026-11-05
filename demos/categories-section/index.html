@@ -1,0 +1,1378 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Categories section</title>
+        <link rel="stylesheet" href="./categories-section.css" />
+        <script type="module" src="./main.ts"></script>
+    </head>
+    <body>
+        <main class="demo">
+            <header class="heading">
+                <h2 class="heading__title">Learn anything, from anyone</h2>
+                <p class="heading__text">
+                    Thousands of hands-on courses taught by people who actually do it.
+                </p>
+            </header>
+
+            <section class="marquee" aria-label="Course categories">
+                <!-- #region markup -->
+                <!-- target points each icon at its chip, so the whole chip is the hover area. The
+                     track holds the set three times. The copies are hidden from screen readers and
+                     their chips have tabindex="-1", so Tab stops once at each chip. -->
+                <div class="row row--1">
+                    <div class="track">
+                        <ul class="set" aria-label="Creative skills">
+                            <li>
+                                <button class="chip chip--signal" type="button">
+                                    <lord-icon
+                                        class="chip__icon"
+                                        current-color
+                                        src="icons/system-solid-61-camera.json"
+                                        loading="interaction"
+                                        trigger="hover"
+                                        target=".chip"
+                                        aria-hidden="true"
+                                    >
+                                        <img alt="" src="icons/system-solid-61-camera.svg" />
+                                    </lord-icon>
+                                    photography
+                                </button>
+                            </li>
+                            <!-- #skip -->
+                            <li>
+                                <button class="chip chip--salvia" type="button">
+                                    <lord-icon
+                                        class="chip__icon"
+                                        current-color
+                                        src="icons/system-solid-4239-video-camera.json"
+                                        loading="interaction"
+                                        trigger="hover"
+                                        target=".chip"
+                                        aria-hidden="true"
+                                    >
+                                        <img
+                                            alt=""
+                                            src="icons/system-solid-4239-video-camera.svg"
+                                        />
+                                    </lord-icon>
+                                    video creation
+                                </button>
+                            </li>
+                            <li>
+                                <button class="chip chip--yamabuki" type="button">
+                                    <lord-icon
+                                        class="chip__icon"
+                                        current-color
+                                        src="icons/system-solid-12-layers.json"
+                                        loading="interaction"
+                                        trigger="hover"
+                                        target=".chip"
+                                        aria-hidden="true"
+                                    >
+                                        <img alt="" src="icons/system-solid-12-layers.svg" />
+                                    </lord-icon>
+                                    graphic design
+                                </button>
+                            </li>
+                            <li>
+                                <button class="chip chip--lilac" type="button">
+                                    <lord-icon
+                                        class="chip__icon"
+                                        current-color
+                                        src="icons/system-solid-1388-grid-bento.json"
+                                        loading="interaction"
+                                        trigger="hover"
+                                        target=".chip"
+                                        aria-hidden="true"
+                                    >
+                                        <img alt="" src="icons/system-solid-1388-grid-bento.svg" />
+                                    </lord-icon>
+                                    ux design
+                                </button>
+                            </li>
+                            <li>
+                                <button class="chip chip--cinnamon" type="button">
+                                    <lord-icon
+                                        class="chip__icon"
+                                        current-color
+                                        src="icons/system-solid-35-pencil.json"
+                                        loading="interaction"
+                                        trigger="hover"
+                                        target=".chip"
+                                        aria-hidden="true"
+                                    >
+                                        <img alt="" src="icons/system-solid-35-pencil.svg" />
+                                    </lord-icon>
+                                    drawing
+                                </button>
+                            </li>
+                            <li>
+                                <button class="chip chip--moss" type="button">
+                                    <lord-icon
+                                        class="chip__icon"
+                                        current-color
+                                        src="icons/system-solid-54-image-mountain.json"
+                                        loading="interaction"
+                                        trigger="hover"
+                                        target=".chip"
+                                        aria-hidden="true"
+                                    >
+                                        <img
+                                            alt=""
+                                            src="icons/system-solid-54-image-mountain.svg"
+                                        />
+                                    </lord-icon>
+                                    photo editing
+                                </button>
+                            </li>
+                            <li>
+                                <button class="chip chip--signal" type="button">
+                                    <lord-icon
+                                        class="chip__icon"
+                                        current-color
+                                        src="icons/system-solid-56-file-text.json"
+                                        loading="interaction"
+                                        trigger="hover"
+                                        target=".chip"
+                                        aria-hidden="true"
+                                    >
+                                        <img alt="" src="icons/system-solid-56-file-text.svg" />
+                                    </lord-icon>
+                                    copywriting
+                                </button>
+                            </li>
+                            <li>
+                                <button class="chip chip--salvia" type="button">
+                                    <lord-icon
+                                        class="chip__icon"
+                                        current-color
+                                        src="icons/system-solid-362-article.json"
+                                        loading="interaction"
+                                        trigger="hover"
+                                        target=".chip"
+                                        aria-hidden="true"
+                                    >
+                                        <img alt="" src="icons/system-solid-362-article.svg" />
+                                    </lord-icon>
+                                    blogging
+                                </button>
+                            </li>
+                            <li>
+                                <button class="chip chip--yamabuki" type="button">
+                                    <lord-icon
+                                        class="chip__icon"
+                                        current-color
+                                        src="icons/system-solid-188-microphone.json"
+                                        loading="interaction"
+                                        trigger="hover"
+                                        target=".chip"
+                                        aria-hidden="true"
+                                    >
+                                        <img alt="" src="icons/system-solid-188-microphone.svg" />
+                                    </lord-icon>
+                                    podcasting
+                                </button>
+                            </li>
+                            <!-- #endskip -->
+                        </ul>
+                        <ul class="set" aria-hidden="true">
+                            <!-- #skip -->
+                            <li>
+                                <button class="chip chip--signal" type="button" tabindex="-1">
+                                    <lord-icon
+                                        class="chip__icon"
+                                        current-color
+                                        src="icons/system-solid-61-camera.json"
+                                        loading="interaction"
+                                        trigger="hover"
+                                        target=".chip"
+                                        aria-hidden="true"
+                                    >
+                                        <img alt="" src="icons/system-solid-61-camera.svg" />
+                                    </lord-icon>
+                                    photography
+                                </button>
+                            </li>
+                            <li>
+                                <button class="chip chip--salvia" type="button" tabindex="-1">
+                                    <lord-icon
+                                        class="chip__icon"
+                                        current-color
+                                        src="icons/system-solid-4239-video-camera.json"
+                                        loading="interaction"
+                                        trigger="hover"
+                                        target=".chip"
+                                        aria-hidden="true"
+                                    >
+                                        <img
+                                            alt=""
+                                            src="icons/system-solid-4239-video-camera.svg"
+                                        />
+                                    </lord-icon>
+                                    video creation
+                                </button>
+                            </li>
+                            <li>
+                                <button class="chip chip--yamabuki" type="button" tabindex="-1">
+                                    <lord-icon
+                                        class="chip__icon"
+                                        current-color
+                                        src="icons/system-solid-12-layers.json"
+                                        loading="interaction"
+                                        trigger="hover"
+                                        target=".chip"
+                                        aria-hidden="true"
+                                    >
+                                        <img alt="" src="icons/system-solid-12-layers.svg" />
+                                    </lord-icon>
+                                    graphic design
+                                </button>
+                            </li>
+                            <li>
+                                <button class="chip chip--lilac" type="button" tabindex="-1">
+                                    <lord-icon
+                                        class="chip__icon"
+                                        current-color
+                                        src="icons/system-solid-1388-grid-bento.json"
+                                        loading="interaction"
+                                        trigger="hover"
+                                        target=".chip"
+                                        aria-hidden="true"
+                                    >
+                                        <img alt="" src="icons/system-solid-1388-grid-bento.svg" />
+                                    </lord-icon>
+                                    ux design
+                                </button>
+                            </li>
+                            <li>
+                                <button class="chip chip--cinnamon" type="button" tabindex="-1">
+                                    <lord-icon
+                                        class="chip__icon"
+                                        current-color
+                                        src="icons/system-solid-35-pencil.json"
+                                        loading="interaction"
+                                        trigger="hover"
+                                        target=".chip"
+                                        aria-hidden="true"
+                                    >
+                                        <img alt="" src="icons/system-solid-35-pencil.svg" />
+                                    </lord-icon>
+                                    drawing
+                                </button>
+                            </li>
+                            <li>
+                                <button class="chip chip--moss" type="button" tabindex="-1">
+                                    <lord-icon
+                                        class="chip__icon"
+                                        current-color
+                                        src="icons/system-solid-54-image-mountain.json"
+                                        loading="interaction"
+                                        trigger="hover"
+                                        target=".chip"
+                                        aria-hidden="true"
+                                    >
+                                        <img
+                                            alt=""
+                                            src="icons/system-solid-54-image-mountain.svg"
+                                        />
+                                    </lord-icon>
+                                    photo editing
+                                </button>
+                            </li>
+                            <li>
+                                <button class="chip chip--signal" type="button" tabindex="-1">
+                                    <lord-icon
+                                        class="chip__icon"
+                                        current-color
+                                        src="icons/system-solid-56-file-text.json"
+                                        loading="interaction"
+                                        trigger="hover"
+                                        target=".chip"
+                                        aria-hidden="true"
+                                    >
+                                        <img alt="" src="icons/system-solid-56-file-text.svg" />
+                                    </lord-icon>
+                                    copywriting
+                                </button>
+                            </li>
+                            <li>
+                                <button class="chip chip--salvia" type="button" tabindex="-1">
+                                    <lord-icon
+                                        class="chip__icon"
+                                        current-color
+                                        src="icons/system-solid-362-article.json"
+                                        loading="interaction"
+                                        trigger="hover"
+                                        target=".chip"
+                                        aria-hidden="true"
+                                    >
+                                        <img alt="" src="icons/system-solid-362-article.svg" />
+                                    </lord-icon>
+                                    blogging
+                                </button>
+                            </li>
+                            <li>
+                                <button class="chip chip--yamabuki" type="button" tabindex="-1">
+                                    <lord-icon
+                                        class="chip__icon"
+                                        current-color
+                                        src="icons/system-solid-188-microphone.json"
+                                        loading="interaction"
+                                        trigger="hover"
+                                        target=".chip"
+                                        aria-hidden="true"
+                                    >
+                                        <img alt="" src="icons/system-solid-188-microphone.svg" />
+                                    </lord-icon>
+                                    podcasting
+                                </button>
+                            </li>
+                            <!-- #endskip -->
+                        </ul>
+                        <ul class="set" aria-hidden="true">
+                            <!-- #skip -->
+                            <li>
+                                <button class="chip chip--signal" type="button" tabindex="-1">
+                                    <lord-icon
+                                        class="chip__icon"
+                                        current-color
+                                        src="icons/system-solid-61-camera.json"
+                                        loading="interaction"
+                                        trigger="hover"
+                                        target=".chip"
+                                        aria-hidden="true"
+                                    >
+                                        <img alt="" src="icons/system-solid-61-camera.svg" />
+                                    </lord-icon>
+                                    photography
+                                </button>
+                            </li>
+                            <li>
+                                <button class="chip chip--salvia" type="button" tabindex="-1">
+                                    <lord-icon
+                                        class="chip__icon"
+                                        current-color
+                                        src="icons/system-solid-4239-video-camera.json"
+                                        loading="interaction"
+                                        trigger="hover"
+                                        target=".chip"
+                                        aria-hidden="true"
+                                    >
+                                        <img
+                                            alt=""
+                                            src="icons/system-solid-4239-video-camera.svg"
+                                        />
+                                    </lord-icon>
+                                    video creation
+                                </button>
+                            </li>
+                            <li>
+                                <button class="chip chip--yamabuki" type="button" tabindex="-1">
+                                    <lord-icon
+                                        class="chip__icon"
+                                        current-color
+                                        src="icons/system-solid-12-layers.json"
+                                        loading="interaction"
+                                        trigger="hover"
+                                        target=".chip"
+                                        aria-hidden="true"
+                                    >
+                                        <img alt="" src="icons/system-solid-12-layers.svg" />
+                                    </lord-icon>
+                                    graphic design
+                                </button>
+                            </li>
+                            <li>
+                                <button class="chip chip--lilac" type="button" tabindex="-1">
+                                    <lord-icon
+                                        class="chip__icon"
+                                        current-color
+                                        src="icons/system-solid-1388-grid-bento.json"
+                                        loading="interaction"
+                                        trigger="hover"
+                                        target=".chip"
+                                        aria-hidden="true"
+                                    >
+                                        <img alt="" src="icons/system-solid-1388-grid-bento.svg" />
+                                    </lord-icon>
+                                    ux design
+                                </button>
+                            </li>
+                            <li>
+                                <button class="chip chip--cinnamon" type="button" tabindex="-1">
+                                    <lord-icon
+                                        class="chip__icon"
+                                        current-color
+                                        src="icons/system-solid-35-pencil.json"
+                                        loading="interaction"
+                                        trigger="hover"
+                                        target=".chip"
+                                        aria-hidden="true"
+                                    >
+                                        <img alt="" src="icons/system-solid-35-pencil.svg" />
+                                    </lord-icon>
+                                    drawing
+                                </button>
+                            </li>
+                            <li>
+                                <button class="chip chip--moss" type="button" tabindex="-1">
+                                    <lord-icon
+                                        class="chip__icon"
+                                        current-color
+                                        src="icons/system-solid-54-image-mountain.json"
+                                        loading="interaction"
+                                        trigger="hover"
+                                        target=".chip"
+                                        aria-hidden="true"
+                                    >
+                                        <img
+                                            alt=""
+                                            src="icons/system-solid-54-image-mountain.svg"
+                                        />
+                                    </lord-icon>
+                                    photo editing
+                                </button>
+                            </li>
+                            <li>
+                                <button class="chip chip--signal" type="button" tabindex="-1">
+                                    <lord-icon
+                                        class="chip__icon"
+                                        current-color
+                                        src="icons/system-solid-56-file-text.json"
+                                        loading="interaction"
+                                        trigger="hover"
+                                        target=".chip"
+                                        aria-hidden="true"
+                                    >
+                                        <img alt="" src="icons/system-solid-56-file-text.svg" />
+                                    </lord-icon>
+                                    copywriting
+                                </button>
+                            </li>
+                            <li>
+                                <button class="chip chip--salvia" type="button" tabindex="-1">
+                                    <lord-icon
+                                        class="chip__icon"
+                                        current-color
+                                        src="icons/system-solid-362-article.json"
+                                        loading="interaction"
+                                        trigger="hover"
+                                        target=".chip"
+                                        aria-hidden="true"
+                                    >
+                                        <img alt="" src="icons/system-solid-362-article.svg" />
+                                    </lord-icon>
+                                    blogging
+                                </button>
+                            </li>
+                            <li>
+                                <button class="chip chip--yamabuki" type="button" tabindex="-1">
+                                    <lord-icon
+                                        class="chip__icon"
+                                        current-color
+                                        src="icons/system-solid-188-microphone.json"
+                                        loading="interaction"
+                                        trigger="hover"
+                                        target=".chip"
+                                        aria-hidden="true"
+                                    >
+                                        <img alt="" src="icons/system-solid-188-microphone.svg" />
+                                    </lord-icon>
+                                    podcasting
+                                </button>
+                            </li>
+                            <!-- #endskip -->
+                        </ul>
+                    </div>
+                </div>
+                <!-- #endregion -->
+
+                <div class="row row--2 row--right">
+                    <div class="track">
+                        <ul class="set" aria-label="Tech and money">
+                            <li>
+                                <button class="chip chip--lilac" type="button">
+                                    <lord-icon
+                                        class="chip__icon"
+                                        current-color
+                                        src="icons/system-solid-369-code.json"
+                                        loading="interaction"
+                                        trigger="hover"
+                                        target=".chip"
+                                        aria-hidden="true"
+                                    >
+                                        <img alt="" src="icons/system-solid-369-code.svg" />
+                                    </lord-icon>
+                                    coding
+                                </button>
+                            </li>
+                            <li>
+                                <button class="chip chip--cinnamon" type="button">
+                                    <lord-icon
+                                        class="chip__icon"
+                                        current-color
+                                        src="icons/system-solid-2526-http.json"
+                                        loading="interaction"
+                                        trigger="hover"
+                                        target=".chip"
+                                        aria-hidden="true"
+                                    >
+                                        <img alt="" src="icons/system-solid-2526-http.svg" />
+                                    </lord-icon>
+                                    web development
+                                </button>
+                            </li>
+                            <li>
+                                <button class="chip chip--moss" type="button">
+                                    <lord-icon
+                                        class="chip__icon"
+                                        current-color
+                                        src="icons/system-solid-1327-api.json"
+                                        loading="interaction"
+                                        trigger="hover"
+                                        target=".chip"
+                                        aria-hidden="true"
+                                    >
+                                        <img alt="" src="icons/system-solid-1327-api.svg" />
+                                    </lord-icon>
+                                    backend &amp; APIs
+                                </button>
+                            </li>
+                            <li>
+                                <button class="chip chip--signal" type="button">
+                                    <lord-icon
+                                        class="chip__icon"
+                                        current-color
+                                        src="icons/system-solid-153-bar-chart-vertical-grow.json"
+                                        loading="interaction"
+                                        trigger="hover"
+                                        target=".chip"
+                                        aria-hidden="true"
+                                    >
+                                        <img
+                                            alt=""
+                                            src="icons/system-solid-153-bar-chart-vertical-grow.svg"
+                                        />
+                                    </lord-icon>
+                                    data analytics
+                                </button>
+                            </li>
+                            <li>
+                                <button class="chip chip--salvia" type="button">
+                                    <lord-icon
+                                        class="chip__icon"
+                                        current-color
+                                        src="icons/system-solid-4094-arrow-trending-up.json"
+                                        loading="interaction"
+                                        trigger="hover"
+                                        target=".chip"
+                                        aria-hidden="true"
+                                    >
+                                        <img
+                                            alt=""
+                                            src="icons/system-solid-4094-arrow-trending-up.svg"
+                                        />
+                                    </lord-icon>
+                                    investing
+                                </button>
+                            </li>
+                            <li>
+                                <button class="chip chip--yamabuki" type="button">
+                                    <lord-icon
+                                        class="chip__icon"
+                                        current-color
+                                        src="icons/system-solid-453-piggy-bank.json"
+                                        loading="interaction"
+                                        trigger="hover"
+                                        target=".chip"
+                                        aria-hidden="true"
+                                    >
+                                        <img alt="" src="icons/system-solid-453-piggy-bank.svg" />
+                                    </lord-icon>
+                                    personal finance
+                                </button>
+                            </li>
+                            <li>
+                                <button class="chip chip--lilac" type="button">
+                                    <lord-icon
+                                        class="chip__icon"
+                                        current-color
+                                        src="icons/system-solid-4014-calculator-simple.json"
+                                        loading="interaction"
+                                        trigger="hover"
+                                        target=".chip"
+                                        aria-hidden="true"
+                                    >
+                                        <img
+                                            alt=""
+                                            src="icons/system-solid-4014-calculator-simple.svg"
+                                        />
+                                    </lord-icon>
+                                    accounting
+                                </button>
+                            </li>
+                            <li>
+                                <button class="chip chip--cinnamon" type="button">
+                                    <lord-icon
+                                        class="chip__icon"
+                                        current-color
+                                        src="icons/system-solid-146-cart.json"
+                                        loading="interaction"
+                                        trigger="hover"
+                                        target=".chip"
+                                        aria-hidden="true"
+                                    >
+                                        <img alt="" src="icons/system-solid-146-cart.svg" />
+                                    </lord-icon>
+                                    e-commerce
+                                </button>
+                            </li>
+                            <li>
+                                <button class="chip chip--moss" type="button">
+                                    <lord-icon
+                                        class="chip__icon"
+                                        current-color
+                                        src="icons/system-solid-4073-email.json"
+                                        loading="interaction"
+                                        trigger="hover"
+                                        target=".chip"
+                                        aria-hidden="true"
+                                    >
+                                        <img alt="" src="icons/system-solid-4073-email.svg" />
+                                    </lord-icon>
+                                    email marketing
+                                </button>
+                            </li>
+                        </ul>
+                        <ul class="set" aria-hidden="true">
+                            <li>
+                                <button class="chip chip--lilac" type="button" tabindex="-1">
+                                    <lord-icon
+                                        class="chip__icon"
+                                        current-color
+                                        src="icons/system-solid-369-code.json"
+                                        loading="interaction"
+                                        trigger="hover"
+                                        target=".chip"
+                                        aria-hidden="true"
+                                    >
+                                        <img alt="" src="icons/system-solid-369-code.svg" />
+                                    </lord-icon>
+                                    coding
+                                </button>
+                            </li>
+                            <li>
+                                <button class="chip chip--cinnamon" type="button" tabindex="-1">
+                                    <lord-icon
+                                        class="chip__icon"
+                                        current-color
+                                        src="icons/system-solid-2526-http.json"
+                                        loading="interaction"
+                                        trigger="hover"
+                                        target=".chip"
+                                        aria-hidden="true"
+                                    >
+                                        <img alt="" src="icons/system-solid-2526-http.svg" />
+                                    </lord-icon>
+                                    web development
+                                </button>
+                            </li>
+                            <li>
+                                <button class="chip chip--moss" type="button" tabindex="-1">
+                                    <lord-icon
+                                        class="chip__icon"
+                                        current-color
+                                        src="icons/system-solid-1327-api.json"
+                                        loading="interaction"
+                                        trigger="hover"
+                                        target=".chip"
+                                        aria-hidden="true"
+                                    >
+                                        <img alt="" src="icons/system-solid-1327-api.svg" />
+                                    </lord-icon>
+                                    backend &amp; APIs
+                                </button>
+                            </li>
+                            <li>
+                                <button class="chip chip--signal" type="button" tabindex="-1">
+                                    <lord-icon
+                                        class="chip__icon"
+                                        current-color
+                                        src="icons/system-solid-153-bar-chart-vertical-grow.json"
+                                        loading="interaction"
+                                        trigger="hover"
+                                        target=".chip"
+                                        aria-hidden="true"
+                                    >
+                                        <img
+                                            alt=""
+                                            src="icons/system-solid-153-bar-chart-vertical-grow.svg"
+                                        />
+                                    </lord-icon>
+                                    data analytics
+                                </button>
+                            </li>
+                            <li>
+                                <button class="chip chip--salvia" type="button" tabindex="-1">
+                                    <lord-icon
+                                        class="chip__icon"
+                                        current-color
+                                        src="icons/system-solid-4094-arrow-trending-up.json"
+                                        loading="interaction"
+                                        trigger="hover"
+                                        target=".chip"
+                                        aria-hidden="true"
+                                    >
+                                        <img
+                                            alt=""
+                                            src="icons/system-solid-4094-arrow-trending-up.svg"
+                                        />
+                                    </lord-icon>
+                                    investing
+                                </button>
+                            </li>
+                            <li>
+                                <button class="chip chip--yamabuki" type="button" tabindex="-1">
+                                    <lord-icon
+                                        class="chip__icon"
+                                        current-color
+                                        src="icons/system-solid-453-piggy-bank.json"
+                                        loading="interaction"
+                                        trigger="hover"
+                                        target=".chip"
+                                        aria-hidden="true"
+                                    >
+                                        <img alt="" src="icons/system-solid-453-piggy-bank.svg" />
+                                    </lord-icon>
+                                    personal finance
+                                </button>
+                            </li>
+                            <li>
+                                <button class="chip chip--lilac" type="button" tabindex="-1">
+                                    <lord-icon
+                                        class="chip__icon"
+                                        current-color
+                                        src="icons/system-solid-4014-calculator-simple.json"
+                                        loading="interaction"
+                                        trigger="hover"
+                                        target=".chip"
+                                        aria-hidden="true"
+                                    >
+                                        <img
+                                            alt=""
+                                            src="icons/system-solid-4014-calculator-simple.svg"
+                                        />
+                                    </lord-icon>
+                                    accounting
+                                </button>
+                            </li>
+                            <li>
+                                <button class="chip chip--cinnamon" type="button" tabindex="-1">
+                                    <lord-icon
+                                        class="chip__icon"
+                                        current-color
+                                        src="icons/system-solid-146-cart.json"
+                                        loading="interaction"
+                                        trigger="hover"
+                                        target=".chip"
+                                        aria-hidden="true"
+                                    >
+                                        <img alt="" src="icons/system-solid-146-cart.svg" />
+                                    </lord-icon>
+                                    e-commerce
+                                </button>
+                            </li>
+                            <li>
+                                <button class="chip chip--moss" type="button" tabindex="-1">
+                                    <lord-icon
+                                        class="chip__icon"
+                                        current-color
+                                        src="icons/system-solid-4073-email.json"
+                                        loading="interaction"
+                                        trigger="hover"
+                                        target=".chip"
+                                        aria-hidden="true"
+                                    >
+                                        <img alt="" src="icons/system-solid-4073-email.svg" />
+                                    </lord-icon>
+                                    email marketing
+                                </button>
+                            </li>
+                        </ul>
+                        <ul class="set" aria-hidden="true">
+                            <li>
+                                <button class="chip chip--lilac" type="button" tabindex="-1">
+                                    <lord-icon
+                                        class="chip__icon"
+                                        current-color
+                                        src="icons/system-solid-369-code.json"
+                                        loading="interaction"
+                                        trigger="hover"
+                                        target=".chip"
+                                        aria-hidden="true"
+                                    >
+                                        <img alt="" src="icons/system-solid-369-code.svg" />
+                                    </lord-icon>
+                                    coding
+                                </button>
+                            </li>
+                            <li>
+                                <button class="chip chip--cinnamon" type="button" tabindex="-1">
+                                    <lord-icon
+                                        class="chip__icon"
+                                        current-color
+                                        src="icons/system-solid-2526-http.json"
+                                        loading="interaction"
+                                        trigger="hover"
+                                        target=".chip"
+                                        aria-hidden="true"
+                                    >
+                                        <img alt="" src="icons/system-solid-2526-http.svg" />
+                                    </lord-icon>
+                                    web development
+                                </button>
+                            </li>
+                            <li>
+                                <button class="chip chip--moss" type="button" tabindex="-1">
+                                    <lord-icon
+                                        class="chip__icon"
+                                        current-color
+                                        src="icons/system-solid-1327-api.json"
+                                        loading="interaction"
+                                        trigger="hover"
+                                        target=".chip"
+                                        aria-hidden="true"
+                                    >
+                                        <img alt="" src="icons/system-solid-1327-api.svg" />
+                                    </lord-icon>
+                                    backend &amp; APIs
+                                </button>
+                            </li>
+                            <li>
+                                <button class="chip chip--signal" type="button" tabindex="-1">
+                                    <lord-icon
+                                        class="chip__icon"
+                                        current-color
+                                        src="icons/system-solid-153-bar-chart-vertical-grow.json"
+                                        loading="interaction"
+                                        trigger="hover"
+                                        target=".chip"
+                                        aria-hidden="true"
+                                    >
+                                        <img
+                                            alt=""
+                                            src="icons/system-solid-153-bar-chart-vertical-grow.svg"
+                                        />
+                                    </lord-icon>
+                                    data analytics
+                                </button>
+                            </li>
+                            <li>
+                                <button class="chip chip--salvia" type="button" tabindex="-1">
+                                    <lord-icon
+                                        class="chip__icon"
+                                        current-color
+                                        src="icons/system-solid-4094-arrow-trending-up.json"
+                                        loading="interaction"
+                                        trigger="hover"
+                                        target=".chip"
+                                        aria-hidden="true"
+                                    >
+                                        <img
+                                            alt=""
+                                            src="icons/system-solid-4094-arrow-trending-up.svg"
+                                        />
+                                    </lord-icon>
+                                    investing
+                                </button>
+                            </li>
+                            <li>
+                                <button class="chip chip--yamabuki" type="button" tabindex="-1">
+                                    <lord-icon
+                                        class="chip__icon"
+                                        current-color
+                                        src="icons/system-solid-453-piggy-bank.json"
+                                        loading="interaction"
+                                        trigger="hover"
+                                        target=".chip"
+                                        aria-hidden="true"
+                                    >
+                                        <img alt="" src="icons/system-solid-453-piggy-bank.svg" />
+                                    </lord-icon>
+                                    personal finance
+                                </button>
+                            </li>
+                            <li>
+                                <button class="chip chip--lilac" type="button" tabindex="-1">
+                                    <lord-icon
+                                        class="chip__icon"
+                                        current-color
+                                        src="icons/system-solid-4014-calculator-simple.json"
+                                        loading="interaction"
+                                        trigger="hover"
+                                        target=".chip"
+                                        aria-hidden="true"
+                                    >
+                                        <img
+                                            alt=""
+                                            src="icons/system-solid-4014-calculator-simple.svg"
+                                        />
+                                    </lord-icon>
+                                    accounting
+                                </button>
+                            </li>
+                            <li>
+                                <button class="chip chip--cinnamon" type="button" tabindex="-1">
+                                    <lord-icon
+                                        class="chip__icon"
+                                        current-color
+                                        src="icons/system-solid-146-cart.json"
+                                        loading="interaction"
+                                        trigger="hover"
+                                        target=".chip"
+                                        aria-hidden="true"
+                                    >
+                                        <img alt="" src="icons/system-solid-146-cart.svg" />
+                                    </lord-icon>
+                                    e-commerce
+                                </button>
+                            </li>
+                            <li>
+                                <button class="chip chip--moss" type="button" tabindex="-1">
+                                    <lord-icon
+                                        class="chip__icon"
+                                        current-color
+                                        src="icons/system-solid-4073-email.json"
+                                        loading="interaction"
+                                        trigger="hover"
+                                        target=".chip"
+                                        aria-hidden="true"
+                                    >
+                                        <img alt="" src="icons/system-solid-4073-email.svg" />
+                                    </lord-icon>
+                                    email marketing
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="row row--3">
+                    <div class="track">
+                        <ul class="set" aria-label="Life and leisure">
+                            <li>
+                                <button class="chip chip--signal" type="button">
+                                    <lord-icon
+                                        class="chip__icon"
+                                        current-color
+                                        src="icons/system-solid-27-globe.json"
+                                        loading="interaction"
+                                        trigger="hover"
+                                        target=".chip"
+                                        aria-hidden="true"
+                                    >
+                                        <img alt="" src="icons/system-solid-27-globe.svg" />
+                                    </lord-icon>
+                                    languages
+                                </button>
+                            </li>
+                            <li>
+                                <button class="chip chip--salvia" type="button">
+                                    <lord-icon
+                                        class="chip__icon"
+                                        current-color
+                                        src="icons/system-solid-18-location-pin.json"
+                                        loading="interaction"
+                                        trigger="hover"
+                                        target=".chip"
+                                        aria-hidden="true"
+                                    >
+                                        <img alt="" src="icons/system-solid-18-location-pin.svg" />
+                                    </lord-icon>
+                                    travel
+                                </button>
+                            </li>
+                            <li>
+                                <button class="chip chip--yamabuki" type="button">
+                                    <lord-icon
+                                        class="chip__icon"
+                                        current-color
+                                        src="icons/system-solid-13-pizza-slice.json"
+                                        loading="interaction"
+                                        trigger="hover"
+                                        target=".chip"
+                                        aria-hidden="true"
+                                    >
+                                        <img alt="" src="icons/system-solid-13-pizza-slice.svg" />
+                                    </lord-icon>
+                                    cooking
+                                </button>
+                            </li>
+                            <li>
+                                <button class="chip chip--lilac" type="button">
+                                    <lord-icon
+                                        class="chip__icon"
+                                        current-color
+                                        src="icons/system-solid-667-person-cycling.json"
+                                        loading="interaction"
+                                        trigger="hover"
+                                        target=".chip"
+                                        aria-hidden="true"
+                                    >
+                                        <img
+                                            alt=""
+                                            src="icons/system-solid-667-person-cycling.svg"
+                                        />
+                                    </lord-icon>
+                                    cycling
+                                </button>
+                            </li>
+                            <li>
+                                <button class="chip chip--cinnamon" type="button">
+                                    <lord-icon
+                                        class="chip__icon"
+                                        current-color
+                                        src="icons/system-solid-514-swimming-pool.json"
+                                        loading="interaction"
+                                        trigger="hover"
+                                        target=".chip"
+                                        aria-hidden="true"
+                                    >
+                                        <img
+                                            alt=""
+                                            src="icons/system-solid-514-swimming-pool.svg"
+                                        />
+                                    </lord-icon>
+                                    swimming
+                                </button>
+                            </li>
+                            <li>
+                                <button class="chip chip--moss" type="button">
+                                    <lord-icon
+                                        class="chip__icon"
+                                        current-color
+                                        src="icons/system-solid-63-home.json"
+                                        loading="interaction"
+                                        trigger="hover"
+                                        target=".chip"
+                                        aria-hidden="true"
+                                    >
+                                        <img alt="" src="icons/system-solid-63-home.svg" />
+                                    </lord-icon>
+                                    home &amp; interior
+                                </button>
+                            </li>
+                            <li>
+                                <button class="chip chip--signal" type="button">
+                                    <lord-icon
+                                        class="chip__icon"
+                                        current-color
+                                        src="icons/system-solid-448-pet-print.json"
+                                        loading="interaction"
+                                        trigger="hover"
+                                        target=".chip"
+                                        aria-hidden="true"
+                                    >
+                                        <img alt="" src="icons/system-solid-448-pet-print.svg" />
+                                    </lord-icon>
+                                    pet care
+                                </button>
+                            </li>
+                            <li>
+                                <button class="chip chip--salvia" type="button">
+                                    <lord-icon
+                                        class="chip__icon"
+                                        current-color
+                                        src="icons/system-solid-4483-dice-one.json"
+                                        loading="interaction"
+                                        trigger="hover"
+                                        target=".chip"
+                                        aria-hidden="true"
+                                    >
+                                        <img alt="" src="icons/system-solid-4483-dice-one.svg" />
+                                    </lord-icon>
+                                    board games
+                                </button>
+                            </li>
+                        </ul>
+                        <ul class="set" aria-hidden="true">
+                            <li>
+                                <button class="chip chip--signal" type="button" tabindex="-1">
+                                    <lord-icon
+                                        class="chip__icon"
+                                        current-color
+                                        src="icons/system-solid-27-globe.json"
+                                        loading="interaction"
+                                        trigger="hover"
+                                        target=".chip"
+                                        aria-hidden="true"
+                                    >
+                                        <img alt="" src="icons/system-solid-27-globe.svg" />
+                                    </lord-icon>
+                                    languages
+                                </button>
+                            </li>
+                            <li>
+                                <button class="chip chip--salvia" type="button" tabindex="-1">
+                                    <lord-icon
+                                        class="chip__icon"
+                                        current-color
+                                        src="icons/system-solid-18-location-pin.json"
+                                        loading="interaction"
+                                        trigger="hover"
+                                        target=".chip"
+                                        aria-hidden="true"
+                                    >
+                                        <img alt="" src="icons/system-solid-18-location-pin.svg" />
+                                    </lord-icon>
+                                    travel
+                                </button>
+                            </li>
+                            <li>
+                                <button class="chip chip--yamabuki" type="button" tabindex="-1">
+                                    <lord-icon
+                                        class="chip__icon"
+                                        current-color
+                                        src="icons/system-solid-13-pizza-slice.json"
+                                        loading="interaction"
+                                        trigger="hover"
+                                        target=".chip"
+                                        aria-hidden="true"
+                                    >
+                                        <img alt="" src="icons/system-solid-13-pizza-slice.svg" />
+                                    </lord-icon>
+                                    cooking
+                                </button>
+                            </li>
+                            <li>
+                                <button class="chip chip--lilac" type="button" tabindex="-1">
+                                    <lord-icon
+                                        class="chip__icon"
+                                        current-color
+                                        src="icons/system-solid-667-person-cycling.json"
+                                        loading="interaction"
+                                        trigger="hover"
+                                        target=".chip"
+                                        aria-hidden="true"
+                                    >
+                                        <img
+                                            alt=""
+                                            src="icons/system-solid-667-person-cycling.svg"
+                                        />
+                                    </lord-icon>
+                                    cycling
+                                </button>
+                            </li>
+                            <li>
+                                <button class="chip chip--cinnamon" type="button" tabindex="-1">
+                                    <lord-icon
+                                        class="chip__icon"
+                                        current-color
+                                        src="icons/system-solid-514-swimming-pool.json"
+                                        loading="interaction"
+                                        trigger="hover"
+                                        target=".chip"
+                                        aria-hidden="true"
+                                    >
+                                        <img
+                                            alt=""
+                                            src="icons/system-solid-514-swimming-pool.svg"
+                                        />
+                                    </lord-icon>
+                                    swimming
+                                </button>
+                            </li>
+                            <li>
+                                <button class="chip chip--moss" type="button" tabindex="-1">
+                                    <lord-icon
+                                        class="chip__icon"
+                                        current-color
+                                        src="icons/system-solid-63-home.json"
+                                        loading="interaction"
+                                        trigger="hover"
+                                        target=".chip"
+                                        aria-hidden="true"
+                                    >
+                                        <img alt="" src="icons/system-solid-63-home.svg" />
+                                    </lord-icon>
+                                    home &amp; interior
+                                </button>
+                            </li>
+                            <li>
+                                <button class="chip chip--signal" type="button" tabindex="-1">
+                                    <lord-icon
+                                        class="chip__icon"
+                                        current-color
+                                        src="icons/system-solid-448-pet-print.json"
+                                        loading="interaction"
+                                        trigger="hover"
+                                        target=".chip"
+                                        aria-hidden="true"
+                                    >
+                                        <img alt="" src="icons/system-solid-448-pet-print.svg" />
+                                    </lord-icon>
+                                    pet care
+                                </button>
+                            </li>
+                            <li>
+                                <button class="chip chip--salvia" type="button" tabindex="-1">
+                                    <lord-icon
+                                        class="chip__icon"
+                                        current-color
+                                        src="icons/system-solid-4483-dice-one.json"
+                                        loading="interaction"
+                                        trigger="hover"
+                                        target=".chip"
+                                        aria-hidden="true"
+                                    >
+                                        <img alt="" src="icons/system-solid-4483-dice-one.svg" />
+                                    </lord-icon>
+                                    board games
+                                </button>
+                            </li>
+                        </ul>
+                        <ul class="set" aria-hidden="true">
+                            <li>
+                                <button class="chip chip--signal" type="button" tabindex="-1">
+                                    <lord-icon
+                                        class="chip__icon"
+                                        current-color
+                                        src="icons/system-solid-27-globe.json"
+                                        loading="interaction"
+                                        trigger="hover"
+                                        target=".chip"
+                                        aria-hidden="true"
+                                    >
+                                        <img alt="" src="icons/system-solid-27-globe.svg" />
+                                    </lord-icon>
+                                    languages
+                                </button>
+                            </li>
+                            <li>
+                                <button class="chip chip--salvia" type="button" tabindex="-1">
+                                    <lord-icon
+                                        class="chip__icon"
+                                        current-color
+                                        src="icons/system-solid-18-location-pin.json"
+                                        loading="interaction"
+                                        trigger="hover"
+                                        target=".chip"
+                                        aria-hidden="true"
+                                    >
+                                        <img alt="" src="icons/system-solid-18-location-pin.svg" />
+                                    </lord-icon>
+                                    travel
+                                </button>
+                            </li>
+                            <li>
+                                <button class="chip chip--yamabuki" type="button" tabindex="-1">
+                                    <lord-icon
+                                        class="chip__icon"
+                                        current-color
+                                        src="icons/system-solid-13-pizza-slice.json"
+                                        loading="interaction"
+                                        trigger="hover"
+                                        target=".chip"
+                                        aria-hidden="true"
+                                    >
+                                        <img alt="" src="icons/system-solid-13-pizza-slice.svg" />
+                                    </lord-icon>
+                                    cooking
+                                </button>
+                            </li>
+                            <li>
+                                <button class="chip chip--lilac" type="button" tabindex="-1">
+                                    <lord-icon
+                                        class="chip__icon"
+                                        current-color
+                                        src="icons/system-solid-667-person-cycling.json"
+                                        loading="interaction"
+                                        trigger="hover"
+                                        target=".chip"
+                                        aria-hidden="true"
+                                    >
+                                        <img
+                                            alt=""
+                                            src="icons/system-solid-667-person-cycling.svg"
+                                        />
+                                    </lord-icon>
+                                    cycling
+                                </button>
+                            </li>
+                            <li>
+                                <button class="chip chip--cinnamon" type="button" tabindex="-1">
+                                    <lord-icon
+                                        class="chip__icon"
+                                        current-color
+                                        src="icons/system-solid-514-swimming-pool.json"
+                                        loading="interaction"
+                                        trigger="hover"
+                                        target=".chip"
+                                        aria-hidden="true"
+                                    >
+                                        <img
+                                            alt=""
+                                            src="icons/system-solid-514-swimming-pool.svg"
+                                        />
+                                    </lord-icon>
+                                    swimming
+                                </button>
+                            </li>
+                            <li>
+                                <button class="chip chip--moss" type="button" tabindex="-1">
+                                    <lord-icon
+                                        class="chip__icon"
+                                        current-color
+                                        src="icons/system-solid-63-home.json"
+                                        loading="interaction"
+                                        trigger="hover"
+                                        target=".chip"
+                                        aria-hidden="true"
+                                    >
+                                        <img alt="" src="icons/system-solid-63-home.svg" />
+                                    </lord-icon>
+                                    home &amp; interior
+                                </button>
+                            </li>
+                            <li>
+                                <button class="chip chip--signal" type="button" tabindex="-1">
+                                    <lord-icon
+                                        class="chip__icon"
+                                        current-color
+                                        src="icons/system-solid-448-pet-print.json"
+                                        loading="interaction"
+                                        trigger="hover"
+                                        target=".chip"
+                                        aria-hidden="true"
+                                    >
+                                        <img alt="" src="icons/system-solid-448-pet-print.svg" />
+                                    </lord-icon>
+                                    pet care
+                                </button>
+                            </li>
+                            <li>
+                                <button class="chip chip--salvia" type="button" tabindex="-1">
+                                    <lord-icon
+                                        class="chip__icon"
+                                        current-color
+                                        src="icons/system-solid-4483-dice-one.json"
+                                        loading="interaction"
+                                        trigger="hover"
+                                        target=".chip"
+                                        aria-hidden="true"
+                                    >
+                                        <img alt="" src="icons/system-solid-4483-dice-one.svg" />
+                                    </lord-icon>
+                                    board games
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <button class="cta" type="button">Browse all courses</button>
+        </main>
+    </body>
+</html>

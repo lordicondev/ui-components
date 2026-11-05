@@ -29,7 +29,7 @@ describe('collectSources', () => {
         const files = collect({
             'index.html': `<link rel="stylesheet" href="./demo.css" />
                 <script type="module" src="./main.ts"></script>
-                <lord-icon src="icons/lock.json"></lord-icon>`,
+                <lord-icon src="icons/system-outline-94-lock.json"></lord-icon>`,
             'demo.css': "@import './extra.css';",
             'extra.css': '.a { color: red }',
             'main.ts': "import { helper } from './helper.ts';\nimport 'some-package';",

@@ -2,9 +2,18 @@
     "$schema": "../../schemas/demo.schema.json",
     "slug": "dropdown-menu",
     "title": "Dropdown menu",
-    "description": "A menu of grouped commands whose rows answer the arrow keys and the pointer through one attribute.",
-    "tags": ["overlay", "navigation", "action"],
-    "icons": ["three-dots-vertical", "pencil-line", "copy", "link", "avatars-group", "trash-bin"],
+    "description": "A menu of grouped actions that opens from a button. Icons react to the mouse and the arrow keys.",
+    "group": "menus",
+    "stage": "medium",
+    "icons": [
+        "system-outline-4101-three-dots-vertical",
+        "system-outline-4062-pencil-line",
+        "system-outline-378-copy",
+        "system-outline-11-link",
+        "system-outline-314-avatars-group",
+        "system-outline-185-trash-bin"
+    ],
+    "iconsNote": "The icons in this menu use the default Hover state, so any System Outline or System Solid icon will fit. Stick with the default animation, as In, Morph and Loop states don’t work well here.",
     "fragments": [
         {
             "id": "setup",
@@ -20,7 +29,7 @@
             "region": "menu",
             "lang": "html",
             "title": "The panel, a group and a row",
-            "note": "data-keys for the arrow keys, data-choose for a row that can be chosen."
+            "note": "Two attributes hook the menu up to the arrow keys and to choosing a row."
         },
         {
             "id": "wiring",
@@ -36,7 +45,7 @@
             "region": "danger",
             "lang": "css",
             "title": "The destructive row",
-            "note": "One rule. The icon takes the colour through current-color."
+            "note": "One rule turns a row and its icon red."
         }
     ]
 }

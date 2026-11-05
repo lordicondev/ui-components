@@ -4,17 +4,25 @@
  *
  * Usage: npm run prepare:portal
  */
-import { cpSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { cpSync, existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { loadConfig, repoRoot } from './lib/config.ts';
 import { demoDir, listDemos, readManifest, type Fragment } from './lib/demos.ts';
-import { PORTAL_ICONS, iconLabel, iconUrl, readLockfile } from './lib/icons.ts';
-import { demoLinks, repoUrl } from './lib/links.ts';
-import { extractRegion, withoutMarkers } from './lib/regions.ts';
+import { PORTAL_ICONS, iconLabel, iconPath, iconStates, readLockfile } from './lib/icons.ts';
+import { demoLinks, lordiconUrl, repoUrl } from './lib/links.ts';
+import { extractFragment, withoutMarkers } from './lib/regions.ts';
 import { demoSources } from './lib/sources.ts';
 import { toJavaScript } from './lib/transpile.ts';
 
 type Code = { ts: string; js: string } | { code: string };
+
+/** A stretch of code, or the mark for lines the fragment leaves out. */
+type Segment = { code: string } | { skip: string };
+
+/** What a fragment shows, and what Copy copies: the region with nothing left out. */
+type FragmentCode =
+    | { ts: Segment[]; js: Segment[]; tsFull: string; jsFull: string }
+    | { code: Segment[]; full: string };
 
 type PortalFragment = {
     id: string;
@@ -23,7 +31,7 @@ type PortalFragment = {
     lang: string;
     /** Fragments always start folded. */
     collapsed: boolean;
-} & Code;
+} & FragmentCode;
 
 const target = resolve(repoRoot, 'portal/src/_data/demos.json');
 const config = loadConfig();
@@ -37,13 +45,45 @@ async function code(source: string, filePath: string, lang: string): Promise<Cod
     return { ts: source, js: await toJavaScript(source, filePath) };
 }
 
+/** The parts between skips, with a mark at each skip. */
+function segments(parts: string[], skips: string[]): Segment[] {
+    return parts.flatMap((code, index) =>
+        index < skips.length ? [{ code }, { skip: skips[index] }] : [{ code }],
+    );
+}
+
+/** Stands in for a skip while the TypeScript is turned into JavaScript. */
+const SKIP_LINE = '// @@skip@@';
+
+async function fragmentCode(
+    parts: string[],
+    skips: string[],
+    full: string,
+    filePath: string,
+    lang: string,
+): Promise<FragmentCode> {
+    if (lang !== 'ts') return { code: segments(parts, skips), full };
+
+    // The parts go through the compiler as one program, so each keeps its context.
+    const joined = parts.join(`\n${SKIP_LINE}\n`);
+    const jsParts = (await toJavaScript(joined, filePath))
+        .split(/^[ \t]*\/\/ @@skip@@[ \t]*$/m)
+        .map((part) => part.replace(/^\s*\n|\n\s*$/g, ''));
+
+    return {
+        ts: segments(parts, skips),
+        js: segments(jsParts, skips),
+        tsFull: full,
+        jsFull: await toJavaScript(full, filePath),
+    };
+}
+
 async function demoFragment(slug: string, fragment: Fragment): Promise<PortalFragment> {
     const filePath = resolve(demoDir(slug), fragment.file);
-    const source = extractRegion(
+    const { parts, skips, full } = extractFragment(
         readFileSync(filePath, 'utf8'),
         fragment.region,
         `demos/${slug}/${fragment.file}`,
-        fragment.lang,
     );
 
     return {
@@ -52,7 +92,7 @@ async function demoFragment(slug: string, fragment: Fragment): Promise<PortalFra
         note: fragment.note,
         lang: fragment.lang,
         collapsed: true,
-        ...(await code(source, filePath, fragment.lang)),
+        ...(await fragmentCode(parts, skips, full, filePath, fragment.lang)),
     };
 }
 
@@ -81,32 +121,86 @@ async function files(slug: string) {
     };
 }
 
+/** The sections of the index, in order. A demo names its own in `group`. */
+const GROUPS = [
+    { id: 'buttons', title: 'Buttons' },
+    { id: 'inputs', title: 'Forms & Inputs' },
+    { id: 'menus', title: 'Menus' },
+    { id: 'navigation', title: 'Navigation' },
+    { id: 'feedback', title: 'Feedback & Progress' },
+    { id: 'containers', title: 'Containers' },
+    { id: 'sections', title: 'Page sections' },
+];
+
 /**
- * The icon each card on the index shows is the demo's first, except where another card
- * shows that one already.
+ * A card on the index shows the demo's thumbnail video. Without one, it shows an icon: the
+ * demo's first, except where another card shows that one already.
  */
 const COVERS: Record<string, string> = {
-    'command-menu': 'file-text',
-    'input-form': 'microphone',
+    'command-menu': 'system-outline-56-file-text',
+    'input-form': 'system-outline-188-microphone',
 };
+
+/** The video and its first frame, from portal/src/thumbnails/, if the demo has them. */
+function thumbnail(slug: string) {
+    const dir = resolve(repoRoot, 'portal/src/thumbnails');
+    if (!existsSync(resolve(dir, `${slug}.mp4`))) return undefined;
+    if (!existsSync(resolve(dir, `${slug}.webp`))) {
+        throw new Error(`portal/src/thumbnails/${slug}.mp4 has no ${slug}.webp poster`);
+    }
+    return { video: `/thumbnails/${slug}.mp4`, poster: `/thumbnails/${slug}.webp` };
+}
+
+/** The trigger a preview in the icon table plays its state with, by the state's kind. */
+const PREVIEW_TRIGGERS: Record<string, string> = {
+    morph: 'morph',
+    loop: 'loop-on-hover',
+};
+
+/** One row of the icon table: the icon, its Lordicon name, and the states the demo plays. */
+function iconRow(alias: string, chosen: string | string[] | undefined) {
+    const entry = lockfile.get(alias);
+    const page = entry && iconPath(entry);
+    const { default: fallback } = iconStates(alias);
+    const states = [chosen ?? fallback].flat().map((name) => ({
+        name,
+        kind: name.split('-')[0],
+        default: name === fallback,
+    }));
+
+    return {
+        alias,
+        id: entry ? iconLabel(entry) : 'unrecorded',
+        url: page ? lordiconUrl(config, page) : undefined,
+        states,
+        // The preview plays the first state, the way the demo does.
+        preview: {
+            state: states[0].default ? undefined : states[0].name,
+            trigger: PREVIEW_TRIGGERS[states[0].kind] ?? 'hover',
+        },
+    };
+}
 
 const demos = [];
 
 for (const slug of listDemos()) {
-    const { $schema: _schema, ...manifest } = readManifest(slug) as Record<string, unknown> &
-        ReturnType<typeof readManifest>;
+    const {
+        $schema: _schema,
+        iconStates: chosen = {},
+        ...manifest
+    } = readManifest(slug) as Record<string, unknown> & ReturnType<typeof readManifest>;
+
+    // A group with no section would leave the demo off the index.
+    if (!GROUPS.some((group) => group.id === manifest.group)) {
+        throw new Error(`demos/${slug}/demo.json: no index section for group "${manifest.group}"`);
+    }
 
     demos.push({
         ...manifest,
-        icons: manifest.icons.map((alias) => {
-            const entry = lockfile.get(alias);
-            return {
-                alias,
-                id: entry ? iconLabel(entry) : 'unrecorded',
-                url: entry ? iconUrl(entry) : undefined,
-            };
-        }),
+        stage: manifest.stage ?? 'large',
+        icons: manifest.icons.map((alias) => iconRow(alias, chosen[alias])),
         cover: COVERS[slug] ?? manifest.icons[0],
+        thumbnail: thumbnail(slug),
         links: demoLinks(config, slug),
         fragments: await Promise.all(
             manifest.fragments.map((fragment) => demoFragment(slug, fragment)),
@@ -117,9 +211,6 @@ for (const slug of listDemos()) {
     console.log(`  ${slug}`);
 }
 
-/** Every tag a demo can be filtered by. Each one is a chip on the index. */
-const tags = [...new Set(demos.flatMap((demo) => demo.tags))].sort();
-
 mkdirSync(resolve(repoRoot, 'portal/src/_data'), { recursive: true });
 writeFileSync(
     target,
@@ -129,10 +220,14 @@ writeFileSync(
                 title: config.title,
                 description: config.description,
                 version,
-                tags,
                 standaloneBranch: config.repo.exportBranch,
                 repo: repoUrl(config),
+                lordicon: {
+                    home: lordiconUrl(config),
+                    licenses: lordiconUrl(config, '/licenses'),
+                },
             },
+            groups: GROUPS,
             demos,
         },
         null,
@@ -143,7 +238,8 @@ writeFileSync(
 
 console.log(`\nwrote ${target}`);
 
-// The portal uses the same tokens and typeface as the demos.
+// The portal uses the same tokens as the demos. Its fonts sit next to theirs: Inter and the
+// mono face are the portal's own.
 for (const [from, to] of [
     ['shared/styles/palette.css', 'portal/src/styles/palette.css'],
     ['shared/styles/tokens.css', 'portal/src/styles/tokens.css'],

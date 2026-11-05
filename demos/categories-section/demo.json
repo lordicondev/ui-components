@@ -1,0 +1,79 @@
+{
+    "$schema": "../../schemas/demo.schema.json",
+    "slug": "categories-section",
+    "title": "Categories section",
+    "description": "Three rows of category chips that scroll without end, the middle one the other way. Point at a row to stop it; the chip’s icon plays.",
+    "group": "sections",
+    "stage": "large",
+    "icons": [
+        "system-solid-61-camera",
+        "system-solid-4239-video-camera",
+        "system-solid-12-layers",
+        "system-solid-1388-grid-bento",
+        "system-solid-35-pencil",
+        "system-solid-54-image-mountain",
+        "system-solid-56-file-text",
+        "system-solid-362-article",
+        "system-solid-188-microphone",
+        "system-solid-369-code",
+        "system-solid-2526-http",
+        "system-solid-1327-api",
+        "system-solid-153-bar-chart-vertical-grow",
+        "system-solid-4094-arrow-trending-up",
+        "system-solid-453-piggy-bank",
+        "system-solid-4014-calculator-simple",
+        "system-solid-146-cart",
+        "system-solid-4073-email",
+        "system-solid-27-globe",
+        "system-solid-18-location-pin",
+        "system-solid-13-pizza-slice",
+        "system-solid-667-person-cycling",
+        "system-solid-514-swimming-pool",
+        "system-solid-63-home",
+        "system-solid-448-pet-print",
+        "system-solid-4483-dice-one"
+    ],
+    "iconsNote": "The icons in this section use the default Hover state, so any System Outline or System Solid icon will fit. Stick with the default animation, as In, Morph and Loop states don’t work well here.",
+    "fragments": [
+        {
+            "id": "setup",
+            "file": "main.ts",
+            "region": "setup",
+            "lang": "ts",
+            "title": "Define the element",
+            "note": "Built-in triggers only. The rest of the script is one call that scrolls the rows."
+        },
+        {
+            "id": "markup",
+            "file": "index.html",
+            "region": "markup",
+            "lang": "html",
+            "title": "A row of chips",
+            "note": "Hovering anywhere on a chip plays its icon. Copies of the set fill the loop."
+        },
+        {
+            "id": "scroll",
+            "file": "categories-section.css",
+            "region": "scroll",
+            "lang": "css",
+            "title": "Slide by one set, then start over",
+            "note": "One number moves the whole row, so the loop never shows a seam."
+        },
+        {
+            "id": "frame",
+            "file": "../../shared/motion/marquee.ts",
+            "region": "frame",
+            "lang": "ts",
+            "title": "Slow to a stop, then pick up",
+            "note": "A row slows to a stop under the pointer, and picks up again after."
+        },
+        {
+            "id": "colour",
+            "file": "categories-section.css",
+            "region": "colour",
+            "lang": "css",
+            "title": "Chip colours",
+            "note": "One custom property per chip. Hover mixes it with black."
+        }
+    ]
+}

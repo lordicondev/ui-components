@@ -109,8 +109,11 @@
     cursor: pointer;
 }
 
-.plan__action:hover {
-    background: var(--surface-muted);
+/* Only under a mouse: on a touch screen :hover stays on after the tap. */
+@media (hover: hover) {
+    .plan__action:hover {
+        background: var(--surface-muted);
+    }
 }
 
 .plan--featured {
@@ -128,9 +131,11 @@
     box-shadow: var(--shadow-accent);
 }
 
-.plan--featured .plan__action:hover {
-    border-color: var(--accent-strong);
-    background: var(--accent-strong);
+@media (hover: hover) {
+    .plan--featured .plan__action:hover {
+        border-color: var(--accent-strong);
+        background: var(--accent-strong);
+    }
 }
 
 /* 12px above the card's border. */

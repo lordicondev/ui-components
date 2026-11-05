@@ -2,9 +2,16 @@
     "$schema": "../../schemas/demo.schema.json",
     "slug": "alert",
     "title": "Alerts",
-    "description": "Four kinds of alert, and icons that greet the card they arrive on.",
-    "tags": ["feedback", "entrance", "status"],
-    "icons": ["info-circle", "check-circle", "warning-triangle", "cross-circle", "cross"],
+    "description": "Short messages about a change or a problem, in four types. Each icon plays as the alert appears.",
+    "group": "feedback",
+    "stage": "large",
+    "icons": [
+        "system-outline-367-info-circle",
+        "system-outline-24-check-circle",
+        "system-outline-1140-warning-triangle",
+        "system-outline-25-cross-circle",
+        "system-outline-38-cross"
+    ],
     "fragments": [
         {
             "id": "setup",
@@ -20,7 +27,7 @@
             "region": "markup",
             "lang": "html",
             "title": "One alert card",
-            "note": "The icon watches the card it sits in, through target. The image inside shows until the icon is ready."
+            "note": "The icon plays as the card arrives, and again on hover."
         },
         {
             "id": "build",
@@ -52,7 +59,7 @@
             "region": "deck",
             "lang": "css",
             "title": "The deck: position, size and fade from --depth",
-            "note": "translate and scale are separate properties, so they can take different times."
+            "note": "New alerts stack like a deck, the older ones shrinking behind."
         },
         {
             "id": "leaving",

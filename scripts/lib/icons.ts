@@ -2,6 +2,8 @@ import { createHash } from 'node:crypto';
 import { readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { repoRoot } from './config.ts';
+import { demoDir, readManifest } from './demos.ts';
+import { demoSources, type SourceFile } from './sources.ts';
 
 /**
  * Where an icon in shared/public/icons came from.
@@ -31,9 +33,61 @@ export type Lockfile = { comment: string; icons: IconEntry[] };
  * Icons the portal itself uses in its chrome. They belong to no demo, but they come from
  * the same set and are checked and fetched the same way.
  */
-export const PORTAL_ICONS = ['arrow-out-square'];
+export const PORTAL_ICONS = [
+    'system-outline-751-arrow-out-square',
+    'system-regular-379-menu-hamburger',
+    'system-outline-38-cross',
+    'system-outline-31-chevron-right',
+    'system-outline-367-info-circle',
+];
+
+/**
+ * Icons the arrows of shared/ui/pager.ts use. A demo with a pager loads them without
+ * declaring them: they switch between the demo's parts and are not part of its component,
+ * so the portal does not list them.
+ */
+export const PAGER_ICONS = ['system-outline-32-chevron-left'];
+
+/** The icons a demo ships: the ones it declares, plus the pager's if it imports the pager. */
+export function shippedIcons(declared: string[], files: SourceFile[]): string[] {
+    const paged = files.some((file) => file.exportPath === 'shared/ui/pager.ts');
+    return [...new Set([...declared, ...(paged ? PAGER_ICONS : [])])];
+}
 
 export const iconsDir = resolve(repoRoot, 'shared/public/icons');
+
+/**
+ * The files from shared/public/icons a demo ships: its icons and the placeholders its markup
+ * shows. The portal build and the export copy these and nothing else.
+ */
+export function demoIconFiles(slug: string): string[] {
+    const manifest = readManifest(slug);
+    const sources = demoSources(
+        slug,
+        manifest.fragments.map((fragment) => fragment.file),
+    );
+    const html = readFileSync(resolve(demoDir(slug), 'index.html'), 'utf8');
+
+    return [
+        ...shippedIcons(manifest.icons, sources).map((alias) => `${alias}.json`),
+        ...placeholdersIn(html).map((name) => `${name}.svg`),
+    ];
+}
+
+/**
+ * The icons a demo's files name as `icons/<alias>.json` or `.svg`. A name built at run time
+ * is not seen.
+ */
+export function referencedIcons(files: SourceFile[]): string[] {
+    const aliases = files.flatMap((file) =>
+        [
+            ...readFileSync(file.path, 'utf8').matchAll(
+                /icons\/([a-z0-9-]+)(?:\.[a-z0-9-]+)?\.(?:json|svg)/g,
+            ),
+        ].map((match) => match[1]),
+    );
+    return [...new Set(aliases)].sort();
+}
 export const lockfilePath = resolve(repoRoot, 'shared/icons.json');
 
 export const LOCKFILE_COMMENT =
@@ -75,7 +129,7 @@ export function placeholdersIn(html: string): string[] {
     return [...new Set(names)].sort();
 }
 
-/** The icon a placeholder is drawn from: `star.morph-select` is `star`. */
+/** The icon a placeholder is drawn from: `system-outline-237-star.morph-select` is `system-outline-237-star`. */
 export function placeholderAlias(name: string): string {
     return name.split('.')[0];
 }
@@ -92,19 +146,34 @@ export function looksLikeLottie(content: string): boolean {
     }
 }
 
-/** The icon's page on lordicon.com, for icons we know the origin of. */
-export function iconUrl(entry: IconEntry): string | undefined {
+/** The path of the icon's page on lordicon.com, for icons we know the origin of. */
+export function iconPath(entry: IconEntry): string | undefined {
     if (!entry.name) return undefined;
-    return `https://lordicon.com/icons/${entry.family}/${entry.style}/${entry.index}-${entry.name}`;
+    return `/icons/${entry.family}/${entry.style}/${entry.index}-${entry.name}`;
 }
 
-/**
- * How to describe an icon in a listing: its Lordicon identifier where we know one, plus a
- * note when the file has since been replaced by hand.
- */
+/** The icon's Lordicon name, as lordicon.com gives it: `system-outline-94-lock`. */
 export function iconLabel(entry: IconEntry): string {
-    const id = entry.name
+    return entry.name
         ? `${entry.family}-${entry.style}-${entry.index}-${entry.name}`
         : 'hand-placed';
-    return entry.source === 'manual' && entry.name ? `${id} (edited by hand)` : id;
+}
+
+export type IconStates = {
+    /** Every state in the file, without the morph ratio: `morph-select`, not `morph-select:0.5`. */
+    names: string[];
+    /** The state the element plays when the markup names none. */
+    default: string;
+};
+
+/** The states an icon's file carries, read from its Lottie markers. */
+export function iconStates(alias: string): IconStates {
+    const data = JSON.parse(readFileSync(resolve(iconsDir, `${alias}.json`), 'utf8')) as {
+        markers?: { cm: string }[];
+    };
+    const markers = (data.markers ?? []).map((marker) => marker.cm);
+    const names = markers.map((marker) => marker.replace(/^default:/, '').split(':')[0]);
+    const index = markers.findIndex((marker) => marker.startsWith('default:'));
+
+    return { names, default: names[index] ?? names[0] ?? '' };
 }

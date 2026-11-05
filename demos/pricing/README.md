@@ -29,4 +29,4 @@ once.
   top border, `plans--compact` drops it and puts name and price in one row. The badge is
   one more element in the card.
 - Three columns from 920px, one below. The middle column is a little wider.
-- The dots are `shared/ui/pager.ts`.
+- The dots and arrows are `shared/ui/pager.ts`.

@@ -2,20 +2,25 @@
     "$schema": "../../schemas/demo.schema.json",
     "slug": "input-form",
     "title": "Input form",
-    "description": "A composer at the foot of the page, so its menu opens upward, with a submenu and a search inside.",
-    "tags": ["overlay", "form", "hover", "navigation"],
+    "description": "A message composer pinned to the bottom of the page. Its menu opens upward, with a submenu and a search inside.",
+    "group": "inputs",
+    "stage": "small",
     "icons": [
-        "plus",
-        "microphone",
-        "arrow-up",
-        "link",
-        "folder",
-        "chevron-right",
-        "bulb",
-        "plug",
-        "magnifier",
-        "cross"
+        "system-outline-48-plus",
+        "system-outline-188-microphone",
+        "system-outline-2754-arrow-up",
+        "system-outline-11-link",
+        "system-outline-120-folder",
+        "system-outline-31-chevron-right",
+        "system-outline-36-bulb",
+        "system-outline-452-plug",
+        "system-outline-19-magnifier",
+        "system-outline-38-cross"
     ],
+    "iconStates": {
+        "system-outline-38-cross": "in-reveal"
+    },
+    "iconsNote": "The icons in this form use the default Hover state, so any System Outline or System Solid icon will fit. Stick with the default animation, as In, Morph and Loop states don’t work well here.",
     "fragments": [
         {
             "id": "setup",
@@ -31,7 +36,7 @@
             "region": "composer",
             "lang": "html",
             "title": "The composer and the plus button",
-            "note": "popovertarget is all it takes to open the menu."
+            "note": "The plus opens the menu with a plain HTML attribute."
         },
         {
             "id": "row",

@@ -5,10 +5,11 @@
  */
 // The schema is draft 2020-12, which is a separate entry point in ajv.
 import { Ajv2020, type ErrorObject } from 'ajv/dist/2020.js';
-import { readFileSync } from 'node:fs';
+import { readdirSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { repoRoot } from './lib/config.ts';
 import { demoDir, listDemos, type DemoManifest } from './lib/demos.ts';
+import { iconFiles, iconStates } from './lib/icons.ts';
 
 const schema = JSON.parse(readFileSync(resolve(repoRoot, 'schemas/demo.schema.json'), 'utf8'));
 const ajv = new Ajv2020({ allErrors: true, strict: false });
@@ -25,6 +26,36 @@ function describe(error: ErrorObject): string {
 }
 
 const readme = readFileSync(resolve(repoRoot, 'README.md'), 'utf8');
+const onDisk = new Set(iconFiles());
+
+/** The demo's markup and code, where a state it plays has to be named. */
+function demoCode(slug: string): string {
+    return readdirSync(demoDir(slug))
+        .filter((file) => /\.(html|ts)$/.test(file))
+        .map((file) => readFileSync(resolve(demoDir(slug), file), 'utf8'))
+        .join('\n');
+}
+
+/** A state the table would show that the icon does not have, or the demo does not play. */
+function stateProblems(slug: string, manifest: DemoManifest): string[] {
+    const code = demoCode(slug);
+
+    return Object.entries(manifest.iconStates ?? {}).flatMap(([alias, value]) => {
+        if (!manifest.icons.includes(alias)) return [`iconStates: "${alias}" is not in icons`];
+        if (!onDisk.has(alias)) return [];
+
+        const { names } = iconStates(alias);
+        return [value]
+            .flat()
+            .flatMap((state) =>
+                !names.includes(state)
+                    ? [`iconStates: ${alias} has no state "${state}" (${names.join(', ')})`]
+                    : !code.includes(state)
+                      ? [`iconStates: "${state}" for ${alias} appears nowhere in the demo's code`]
+                      : [],
+            );
+    });
+}
 
 const problems: string[] = [];
 
@@ -55,6 +86,8 @@ for (const slug of listDemos()) {
     if (duplicate) {
         problems.push(`${slug}: two fragments share the id "${duplicate}"`);
     }
+
+    for (const problem of stateProblems(slug, manifest)) problems.push(`${slug}: ${problem}`);
 
     console.log(`  ${slug.padEnd(20)} ${manifest.fragments.length} fragment(s)`);
 }

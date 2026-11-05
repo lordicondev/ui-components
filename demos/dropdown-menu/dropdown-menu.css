@@ -22,9 +22,15 @@
     cursor: pointer;
 }
 
-.dots:hover,
 .dots[aria-expanded='true'] {
     background: var(--surface-sunken);
+}
+
+/* Only under a mouse: on a touch screen :hover stays on after the tap. */
+@media (hover: hover) {
+    .dots:hover {
+        background: var(--surface-sunken);
+    }
 }
 
 .dots__mark {

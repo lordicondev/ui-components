@@ -1,7 +1,9 @@
+import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import type { InlineConfig, Plugin } from 'vite';
 import { repoRoot } from './config.ts';
-import { demoDir } from './demos.ts';
+import { demoDir, readManifest } from './demos.ts';
+import { demoIconFiles, iconsDir } from './icons.ts';
 
 const shared = resolve(repoRoot, 'shared');
 
@@ -68,6 +70,31 @@ function stripComments(): Plugin {
     };
 }
 
+/**
+ * A built demo ships only its own icons and placeholders, not all of shared/public. The dev
+ * server still serves everything. In the portal the demo's page and its card also show each
+ * declared icon's rest frame from the app folder.
+ */
+function demoIcons(slug: string, embed: boolean): Plugin {
+    return {
+        name: 'demo-icons',
+        apply: 'build',
+        config: () => ({ publicDir: false }),
+        generateBundle() {
+            const files = new Set(demoIconFiles(slug));
+            if (embed) for (const alias of readManifest(slug).icons) files.add(`${alias}.svg`);
+
+            for (const file of files) {
+                this.emitFile({
+                    type: 'asset',
+                    fileName: `icons/${file}`,
+                    source: readFileSync(resolve(iconsDir, file)),
+                });
+            }
+        },
+    };
+}
+
 export type DemoConfigOptions = {
     /** True when the build is for the portal, which embeds the demo in an iframe. */
     embed?: boolean;
@@ -82,10 +109,13 @@ export function demoConfig(slug: string, options: DemoConfigOptions = {}): Inlin
         configFile: false,
         root: demoDir(slug),
         base: './',
-        // shared/public/icons is served to every demo as ./icons/*.json.
+        // shared/public/icons is served to every demo as ./icons/*.json. A build narrows it.
         publicDir: resolve(shared, 'public'),
         resolve: { alias: { '@shared': shared } },
-        plugins: options.embed ? [reportHeight(), preloadFont(), stripComments()] : [],
+        plugins: [
+            demoIcons(slug, Boolean(options.embed)),
+            ...(options.embed ? [reportHeight(), preloadFont(), stripComments()] : []),
+        ],
         build: {
             outDir: resolve(repoRoot, 'dist/demos', slug, 'app'),
             emptyOutDir: true,

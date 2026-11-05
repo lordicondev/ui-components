@@ -16,6 +16,7 @@ npm run build                   # demos, exports, portal data, then the portal
 npm run build:release           # the same, for https://components.lordicon.com/
 npm run check:links             # every link in the built site; see docs/deploy.md
 npm start                       # the built portal at localhost:3000
+npm run codepen                 # the list to publish pens from; see CodePen below
 ```
 
 `npm run dev:portal` serves the portal with live reload instead. See
@@ -32,7 +33,7 @@ version in `package.json` and `portal/deno.json` in step.
 | `shared/`          | Triggers, motion, shared UI, styles, icons. See [shared/README.md](shared/README.md) |
 | `scripts/`         | Build, export, portal data and check scripts                                         |
 | `portal/`          | The Lume site                                                                        |
-| `site.config.json` | Project name and the addresses derived from it                                       |
+| `site.config.json` | Project name, the addresses derived from it, UTM tags for lordicon.com links         |
 
 Each demo is its own Vite project; `scripts/lib/vite-config.ts` builds one config per demo.
 
@@ -41,12 +42,16 @@ Each demo is its own Vite project; `scripts/lib/vite-config.ts` builds one confi
 1. Create `demos/<slug>/` with `index.html`, `main.ts`, `<slug>.css` and `README.md`.
 2. In `main.ts`, call `defineElement()` in the `setup` region; other imports go below it.
    What each icon does is its `trigger` attribute in the markup.
-3. Write `demo.json`. It points at `schemas/demo.schema.json`, so an editor helps.
+3. Write `demo.json`. It points at `schemas/demo.schema.json`, so an editor helps. Pick the
+   smallest `stage` (the frame's height in the portal) that fits the demo with its menus open,
+   and the `group` it is listed under on the index.
 4. Mark the parts worth reading with `#region` / `#endregion` and list them as
    `fragments`. Every region must be a fragment. `#skip` … `#endskip` inside a region
    collapses a stretch to an ellipsis.
-5. Declare the icons by alias, put the Lottie JSON in `shared/public/icons/`, then run
-   `npm run check:icons -- --record`.
+5. Declare the icons by their Lordicon name, put the Lottie JSON in `shared/public/icons/`, then run
+   `npm run check:icons -- --record`. Name the states the demo plays in `iconStates`
+   (`"system-outline-69-eye": "morph-close"`); an icon left out shows its default. `iconsNote` says what to
+   know before swapping an icon. Both appear in the portal's icon table.
 6. `npm run check && npm test`.
 
 ## Conventions
@@ -63,12 +68,12 @@ Each demo is its own Vite project; `scripts/lib/vite-config.ts` builds one confi
   imports; what it finds is what the portal lists and the export ships.
 - Icons carry the `current-color` attribute and inherit `color`.
 - An icon visible before any interaction holds its placeholder:
-  `<lord-icon …><img alt="" src="icons/star.svg" /></lord-icon>`. The SVG is black; set
+  `<lord-icon …><img alt="" src="icons/system-outline-237-star.svg" /></lord-icon>`. The SVG is black; set
   `--icon-filter: var(--filter-…)` next to `color` in every rule that can match at load.
   Hover rules need none: the icon is ready by then.
 - Such an icon loads on the first pointer, click or focus on its target
   (`loading="interaction"`), unless something else changes it: another control (the rating,
-  the menu-bar tools), a timer (the bell), or an `intro`. Those load at once.
+  the toolbar tools), a timer (the bell, the title icons), or an `intro`. Those load at once.
 - Nothing moves when the script runs: pages a script switches between ship `hidden`, and
   markup that could be static is in the HTML.
 - Controls carry their own ARIA state, work from the keyboard and respect
@@ -92,22 +97,29 @@ state, then what makes this demo different. Titles say what the reader will see.
 Fragments come from the demo's own files; `shared/` code is listed whole under "What it
 imports".
 
+A fragment starts folded, so its note is what a reader sees first. The note says in one
+sentence what the code gets them; the comments in the code say how it works, for whoever
+copies the file. Do not repeat one in the other. A `#skip` shows as a mark, not code, and
+Copy copies the region whole.
+
 ## Icons
 
-`shared/public/icons/` holds only the icons the demos use, as Lottie JSON. A demo declares
-them by alias: `lock` is `system-outline-94-lock`, `lock-solid` is `system-solid-94-lock`.
+`shared/public/icons/` holds only the icons the demos use, as Lottie JSON. Each file is named
+as Lordicon names the icon, `system-outline-94-lock.json`, and a demo declares it by that name.
+The pager's arrows are the exception: `PAGER_ICONS` in `scripts/lib/icons.ts` ships with every
+demo that imports the pager, undeclared, so the portal does not list it as the demo's icon.
 `shared/icons.json` records where each came from. Swapping a file by hand is normal:
 
 ```sh
-cp better-lock.json shared/public/icons/lock.json
+cp better-lock.json shared/public/icons/system-outline-94-lock.json
 npm run check:icons -- --record
 ```
 
 Each icon has black SVG placeholders next to its JSON:
 
-- `<alias>.svg`, the first frame of its default state: what the icon shows at rest;
-- `<alias>.<state>.svg`, the second look of a morph, only where a demo starts in it
-  (`star.morph-select.svg` for a filled star).
+- `<name>.svg`, the first frame of its default state: what the icon shows at rest;
+- `<name>.<state>.svg`, the second look of a morph, only where a demo starts in it
+  (`system-outline-237-star.morph-select.svg` for a filled star).
 
 They are rendered with `@lordicon/renderer`, then run through SVGO:
 
@@ -122,6 +134,29 @@ render(icon, {
 
 Render them again after swapping an icon's JSON. `check:icons` fails when a demo shows a
 placeholder that is missing, and warns about an icon without one.
+
+## CodePen
+
+Demos are published on CodePen by hand. `npm run codepen` writes `dist/codepen/index.html`,
+a list of every demo; it opens from disk. For each demo it has:
+
+- **Preview**: the demo as one page, the way the pen will run it;
+- **Open in CodePen**: a new, unsaved pen with the demo in it.
+
+To publish: preview the demo, open it in CodePen while signed in to the Lordicon account,
+save, then put the pen's address in the demo's `demo.json`:
+
+```json
+"codepen": "https://codepen.io/lordicon/pen/AbCdEf"
+```
+
+The portal shows an Open in CodePen button for every demo that has one. To update a pen,
+open the demo in CodePen again and copy the three panes into the published pen.
+
+`scripts/lib/codepen.ts` packs a demo into the three panes. The shared files are inlined
+under their paths, the JavaScript has its types stripped, and assets load from the repo
+on jsDelivr at `main`. A demo whose icons are not on `main` yet shows broken placeholders
+until they are.
 
 ## Deploying
 

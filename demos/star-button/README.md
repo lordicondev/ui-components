@@ -27,6 +27,6 @@ lands mid-animation reverses it in place.
   the number is recomputed, so however fast you click, all three agree at the end.
 - Hover shows the colour a press would leave. The shape, hollow or filled, is what tells
   the two states apart.
-- `shared/public/icons/star.json` is hand-edited: its `morph-select` marker got the `:0.5`
-  ratio that tells the trigger where the fill ends and the way back begins.
-  `shared/icons.json` records the edit.
+- `shared/public/icons/system-outline-237-star.json` is hand-edited: its `morph-select`
+  marker got the `:0.5` ratio that tells the trigger where the fill ends and the way back
+  begins. `shared/icons.json` records the edit.

@@ -2,9 +2,19 @@
     "$schema": "../../schemas/demo.schema.json",
     "slug": "checkbox-list",
     "title": "Checkbox list",
-    "description": "Native checkboxes whose tick is an icon following data-checked, in three styles.",
-    "tags": ["form", "toggle", "settings"],
-    "icons": ["check-box-empty", "check-circle-empty", "radio-button"],
+    "description": "A list of options to tick, in three styles. The checkbox icon morphs into a tick when you select it.",
+    "group": "inputs",
+    "stage": "medium",
+    "icons": [
+        "system-outline-4490-check-box-empty",
+        "system-outline-4489-check-circle-empty",
+        "system-outline-4478-radio-button"
+    ],
+    "iconStates": {
+        "system-outline-4490-check-box-empty": "morph-select",
+        "system-outline-4489-check-circle-empty": "morph-select",
+        "system-outline-4478-radio-button": "morph-select"
+    },
     "fragments": [
         {
             "id": "setup",
@@ -28,7 +38,7 @@
             "region": "wiring",
             "lang": "ts",
             "title": "Mirror checked into an attribute",
-            "note": "checked is a property, and nothing can watch a property."
+            "note": "A few lines let the icon follow a native checkbox."
         },
         {
             "id": "colour",

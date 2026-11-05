@@ -1,7 +1,7 @@
 /**
  * Turns each demo into a standalone project: the demo's own files as they are, the
- * shared files it imports, the fonts, the icons it declares and the placeholder SVGs its
- * markup shows, and generated config files.
+ * shared files it imports, the fonts, the icons it declares (and its pager's), the
+ * placeholder SVGs its markup shows, and generated config files.
  *
  * Output: export/<slug>/ and dist/demos/<slug>/<slug>.zip
  *
@@ -13,7 +13,7 @@ import { cp, mkdir, readdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { dirname, join, relative, resolve } from 'node:path';
 import { loadConfig, repoRoot } from './lib/config.ts';
 import { demoDir, listDemos, readManifest } from './lib/demos.ts';
-import { placeholdersIn } from './lib/icons.ts';
+import { demoIconFiles, iconsDir } from './lib/icons.ts';
 import { demoLinks } from './lib/links.ts';
 import { hasMarkers, withoutMarkers } from './lib/regions.ts';
 import { demoSources } from './lib/sources.ts';
@@ -141,7 +141,8 @@ async function exportDemo(slug: string): Promise<string> {
 
     // The shared files reached by following the demo's imports.
     const fragmentFiles = manifest.fragments.map((fragment) => fragment.file);
-    for (const file of demoSources(slug, fragmentFiles)) {
+    const sources = demoSources(slug, fragmentFiles);
+    for (const file of sources) {
         if (!file.shared) continue;
 
         const to = resolve(target, file.exportPath);
@@ -152,22 +153,10 @@ async function exportDemo(slug: string): Promise<string> {
     await copyFonts(target);
     await stripMarkers(target);
 
-    // Only the icons this demo declares.
+    // Only the icons this demo declares, its pager's, and the placeholders its markup shows.
     await mkdir(resolve(target, 'public/icons'), { recursive: true });
-    for (const alias of manifest.icons) {
-        await cp(
-            resolve(repoRoot, 'shared/public/icons', `${alias}.json`),
-            resolve(target, 'public/icons', `${alias}.json`),
-        );
-    }
-
-    // The placeholder SVGs its markup shows.
-    const html = await readFile(resolve(demoDir(slug), 'index.html'), 'utf8');
-    for (const name of placeholdersIn(html)) {
-        await cp(
-            resolve(repoRoot, 'shared/public/icons', `${name}.svg`),
-            resolve(target, 'public/icons', `${name}.svg`),
-        );
+    for (const file of demoIconFiles(slug)) {
+        await cp(resolve(iconsDir, file), resolve(target, 'public/icons', file));
     }
 
     await writeFile(resolve(target, 'package.json'), packageJson(slug));
@@ -180,7 +169,7 @@ async function exportDemo(slug: string): Promise<string> {
     return target;
 }
 
-/** Only the font files base.css loads, with their licences. The mono face is the portal's. */
+/** Only the font files base.css loads, with their licences. Inter and the mono face are the portal's. */
 async function copyFonts(target: string): Promise<void> {
     const fontsDir = resolve(repoRoot, 'shared/fonts');
     const base = await readFile(resolve(repoRoot, 'shared/styles/base.css'), 'utf8');
@@ -245,6 +234,15 @@ async function zip(slug: string, from: string): Promise<number> {
 
 const requested = process.argv.slice(2).filter((argument) => !argument.startsWith('--'));
 const slugs = requested.length ? requested : listDemos();
+
+// A full export drops demos that were renamed or removed, or publish:export would still ship them.
+if (!requested.length) {
+    await mkdir(exportRoot, { recursive: true });
+    for (const entry of await readdir(exportRoot)) {
+        if (!slugs.includes(entry))
+            await rm(resolve(exportRoot, entry), { recursive: true, force: true });
+    }
+}
 
 for (const slug of slugs) {
     const target = await exportDemo(slug);

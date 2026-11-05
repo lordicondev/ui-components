@@ -2,9 +2,15 @@
     "$schema": "../../schemas/demo.schema.json",
     "slug": "add-to-cart",
     "title": "Add to cart",
-    "description": "A button that opens to say what it did, and a heart that stays filled. One attribute each.",
-    "tags": ["commerce", "toggle", "action"],
-    "icons": ["shopping-basket", "heart"],
+    "description": "A product action with an Add to cart button and a heart for saving. The button confirms the item was added, and the heart fills when you save it.",
+    "group": "buttons",
+    "stage": "small",
+    "icons": ["system-outline-139-shopping-basket", "system-outline-20-heart"],
+    "iconStates": {
+        "system-outline-139-shopping-basket": "morph-add",
+        "system-outline-20-heart": "morph-select"
+    },
+    "iconsNote": "The basket animation is one of a kind, so you won’t find another icon that behaves the same way (but you can request one). The heart uses the Morph state, so you can swap it for a star, a flag or any other System Outline icon with a Morph state. Icons with the default Hover state work too, but instead of turning solid, they play the full animation and only change color.",
     "fragments": [
         {
             "id": "setup",
@@ -20,7 +26,7 @@
             "region": "markup",
             "lang": "html",
             "title": "The cart button",
-            "note": "aria-pressed is the state. The words inside are what it looks like."
+            "note": "One attribute drives the tick, the label and what a screen reader hears."
         },
         {
             "id": "favorite",
@@ -28,15 +34,15 @@
             "region": "favorite",
             "lang": "html",
             "title": "The favourite button",
-            "note": "Same trigger, same attribute, a different morph."
+            "note": "The heart fills and empties with the button's pressed state."
         },
         {
             "id": "wiring",
             "file": "main.ts",
             "region": "wiring",
             "lang": "ts",
-            "title": "Flip the attribute on click",
-            "note": "The cart also renames itself and starts its words."
+            "title": "Say it, then close again",
+            "note": "A timer from the last press closes it. Presses while it is open only keep it open."
         },
         {
             "id": "measure",
@@ -44,7 +50,7 @@
             "region": "measure",
             "lang": "ts",
             "title": "Measure the label's width",
-            "note": "Width cannot transition to auto, so the stylesheet gets a number."
+            "note": "The button grows to fit its label, so the script measures it once."
         },
         {
             "id": "open",
@@ -52,7 +58,7 @@
             "region": "open",
             "lang": "css",
             "title": "Open and close the button",
-            "note": "Three transitions. Closing is the same three in reverse."
+            "note": "The button widens to say it was added, then shrinks back."
         },
         {
             "id": "colour",

@@ -1,0 +1,82 @@
+{
+    "$schema": "../../schemas/demo.schema.json",
+    "slug": "mega-menu",
+    "title": "Mega menu",
+    "description": "A site header with a Resources menu that opens a wide panel of links. Each tile lights up and plays its icon when you point at it.",
+    "group": "navigation",
+    "stage": "large",
+    "icons": [
+        "system-outline-33-chevron-down",
+        "system-outline-3089-bar-chart-vertical",
+        "system-outline-409-wrench",
+        "system-outline-11-link",
+        "system-outline-392-credit-card-back",
+        "system-outline-4481-shield-heart",
+        "system-outline-3973-clipboard-bar-chart",
+        "system-outline-21-avatar",
+        "system-outline-369-code",
+        "system-outline-2501-question-circle"
+    ],
+    "iconStates": {
+        "system-outline-33-chevron-down": "morph-direction"
+    },
+    "iconsNote": "The icons in this menu use the default Hover state, so any System Outline or System Solid icon will fit. Stick with the default animation, as In, Morph and Loop states don’t work well here.",
+    "fragments": [
+        {
+            "id": "setup",
+            "file": "main.ts",
+            "region": "setup",
+            "lang": "ts",
+            "title": "Define the element",
+            "note": "Built-in triggers only. Apart from three lines for the chevron, this is the whole script."
+        },
+        {
+            "id": "trigger",
+            "file": "index.html",
+            "region": "trigger",
+            "lang": "html",
+            "title": "The Resources button",
+            "note": "The browser opens and closes the panel; the chevron turns with it."
+        },
+        {
+            "id": "expanded",
+            "file": "main.ts",
+            "region": "expanded",
+            "lang": "ts",
+            "title": "Keep aria-expanded in step",
+            "note": "One listener writes the panel's state onto the button, where the chevron can follow it."
+        },
+        {
+            "id": "tile",
+            "file": "index.html",
+            "region": "tile",
+            "lang": "html",
+            "title": "A tile",
+            "note": "Hovering anywhere on a tile plays its icon."
+        },
+        {
+            "id": "hover",
+            "file": "mega-menu.css",
+            "region": "hover",
+            "lang": "css",
+            "title": "Light up the whole tile",
+            "note": "The same look for the pointer and the keyboard."
+        },
+        {
+            "id": "open",
+            "file": "mega-menu.css",
+            "region": "open",
+            "lang": "css",
+            "title": "Slide down from under the header",
+            "note": "CSS alone animates the panel in and out, with transform only, so it stays smooth."
+        },
+        {
+            "id": "rows",
+            "file": "mega-menu.css",
+            "region": "rows",
+            "lang": "css",
+            "title": "Rows that drop in",
+            "note": "The tiles keep settling for a moment after the sheet has stopped."
+        }
+    ]
+}

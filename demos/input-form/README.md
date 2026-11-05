@@ -31,9 +31,13 @@ dropped. The two field icons follow the attributes that `shared/ui/field.ts` wri
   the browser treat them as a pair: opening the inner does not close the outer, closing
   the outer takes the inner with it. The row that opens it has no `data-choose` and uses
   `popovertargetaction="show"`.
-- The submenu opens on pointer enter and closes 150ms after the pointer has left both it
-  and its row, unless focus is inside it. Strips down each side of the submenu
-  (`::before`, `::after`) bridge the gap to the menu so the pointer is never over nothing.
+- Under a mouse, the submenu opens on pointer enter and closes 150ms after the pointer has
+  left both it and its row, unless focus is inside it. Strips down each side of the
+  submenu (`::before`, `::after`) bridge the gap to the menu so the pointer is never over
+  nothing. A tap only opens it with a click: a lifted finger counts as leaving.
+- With no room beside the menu, as on a phone, the submenu overlaps it from the roomier
+  side. It is kept on screen vertically too.
+- Escape in the search returns focus to the row. Closing the submenu clears the search.
 - A `data-choose` row raises `popover-choose` and closes the whole chain; the demo only
   moves focus back to the composer.
 - The project search filters rows on `input`. The clear button raises that event too.

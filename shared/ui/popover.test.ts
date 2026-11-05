@@ -110,6 +110,23 @@ describe('popovers', () => {
         expect(panel.style.top).toBe('auto');
     });
 
+    it('starts at the control where the panel fits, and centres on it where it does not', () => {
+        const { anchor, panel } = mount(60);
+        Object.defineProperty(panel, 'offsetWidth', { value: 334 });
+        popovers(document);
+
+        toggling(panel, 'open');
+        expect(panel.style.left).toBe('100px'); // the control's left edge
+
+        // A phone-wide screen with the control in the middle of it.
+        Object.defineProperty(document.documentElement, 'clientWidth', { value: 390 });
+        anchor.getBoundingClientRect = () =>
+            ({ left: 175, right: 215, top: 60, bottom: 100 }) as DOMRect;
+
+        toggling(panel, 'open');
+        expect(panel.style.left).toBe('28px'); // (390 - 334) / 2
+    });
+
     it('lets a caller insist on a direction', () => {
         const { panel } = mount(60);
         popovers(document, { direction: 'up' });
@@ -147,6 +164,35 @@ describe('popovers', () => {
         popovers(document, { direction: 'up' });
         toggling(up.panel, 'open');
         expect(firstFrame(up.panel)).toBe('translateY(12px)');
+    });
+
+    it('overlaps the menu with a submenu that fits on neither side, and keeps it on screen', () => {
+        const { panel } = mount(700, 1);
+        panel.getBoundingClientRect = () =>
+            ({ left: 30, right: 310, top: 140, bottom: 320 }) as DOMRect;
+
+        // A submenu beside a row near the menu's top, on a phone-wide screen.
+        const route = document.createElement('button');
+        route.setAttribute('popovertarget', 'inner');
+        route.getBoundingClientRect = () =>
+            ({ left: 38, right: 302, top: 150, bottom: 190 }) as DOMRect;
+        const inner = document.createElement('div');
+        inner.id = 'inner';
+        inner.dataset.side = 'inline';
+        inner.setAttribute('popover', '');
+        Object.defineProperty(inner, 'offsetWidth', { value: 280 });
+        Object.defineProperty(inner, 'offsetHeight', { value: 190 });
+        panel.append(route, inner);
+        Object.defineProperty(document.documentElement, 'clientWidth', { value: 390 });
+
+        popovers(document);
+        toggling(panel, 'open');
+        toggling(inner, 'open');
+
+        // From the roomier right side, flush with the screen's edge less the gap.
+        expect(inner.style.left).toBe('102px'); // 390 - 8 - 280
+        // Lined up with the row it would run off the top; 8px from it instead.
+        expect(inner.style.bottom).toBe('602px'); // 800 - (8 + 190)
     });
 
     it('brings in its own rows and leaves a nested panel alone', () => {

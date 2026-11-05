@@ -11,11 +11,19 @@ export type RepoConfig = {
     exportBranch: string;
 };
 
+/** Added to every link to lordicon.com. */
+export type UtmConfig = {
+    source: string;
+    medium: string;
+    campaign: string;
+};
+
 export type SiteConfig = {
     name: string;
     title: string;
     description: string;
     siteUrl: string;
+    utm: UtmConfig;
     repo: RepoConfig;
 };
 
@@ -35,6 +43,7 @@ export function loadConfig(): SiteConfig {
         title: process.env.SITE_TITLE ?? file.title,
         description: file.description,
         siteUrl: siteUrl.endsWith('/') ? siteUrl : `${siteUrl}/`,
+        utm: file.utm,
         repo: {
             owner: process.env.REPO_OWNER ?? file.repo.owner,
             name: process.env.REPO_NAME ?? file.repo.name,

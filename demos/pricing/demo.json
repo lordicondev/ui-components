@@ -2,9 +2,16 @@
     "$schema": "../../schemas/demo.schema.json",
     "slug": "pricing",
     "title": "Pricing",
-    "description": "Three plans whose icons play when the pointer enters the card. In four layouts.",
-    "tags": ["cards", "hover"],
-    "icons": ["puzzle-piece", "rocket", "avatars-group", "check-circle-solid"],
+    "description": "Cards comparing subscription plans, in four layouts. Each plan’s icon plays when you hover over its card.",
+    "group": "sections",
+    "stage": "large",
+    "icons": [
+        "system-outline-3150-puzzle-piece",
+        "system-outline-489-rocket",
+        "system-outline-314-avatars-group",
+        "system-solid-24-check-circle"
+    ],
+    "iconsNote": "The icons here use the default Hover state, so any System Outline or System Solid icon will fit. The default animation works best, but the Loop state, or the Morph state with the morph-on-hover trigger, will look great too.",
     "fragments": [
         {
             "id": "setup",
@@ -20,7 +27,7 @@
             "region": "markup",
             "lang": "html",
             "title": "A plan card",
-            "note": "target points the icon at the card, so the whole card is the hover area. The ticks are plain SVG."
+            "note": "Hovering anywhere on a plan plays its icon."
         },
         {
             "id": "colour",
@@ -28,7 +35,7 @@
             "region": "colour",
             "lang": "css",
             "title": "Grey icons and accent ones",
-            "note": "The icons inherit color through current-color. The black SVGs take a filter."
+            "note": "Grey icons on the plain cards, accent ones on the featured card."
         },
         {
             "id": "raised",

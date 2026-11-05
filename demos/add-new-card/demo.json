@@ -2,9 +2,13 @@
     "$schema": "../../schemas/demo.schema.json",
     "slug": "add-new-card",
     "title": "Add new card",
-    "description": "A dashed tile with a plus that turns on hover. The whole script is defineElement().",
-    "tags": ["action", "hover", "payment"],
-    "icons": ["plus"],
+    "description": "An empty, dashed tile for adding a new item to a grid. Its plus icon turns when you hover over it.",
+    "group": "containers",
+    "stage": "small",
+    "icons": ["system-outline-48-plus"],
+    "iconStates": {
+        "system-outline-48-plus": "hover-rotation"
+    },
     "fragments": [
         {
             "id": "setup",
@@ -20,7 +24,7 @@
             "region": "markup",
             "lang": "html",
             "title": "The tile",
-            "note": "target points the icon at the tile, so the whole tile is the hover area."
+            "note": "The plus turns wherever the pointer enters the tile."
         },
         {
             "id": "colour",

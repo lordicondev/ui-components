@@ -1,0 +1,43 @@
+@import '@shared/styles/index.css';
+
+.demo {
+    display: grid;
+    place-items: center;
+    min-height: 100dvh;
+    padding: var(--space-64) var(--gutter);
+}
+
+/* #region button */
+/* The brand fill, darker under the pointer and darker still while pressed. The icon is
+   white like the text through current-color, and its placeholder through the filter. */
+.button {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    padding: var(--space-8) var(--space-16);
+    border: 0;
+    border-radius: var(--radius-md);
+    background: var(--accent);
+    box-shadow: var(--shadow-accent);
+    color: var(--ink-inverse);
+    --icon-filter: var(--filter-ink-inverse);
+    font-weight: 500;
+    cursor: pointer;
+}
+
+/* Only under a mouse: on a touch screen :hover stays on after the tap. */
+@media (hover: hover) {
+    .button:hover {
+        background: var(--accent-strong);
+    }
+}
+
+.button:active {
+    background: var(--accent-ink);
+}
+/* #endregion */
+
+.button__icon {
+    width: var(--icon-size-24);
+    height: var(--icon-size-24);
+}

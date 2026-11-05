@@ -22,9 +22,15 @@
     cursor: pointer;
 }
 
-.opener:hover,
 .opener[aria-expanded='true'] {
     background: var(--surface-sunken);
+}
+
+/* Only under a mouse: on a touch screen :hover stays on after the tap. */
+@media (hover: hover) {
+    .opener:hover {
+        background: var(--surface-sunken);
+    }
 }
 
 /* Groups sit a step further apart than rows. */

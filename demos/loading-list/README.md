@@ -13,15 +13,17 @@ npm run dev
 
 ## Triggers
 
-| Trigger                                 | Watches                  | On          |
-| --------------------------------------- | ------------------------ | ----------- |
-| `follow(data-status, active=loop-spin)` | `data-status` on `.step` | the spinner |
-| `follow(data-status, done=in-reveal)`   | `data-status` on `.step` | the tick    |
-| `follow(data-status, failed=in-reveal)` | `data-status` on `.step` | the cross   |
+| Trigger                                          | Watches                  | On          |
+| ------------------------------------------------ | ------------------------ | ----------- |
+| `follow(data-status, active=loop-rotation-half)` | `data-status` on `.step` | the spinner |
+| `follow(data-status, done=morph-tick)`           | `data-status` on `.step` | the tick    |
+| `follow(data-status, failed=morph-cross)`        | `data-status` on `.step` | the cross   |
 
-`data-status` is `pending`, `active`, `done` or `failed`. The spinner loops while the step
-is active and rests on its default look otherwise. The tick and the cross draw in when the
-step gets their value.
+`data-status` is `pending`, `active`, `done` or `failed`. The spinner turns while the step is
+active and rests on its default look otherwise. The tick and the cross draw into an empty
+circle when the step gets their value, and stay drawn.
+
+All three icons have the same circle, so the spinner closes into the tick or the cross.
 
 ## Adapting it
 

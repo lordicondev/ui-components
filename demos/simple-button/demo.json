@@ -1,0 +1,36 @@
+{
+    "$schema": "../../schemas/demo.schema.json",
+    "slug": "simple-button",
+    "title": "Simple button",
+    "description": "A Call us button. The phone icon rings when you point at it.",
+    "group": "buttons",
+    "stage": "small",
+    "icons": ["system-outline-140-phone"],
+    "iconsNote": "This one is truly universal: any System Outline or System Solid icon with the default Hover state will work here.",
+    "fragments": [
+        {
+            "id": "setup",
+            "file": "main.ts",
+            "region": "setup",
+            "lang": "ts",
+            "title": "Define the element",
+            "note": "The whole script."
+        },
+        {
+            "id": "markup",
+            "file": "index.html",
+            "region": "markup",
+            "lang": "html",
+            "title": "The button",
+            "note": "Hovering anywhere on the button plays the phone."
+        },
+        {
+            "id": "button",
+            "file": "simple-button.css",
+            "region": "button",
+            "lang": "css",
+            "title": "Resting, hovered and pressed",
+            "note": "Three steps of the brand colour. The icon stays white."
+        }
+    ]
+}

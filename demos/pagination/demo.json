@@ -2,9 +2,13 @@
     "$schema": "../../schemas/demo.schema.json",
     "slug": "pagination",
     "title": "Pagination",
-    "description": "A frame that stretches to the page you picked and then catches up with itself, in three styles of button.",
-    "tags": ["navigation", "action"],
-    "icons": ["arrow-left", "chevron-left"],
+    "description": "Page navigation for long lists, in three button styles. A highlight slides to the page you pick.",
+    "group": "navigation",
+    "stage": "small",
+    "icons": ["system-outline-2753-arrow-left", "system-outline-32-chevron-left"],
+    "iconStates": {
+        "system-outline-2753-arrow-left": "hover-slide"
+    },
     "fragments": [
         {
             "id": "setup",
@@ -20,7 +24,7 @@
             "region": "markup",
             "lang": "html",
             "title": "The pages and the frame",
-            "note": "aria-current says which page it is. The frame is one element for the row."
+            "note": "One frame slides to the page you pick."
         },
         {
             "id": "turn",
@@ -52,7 +56,7 @@
             "region": "steps",
             "lang": "html",
             "title": "One arrow icon, flipped for next",
-            "note": "Flipping the button flips its animation with it."
+            "note": "Both arrows use the same icon file."
         },
         {
             "id": "variants",

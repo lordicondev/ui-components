@@ -16,6 +16,15 @@ export type DemoLinks = {
     source: string;
 };
 
+/** A page on lordicon.com, with the UTM tags from site.config.json. */
+export function lordiconUrl(config: SiteConfig, path = '/'): string {
+    const url = new URL(path, 'https://lordicon.com/');
+    for (const [key, value] of Object.entries(config.utm)) {
+        url.searchParams.set(`utm_${key}`, value);
+    }
+    return url.href;
+}
+
 /** The project repo. */
 export function repoUrl(config: SiteConfig): string {
     return `https://github.com/${config.repo.owner}/${config.repo.name}`;

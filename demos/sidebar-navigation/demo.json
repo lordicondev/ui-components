@@ -2,20 +2,26 @@
     "$schema": "../../schemas/demo.schema.json",
     "slug": "sidebar-navigation",
     "title": "Sidebar navigation",
-    "description": "Seven destinations whose icons answer the pointer and the keyboard, and one attribute that says where you are.",
-    "tags": ["navigation", "hover", "state"],
+    "description": "A side menu linking to pages of an app. Icons react to hover and the keyboard, and the current page is highlighted.",
+    "group": "navigation",
+    "stage": "large",
     "icons": [
-        "grid-widget",
-        "cart",
-        "box-front",
-        "avatars-two",
-        "price-tag",
-        "bar-chart-vertical",
-        "cog",
-        "three-dots-vertical",
-        "magnifier",
-        "cross"
+        "system-outline-366-grid-widget",
+        "system-outline-146-cart",
+        "system-outline-3570-box-front",
+        "system-outline-313-avatars-two",
+        "system-outline-99-price-tag",
+        "system-outline-3089-bar-chart-vertical",
+        "system-outline-39-cog",
+        "system-outline-4101-three-dots-vertical",
+        "system-outline-19-magnifier",
+        "system-outline-38-cross"
     ],
+    "iconStates": {
+        "system-outline-39-cog": "hover-mechanic",
+        "system-outline-38-cross": "in-reveal"
+    },
+    "iconsNote": "The icons in this sidebar use the default Hover state, so any System Outline or System Solid icon will fit. Stick with the default animation, as In, Morph and Loop states don’t work well here.",
     "fragments": [
         {
             "id": "setup",
@@ -31,7 +37,7 @@
             "region": "markup",
             "lang": "html",
             "title": "One destination",
-            "note": "target points the icon at the link, so the whole row is the hover area."
+            "note": "Hovering anywhere on a row plays its icon, and the current page is tinted."
         },
         {
             "id": "navigate",
@@ -47,7 +53,7 @@
             "region": "state",
             "lang": "css",
             "title": "Hovered and current rows",
-            "note": "Two custom properties: the fill and the icon colour."
+            "note": "The icon changes colour with its row."
         },
         {
             "id": "fit",
@@ -55,7 +61,7 @@
             "region": "fit",
             "lang": "css",
             "title": "The sidebar's height",
-            "note": "Drawn at 814px, never shorter than its contents, never taller than the screen."
+            "note": "The sidebar keeps the height it was designed at whenever the screen allows."
         }
     ]
 }

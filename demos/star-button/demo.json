@@ -2,9 +2,14 @@
     "$schema": "../../schemas/demo.schema.json",
     "slug": "star-button",
     "title": "Star button",
-    "description": "A star that fills as you press it, with a count read back off the same attribute.",
-    "tags": ["action", "toggle", "social"],
-    "icons": ["star"],
+    "description": "A button for starring an item, with a counter. The star morphs into a filled one when you press it, and the count goes up.",
+    "group": "buttons",
+    "stage": "small",
+    "icons": ["system-outline-237-star"],
+    "iconStates": {
+        "system-outline-237-star": "morph-select"
+    },
+    "iconsNote": "This icon button with a counter uses a System Outline icon with the Morph state. Swap the star for a heart, a bookmark or any other System Outline icon with a Morph state. Icons with the default Hover state work too, but instead of turning solid, they play the full animation and only change color.",
     "fragments": [
         {
             "id": "setup",
@@ -20,7 +25,7 @@
             "region": "markup",
             "lang": "html",
             "title": "The button and its icon",
-            "note": "The icon, the stylesheet and the count all read aria-pressed."
+            "note": "Press it, and the star fills and the count goes up, all from aria-pressed."
         },
         {
             "id": "wiring",

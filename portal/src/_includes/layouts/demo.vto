@@ -2,9 +2,9 @@
 layout: layouts/base.vto
 ---
 
-<article class="demo-page">
-    {{# The head and the stage fill the first screen from CSS, so nothing below them moves
-        when the demo loads. #}}
+<article class="demo-page demo-page--{{ demo.stage }}">
+    {{# The stage's height comes from CSS, by the size the demo picks, so nothing below it
+        moves when the demo loads. #}}
     <div class="demo-page__intro">
         <header class="demo-page__head">
         <div class="demo-page__title">
@@ -22,13 +22,13 @@ layout: layouts/base.vto
                 >
                     <lord-icon
                         current-color
-                        src="{{ '/icons/arrow-out-square.json' |> url }}"
+                        src="{{ '/icons/system-outline-751-arrow-out-square.json' |> url }}"
                         loading="interaction"
                         trigger="hover"
                         target=".action"
                         aria-hidden="true"
                     >
-                        <img alt="" src="{{ '/icons/arrow-out-square.svg' |> url }}" />
+                        <img alt="" src="{{ '/icons/system-outline-751-arrow-out-square.svg' |> url }}" />
                     </lord-icon>
                 </a>
             </div>
@@ -51,7 +51,7 @@ layout: layouts/base.vto
     </div>
 
     <section class="take-it">
-        <h2>Take it with you</h2>
+        <h2>Get the code</h2>
         <p>
             This demo also exists as a standalone project —
             <code>npm install &amp;&amp; npm run dev</code>, no changes needed.
@@ -79,6 +79,13 @@ layout: layouts/base.vto
                     rel="noopener"
                 >Open in StackBlitz</a>
             </li>
+            {{ if demo.codepen }}
+                <li>
+                    <a class="button" href="{{ demo.codepen }}" target="_blank" rel="noopener">
+                        Open in CodePen
+                    </a>
+                </li>
+            {{ /if }}
             <li><a class="button" href="{{ demo.links.zip |> url }}">Download ZIP</a></li>
             <li>
                 <a class="button" href="{{ demo.links.github }}" target="_blank" rel="noopener">
@@ -104,12 +111,15 @@ layout: layouts/base.vto
                 ts: fragment.ts,
                 js: fragment.js,
                 code: fragment.code,
+                tsFull: fragment.tsFull,
+                jsFull: fragment.jsFull,
+                full: fragment.full,
             }) }}
         {{ /for }}
     </section>
 
     <section class="reading">
-        <h2>Every file</h2>
+        <h2>Source files</h2>
         <p class="reading__legend">
             The demo's own files, whole, at the paths the export uses.
         </p>
@@ -153,17 +163,39 @@ layout: layouts/base.vto
     <section class="icons-used">
         <h2>Icons</h2>
         <p class="reading__legend">
-            Hover a preview to play it. The icons are under the
-            <a href="https://lordicon.com/licenses" target="_blank" rel="noopener">Lordicon License
+            Hover a row to play its icon. A state marked default plays without a
+            <code>state</code> attribute. The icons are under the
+            <a href="{{ demos.site.lordicon.licenses }}" target="_blank" rel="noopener">Lordicon License
                 Terms</a>, not the MIT licence of the code.
         </p>
+
+        {{# What to know before swapping an icon, written for the demo. #}}
+        {{ if demo.iconsNote }}
+            <aside class="icons-note">
+                <lord-icon
+                    class="icons-note__icon"
+                    current-color
+                    src="{{ '/icons/system-outline-367-info-circle.json' |> url }}"
+                    loading="interaction"
+                    trigger="hover"
+                    target=".icons-note"
+                    aria-hidden="true"
+                >
+                    <img alt="" src="{{ '/icons/system-outline-367-info-circle.svg' |> url }}" />
+                </lord-icon>
+                <p>
+                    The <strong>Animation state</strong> column shows which icon state to use
+                    to get the effect from the example. {{ demo.iconsNote }}
+                </p>
+            </aside>
+        {{ /if }}
 
         <table class="icon-table">
             <thead>
                 <tr>
                     <th scope="col"><span class="visually-hidden">Preview</span></th>
-                    <th scope="col">Used as</th>
                     <th scope="col">Lordicon icon</th>
+                    <th scope="col">Animation state</th>
                 </tr>
             </thead>
             <tbody>
@@ -174,8 +206,10 @@ layout: layouts/base.vto
                                 <lord-icon
                                     current-color
                                     src="{{ `${demo.links.app}icons/${icon.alias}.json` |> url }}"
+                                    {{ if icon.preview.state }}state="{{ icon.preview.state }}"{{ /if }}
                                     loading="interaction"
-                                    trigger="hover"
+                                    trigger="{{ icon.preview.trigger }}"
+                                    target=".icon-table tr"
                                     aria-hidden="true"
                                 >
                                     <img
@@ -185,15 +219,28 @@ layout: layouts/base.vto
                                 </lord-icon>
                             </span>
                         </td>
-                        <td><code>{{ icon.alias }}</code></td>
                         <td class="icon-table__id">
                             {{ if icon.url }}
-                                <a href="{{ icon.url }}" target="_blank" rel="noopener">
-                                    {{ icon.id }}
-                                </a>
+                                <a href="{{ icon.url }}" target="_blank" rel="noopener">{{ icon.id }}</a>
                             {{ else }}
                                 {{ icon.id }}
                             {{ /if }}
+                        </td>
+                        <td>
+                            {{# A default state is the one the icon plays without a state
+                                attribute, so the markup does not name it. #}}
+                            <div class="icon-table__states">
+                                {{ for state of icon.states }}
+                                    {{ if state.default }}
+                                        <span
+                                            class="state state--default"
+                                            title="Plays without a state attribute"
+                                        ><code>{{ state.name }}</code> <span class="state__default">default</span></span>
+                                    {{ else }}
+                                        <span class="state"><code>{{ state.name }}</code></span>
+                                    {{ /if }}
+                                {{ /for }}
+                            </div>
                         </td>
                     </tr>
                 {{ /for }}
