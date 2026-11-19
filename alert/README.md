@@ -36,11 +36,14 @@ the card's own entrance animation has finished, so the two do not compete. After
   waits for the leaving transitions, then removes it.
 - The button queues four and then rests. Which kind comes next depends on which are
   already up, so the order stays the same however you dismiss.
+- Resting is `aria-disabled`, not `disabled`, so the button keeps focus. Dismissing from
+  the keyboard moves focus to the next card's close button, or back to the button when
+  the deck is empty.
 - The dots and arrows are `shared/ui/pager.ts`.
 
 ---
 
-Exported from [lordicondev/ui-components](https://github.com/lordicondev/ui-components/tree/main/demos/alert) 1.1.0,
+Exported from [lordicondev/ui-components](https://github.com/lordicondev/ui-components/tree/main/demos/alert) 1.2.0,
 where it sits alongside the other demos.
 
 The code is MIT. The icons are under the [Lordicon License Terms](https://lordicon.com/licenses);

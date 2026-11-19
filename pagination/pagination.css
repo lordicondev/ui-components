@@ -12,16 +12,48 @@
     padding: var(--space-64) var(--gutter) var(--space-32);
 }
 
+/* Step, pages, step. The space either side is 96px when there is room; on a narrow
+   screen it shrinks, down to 8px, before the row would overflow. */
 .pages {
-    display: flex;
+    --between: var(--space-96);
+    display: grid;
+    grid-template-columns:
+        auto minmax(var(--space-8), var(--between)) auto
+        minmax(var(--space-8), var(--between)) auto;
     align-items: center;
-    gap: var(--space-96);
 }
 
-/* The bare chevrons carry 8px of padding to be big enough to hit; the gap gives it back
+.pages > .numbers {
+    grid-column: 3;
+}
+
+.pages > .step--next {
+    grid-column: 5;
+}
+
+/* The bare chevrons carry 8px of padding to be big enough to hit; the space gives it back
    so the visible distance matches the other rows. */
 .pages--bare {
-    gap: calc(var(--space-96) - var(--space-8));
+    --between: calc(var(--space-96) - var(--space-8));
+}
+
+/* With words on the steps the row does not fit a phone, so the steps go under the pages. */
+@media (max-width: 479px) {
+    .pages--labelled {
+        grid-template-columns: auto auto;
+        justify-content: space-between;
+        gap: var(--space-16);
+    }
+
+    .pages--labelled > .numbers {
+        grid-row: 1;
+        grid-column: 1 / -1;
+        justify-self: center;
+    }
+
+    .pages--labelled > .step--next {
+        grid-column: 2;
+    }
 }
 
 .numbers {

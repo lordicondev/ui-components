@@ -59,6 +59,12 @@ function standing(): HTMLElement[] {
     );
 }
 
+/** Focus would leave with a dismissed card: to the next card's close, or to the button. */
+function passFocus(): void {
+    const front = standing().at(-1);
+    (front?.querySelector<HTMLElement>('.alert__close') ?? add).focus();
+}
+
 /** Writes each card's depth: the newest is 0 and in front, the rest recede behind it. */
 function restack(): void {
     const cards = standing();
@@ -75,6 +81,7 @@ async function dismiss(card: HTMLElement): Promise<void> {
 
     // Restack now, so the deck closes up while the card is still on its way out.
     settle();
+    if (card.contains(document.activeElement)) passFocus();
 
     // The leaving transitions only exist once a frame has passed with the attribute set.
     await new Promise(requestAnimationFrame);
@@ -101,10 +108,13 @@ function enqueue(): void {
     settle();
 }
 
-/** After any change: who sits where, and whether there is room for one more. */
+/**
+ * After any change: who sits where, and whether there is room for one more. A full deck
+ * marks the button aria-disabled rather than disabled, so it keeps focus.
+ */
 function settle(): void {
     restack();
-    add.disabled = !next();
+    add.setAttribute('aria-disabled', String(!next()));
 }
 
 add.addEventListener('click', enqueue);

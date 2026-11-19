@@ -41,13 +41,13 @@ picks which morph each icon plays.
 - The words arrive with `revealText()` from `shared/motion/text-reveal.ts`, starting 100ms
   into the opening so they land as the button stops.
 - The pair is anchored on its right, so the cart opens leftward and the heart never moves.
-- The heart renames itself on press. The name is the `.tooltip` span inside the button,
-  which `shared/ui/tooltip.ts` shows on hover, so the visible and the spoken name are the
-  same text.
+- The heart is always named "Favorite"; `aria-pressed` says whether it is one. The name is
+  the `.tooltip` span inside the button, which `shared/ui/tooltip.ts` shows on hover, so
+  the visible and the spoken name are the same text.
 
 ---
 
-Exported from [lordicondev/ui-components](https://github.com/lordicondev/ui-components/tree/main/demos/add-to-cart) 1.1.0,
+Exported from [lordicondev/ui-components](https://github.com/lordicondev/ui-components/tree/main/demos/add-to-cart) 1.2.0,
 where it sits alongside the other demos.
 
 The code is MIT. The icons are under the [Lordicon License Terms](https://lordicon.com/licenses);

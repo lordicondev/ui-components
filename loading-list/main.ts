@@ -51,13 +51,20 @@ async function run(from: number): Promise<void> {
     }
 }
 
-/** Shows the step's Retry button. A press hides it and runs again from that step. */
+/**
+ * Shows the step's Retry button. A press hides it and runs again from that step. Focus on
+ * the button moves to the step, so it is not lost with the button.
+ */
 function offerRetry(step: HTMLElement, at: number): void {
     const retry = step.querySelector<HTMLButtonElement>('.step__retry')!;
     retry.hidden = false;
     retry.addEventListener(
         'click',
         () => {
+            if (document.activeElement === retry) {
+                step.tabIndex = -1;
+                step.focus();
+            }
             retry.hidden = true;
             void run(at);
         },

@@ -37,11 +37,13 @@ the loop to come round, so the icon never stops halfway through a turn.
 - The toast opens from the middle of the button to its left edge. `--toast-width` is
   measured once after the font loads, because width cannot transition to `auto`. Leaving
   is a fade and a drop; the `0s 150ms` transitions snap the box back once it is invisible.
-- While busy the button is `disabled` and `aria-busy`. The toast is `role="status"`.
+- Until it is idle again the button is `aria-disabled` and ignores presses; while busy it
+  is also `aria-busy`. Not `disabled`, which would drop keyboard focus. The toast is
+  `role="status"`.
 
 ---
 
-Exported from [lordicondev/ui-components](https://github.com/lordicondev/ui-components/tree/main/demos/button-progress) 1.1.0,
+Exported from [lordicondev/ui-components](https://github.com/lordicondev/ui-components/tree/main/demos/button-progress) 1.2.0,
 where it sits alongside the other demos.
 
 The code is MIT. The icons are under the [Lordicon License Terms](https://lordicon.com/licenses);

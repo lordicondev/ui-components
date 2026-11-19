@@ -314,15 +314,21 @@
     }
 }
 
-/* Phones: one column, and the header keeps the logo, Resources and Get started. */
-@media (max-width: 639px) {
+/* Below 768px the full header does not fit. It keeps the logo, Resources and Get started. */
+@media (max-width: 767px) {
     .bar {
         gap: var(--space-8);
         padding: 0 var(--space-16);
     }
 
+    /* The logo is the one thing that gives way, so the smallest phones fit too. */
+    .logo {
+        min-width: 0;
+    }
+
     .logo img {
         width: 106px;
+        max-width: 100%;
         height: auto;
     }
 
@@ -334,7 +340,10 @@
     .nav__trigger {
         padding-inline: var(--space-8);
     }
+}
 
+/* Phones: one column. */
+@media (max-width: 639px) {
     .sheet {
         padding: var(--space-16) var(--space-16) var(--space-32);
     }

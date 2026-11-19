@@ -12,7 +12,7 @@
             <form class="demo__form" novalidate>
                 <!-- target names the ancestor whose state the icon follows; the element
                      resolves it with closest(). Here it is .field. -->
-                <div class="field" aria-invalid="false" data-focused="false">
+                <div class="field" data-focused="false">
                     <label class="field__label" for="password">Password</label>
 
                     <div class="field__control">
@@ -35,6 +35,7 @@
                             placeholder="Password"
                             minlength="8"
                             required
+                            aria-invalid="false"
                             aria-describedby="password-error"
                         />
 
@@ -60,7 +61,7 @@
                         </button>
                     </div>
 
-                    <p class="field__error" id="password-error" data-raised="0" hidden>
+                    <p class="field__error" id="password-error" role="alert" data-raised="0" hidden>
                         <!-- data-raised counts how many times the message has been shown:
                              the icon draws itself in on the first, and nudges on a repeat. -->
                         <lord-icon

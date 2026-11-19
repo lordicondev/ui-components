@@ -9,8 +9,15 @@
     </head>
     <body>
         <main class="demo">
-            <!-- popovertarget opens the menu. popovers() decides which way it opens. -->
-            <button class="dots" type="button" popovertarget="edit" aria-label="More options">
+            <!-- popovertarget opens the menu. popovers() decides which way it opens.
+                 aria-haspopup tells a screen reader that what opens is a menu. -->
+            <button
+                class="dots"
+                type="button"
+                popovertarget="edit"
+                aria-haspopup="menu"
+                aria-label="More options"
+            >
                 <lord-icon
                     class="dots__mark"
                     current-color

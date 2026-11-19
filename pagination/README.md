@@ -29,17 +29,20 @@ the arrow has a `hover-slide` state, the chevron uses its default.
   cannot travel between buttons. `place()` measures the target button and writes
   `--frame-left` and `--frame-right`; `data-going` says which way, and the stylesheet
   picks which edge moves first. The times and curves come from the reference recording.
+- The space either side of the pages is 96px when there is room and shrinks on a narrow
+  screen. On a phone the row with words puts its steps under the pages.
 - There is one arrow icon and two arrow buttons. The next button flips its icon with
   `scale: -1 1`, which flips the animation too.
 - A step with nowhere to go is `disabled`. A disabled button fires no click, so its icon
-  holds still without any extra code.
+  holds still without any extra code. It also drops focus, so focus moves to the other
+  arrow.
 - The three rows are three separate controls and each remembers its own page. The dots
   and arrows under them are `shared/ui/pager.ts`. Every row is measured before the first one is hidden, because a
   hidden row has no widths to measure.
 
 ---
 
-Exported from [lordicondev/ui-components](https://github.com/lordicondev/ui-components/tree/main/demos/pagination) 1.1.0,
+Exported from [lordicondev/ui-components](https://github.com/lordicondev/ui-components/tree/main/demos/pagination) 1.2.0,
 where it sits alongside the other demos.
 
 The code is MIT. The icons are under the [Lordicon License Terms](https://lordicon.com/licenses);

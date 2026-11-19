@@ -85,14 +85,15 @@
     visibility: visible;
 }
 
-/* Faint until a step starts. The spinner has a placeholder, so it takes a filter too. */
+/* Faint until a step starts. The label only goes a step lighter, so it stays readable.
+   The spinner has a placeholder, so it takes a filter too. */
 .step__spinner {
     color: var(--ink-muted);
     --icon-filter: var(--filter-ink-muted);
 }
 
 .step[data-status='pending'] .step__label {
-    color: var(--ink-faint);
+    color: var(--ink-soft);
 }
 
 .step[data-status='pending'] .step__spinner {

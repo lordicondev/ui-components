@@ -28,11 +28,12 @@ forwards to open and backwards to close.
   follows it.
 - The panel slides down and the tiles drop in a row at a time; closing slides it back up.
   It is CSS only, and turns off with `prefers-reduced-motion`.
-- On narrow screens the tiles go to two columns, then one.
+- On narrow screens the tiles go to two columns, then one. Below 768px the header drops
+  Product, Pricing and Log in, and on the smallest phones the logo shrinks to fit.
 
 ---
 
-Exported from [lordicondev/ui-components](https://github.com/lordicondev/ui-components/tree/main/demos/mega-menu) 1.1.0,
+Exported from [lordicondev/ui-components](https://github.com/lordicondev/ui-components/tree/main/demos/mega-menu) 1.2.0,
 where it sits alongside the other demos.
 
 The code is MIT. The icons are under the [Lordicon License Terms](https://lordicon.com/licenses);

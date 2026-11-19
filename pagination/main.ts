@@ -20,12 +20,18 @@ function place(numbers: HTMLElement, page: HTMLElement, going: 'on' | 'back'): v
     numbers.style.setProperty('--frame-right', `${trailing}px`);
 }
 
-/** Disables a step with nowhere to go. A disabled button fires no click, so its icon holds still. */
+/**
+ * Disables a step with nowhere to go. A disabled button fires no click, so its icon holds
+ * still. It also drops focus, so focus moves to the step that still works.
+ */
 function limit(steps: HTMLButtonElement[], at: number, count: number): void {
+    const focused = steps.find((step) => step === document.activeElement);
+
     for (const step of steps) {
         const next = at + Number(step.dataset.step);
         step.disabled = next < 0 || next >= count;
     }
+    if (focused?.disabled) steps.find((step) => !step.disabled)?.focus();
 }
 
 /** Wires one row: its pages, its two steps, and the frame. */

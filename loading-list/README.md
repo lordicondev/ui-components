@@ -38,11 +38,12 @@ are only there to have something to show.
   once when they show.
 - `setStatus()` also writes a word for screen readers into the row, and the list is
   `aria-live="polite"`, so each change is read out.
+- Pressing Retry hides the button, so keyboard focus moves to its row.
 - Only the spinner is on screen at load, so only it has a placeholder.
 
 ---
 
-Exported from [lordicondev/ui-components](https://github.com/lordicondev/ui-components/tree/main/demos/loading-list) 1.1.0,
+Exported from [lordicondev/ui-components](https://github.com/lordicondev/ui-components/tree/main/demos/loading-list) 1.2.0,
 where it sits alongside the other demos.
 
 The code is MIT. The icons are under the [Lordicon License Terms](https://lordicon.com/licenses);

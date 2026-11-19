@@ -44,10 +44,14 @@ as a nudge instead.
 - The hint slides in from the right with its words arriving one by one
   (`shared/motion/text-reveal.ts`), and leaves by dropping and fading.
 - Reduced motion is checked in script for the hint; the triggers check it themselves.
+- `aria-invalid` is on the input, which the hint describes through `aria-describedby`. The
+  hint is `role="alert"`, so a screen reader reads it out when it appears.
+- The toggle is always named "Show password". `aria-pressed` says whether the password is
+  shown, so the name does not change with it.
 
 ---
 
-Exported from [lordicondev/ui-components](https://github.com/lordicondev/ui-components/tree/main/demos/password-field) 1.1.0,
+Exported from [lordicondev/ui-components](https://github.com/lordicondev/ui-components/tree/main/demos/password-field) 1.2.0,
 where it sits alongside the other demos.
 
 The code is MIT. The icons are under the [Lordicon License Terms](https://lordicon.com/licenses);
