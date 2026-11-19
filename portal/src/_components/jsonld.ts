@@ -22,25 +22,25 @@ export default function ({ site, home, page, demo }: Props) {
 
     const graph = demo
         ? [
-              {
-                  '@type': 'SoftwareSourceCode',
-                  name: `${demo.title} component`,
-                  description: demo.description,
-                  url: page,
-                  codeRepository: demo.links.github,
-                  programmingLanguage: ['HTML', 'CSS', 'TypeScript'],
-                  license: 'https://opensource.org/license/mit',
-                  isPartOf: { '@id': website['@id'] },
-                  publisher,
-              },
-              {
-                  '@type': 'BreadcrumbList',
-                  itemListElement: [
-                      { '@type': 'ListItem', position: 1, name: site.title, item: home },
-                      { '@type': 'ListItem', position: 2, name: demo.title, item: page },
-                  ],
-              },
-          ]
+            {
+                '@type': 'SoftwareSourceCode',
+                name: `${demo.title} component`,
+                description: demo.description,
+                url: page,
+                codeRepository: demo.links.github,
+                programmingLanguage: ['HTML', 'CSS', 'TypeScript'],
+                license: 'https://opensource.org/license/mit',
+                isPartOf: { '@id': website['@id'] },
+                publisher,
+            },
+            {
+                '@type': 'BreadcrumbList',
+                itemListElement: [
+                    { '@type': 'ListItem', position: 1, name: site.title, item: home },
+                    { '@type': 'ListItem', position: 2, name: demo.title, item: page },
+                ],
+            },
+        ]
         : [website];
 
     // "<" escaped, so no text in the data can close the script element.

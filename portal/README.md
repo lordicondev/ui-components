@@ -19,7 +19,7 @@ A demo without a video gets its icon on the card instead.
 `src/gifs/` holds the GIF next to each demo's "When to use" text, named in `demo.json`
 (`whenToUse.gif`), and its first frame as a `.webp` of the same name, shown under reduced motion:
 
-```sh
+````sh
 magick '<name>.gif[0]' -quality 85 <name>.webp
 ``` `src/favicon/` holds the favicons and the
 web manifest; `src/favicon.ico` sits at the root, where browsers look for it. The icons, fonts and
@@ -31,7 +31,7 @@ The portal needs the demos built first. From the repo root:
 
 ```sh
 npm run build:demos && npm run prepare:portal
-```
+````
 
 Then here:
 

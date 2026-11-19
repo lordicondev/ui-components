@@ -76,8 +76,8 @@ site.use(
     sitemap({
         items: {
             lastmod: (data) => {
-                const updated =
-                    data.updated ?? (data.url === '/' ? data.demos.site.updated : undefined);
+                const updated = data.updated ??
+                    (data.url === '/' ? data.demos.site.updated : undefined);
                 return (updated ? new Date(updated) : undefined) as Date;
             },
         },
