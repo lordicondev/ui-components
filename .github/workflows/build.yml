@@ -15,7 +15,10 @@ jobs:
             contents: write
 
         steps:
+            # The whole history: the sitemap dates each demo by its last commit.
             - uses: actions/checkout@v4
+              with:
+                  fetch-depth: 0
 
             - uses: actions/setup-node@v4
               with:

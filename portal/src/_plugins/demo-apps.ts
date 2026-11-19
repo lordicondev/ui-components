@@ -2,7 +2,7 @@ import type Site from 'lume/core/site.ts';
 
 /**
  * Copies each built demo into the site: the app itself, and the zip beside it. The app gets
- * the site's favicon; the export stays without it.
+ * the site's favicon and a canonical link to its demo page; the export stays without both.
  *
  * These are produced outside Lume by `npm run build:demos` and `npm run export`, and they
  * must not go through the page pipeline — a demo's index.html is an application, not a
@@ -29,9 +29,14 @@ export default function demoApps(from = '../dist/demos') {
                     site.dest(`demos/${demo.name}`),
                 );
 
+                const demoPage = site.url(`/demos/${demo.name}/`, true);
+                const canonical = `<link rel="canonical" href="${demoPage}" />`;
                 const page = site.dest(`demos/${demo.name}/app/index.html`);
                 const html = await Deno.readTextFile(page);
-                await Deno.writeTextFile(page, html.replace('</head>', `${favicon}\n</head>`));
+                await Deno.writeTextFile(
+                    page,
+                    html.replace('</head>', `${favicon}\n${canonical}\n</head>`),
+                );
             }
 
             console.log(`demo-apps: copied ${demos.length} demo(s)`);

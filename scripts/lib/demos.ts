@@ -15,6 +15,12 @@ export type DemoManifest = {
     slug: string;
     title: string;
     description: string;
+    /** The page's <title>, whole. The title plus the site's name when left out. */
+    pageTitle?: string;
+    /** The "When to use" section: text, and a GIF from portal/src/gifs/ next to it. */
+    whenToUse?: { text: string; gif?: string; alt?: string };
+    /** The Accessibility section, one list item each. */
+    accessibility?: string[];
     /** The section of the index it is listed in. */
     group: 'buttons' | 'inputs' | 'menus' | 'navigation' | 'feedback' | 'containers' | 'sections';
     /** How tall the portal's frame is. Large when left out. */
@@ -25,6 +31,8 @@ export type DemoManifest = {
     /** What to know about the icons and their states, shown above the portal's icon table. */
     iconsNote?: string;
     fragments: Fragment[];
+    /** The demo's frame in the Figma file, if there is one. */
+    figma?: string;
     /** The published pen, if there is one. */
     codepen?: string;
 };

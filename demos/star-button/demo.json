@@ -3,6 +3,17 @@
     "slug": "star-button",
     "title": "Star button",
     "description": "A button for starring an item, with a counter. The star morphs into a filled one when you press it, and the count goes up.",
+    "pageTitle": "Star Button with Animated Counter (Like & Upvote) | Lordicon",
+    "whenToUse": {
+        "text": "Use it for actions where the count matters: starring a repository, liking a post or upvoting a feature request. The star morph and the updated count reward the click and show at a glance how many others engaged. Place it near the item's title, where people expect social proof.",
+        "gif": "animated-star-button-counter.gif",
+        "alt": "Animated star button with counter: star morphs into a filled star on click and the count goes up"
+    },
+    "accessibility": [
+        "Native toggle button with `aria-pressed`.",
+        "Visually hidden text completes the name, so screen readers hear \"24 stars\" instead of a bare number.",
+        "The animated star is decorative and hidden from assistive tech."
+    ],
     "group": "buttons",
     "stage": "small",
     "icons": ["system-outline-237-star"],
@@ -43,5 +54,7 @@
             "title": "Colour from the same attribute",
             "note": "One custom property, four states. The icon inherits it through current-color."
         }
-    ]
+    ],
+    "codepen": "https://codepen.io/lord-icon/pen/myWvjPm",
+    "figma": "https://www.figma.com/design/10ewOq6uRSMi9pLH9ZiFcK/Lordicon-Animated-Components?node-id=2020-5297"
 }

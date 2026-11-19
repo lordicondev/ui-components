@@ -29,7 +29,7 @@ let leaving: ReturnType<typeof setTimeout> | undefined;
 
 // The pointer resting on the row opens the submenu; leaving both closes it after a grace
 // period, unless focus is inside it. Click and Enter open it through popovertargetaction;
-// Escape and clicking away are the browser's.
+// Escape and clicking away are the browser's (on iOS, a tap away is popovers()').
 //
 // Not for touch: a finger "leaves" as it lifts, and a submenu opened mid-tap catches the
 // tap and focuses its search.

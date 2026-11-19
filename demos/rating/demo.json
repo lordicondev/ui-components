@@ -3,6 +3,18 @@
     "slug": "rating",
     "title": "Rating",
     "description": "A row of five stars for rating something. Stars light up one by one as you hover and morph into filled stars when you pick a rating.",
+    "pageTitle": "Accessible Star Rating Input (1-5 Stars) | Lordicon",
+    "whenToUse": {
+        "text": "Use it for product reviews, feedback forms and post-purchase surveys. Stars light up on hover to preview the score before you commit, and clicking the selected star again clears the rating. Because it's built on radio inputs, the value submits with any regular form.",
+        "gif": "animated-star-rating-component.gif",
+        "alt": "Animated star rating: five stars light up one by one on hover and fill when a rating is selected"
+    },
+    "accessibility": [
+        "Each star is a real radio input inside a fieldset with the legend \"Rate this\".",
+        "Hidden text gives every star a name, from \"1 star\" to \"5 stars\".",
+        "Arrow keys change the rating natively, and a focus ring appears around the active star.",
+        "With `prefers-reduced-motion`, each star changes shape at once and the hover nudge is skipped."
+    ],
     "group": "inputs",
     "stage": "small",
     "icons": ["system-outline-237-star"],
@@ -66,5 +78,7 @@
             "title": "Click the top star to clear",
             "note": "Clicking the top star again clears the rating."
         }
-    ]
+    ],
+    "codepen": "https://codepen.io/lord-icon/pen/wBJNxMy",
+    "figma": "https://www.figma.com/design/10ewOq6uRSMi9pLH9ZiFcK/Lordicon-Animated-Components?node-id=2020-3925"
 }

@@ -21,8 +21,8 @@
 /* Resting, hovered, starred, and starred under the pointer. Hover shows the colour a press
    would leave; the shape says which state it is. No transition: only the fill animates. */
 .star {
-    --star-mark: var(--ink-subtle);
-    --icon-filter: var(--filter-ink-subtle);
+    --star-mark: var(--ink-muted);
+    --icon-filter: var(--filter-ink-muted);
 }
 
 /* Only under a mouse: on a touch screen :hover stays on after the tap. */

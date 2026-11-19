@@ -3,6 +3,17 @@
     "slug": "simple-button",
     "title": "Simple button",
     "description": "A Call us button. The phone icon rings when you point at it.",
+    "pageTitle": "Animated CTA Button with Hover Icon | Lordicon",
+    "whenToUse": {
+        "text": "The simplest way to add motion to a call to action: a text button with an icon that plays on hover. Use it for primary contact actions like \"Call us\", \"Book a demo\" or \"Contact sales\", where a little movement draws the eye without distracting. It's also the easiest starting point for swapping in any Lordicon icon.",
+        "gif": "animated-call-us-button.gif",
+        "alt": "Animated Call us button: phone icon rings on hover"
+    },
+    "accessibility": [
+        "A plain native button named by its visible text, with no extra ARIA needed.",
+        "The icon is decorative and hidden from screen readers.",
+        "A clear focus ring is shown for keyboard users, and hover styles apply only on devices that can hover, so nothing sticks after a tap."
+    ],
     "group": "buttons",
     "stage": "small",
     "icons": ["system-outline-140-phone"],
@@ -32,5 +43,7 @@
             "title": "Resting, hovered and pressed",
             "note": "Three steps of the brand colour. The icon stays white."
         }
-    ]
+    ],
+    "codepen": "https://codepen.io/lord-icon/pen/dPvajMX",
+    "figma": "https://www.figma.com/design/10ewOq6uRSMi9pLH9ZiFcK/Lordicon-Animated-Components?node-id=2687-5350"
 }

@@ -4,10 +4,11 @@
  *
  * Usage: npm run prepare:portal
  */
+import { execFileSync } from 'node:child_process';
 import { cpSync, existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { loadConfig, repoRoot } from './lib/config.ts';
-import { demoDir, listDemos, readManifest, type Fragment } from './lib/demos.ts';
+import { demoDir, listDemos, readManifest, type DemoManifest, type Fragment } from './lib/demos.ts';
 import { PORTAL_ICONS, iconLabel, iconPath, iconStates, readLockfile } from './lib/icons.ts';
 import { demoLinks, lordiconUrl, repoUrl } from './lib/links.ts';
 import { extractFragment, withoutMarkers } from './lib/regions.ts';
@@ -151,6 +152,50 @@ function thumbnail(slug: string) {
     return { video: `/thumbnails/${slug}.mp4`, poster: `/thumbnails/${slug}.webp` };
 }
 
+function git(...args: string[]): string | undefined {
+    try {
+        return execFileSync('git', args, { cwd: repoRoot, encoding: 'utf8', stdio: 'pipe' }).trim();
+    } catch {
+        return undefined;
+    }
+}
+
+/**
+ * Only a full clone knows when each demo last changed. A shallow one would date them all to
+ * its single commit, and a copy outside git has no dates at all: the sitemap goes without.
+ */
+const fullHistory = git('rev-parse', '--is-shallow-repository') === 'false';
+if (!fullHistory) console.warn('  no full git history: the sitemap gets no dates');
+
+/** The date of the last commit that touched these paths, for the sitemap. */
+function lastChanged(...paths: string[]) {
+    return (fullHistory && git('log', '-1', '--format=%cI', '--', ...paths)) || undefined;
+}
+
+/** The link preview image, portal/src/og/<slug>.png. The site's own when there is none. */
+function ogImage(slug: string) {
+    const file = resolve(repoRoot, 'portal/src/og', `${slug}.png`);
+    return existsSync(file) ? `/og/${slug}.png` : undefined;
+}
+
+/**
+ * The "When to use" section. A GIF that is not in portal/src/gifs/ is left out, with a
+ * warning. Its first frame, the .webp next to it, is shown instead under reduced motion.
+ */
+function whenToUse(slug: string, section: DemoManifest['whenToUse']) {
+    if (!section?.gif) return section;
+    const dir = resolve(repoRoot, 'portal/src/gifs');
+    if (existsSync(resolve(dir, section.gif))) {
+        const still = section.gif.replace(/\.gif$/, '.webp');
+        if (!existsSync(resolve(dir, still))) {
+            throw new Error(`portal/src/gifs/${section.gif} has no ${still} still`);
+        }
+        return { ...section, gif: `/gifs/${section.gif}`, still: `/gifs/${still}` };
+    }
+    console.warn(`  ${slug}: portal/src/gifs/${section.gif} is missing, shown without it`);
+    return { text: section.text };
+}
+
 /** The trigger a preview in the icon table plays its state with, by the state's kind. */
 const PREVIEW_TRIGGERS: Record<string, string> = {
     morph: 'morph',
@@ -201,6 +246,9 @@ for (const slug of listDemos()) {
         icons: manifest.icons.map((alias) => iconRow(alias, chosen[alias])),
         cover: COVERS[slug] ?? manifest.icons[0],
         thumbnail: thumbnail(slug),
+        og: ogImage(slug),
+        updated: lastChanged(`demos/${slug}`),
+        whenToUse: whenToUse(slug, manifest.whenToUse),
         links: demoLinks(config, slug),
         fragments: await Promise.all(
             manifest.fragments.map((fragment) => demoFragment(slug, fragment)),
@@ -220,8 +268,11 @@ writeFileSync(
                 title: config.title,
                 description: config.description,
                 version,
+                // The home page: its own text, and the list of demos.
+                updated: lastChanged('portal/src/index.vto', 'demos'),
                 standaloneBranch: config.repo.exportBranch,
                 repo: repoUrl(config),
+                figma: config.figma,
                 lordicon: {
                     home: lordiconUrl(config),
                     licenses: lordiconUrl(config, '/licenses'),

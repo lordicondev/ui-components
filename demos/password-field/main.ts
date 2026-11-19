@@ -102,8 +102,8 @@ async function hideHint(): Promise<void> {
 toggle.addEventListener('click', () => {
     const reveal = input.type === 'password';
     input.type = reveal ? 'text' : 'password';
+    // The name stays "Show password"; aria-pressed says whether it is shown.
     toggle.setAttribute('aria-pressed', String(reveal));
-    toggle.setAttribute('aria-label', reveal ? 'Hide password' : 'Show password');
 });
 
 // The lock plays when focus arrives, not on every keystroke.
@@ -114,14 +114,14 @@ form.addEventListener('submit', (event) => {
     event.preventDefault();
     const wrong = problem();
 
-    field.setAttribute('aria-invalid', String(wrong !== null));
+    input.setAttribute('aria-invalid', String(wrong !== null));
     if (wrong) showHint(wrong);
     else void hideHint();
 });
 
 // A changed value invalidates the last answer; the next Sign in asks again.
 input.addEventListener('input', () => {
-    field.setAttribute('aria-invalid', 'false');
+    input.setAttribute('aria-invalid', 'false');
     void hideHint();
 });
 // #endregion

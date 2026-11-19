@@ -3,6 +3,18 @@
     "slug": "categories-section",
     "title": "Categories section",
     "description": "Three rows of category chips that scroll without end, the middle one the other way. Point at a row to stop it; the chip’s icon plays.",
+    "pageTitle": "Infinite Scrolling Category Chips Section | Lordicon",
+    "whenToUse": {
+        "text": "Use it on landing pages for marketplaces, course platforms and stores to show the breadth of what you offer. Three rows scroll endlessly, the middle one in the opposite direction, creating movement without a carousel. Pointing at a row pauses it and plays the chip's icon.",
+        "gif": "animated-categories-section.gif",
+        "alt": "Animated categories section: three rows of scrolling category chips with icons that play on hover"
+    },
+    "accessibility": [
+        "Only one copy of each chip is exposed. The looping duplicates are hidden from screen readers and skipped by Tab.",
+        "A row stops when one of its chips has keyboard focus, and the focused chip scrolls into view.",
+        "With `prefers-reduced-motion`, the rows stay still.",
+        "Chips are native buttons with visible labels."
+    ],
     "group": "sections",
     "stage": "large",
     "icons": [
@@ -75,5 +87,7 @@
             "title": "Chip colours",
             "note": "One custom property per chip. Hover mixes it with black."
         }
-    ]
+    ],
+    "codepen": "https://codepen.io/lord-icon/pen/QwpYBwx",
+    "figma": "https://www.figma.com/design/10ewOq6uRSMi9pLH9ZiFcK/Lordicon-Animated-Components?node-id=2687-5347"
 }

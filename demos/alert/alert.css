@@ -38,12 +38,12 @@
 
 /* Only under a mouse: on a touch screen :hover stays on after the tap. */
 @media (hover: hover) {
-    .add:hover:not(:disabled) {
+    .add:hover:not([aria-disabled='true']) {
         border-color: var(--border-strong);
     }
 }
 
-.add:disabled {
+.add[aria-disabled='true'] {
     color: var(--ink-subtle);
     cursor: not-allowed;
 }

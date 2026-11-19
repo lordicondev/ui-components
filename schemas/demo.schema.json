@@ -22,6 +22,43 @@
             "type": "string",
             "minLength": 1
         },
+        "pageTitle": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 65,
+            "description": "The page's <title> and link preview title, whole. The title plus the site's name when left out. The metas plugin cuts anything over 65 characters."
+        },
+        "whenToUse": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["text"],
+            "dependentRequired": { "gif": ["alt"] },
+            "properties": {
+                "text": {
+                    "type": "string",
+                    "minLength": 1
+                },
+                "gif": {
+                    "type": "string",
+                    "pattern": "^[a-z0-9-]+\\.gif$",
+                    "description": "A file in portal/src/gifs/, shown next to the text."
+                },
+                "alt": {
+                    "type": "string",
+                    "minLength": 1
+                }
+            },
+            "description": "The portal's \"When to use\" section, at the end of the page. Inline `code` works in the text."
+        },
+        "accessibility": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+                "type": "string",
+                "minLength": 1
+            },
+            "description": "The portal's Accessibility section, one list item each. Inline `code` works."
+        },
         "group": {
             "enum": [
                 "buttons",
@@ -102,6 +139,11 @@
                     }
                 }
             }
+        },
+        "figma": {
+            "type": "string",
+            "pattern": "^https://www\\.figma\\.com/design/\\w+/[\\w-]+\\?node-id=\\d+-\\d+$",
+            "description": "The demo's frame in the Figma file. The portal shows an Open in Figma button when it is set."
         },
         "codepen": {
             "type": "string",

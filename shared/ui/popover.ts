@@ -13,6 +13,7 @@
  *   one after another, starting from the end nearest the button
  * - closes the whole chain of panels when a `[data-choose]` row is clicked, and raises a
  *   `popover-choose` event carrying the row
+ * - closes the panels on a tap on an empty page, which iOS Safari does not do
  *
  * Closing is not animated here. A closing popover leaves the top layer, and the only way to
  * hold it there is `transition-behavior: allow-discrete` in popover.css.
@@ -233,9 +234,32 @@ function raise(panel: HTMLElement, to: PopoverDirection, options: PopoverOptions
     });
 }
 
+let tapsWired = false;
+
+/**
+ * iOS Safari closes a popover on a tap only when the tap lands on something it counts as
+ * clickable, so a tap on an empty page leaves the panel open. This closes it there.
+ * Controls are skipped: their own `popovertarget` toggles the panel. A swipe ends in
+ * `pointercancel`, so scrolling does not close anything.
+ */
+function closeOnTap(): void {
+    if (tapsWired) return;
+    tapsWired = true;
+
+    document.addEventListener('pointerup', (event) => {
+        if (event.pointerType !== 'touch') return;
+        if ((event.target as Element).closest('[popover], [popovertarget]')) return;
+
+        for (const panel of document.querySelectorAll<HTMLElement>('[popover]')) {
+            if (wired.has(panel) && panel.matches(':popover-open')) outermost(panel).hidePopover();
+        }
+    });
+}
+
 /** Wires every `[popovertarget]` under `root` to the panel it names. Called once. */
 export function popovers(root: ParentNode = document, options: PopoverOptions = {}): void {
     const { gap = GAP, duration = OPEN_MS, direction = 'auto' } = options;
+    closeOnTap();
 
     for (const anchor of root.querySelectorAll<HTMLElement>('[popovertarget]')) {
         const panel = document.getElementById(anchor.getAttribute('popovertarget') ?? '');

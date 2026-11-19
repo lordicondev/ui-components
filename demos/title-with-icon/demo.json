@@ -3,6 +3,16 @@
     "slug": "title-with-icon",
     "title": "Title with icon",
     "description": "A heading with icons between its words, plain or in a box. The icons play by themselves, one after another.",
+    "pageTitle": "Animated Heading with Inline Icons | Lordicon",
+    "whenToUse": {
+        "text": "Use it in hero sections and feature headers when a plain headline isn't enough. Icons sit between the words, plain or in boxes, and play one after another to bring the sentence to life. Works best for short, bold headlines.",
+        "gif": "animated-title-with-icons.gif",
+        "alt": "Animated heading with icons between words, plain and boxed, icons playing one after another"
+    },
+    "accessibility": [
+        "The title is a real heading element.",
+        "All icons are hidden from screen readers, so the heading is read as one plain sentence."
+    ],
     "group": "sections",
     "stage": "medium",
     "icons": [
@@ -52,5 +62,7 @@
             "title": "The box",
             "note": "The box grows and shrinks with the text, like the icons do."
         }
-    ]
+    ],
+    "codepen": "https://codepen.io/lord-icon/pen/PwpVBNJ",
+    "figma": "https://www.figma.com/design/10ewOq6uRSMi9pLH9ZiFcK/Lordicon-Animated-Components?node-id=2687-5348"
 }

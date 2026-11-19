@@ -23,6 +23,8 @@ export type SiteConfig = {
     title: string;
     description: string;
     siteUrl: string;
+    /** The Figma file with every component. */
+    figma: string;
     utm: UtmConfig;
     repo: RepoConfig;
 };
@@ -43,6 +45,7 @@ export function loadConfig(): SiteConfig {
         title: process.env.SITE_TITLE ?? file.title,
         description: file.description,
         siteUrl: siteUrl.endsWith('/') ? siteUrl : `${siteUrl}/`,
+        figma: file.figma,
         utm: file.utm,
         repo: {
             owner: process.env.REPO_OWNER ?? file.repo.owner,

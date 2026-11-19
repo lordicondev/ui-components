@@ -52,7 +52,10 @@ Each demo is its own Vite project; `scripts/lib/vite-config.ts` builds one confi
    `npm run check:icons -- --record`. Name the states the demo plays in `iconStates`
    (`"system-outline-69-eye": "morph-close"`); an icon left out shows its default. `iconsNote` says what to
    know before swapping an icon. Both appear in the portal's icon table.
-6. `npm run check && npm test`.
+6. For search: `pageTitle` is the page's whole `<title>`, `whenToUse` and `accessibility` are
+   the last two sections of the page. Say only what the code does. Add the link preview and
+   GIF as `portal/README.md` describes.
+7. `npm run check && npm test`.
 
 ## Conventions
 

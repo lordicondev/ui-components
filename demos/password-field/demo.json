@@ -3,6 +3,18 @@
     "slug": "password-field",
     "title": "Password field",
     "description": "A password input with a show/hide toggle and error messages. The lock reacts when you click into the field, and the eye morphs open and closed with the toggle.",
+    "pageTitle": "Password Input with Show/Hide Toggle & Validation | Lordicon",
+    "whenToUse": {
+        "text": "Use it in sign-in, sign-up and password change forms. The show/hide toggle helps people avoid typos, especially on mobile, and inline errors explain exactly what's wrong instead of a generic failure. The animated lock and eye make the field's state clear at a glance.",
+        "gif": "animated-password-field-show-hide.gif",
+        "alt": "Animated password field: lock reacts on focus and eye icon morphs open and closed with the show/hide toggle"
+    },
+    "accessibility": [
+        "A visible label is linked to the input, and the error message is connected with `aria-describedby`.",
+        "The toggle is a native button named \"Show password\", and `aria-pressed` says whether the password is shown.",
+        "Errors are shown with text, not color alone.",
+        "Message animations are skipped with `prefers-reduced-motion`."
+    ],
     "group": "inputs",
     "stage": "small",
     "icons": [
@@ -71,5 +83,7 @@
             "title": "Hide the message",
             "note": "A drop and a fade, then hidden. Safe to call on every keystroke."
         }
-    ]
+    ],
+    "codepen": "https://codepen.io/lord-icon/pen/EaWrpPY",
+    "figma": "https://www.figma.com/design/10ewOq6uRSMi9pLH9ZiFcK/Lordicon-Animated-Components?node-id=42-6887"
 }

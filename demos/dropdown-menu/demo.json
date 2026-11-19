@@ -3,6 +3,18 @@
     "slug": "dropdown-menu",
     "title": "Dropdown menu",
     "description": "A menu of grouped actions that opens from a button. Icons react to the mouse and the arrow keys.",
+    "pageTitle": "Animated Dropdown Menu with Grouped Actions | Lordicon",
+    "whenToUse": {
+        "text": "Use it for \"more\" menus on cards, table rows and toolbars, where secondary actions shouldn't take up permanent space. Groups separate everyday actions from destructive ones like Delete. Icons react to both mouse and keyboard, so the menu feels alive either way.",
+        "gif": "animated-dropdown-menu-component.gif",
+        "alt": "Animated dropdown menu with grouped actions: icons react to hover and keyboard navigation"
+    },
+    "accessibility": [
+        "Uses the ARIA menu pattern: `role=\"menu\"`, with everyday actions in labelled groups and Delete on its own.",
+        "The menu is a single tab stop. Arrow keys, Home, End and Enter move through and run items.",
+        "Escape and click-away close it natively, and the trigger exposes `aria-expanded` and a \"More options\" label.",
+        "Destructive actions are marked by their label, not color alone."
+    ],
     "group": "menus",
     "stage": "medium",
     "icons": [
@@ -47,5 +59,7 @@
             "title": "The destructive row",
             "note": "One rule turns a row and its icon red."
         }
-    ]
+    ],
+    "codepen": "https://codepen.io/lord-icon/pen/dPvajoM",
+    "figma": "https://www.figma.com/design/10ewOq6uRSMi9pLH9ZiFcK/Lordicon-Animated-Components?node-id=41-4500"
 }

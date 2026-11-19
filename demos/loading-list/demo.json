@@ -3,6 +3,18 @@
     "slug": "loading-list",
     "title": "Loading list",
     "description": "A checklist showing the steps of a running task. Each spinner turns into a tick or a cross when its step finishes.",
+    "pageTitle": "Step-by-Step Loading Checklist with Status Icons | Lordicon",
+    "whenToUse": {
+        "text": "Use it for processes with several steps: account setup, file processing, deployments or AI generation. People see what's happening now, what's done and exactly which step failed. A Retry button appears only when something goes wrong.",
+        "gif": "animated-loading-list-component.gif",
+        "alt": "Animated loading checklist: spinners turn into a tick or a cross as each task step finishes"
+    },
+    "accessibility": [
+        "Steps are an ordered list, so screen readers announce order and count.",
+        "A polite live region announces each change: \"In progress\", \"Done\" or \"Failed\".",
+        "Status is shown by icon and color, and screen readers get it as text.",
+        "Retry is a native button."
+    ],
     "group": "feedback",
     "stage": "medium",
     "icons": [
@@ -73,5 +85,7 @@
             "title": "Faint, then solid",
             "note": "The icons inherit color through current-color."
         }
-    ]
+    ],
+    "codepen": "https://codepen.io/lord-icon/pen/zxZeLGg",
+    "figma": "https://www.figma.com/design/10ewOq6uRSMi9pLH9ZiFcK/Lordicon-Animated-Components?node-id=2350-3529"
 }

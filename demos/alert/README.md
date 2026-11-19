@@ -36,4 +36,7 @@ the card's own entrance animation has finished, so the two do not compete. After
   waits for the leaving transitions, then removes it.
 - The button queues four and then rests. Which kind comes next depends on which are
   already up, so the order stays the same however you dismiss.
+- Resting is `aria-disabled`, not `disabled`, so the button keeps focus. Dismissing from
+  the keyboard moves focus to the next card's close button, or back to the button when
+  the deck is empty.
 - The dots and arrows are `shared/ui/pager.ts`.

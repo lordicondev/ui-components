@@ -3,6 +3,17 @@
     "slug": "add-new-card",
     "title": "Add new card",
     "description": "An empty, dashed tile for adding a new item to a grid. Its plus icon turns when you hover over it.",
+    "pageTitle": "\"Add New\" Placeholder Card for Grids | Lordicon",
+    "whenToUse": {
+        "text": "Use it as the last tile in a grid of projects, boards, team members or files, inviting people to create a new item right where it will appear. It also works as an empty state when the grid has nothing in it yet. The rotating plus icon adds a friendly cue on hover.",
+        "gif": "animated-add-new-card-component.gif",
+        "alt": "Animated add new card tile: dashed card with a plus icon that turns on hover"
+    },
+    "accessibility": [
+        "The whole tile is one native button, named by its visible text \"Add new card\".",
+        "The icon is decorative and hidden from screen readers.",
+        "Keyboard users get a visible focus ring."
+    ],
     "group": "containers",
     "stage": "small",
     "icons": ["system-outline-48-plus"],
@@ -34,5 +45,7 @@
             "title": "Resting and hovered",
             "note": "Five custom properties set twice. The icon colour is one of them."
         }
-    ]
+    ],
+    "codepen": "https://codepen.io/lord-icon/pen/yyMZEWx",
+    "figma": "https://www.figma.com/design/10ewOq6uRSMi9pLH9ZiFcK/Lordicon-Animated-Components?node-id=2020-5625"
 }

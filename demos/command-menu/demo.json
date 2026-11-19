@@ -3,6 +3,18 @@
     "slug": "command-menu",
     "title": "Command menu",
     "description": "A search palette for jumping to commands, opened with a keyboard shortcut. Icons react as you move through the commands with the mouse or the arrow keys.",
+    "pageTitle": "Command Palette (Cmd+K Menu) with Keyboard Navigation | Lordicon",
+    "whenToUse": {
+        "text": "Use it in apps with many pages or actions, like dashboards, editors and developer tools. Power users press Cmd+K or Ctrl+K and jump anywhere without touching the mouse. Grouped results and live filtering keep long command lists easy to scan.",
+        "gif": "animated-command-menu-component.gif",
+        "alt": "Animated command menu search palette: icons react while moving through commands with mouse or arrow keys"
+    },
+    "accessibility": [
+        "Built as an ARIA combobox controlling a listbox, with options in labelled groups.",
+        "`aria-activedescendant` tracks the active row, so focus stays in the search field while arrow keys move through results.",
+        "Arrow keys wrap around, Enter runs the command and Escape closes the palette.",
+        "The trigger exposes its shortcut with `aria-keyshortcuts`. Animations are skipped with `prefers-reduced-motion`."
+    ],
     "group": "menus",
     "stage": "large",
     "icons": [
@@ -79,5 +91,7 @@
             "title": "Hide empty groups",
             "note": "Whether a group still has a visible row is a question CSS can ask with :has()."
         }
-    ]
+    ],
+    "codepen": "https://codepen.io/lord-icon/pen/JoWxBdo",
+    "figma": "https://www.figma.com/design/10ewOq6uRSMi9pLH9ZiFcK/Lordicon-Animated-Components?node-id=30-8863"
 }

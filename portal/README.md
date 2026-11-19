@@ -13,7 +13,15 @@ The site that presents the demos. It never builds a demo: everything it renders 
 ffmpeg -i <slug>.mp4 -frames:v 1 -c:v libwebp -quality 90 <slug>.webp
 ```
 
-A demo without a video gets its icon on the card instead. `src/favicon/` holds the favicons and the
+A demo without a video gets its icon on the card instead.
+
+`src/og/<slug>.png` is a demo's own link preview (1200×630); without one the page uses `og.png`.
+`src/gifs/` holds the GIF next to each demo's "When to use" text, named in `demo.json`
+(`whenToUse.gif`), and its first frame as a `.webp` of the same name, shown under reduced motion:
+
+```sh
+magick '<name>.gif[0]' -quality 85 <name>.webp
+``` `src/favicon/` holds the favicons and the
 web manifest; `src/favicon.ico` sits at the root, where browsers look for it. The icons, fonts and
 tokens in `src/` are copied in from `shared/` by `prepare:portal`; edit them there.
 
@@ -50,6 +58,9 @@ SITE_URL="https://example.com/ui-components/" deno task build
 
 If it carries a pathname, Lume prefixes every internal link with it. Demos are built with a relative
 base, so they need no rebuild to move.
+
+Every page links to its own address as canonical, except the 404. A demo app links to its demo page
+instead; that link is added to the portal's copy only, so exported code never points here.
 
 ## Layout
 

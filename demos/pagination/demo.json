@@ -3,6 +3,18 @@
     "slug": "pagination",
     "title": "Pagination",
     "description": "Page navigation for long lists, in three button styles. A highlight slides to the page you pick.",
+    "pageTitle": "Animated Pagination Component in 3 Styles | Lordicon",
+    "whenToUse": {
+        "text": "Use it for search results, tables, blog archives and product lists, where people need to know where they are and jump back to a page. Choose boxed, bare or labelled buttons to match your UI. A sliding highlight shows the current page clearly.",
+        "gif": "animated-pagination-component.gif",
+        "alt": "Animated pagination in three button styles: highlight slides to the selected page"
+    },
+    "accessibility": [
+        "Each pagination is a nav landmark labelled \"Pagination\".",
+        "The current page is marked with `aria-current=\"page\"`.",
+        "Previous and Next buttons are labelled and disabled at the ends of the list.",
+        "The sliding highlight is hidden from screen readers and stops animating with `prefers-reduced-motion`."
+    ],
     "group": "navigation",
     "stage": "small",
     "icons": ["system-outline-2753-arrow-left", "system-outline-32-chevron-left"],
@@ -66,5 +78,7 @@
             "title": "The three button styles",
             "note": "A box, a box with a word, and no box at all. Everything else is shared."
         }
-    ]
+    ],
+    "codepen": "https://codepen.io/lord-icon/pen/yyMZqYG",
+    "figma": "https://www.figma.com/design/10ewOq6uRSMi9pLH9ZiFcK/Lordicon-Animated-Components?node-id=43-717"
 }

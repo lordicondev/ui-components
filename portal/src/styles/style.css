@@ -879,13 +879,17 @@ h2 {
 
 .take-it,
 .reading,
-.icons-used {
+.icons-used,
+.usage,
+.a11y {
     margin-bottom: var(--space-96);
 }
 
 .take-it h2,
 .reading h2,
-.icons-used h2 {
+.icons-used h2,
+.usage h2,
+.a11y h2 {
     margin-bottom: var(--space-8);
     font-size: var(--text-lg);
 }
@@ -1283,6 +1287,49 @@ h2 {
         white-space: normal;
         overflow-wrap: anywhere;
     }
+}
+
+/* When to use, Accessibility ------------------------------------------------ */
+
+/* Text and GIF side by side, half each; stacked on a phone. */
+.usage--gif {
+    display: grid;
+    gap: var(--space-24) var(--space-48);
+    align-items: center;
+}
+
+@media (min-width: 720px) {
+    .usage--gif {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+.usage p,
+.a11y__list {
+    max-width: 68ch;
+    margin: 0;
+    color: var(--ink-soft);
+}
+
+.usage__media img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--border-soft);
+    border-radius: var(--radius-lg);
+}
+
+.a11y__list {
+    display: grid;
+    gap: var(--space-8);
+    padding-left: var(--space-24);
+}
+
+.usage code,
+.a11y code {
+    font-family: var(--font-mono);
+    font-variant-ligatures: none;
+    font-size: 0.9em;
 }
 
 .visually-hidden {

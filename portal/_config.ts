@@ -44,9 +44,45 @@ site.data('metas', {
     generator: false,
 });
 site.use(metas());
+// The metas plugin cuts titles at 65 and descriptions at 155 characters. The home page
+// sets its own text in the front matter, so put that back whole.
+site.process(['.html'], (pages) => {
+    for (const page of pages) {
+        const own = page.data.metas as { title?: unknown; description?: unknown } | undefined;
+        if (typeof own?.title !== 'string' || typeof own.description !== 'string') continue;
+
+        const set = (selector: string, content: string) =>
+            page.document?.querySelector(selector)?.setAttribute('content', content);
+        set('meta[property="og:title"]', own.title);
+        set('meta[property="og:description"]', own.description);
+        set('meta[name="description"]', own.description);
+    }
+});
+// A redirect page is not a page to preview: it keeps only its canonical link and refresh.
+site.process(['.html'], (pages) => {
+    for (const page of pages) {
+        if (!page.data.redirect) continue;
+        page.document
+            ?.querySelectorAll(
+                'meta[property^="og:"], meta[name^="twitter:"], meta[name="description"]',
+            )
+            .forEach((meta) => meta.remove());
+    }
+});
 site.use(robots());
-// No lastmod: a file's date says when it was checked out, not when the demo changed.
-site.use(sitemap({ items: { lastmod: '' } }));
+// lastmod is the date of the last commit to the demo, from prepare:portal. Not a file's
+// date: that says when it was checked out, not when the demo changed.
+site.use(
+    sitemap({
+        items: {
+            lastmod: (data) => {
+                const updated =
+                    data.updated ?? (data.url === '/' ? data.demos.site.updated : undefined);
+                return (updated ? new Date(updated) : undefined) as Date;
+            },
+        },
+    }),
+);
 
 site.add('styles/style.css', '/style.css');
 site.add('js/main.ts', '/main.js');
@@ -54,6 +90,8 @@ site.add('fonts');
 site.add('icons');
 site.add('images');
 site.add('thumbnails');
+site.add('gifs');
+site.add('og');
 site.add('favicon');
 site.add('favicon.ico');
 

@@ -3,6 +3,17 @@
     "slug": "button-progress",
     "title": "Button progress",
     "description": "A button that shows the progress of a download or upload. The icon loops while the file transfers, then a receipt confirms it’s done.",
+    "pageTitle": "Download & Upload Button with Animated Progress | Lordicon",
+    "whenToUse": {
+        "text": "Use it when a click starts something that takes a few seconds, like a download, upload or export, and people should see it working without leaving the page. The button itself becomes the progress indicator, and a small receipt confirms when the file is done. Great for asset libraries, file managers and export actions in settings.",
+        "gif": "animated-download-progress-button.gif",
+        "alt": "Animated download progress button: icon loops during the file transfer and a receipt confirms completion"
+    },
+    "accessibility": [
+        "Native button whose `aria-label` follows each stage: \"Download file\", \"Downloading\", \"Downloaded\".",
+        "`aria-busy` is set while the transfer runs. The button is marked `aria-disabled` and ignores extra presses, so it keeps keyboard focus.",
+        "Label transitions switch off with `prefers-reduced-motion`."
+    ],
     "group": "buttons",
     "stage": "small",
     "icons": [
@@ -73,5 +84,7 @@
             "title": "The receipt opening and leaving",
             "note": "The receipt slides out of the button, then fades away."
         }
-    ]
+    ],
+    "codepen": "https://codepen.io/lord-icon/pen/dPvaKxG",
+    "figma": "https://www.figma.com/design/10ewOq6uRSMi9pLH9ZiFcK/Lordicon-Animated-Components?node-id=0-1"
 }

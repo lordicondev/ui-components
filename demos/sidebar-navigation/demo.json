@@ -3,6 +3,18 @@
     "slug": "sidebar-navigation",
     "title": "Sidebar navigation",
     "description": "A side menu linking to pages of an app. Icons react to hover and the keyboard, and the current page is highlighted.",
+    "pageTitle": "Sidebar Navigation Menu with Animated Icons | Lordicon",
+    "whenToUse": {
+        "text": "Use it for dashboards, admin panels and SaaS apps with several top-level sections. Grouped links, a search field and an account button fit everything people need in one column. The highlighted current page tells users where they are at all times.",
+        "gif": "animated-sidebar-navigation-menu.gif",
+        "alt": "Animated sidebar navigation menu: icons react to hover and keyboard, with the current page highlighted"
+    },
+    "accessibility": [
+        "A nav landmark labelled \"Main\", with real links in lists.",
+        "The current page is marked with `aria-current=\"page\"`, so screen readers announce it too.",
+        "The search is a search landmark with a hidden label and a labelled clear button.",
+        "Icons are decorative and hidden from screen readers."
+    ],
     "group": "navigation",
     "stage": "large",
     "icons": [
@@ -63,5 +75,7 @@
             "title": "The sidebar's height",
             "note": "The sidebar keeps the height it was designed at whenever the screen allows."
         }
-    ]
+    ],
+    "codepen": "https://codepen.io/lord-icon/pen/JoWxBXd",
+    "figma": "https://www.figma.com/design/10ewOq6uRSMi9pLH9ZiFcK/Lordicon-Animated-Components?node-id=42-5279"
 }

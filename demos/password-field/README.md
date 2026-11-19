@@ -44,3 +44,7 @@ as a nudge instead.
 - The hint slides in from the right with its words arriving one by one
   (`shared/motion/text-reveal.ts`), and leaves by dropping and fading.
 - Reduced motion is checked in script for the hint; the triggers check it themselves.
+- `aria-invalid` is on the input, which the hint describes through `aria-describedby`. The
+  hint is `role="alert"`, so a screen reader reads it out when it appears.
+- The toggle is always named "Show password". `aria-pressed` says whether the password is
+  shown, so the name does not change with it.

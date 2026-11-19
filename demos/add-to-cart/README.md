@@ -41,6 +41,6 @@ picks which morph each icon plays.
 - The words arrive with `revealText()` from `shared/motion/text-reveal.ts`, starting 100ms
   into the opening so they land as the button stops.
 - The pair is anchored on its right, so the cart opens leftward and the heart never moves.
-- The heart renames itself on press. The name is the `.tooltip` span inside the button,
-  which `shared/ui/tooltip.ts` shows on hover, so the visible and the spoken name are the
-  same text.
+- The heart is always named "Favorite"; `aria-pressed` says whether it is one. The name is
+  the `.tooltip` span inside the button, which `shared/ui/tooltip.ts` shows on hover, so
+  the visible and the spoken name are the same text.

@@ -3,6 +3,18 @@
     "slug": "accordion",
     "title": "Accordion",
     "description": "A stack of headings that each open a section of content. The chevron morphs as a section opens or closes.",
+    "pageTitle": "Accessible Accordion with Animated Chevron | Lordicon",
+    "whenToUse": {
+        "text": "Use it for FAQs, product details, settings and any long content people want to scan before reading. Only the sections they open take up space. The morphing chevron makes it clear which sections are open.",
+        "gif": "animated-accordion-component.gif",
+        "alt": "Animated accordion component: chevron icon morphs as each section opens and closes"
+    },
+    "accessibility": [
+        "Each trigger is a native button inside a heading, with `aria-expanded` and `aria-controls`.",
+        "Closed panels are fully hidden from screen readers and the tab order.",
+        "The chevron animation is driven by `aria-expanded`, so what you see always matches what screen readers announce.",
+        "The height animation is skipped with `prefers-reduced-motion`."
+    ],
     "group": "containers",
     "stage": "medium",
     "icons": ["system-outline-33-chevron-down"],
@@ -50,5 +62,7 @@
             "title": "Chevron colour, and the panel that clips",
             "note": "Colour changes at once. The shrinking panel is what hides the text."
         }
-    ]
+    ],
+    "codepen": "https://codepen.io/lord-icon/pen/bNqzvbL",
+    "figma": "https://www.figma.com/design/10ewOq6uRSMi9pLH9ZiFcK/Lordicon-Animated-Components?node-id=23-6330"
 }

@@ -3,6 +3,17 @@
     "slug": "pricing",
     "title": "Pricing",
     "description": "Cards comparing subscription plans, in four layouts. Each plan’s icon plays when you hover over its card.",
+    "pageTitle": "Pricing Table Cards in 4 Layouts | Lordicon",
+    "whenToUse": {
+        "text": "Use it for SaaS plans, memberships or service tiers, wherever people compare options side by side. Four layouts let you match the cards to your page. In three of the layouts, each plan's icon plays on hover, giving every tier its own personality.",
+        "gif": "animated-pricing-cards-section.gif",
+        "alt": "Animated pricing cards comparing subscription plans: each plan icon plays on hover"
+    },
+    "accessibility": [
+        "Each plan is an article with its name as a heading and features in a real list.",
+        "Plan actions are native buttons.",
+        "Icons and feature ticks are decorative and hidden from screen readers."
+    ],
     "group": "sections",
     "stage": "large",
     "icons": [
@@ -53,5 +64,7 @@
             "title": "Name and price in one row",
             "note": "No icon in the markup. The rule is the head's bottom border."
         }
-    ]
+    ],
+    "codepen": "https://codepen.io/lord-icon/pen/myWvjVm",
+    "figma": "https://www.figma.com/design/10ewOq6uRSMi9pLH9ZiFcK/Lordicon-Animated-Components?node-id=2350-4086"
 }

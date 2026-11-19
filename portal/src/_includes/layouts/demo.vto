@@ -2,6 +2,10 @@
 layout: layouts/base.vto
 ---
 
+{{ set home = "/" |> url(true) }}
+{{ set page = url |> url(true) }}
+{{ comp.jsonld({ site: demos.site, home, page, demo }) }}
+
 <article class="demo-page demo-page--{{ demo.stage }}">
     {{# The stage's height comes from CSS, by the size the demo picks, so nothing below it
         moves when the demo loads. #}}
@@ -79,6 +83,13 @@ layout: layouts/base.vto
                     rel="noopener"
                 >Open in StackBlitz</a>
             </li>
+            {{ if demo.figma }}
+                <li>
+                    <a class="button" href="{{ demo.figma }}" target="_blank" rel="noopener">
+                        Open in Figma
+                    </a>
+                </li>
+            {{ /if }}
             {{ if demo.codepen }}
                 <li>
                     <a class="button" href="{{ demo.codepen }}" target="_blank" rel="noopener">
@@ -247,4 +258,40 @@ layout: layouts/base.vto
             </tbody>
         </table>
     </section>
+
+    {{ if demo.whenToUse }}
+        <section class="usage{{ if demo.whenToUse.gif }} usage--gif{{ /if }}">
+            <div class="usage__text">
+                <h2>When to use the {{ demo.title }} component</h2>
+                {{ demo.whenToUse.text |> md }}
+            </div>
+            {{# Under reduced motion, the GIF's first frame instead. #}}
+            {{ if demo.whenToUse.gif }}
+                <picture class="usage__media">
+                    <source
+                        srcset="{{ demo.whenToUse.still |> url }}"
+                        media="(prefers-reduced-motion: reduce)"
+                    />
+                    <img
+                        src="{{ demo.whenToUse.gif |> url }}"
+                        alt="{{ demo.whenToUse.alt |> escape }}"
+                        width="400"
+                        height="300"
+                        loading="lazy"
+                    />
+                </picture>
+            {{ /if }}
+        </section>
+    {{ /if }}
+
+    {{ if demo.accessibility }}
+        <section class="a11y">
+            <h2>Accessibility</h2>
+            <ul class="a11y__list">
+                {{ for item of demo.accessibility }}
+                    <li>{{ item |> md(true) }}</li>
+                {{ /for }}
+            </ul>
+        </section>
+    {{ /if }}
 </article>

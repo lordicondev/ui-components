@@ -3,6 +3,18 @@
     "slug": "add-to-cart",
     "title": "Add to cart",
     "description": "A product action with an Add to cart button and a heart for saving. The button confirms the item was added, and the heart fills when you save it.",
+    "pageTitle": "Animated Add to Cart Button with Favorite Heart | Lordicon",
+    "whenToUse": {
+        "text": "Use it on product cards and product pages where shoppers need one clear purchase action next to a quick way to save the item for later. The basket animation confirms the addition right on the button, so you don't need a separate toast or modal. It fits tight product grids where every pixel counts.",
+        "gif": "animated-add-to-cart-button.gif",
+        "alt": "Animated add to cart button with heart icon: cart confirms the item and the heart fills when saved"
+    },
+    "accessibility": [
+        "Both controls are native buttons, so Tab, Enter and Space work out of the box.",
+        "The heart is a real toggle named \"Favorite\", and `aria-pressed` says whether the item is saved.",
+        "A visually hidden status region announces \"Added to cart\" to screen readers.",
+        "Tooltips open on keyboard focus and close with Escape. Text transitions switch off with `prefers-reduced-motion`."
+    ],
     "group": "buttons",
     "stage": "small",
     "icons": ["system-outline-139-shopping-basket", "system-outline-20-heart"],
@@ -68,5 +80,7 @@
             "title": "Colour the heart from the same attribute",
             "note": "Shape and colour read aria-pressed, so they cannot disagree."
         }
-    ]
+    ],
+    "codepen": "https://codepen.io/lord-icon/pen/JoWxZQj",
+    "figma": "https://www.figma.com/design/10ewOq6uRSMi9pLH9ZiFcK/Lordicon-Animated-Components?node-id=2020-2289"
 }

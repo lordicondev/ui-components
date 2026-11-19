@@ -3,6 +3,17 @@
     "slug": "alert",
     "title": "Alerts",
     "description": "Short messages about a change or a problem, in four types. Each icon plays as the alert appears.",
+    "pageTitle": "Animated Alert Messages in 4 Types | Lordicon",
+    "whenToUse": {
+        "text": "Use alerts to confirm saved changes, warn about a problem or report an error, either inline or stacked as they arrive. Each type has its own color and icon, so people recognize the message before reading it. Dismissible alerts let users clear what they've seen.",
+        "gif": "animated-alert-component.gif",
+        "alt": "Animated alert messages in four types: success, info, warning and error icons play as each alert appears"
+    },
+    "accessibility": [
+        "New alerts go into a polite live region, so screen readers announce them without interrupting.",
+        "Dismiss buttons are labelled \"Dismiss\".",
+        "Each type has its own icon shape, not just its own color."
+    ],
     "group": "feedback",
     "stage": "large",
     "icons": [
@@ -69,5 +80,7 @@
             "title": "The way out",
             "note": "A drop and a fade, over a deck that is already closing up."
         }
-    ]
+    ],
+    "codepen": "https://codepen.io/lord-icon/pen/KwWJejB",
+    "figma": "https://www.figma.com/design/10ewOq6uRSMi9pLH9ZiFcK/Lordicon-Animated-Components?node-id=27-7297"
 }

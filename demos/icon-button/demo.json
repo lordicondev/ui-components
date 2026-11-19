@@ -3,6 +3,17 @@
     "slug": "icon-button",
     "title": "Icon button",
     "description": "A bookmark button with no label. The bookmark fills when you press it, and a short message confirms the item was saved.",
+    "pageTitle": "Animated Bookmark Icon Button (Save Toggle) | Lordicon",
+    "whenToUse": {
+        "text": "Use an icon-only button when the action is widely recognized and space is limited: saving articles, bookmarking products or pinning items in a list. The bookmark fills as soon as it is pressed, giving feedback without any extra text. If the meaning isn't obvious in your context, add a visible label or tooltip.",
+        "gif": "animated-bookmark-icon-button.gif",
+        "alt": "Animated bookmark icon button: bookmark fills on click and a short message confirms the item was saved"
+    },
+    "accessibility": [
+        "Native button with an `aria-label`, so it has a name even without visible text.",
+        "Saved state is exposed with `aria-pressed`, which screen readers announce as \"pressed\" or \"not pressed\".",
+        "The visual confirmation toast is hidden from assistive tech, because the state is already announced. Its motion switches off with `prefers-reduced-motion`."
+    ],
     "group": "buttons",
     "stage": "small",
     "icons": ["system-outline-400-bookmark"],
@@ -51,5 +62,7 @@
             "title": "The toast rising in",
             "note": "One attribute shows it; a transition does the rest."
         }
-    ]
+    ],
+    "codepen": "https://codepen.io/lord-icon/pen/myWvjJW",
+    "figma": "https://www.figma.com/design/10ewOq6uRSMi9pLH9ZiFcK/Lordicon-Animated-Components?node-id=2687-5349"
 }

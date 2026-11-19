@@ -3,7 +3,12 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>{{ title ? `${title} — ${demos.site.title}` : demos.site.title }}</title>
+        <title>
+            {{ typeof metas.title === 'string' ? metas.title : title ? `${title} — ${demos.site.title}` : demos.site.title }}
+        </title>
+        {{ if metas.robots !== false }}
+            <link rel="canonical" href="{{ url |> url(true) }}" />
+        {{ /if }}
         <link rel="icon" href="{{ '/favicon.ico' |> url }}" sizes="16x16 32x32 48x48" />
         <link
             rel="icon"

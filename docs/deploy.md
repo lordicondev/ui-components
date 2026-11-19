@@ -27,6 +27,9 @@ built with a relative base, so they work at any depth without a rebuild.
 Use the real public address. Link previews (`og:image`, `og:url`), `sitemap.xml` and
 `robots.txt` carry it in full, so a build for one address shows the wrong one anywhere else.
 
+Build from a full clone. The sitemap dates each demo by its last commit; a shallow clone
+has no history, so the sitemap goes without dates (with a warning).
+
 The result is `portal/_site/`. CI runs `build:release` and uploads the result as a build
 artefact named `site`, ready to ship.
 
@@ -56,6 +59,8 @@ Any static server will do. What it should know:
 
 - A page is `<path>/index.html`, asked for as `<path>/`.
 - A missing page gets `404.html`, with status 404.
+- `/demos/` is a page that sends you home (a meta refresh with a canonical link). A 301 to
+  `/` on the server is better, where you can set one.
 - Only `demos/<slug>/app/assets/` has a content hash in its file names, so only that can be
   cached for good. Everything else keeps its name between releases and has to be
   revalidated.

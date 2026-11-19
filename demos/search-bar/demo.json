@@ -3,6 +3,17 @@
     "slug": "search-bar",
     "title": "Search bar",
     "description": "A search field with a clear button. The magnifier reacts when you click into the field, and the cross icon appears once you stop typing.",
+    "pageTitle": "Animated Search Bar with Clear Button | Lordicon",
+    "whenToUse": {
+        "text": "Use it in site headers, documentation and list filters. The magnifier reacts when the field gets focus, and the clear button appears once you pause typing or leave the field, so the field stays clean while you type. One click resets the query and puts you back in the input.",
+        "gif": "animated-search-bar-component.gif",
+        "alt": "Animated search bar: magnifier icon reacts on focus and a clear button appears after typing"
+    },
+    "accessibility": [
+        "The form is a search landmark with a labelled `type=\"search\"` input.",
+        "The clear button is named \"Clear search\" and stays out of the tab order until it's visible.",
+        "After clearing, focus returns to the input so you can type again right away."
+    ],
     "group": "inputs",
     "stage": "small",
     "icons": ["system-outline-19-magnifier", "system-outline-38-cross"],
@@ -50,5 +61,7 @@
             "title": "Hidden but still taking up room",
             "note": "From shared/ui/field.css. The stylesheet reads the same attribute the icon does."
         }
-    ]
+    ],
+    "codepen": "https://codepen.io/lord-icon/pen/rayPrxg",
+    "figma": "https://www.figma.com/design/10ewOq6uRSMi9pLH9ZiFcK/Lordicon-Animated-Components?node-id=42-6360"
 }

@@ -38,4 +38,5 @@ are only there to have something to show.
   once when they show.
 - `setStatus()` also writes a word for screen readers into the row, and the list is
   `aria-live="polite"`, so each change is read out.
+- Pressing Retry hides the button, so keyboard focus moves to its row.
 - Only the spinner is on screen at load, so only it has a placeholder.

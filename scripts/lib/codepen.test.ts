@@ -8,6 +8,7 @@ const config: SiteConfig = {
     title: 'UI Components',
     description: '',
     siteUrl: 'https://example.com/',
+    figma: 'https://www.figma.com/design/key/file?node-id=1-1',
     utm: { source: 'source', medium: 'medium', campaign: 'campaign' },
     repo: { owner: 'owner', name: 'repo', branch: 'main', exportBranch: 'standalone' },
 };

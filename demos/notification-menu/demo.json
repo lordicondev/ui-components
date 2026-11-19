@@ -3,6 +3,18 @@
     "slug": "notification-menu",
     "title": "Notification menu",
     "description": "A bell that opens a list of recent notifications. It rings when a new one arrives.",
+    "pageTitle": "Notification Bell Dropdown with Unread Badge | Lordicon",
+    "whenToUse": {
+        "text": "Use it in any app with an activity feed: mentions, comments, approvals or system updates. The bell rings when something new arrives, catching attention without a pop-up. People can scan recent items and mark everything as read in one click.",
+        "gif": "animated-notification-menu-bell.gif",
+        "alt": "Animated notification menu: bell icon rings when a new notification arrives and opens a list of recent alerts"
+    },
+    "accessibility": [
+        "The bell's label includes the unread count, for example \"Notifications, 2 unread\".",
+        "Unread items carry hidden \"Unread\" text, so the state isn't shown by a dot alone.",
+        "\"Mark as read\" uses `aria-disabled` instead of disabled, so it stays focusable.",
+        "The panel has a heading and a real list, closes with Escape, and its animations are skipped with `prefers-reduced-motion`."
+    ],
     "group": "menus",
     "stage": "medium",
     "icons": [
@@ -70,5 +82,7 @@
             "title": "The colour of a row",
             "note": "The tint grows across the row as it comes in."
         }
-    ]
+    ],
+    "codepen": "https://codepen.io/lord-icon/pen/ByWMPoJ",
+    "figma": "https://www.figma.com/design/10ewOq6uRSMi9pLH9ZiFcK/Lordicon-Animated-Components?node-id=30-8744"
 }

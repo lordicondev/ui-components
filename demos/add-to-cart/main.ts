@@ -29,11 +29,6 @@ async function measure(): Promise<void> {
 void measure();
 // #endregion
 
-/** A toggle button is named after what pressing it would do next. The name is the tooltip. */
-function rename(button: HTMLButtonElement, to: string): void {
-    button.querySelector<HTMLElement>('.tooltip')!.textContent = to;
-}
-
 /** The words start 100ms into the 400ms opening and land as the button stops. */
 const WORDS_WAIT = 100;
 const WORDS_RUN = 300;
@@ -66,10 +61,10 @@ function backToBasket(): void {
     settleText(label);
 }
 
+// The name stays "Favorite"; aria-pressed says whether it is one.
 favorite.addEventListener('click', () => {
     const kept = favorite.getAttribute('aria-pressed') !== 'true';
 
     favorite.setAttribute('aria-pressed', String(kept)); // and so does the heart
-    rename(favorite, kept ? 'Remove from favorites' : 'Add to favorites');
 });
 // #endregion

@@ -276,6 +276,39 @@ describe('popovers', () => {
         expect(closed).toEqual(['outer']);
     });
 
+    it('closes the chain on a tap on an empty page, and leaves panels and controls alone', () => {
+        const { anchor, panel } = mount(60, 1);
+
+        const route = document.createElement('button');
+        route.setAttribute('popovertarget', 'inner');
+        const inner = document.createElement('div');
+        inner.id = 'inner';
+        inner.setAttribute('popover', '');
+        panel.append(route, inner);
+        const page = document.createElement('main');
+        document.body.append(page);
+
+        popovers(document);
+
+        // happy-dom has no popover state: only the submenu counts as open.
+        Object.defineProperty(panel, 'matches', { value: () => false });
+        Object.defineProperty(inner, 'matches', { value: () => true });
+        const closed: string[] = [];
+        panel.hidePopover = () => closed.push('outer');
+        inner.hidePopover = () => closed.push('inner');
+
+        const tap = (target: Element, pointerType = 'touch') =>
+            target.dispatchEvent(new PointerEvent('pointerup', { bubbles: true, pointerType }));
+
+        tap(inner);
+        tap(anchor);
+        tap(page, 'mouse');
+        expect(closed).toEqual([]);
+
+        tap(page);
+        expect(closed).toEqual(['outer']);
+    });
+
     it('tells the control it is open, and that it is not', () => {
         const { anchor, panel } = mount(60);
         popovers(document);

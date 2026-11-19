@@ -3,6 +3,18 @@
     "slug": "toolbar",
     "title": "Toolbar",
     "description": "A row of tools and formatting options. Icons morph into place as you pick a tool or list style, and play when pressed.",
+    "pageTitle": "Animated Editor Toolbar with Tool Picker | Lordicon",
+    "whenToUse": {
+        "text": "Use it in drawing apps, whiteboards and rich text editors, where people pick one active tool and toggle formatting on and off. Icons morph to show the active tool, so the current mode is always clear. Tooltips explain each icon, keeping the toolbar compact.",
+        "gif": "animated-text-editor-toolbar.gif",
+        "alt": "Animated text editor toolbar: tool and list style icons morph into place when selected and play when pressed"
+    },
+    "accessibility": [
+        "Tools are real radio inputs in a fieldset with a hidden legend, so arrow keys move between tools natively and screen readers announce the selection.",
+        "List styles are `aria-pressed` toggle buttons in a labelled group. Turning one on turns the other off.",
+        "Tooltips double as accessible names, appear immediately on keyboard focus and close with Escape.",
+        "The focus ring is drawn on the visible tool, even though the radio itself is hidden."
+    ],
     "group": "buttons",
     "stage": "small",
     "icons": [
@@ -80,5 +92,7 @@
             "title": "The selected tool",
             "note": "The resting, hovered and selected looks, icon colour included."
         }
-    ]
+    ],
+    "codepen": "https://codepen.io/lord-icon/pen/bNqzjpv",
+    "figma": "https://www.figma.com/design/10ewOq6uRSMi9pLH9ZiFcK/Lordicon-Animated-Components?node-id=43-917"
 }

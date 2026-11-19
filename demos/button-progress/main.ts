@@ -45,7 +45,8 @@ function wire(task: HTMLElement): void {
     /** Sets the stage: idle, busy or done. The icon, the bar, the label and the toast read it. */
     function enter(stage: string): void {
         button.dataset.stage = stage;
-        button.disabled = stage === 'busy';
+        // aria-disabled rather than disabled: a disabled button would drop keyboard focus.
+        button.setAttribute('aria-disabled', String(stage !== 'idle'));
         button.setAttribute('aria-busy', String(stage === 'busy'));
 
         say(STAGES.indexOf(stage));
@@ -104,7 +105,10 @@ function wire(task: HTMLElement): void {
         report(0);
     }
 
-    button.addEventListener('click', () => void run());
+    // aria-disabled does not stop clicks, so a press counts only when idle.
+    button.addEventListener('click', () => {
+        if (button.dataset.stage === 'idle') void run();
+    });
     // #endregion
 }
 

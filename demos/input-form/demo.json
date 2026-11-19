@@ -3,6 +3,18 @@
     "slug": "input-form",
     "title": "Input form",
     "description": "A message composer pinned to the bottom of the page. Its menu opens upward, with a submenu and a search inside.",
+    "pageTitle": "Chat Message Composer with Upward Menu & Search | Lordicon",
+    "whenToUse": {
+        "text": "Use it for AI chat interfaces, messaging apps or comment boxes pinned to the bottom of the screen. The plus menu opens upward so it never runs off the page, with a submenu and a search for attaching context such as projects. It keeps extra actions one click away without cluttering the input.",
+        "gif": "animated-chat-input-form.gif",
+        "alt": "Animated chat message input form with an upward menu, submenu and search, icons animating on hover"
+    },
+    "accessibility": [
+        "A real form with a labelled text input and a submit button, so Enter sends the message.",
+        "Icon-only buttons have clear names: \"Add context\", \"Dictate\", \"Send\" and \"Clear search\".",
+        "Menus use the native Popover API: Escape and click-away close them, and the opener exposes `aria-expanded`.",
+        "Closing the project search returns focus to the \"Add to project\" row. Panel and text animations are skipped with `prefers-reduced-motion`."
+    ],
     "group": "inputs",
     "stage": "small",
     "icons": [
@@ -78,5 +90,7 @@
             "title": "Filter the projects",
             "note": "hidden rather than a class: out of the layout and the accessibility tree."
         }
-    ]
+    ],
+    "codepen": "https://codepen.io/lord-icon/pen/ZYewjGP",
+    "figma": "https://www.figma.com/design/10ewOq6uRSMi9pLH9ZiFcK/Lordicon-Animated-Components?node-id=43-4344"
 }

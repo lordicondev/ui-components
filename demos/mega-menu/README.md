@@ -28,4 +28,5 @@ forwards to open and backwards to close.
   follows it.
 - The panel slides down and the tiles drop in a row at a time; closing slides it back up.
   It is CSS only, and turns off with `prefers-reduced-motion`.
-- On narrow screens the tiles go to two columns, then one.
+- On narrow screens the tiles go to two columns, then one. Below 768px the header drops
+  Product, Pricing and Log in, and on the smallest phones the logo shrinks to fit.
