@@ -29,7 +29,7 @@ toggle.addEventListener('click', () => {
 
 ## The demos
 
-Each demo has a page on the [component.lordicon.com](https://components.lordicon.com/) with the demo
+Each demo has a page on the [components.lordicon.com](https://components.lordicon.com/) with the demo
 running, the code that matters, and every file it is made of.
 
 | Demo                                            | What it shows                                                                                                                                                   |
