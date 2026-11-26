@@ -31,8 +31,6 @@ export type DemoManifest = {
     /** What to know about the icons and their states, shown above the portal's icon table. */
     iconsNote?: string;
     fragments: Fragment[];
-    /** The demo's frame in the Figma file, if there is one. */
-    figma?: string;
     /** The published pen, if there is one. */
     codepen?: string;
 };

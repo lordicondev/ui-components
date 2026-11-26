@@ -83,13 +83,11 @@ layout: layouts/base.vto
                     rel="noopener"
                 >Open in StackBlitz</a>
             </li>
-            {{ if demo.figma }}
-                <li>
-                    <a class="button" href="{{ demo.figma }}" target="_blank" rel="noopener">
-                        Open in Figma
-                    </a>
-                </li>
-            {{ /if }}
+            <li>
+                <a class="button" href="{{ demos.site.figma }}" target="_blank" rel="noopener">
+                    Open in Figma
+                </a>
+            </li>
             {{ if demo.codepen }}
                 <li>
                     <a class="button" href="{{ demo.codepen }}" target="_blank" rel="noopener">

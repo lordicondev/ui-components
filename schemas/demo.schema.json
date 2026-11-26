@@ -140,11 +140,6 @@
                 }
             }
         },
-        "figma": {
-            "type": "string",
-            "pattern": "^https://www\\.figma\\.com/design/\\w+/[\\w-]+\\?node-id=\\d+-\\d+$",
-            "description": "The demo's frame in the Figma file. The portal shows an Open in Figma button when it is set."
-        },
         "codepen": {
             "type": "string",
             "pattern": "^https://codepen\\.io/[\\w-]+/pen/\\w+$",

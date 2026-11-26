@@ -23,7 +23,7 @@ export type SiteConfig = {
     title: string;
     description: string;
     siteUrl: string;
-    /** The Figma file with every component. */
+    /** The free UI kit in the Figma Community. */
     figma: string;
     utm: UtmConfig;
     repo: RepoConfig;
