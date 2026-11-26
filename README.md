@@ -5,8 +5,6 @@
     </picture>
 </a>
 
-# Animated UI Components by Lordicon – Free Interactive Components
-
 Lordicon system icons wired into everyday controls: a password field, a menu, a rating, a
 button that shows progress, and more. Every demo makes the same point: an icon is a
 reaction to the state of a control, and wiring it up is mostly markup.
