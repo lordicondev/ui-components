@@ -35,7 +35,7 @@ is no CSS rotation in the demo. The stylesheet only sets the chevron's colour.
 
 ---
 
-Exported from [lordicondev/ui-components](https://github.com/lordicondev/ui-components/tree/main/demos/accordion) 1.2.0,
+Exported from [lordicondev/ui-components](https://github.com/lordicondev/ui-components/tree/main/demos/accordion) 1.2.1,
 where it sits alongside the other demos.
 
 The code is MIT. The icons are under the [Lordicon License Terms](https://lordicon.com/licenses);
